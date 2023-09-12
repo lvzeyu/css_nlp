@@ -315,10 +315,15 @@ title="Print to PDF"
      Topic Model
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     単語分散表現
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id7">
+  <a class="reference internal nav-link" href="#id8">
    講義の構成
   </a>
  </li>
@@ -356,10 +361,15 @@ title="Print to PDF"
      Topic Model
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     単語分散表現
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id7">
+  <a class="reference internal nav-link" href="#id8">
    講義の構成
   </a>
  </li>
@@ -394,19 +404,27 @@ title="Print to PDF"
 <p>トピックモデルではコーディングによって形成される語の集合に準ずるものをトピックとして示すことができます。トピックをを構成する複数の下位概念や単語によって立体的，構造的に捉えることができます。</p>
 <p><img alt="" src="../_images/topicmodel2.png" /></p>
 <ul class="simple">
-<li><p>アメリカの芸術政策に対する意見のあり方について，それを扱った新聞記事を分析することを通して，複数のトピックを析出し，時期や新聞社ごとに，潜在するトピックに差があることを示す <span id="id4">[<a class="reference internal" href="#id6" title="Paul DiMaggio, Manish Nag, and David Blei. Exploiting affinities between topic modeling and the sociological perspective on culture: application to newspaper coverage of u.s. government arts funding. Poetics, 41(6):570-606, 2013. Topic Models and the Cultural Sciences. doi:https://doi.org/10.1016/j.poetic.2013.08.004.">DiMaggio <em>et al.</em>, 2013</a>]</span></p></li>
+<li><p>アメリカの芸術政策に対する意見のあり方について，それを扱った新聞記事を分析することを通して，複数のトピックを析出し，時期や新聞社ごとに，潜在するトピックに差があることを示す <span id="id4">[<a class="reference internal" href="#id10" title="Paul DiMaggio, Manish Nag, and David Blei. Exploiting affinities between topic modeling and the sociological perspective on culture: application to newspaper coverage of u.s. government arts funding. Poetics, 41(6):570-606, 2013. Topic Models and the Cultural Sciences. doi:https://doi.org/10.1016/j.poetic.2013.08.004.">DiMaggio <em>et al.</em>, 2013</a>]</span></p></li>
 </ul>
-<div class="docutils container" id="id5">
-<dl class="citation">
-<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id4">DNB13</a></span></dt>
-<dd><p>Paul DiMaggio, Manish Nag, and David Blei. Exploiting affinities between topic modeling and the sociological perspective on culture: application to newspaper coverage of u.s. government arts funding. <em>Poetics</em>, 41(6):570–606, 2013. Topic Models and the Cultural Sciences. <a class="reference external" href="https://doi.org/https://doi.org/10.1016/j.poetic.2013.08.004">doi:https://doi.org/10.1016/j.poetic.2013.08.004</a>.</p>
-</dd>
-</dl>
-</div>
+</section>
+<section id="id5">
+<h3>単語分散表現<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>単語分散表現とは、「文字・単語をベクトル空間に埋め込み、その空間上のひとつの点として捉える」ことを指します。</p>
+<ul class="simple">
+<li><p>類似性: ある概念を表現する際に、ほかの概念との共通点や類似性と紐づけながら、ベクトル空間上に表現します。</p></li>
+<li><p>単語類推: 分散表現では異なる概念を表現するベクトル同士での計算が可能です
+<img alt="" src="../_images/word2vec.png" /></p></li>
+<li><p>1910年代からのテキストデータで単語分散表現を学習し、単語分散表現で男性と女性はそれぞれどのような単語と関連していることを検証することで、ジェンダーのステレオタイプの実態と変化を定量的に分析する <span id="id6">[]</span></p></li>
+</ul>
+<p><img alt="" src="../_images/word2vec_gender.jpeg" /></p>
+<ul class="simple">
+<li><p>単語分散表現の類似性と単語類推特性で、単語分散表現の計算を通じて、文化概念の潜在的意味と関係を定量的に測定できました。　<span id="id7">[]</span></p></li>
+</ul>
+<p><img alt="" src="../_images/city.png" /></p>
 </section>
 </section>
-<section id="id7">
-<h2>講義の構成<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<section id="id8">
+<h2>講義の構成<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>イントロダクション</p></li>
 <li><p>自然言語処理の基礎  💻</p>
@@ -460,6 +478,13 @@ title="Print to PDF"
 <li><p>🔣　: 数学に関わる解説が含む講義、基本的な微積分と線形代数の知識が前提となります</p></li>
 <li><p>📄　: 英語論文を読む必要がある講義</p></li>
 </ul>
+<div class="docutils container" id="id9">
+<dl class="citation">
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id4">DNB13</a></span></dt>
+<dd><p>Paul DiMaggio, Manish Nag, and David Blei. Exploiting affinities between topic modeling and the sociological perspective on culture: application to newspaper coverage of u.s. government arts funding. <em>Poetics</em>, 41(6):570–606, 2013. Topic Models and the Cultural Sciences. <a class="reference external" href="https://doi.org/https://doi.org/10.1016/j.poetic.2013.08.004">doi:https://doi.org/10.1016/j.poetic.2013.08.004</a>.</p>
+</dd>
+</dl>
+</div>
 </section>
 </section>
 
