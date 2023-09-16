@@ -1,0 +1,689 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>ガイダンス &#8212; My sample book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="自然言語処理の基礎" href="nlp_basis.html" />
+    <link rel="prev" title="計算社会科学と自然言語処理" href="../intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    計算社会科学と自然言語処理
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  イントロダクション
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   ガイダンス
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  基礎知識
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp_basis.html">
+   自然言語処理の基礎
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_basis.html">
+   機械学習の基本概念
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fnotebook/introduction.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebook/introduction.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   自然言語処理
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   計算社会科学において自然言語処理の応用
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#topic-model">
+     Topic Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     単語分散表現
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     テキスト分類
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   講義の構成
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   到達目標
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   授業設計と成績評価
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id14">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>ガイダンス</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   自然言語処理
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   計算社会科学において自然言語処理の応用
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#topic-model">
+     Topic Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     単語分散表現
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     テキスト分類
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   講義の構成
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   到達目標
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   授業設計と成績評価
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id14">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>ガイダンス<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<section id="id2">
+<h2>自然言語処理<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>自然言語処理（NLP: Natural Language Processing）は、人間が日常的に使っている自然言語をコンピュータに処理させる一連の技術であり、人工知能（AI）の研究分野で中核を成す要素技術の一つといえます。</p>
+<p>私たちは普段、自分たちの言語の複雑さについて考えることはありません。言語は歩くのと同じように、訓練された反復可能な行動であるため、習得しやすく、青年期にはより自然に使用できるようになると言われています。ただ、人間にとって自然なことでも、大量の非構造化データを処理し、正式なルールがないばかりか、現実世界のコンテキストや意図もないコンピューターにとっては、それを成すことは非常に困難です。</p>
+<p>近年、自然言語処理技術の急速な進歩に驚きの声が上がっていました。</p>
+<p>実際、自然言語処理において昨今の支配的な手法は、隠れマルコフモデル(HMM)、線型サポートベクトルマシン(SVM)やロジスティック回帰など統計的機械学習(statistical machine learning)に基づいていました。</p>
+<p>2014年頃、この分野において、非線型ニューラルネットワークが導入され、多くのタスクにより高い性能を達成できました。これに基づいて、より先進的なモデリング方法の開発も進めました。特に、再帰的ニューラルネットワーク(RNN)に基づく方法は言語の時系列性質も学習できるになって、様々なタスクにおいて精度向上に大きく貢献しました。</p>
+<p>2018年にGoogleが発表した「BERT」というシステムでは、開発者が少し手を加えるだけでさまざまなタスクに使えるようになりました。それだけでも驚きでしたが、一般人の中でも話題になる「ChatGPT」をはじめとする自然言語処理技術の進展により、質問への回答、文章の要約や翻訳、ソフトウエアのプログラミングなど、言語に関わるさまざまなタスクができるようになりました。</p>
+<p>高機能化のカギは、深層学習技術の発展があります。深層学習を用いた自然言語処理には、あらかじめ用意した膨大な文章を使って、「言語モデル」と呼ばれるシステムを学習させる方法があります。
+言語モデルの実体は簡単な計算式を大量に組み合わせた超巨大な数式といえます。最先端の言語モデルでは、想像を絶するほど大量の文章を使い、パラメータ（数式の係数）が数千億に達するほどの大規模な言語モデル(LLM : Large Language Models)を学習させて使っています。LLMが人間に匹敵するほどの高度な能力を持つ、文章の作成や会話を利用するさまざまな仕事を、コンピュータに任せることが可能になってきました。</p>
+</section>
+<section id="id3">
+<h2>計算社会科学において自然言語処理の応用<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>人間の社会行動に関するデジタル化された高密度・大容量のデータの蓄積を背景に、近年、計算社会科学と呼ばれる新たな学問領域が勃興し、急速な発展を遂げています。計算社会科学において，テキストデータの収集・分析は広く用いられている研究手法です。ここで、自然言語処理技術の発展が計算社会科学にす新たな可能性をもたらせます。</p>
+<p>本講義の目的は、計算社会科学に多く応用された自然言語処理技術を理解し、実問題に適用するための基礎力を身につけることです。その目的を達成するために、自然言語処理の基礎、重要な概念と主な手法を学習する。さらに、Python用いて、自然言語処理によく用いられるライブラリとツールを学習しつつ、自然言語処理技術を応用するスキルを修得する。</p>
+<section id="topic-model">
+<h3>Topic Model<a class="headerlink" href="#topic-model" title="Permalink to this headline">#</a></h3>
+<p>トピックモデルは，確率的な言語生成モデルの一種です。その目的は，コーパスを潜在的に特徴づけるトピックを抽出すること，またトピックによって各テクストを特徴づけ・分類することになります。</p>
+<p><img alt="" src="../_images/topicmodel.png" /></p>
+<p>トピックモデルではコーディングによって形成される語の集合に準ずるものをトピックとして示すことができます。トピックをを構成する複数の下位概念や単語によって立体的，構造的に捉えることができます。</p>
+<p><img alt="" src="../_images/topicmodel2.png" /></p>
+<ul class="simple">
+<li><p>アメリカの芸術政策に対する意見のあり方について，それを扱った新聞記事を分析することを通して，複数のトピックを析出し，時期や新聞社ごとに，潜在するトピックに差があることを示す <span id="id4">[<a class="reference internal" href="#id16" title="Paul DiMaggio, Manish Nag, and David Blei. Exploiting affinities between topic modeling and the sociological perspective on culture: application to newspaper coverage of u.s. government arts funding. Poetics, 41(6):570-606, 2013. Topic Models and the Cultural Sciences. doi:https://doi.org/10.1016/j.poetic.2013.08.004.">DiMaggio <em>et al.</em>, 2013</a>]</span></p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>単語分散表現<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>単語分散表現とは、「文字・単語をベクトル空間に埋め込み、その空間上のひとつの点として捉える」ことを指します。</p>
+<ul class="simple">
+<li><p>類似性: ある概念を表現する際に、ほかの概念との共通点や類似性と紐づけながら、ベクトル空間上に表現します。</p></li>
+<li><p>単語類推: 分散表現では異なる概念を表現するベクトル同士での計算が可能です
+<img alt="" src="../_images/word2vec.png" /></p></li>
+<li><p>1910年代からのテキストデータで単語分散表現を学習し、単語分散表現で男性と女性はそれぞれどのような単語と関連していることを検証することで、ジェンダーのステレオタイプの実態と変化を定量的に分析する <span id="id6">[<a class="reference internal" href="#id17" title="Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16):E3635-E3644, 2018. URL: https://www.pnas.org/doi/abs/10.1073/pnas.1720347115, arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115, doi:10.1073/pnas.1720347115.">Garg <em>et al.</em>, 2018</a>]</span></p></li>
+</ul>
+<p><img alt="" src="../_images/word2vec_gender.jpeg" /></p>
+<ul class="simple">
+<li><p>単語分散表現の類似性と単語類推特性で、単語分散表現の計算を通じて、文化概念の潜在的意味と関係を定量的に測定できました<span id="id7">[<a class="reference internal" href="#id18" title="Austin C. Kozlowski, Matt Taddy, and James A. Evans. The geometry of culture: analyzing the meanings of class through word embeddings. American Sociological Review, 84(5):905-949, 2019. doi:10.1177/0003122419877135.">Kozlowski <em>et al.</em>, 2019</a>]</span></p></li>
+</ul>
+<p><img alt="" src="../_images/city.png" /></p>
+</section>
+<section id="id8">
+<h3>テキスト分類<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<p>キスト分類とは、事前定義済みカテゴリまたはラベルを非構造化テキスト形式に割り当てる処理のことです。主な使用例として、感情分析、偽情報の検出や内容判定などが挙げられます。</p>
+<p>言語は本質的に曖昧で、変化し続け、適切に定義されていないため、テキスト分類は決して簡単なタスクではないが、深層学習による自然言語処理が発展したことにより、高精度化させることが可能になってきています。</p>
+<p>とくに2018年に発表されたBERT <span id="id9">[<a class="reference internal" href="#id19" title="Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. \BERT\: Pre-training of Deep Bidirectional Transformers for Language Understanding. In Proceedings of the 2019 Conference of the North \A\merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers), Proceedings of the 2019 Conference of the North, 4171–4186. Minneapolis, Minnesota, 2019. Association for Computational Linguistics. URL: https://www.aclweb.org/anthology/N19-1423, doi:10.18653/v1/n19-1423.">Devlin <em>et al.</em>, 2019</a>]</span> はセンチメント分析を含めた多くのタスクに関して、当時の最高性能(SOTA: State of the Art)を達成する画期的な技術でした。</p>
+<p>BERTは事前学習モデルの一種で、事前に一定のタスクに基づいて事前学習することで汎用性を獲得することに特徴があります。そのため、特定のタスクについてより少ないデータで性能を発揮することができます。</p>
+<p>BERTのような事前学習モデルによるテキスト分類の社会科学における応用可能性について多くの注目を集めています <span id="id10">[<a class="reference internal" href="#id20" title="Moritz Laurer, Wouter van Atteveldt, Andreu Casas, and Kasper Welbers. Less annotating, more classifying: addressing the data scarcity issue of supervised machine learning with deep transfer learning and bert-nli. Political Analysis, pages 1–17, 2023. doi:10.1017/pan.2023.20.">Laurer <em>et al.</em>, 2023</a>]</span>。</p>
+<p><img alt="" src="../_images/text_class.png" /></p>
+</section>
+</section>
+<section id="id11">
+<h2>講義の構成<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>イントロダクション</p></li>
+<li><p>基礎知識  💻 🔣</p>
+<ul class="simple">
+<li><p>自然言語処理の基本概念</p></li>
+<li><p>機械学習の基本概念</p></li>
+<li><p>深層学習による自然言語処理ための数学の復習</p></li>
+</ul>
+</li>
+<li><p>深層学習の基礎 💻 🔣</p>
+<ul class="simple">
+<li><p>教師あり学習</p></li>
+<li><p>ニューラルネットワーク</p></li>
+</ul>
+</li>
+<li><p>PyTorch 💻</p></li>
+<li><p>単語埋め込みモデル(Word Embedding) 💻 🔣</p>
+<ul class="simple">
+<li><p>単語埋め込みアルゴリズム</p></li>
+<li><p>単語埋め込みモデルの性質</p></li>
+<li><p>単語埋め込み獲得：カウントベース手法</p></li>
+</ul>
+</li>
+<li><p>word2vecの原理 🔣</p>
+<ul class="simple">
+<li><p>CBOW</p></li>
+<li><p>Skip-gram</p></li>
+<li><p>Negative Sampling</p></li>
+</ul>
+</li>
+<li><p>word2vecの実装 💻</p>
+<ul class="simple">
+<li><p>gensimによるword2vecモデルの学習</p></li>
+<li><p>既存word2vecモデルの利用</p></li>
+</ul>
+</li>
+<li><p>word2vecが人文・社会科学研究における応用 📄</p></li>
+<li><p>シーケンスモデリング(1) 💻 🔣</p>
+<ul class="simple">
+<li><p>RNN</p></li>
+<li><p>LSTM</p></li>
+</ul>
+</li>
+<li><p>シーケンスモデリング(2) 💻 🔣</p>
+<ul class="simple">
+<li><p>seq2seq</p></li>
+</ul>
+</li>
+<li><p>Transformer(1) 💻 🔣</p>
+<ul class="simple">
+<li><p>Attentionモデル</p></li>
+</ul>
+</li>
+<li><p>Transformer(2) 💻 🔣</p>
+<ul class="simple">
+<li><p>Self-attention</p></li>
+<li><p>Transformerの構成要素</p></li>
+</ul>
+</li>
+<li><p>BERTによるテキスト分類の実装(1) 💻</p>
+<ul class="simple">
+<li><p>事前学習済みモデルと転移学習</p></li>
+<li><p>HuggingFace</p></li>
+<li><p>GPUの設定</p></li>
+</ul>
+</li>
+<li><p>BERTによるテキスト分類の実装(2) 💻</p></li>
+<li><p>大規模言語モデル 📄</p></li>
+</ol>
+<ul class="simple">
+<li><p>💻 : プログラミング作業が含む講義、PythonとJupyterの基本の使い方を把握することが前提となります</p></li>
+<li><p>🔣　: 数学に関わる解説が含む講義、基本的な微積分と線形代数の知識が前提となります</p></li>
+<li><p>📄　: 英語論文を読む必要がある講義</p></li>
+</ul>
+</section>
+<section id="id12">
+<h2>到達目標<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>自然言語処理と深層学習の基礎概念について学ぶとともに、自然言語処理手法を実装する能力を習得する</p></li>
+<li><p>自然言語処理を用いる研究論文を理解できるようになることを目指す</p></li>
+</ul>
+</section>
+<section id="id13">
+<h2>授業設計と成績評価<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>プログラミング操作が含む講義では、必ずPCをご持参する上で、Python環境を整備してください。また、インターネットとの接続が必要される操作もありますので、PCのインターネット接続も事前に設定してください。</p></li>
+<li><p>授業後課題提出を求める場合があります。基本的には授業の理解度を確認するためのプログラミング課題と想定しています。</p></li>
+<li><p>最終レポートは、自然言語処理技術を用いる分析に関する内容が想定されています。</p></li>
+<li><p>成績評価の分配は以下の通りです</p>
+<ul>
+<li><p>出席: <span class="math notranslate nohighlight">\(30\%\)</span></p></li>
+<li><p>授業後の課題: <span class="math notranslate nohighlight">\(30\%\)</span></p></li>
+<li><p>最終レポート: <span class="math notranslate nohighlight">\(40\%\)</span></p></li>
+</ul>
+</li>
+<li><p>授業の内容に関して不明点あるいはご要望があれば、随時<a class="reference external" href="mailto:lyu&#46;zeyu&#46;e8&#37;&#52;&#48;tohoku&#46;ac&#46;jp">メール</a>でご連絡ください。また、プログラミングやソフトウェア操作の質問については、Google ClassroomまたはGitHub Issueでも受け付けます。</p></li>
+<li><p>授業のオフィスアワーは、できれば二日前アポイントを取ってくだい。</p></li>
+</ul>
+</section>
+<section id="id14">
+<h2>参考文献<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h2>
+<div class="docutils container" id="id15">
+<dl class="citation">
+<dt class="label" id="id19"><span class="brackets"><a class="fn-backref" href="#id9">DCLT19</a></span></dt>
+<dd><p>Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. \BERT\: Pre-training of Deep Bidirectional Transformers for Language Understanding. In <em>Proceedings of the 2019 Conference of the North \A\merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)</em>, Proceedings of the 2019 Conference of the North, 4171–4186. Minneapolis, Minnesota, 2019. Association for Computational Linguistics. URL: <a class="reference external" href="https://www.aclweb.org/anthology/N19-1423">https://www.aclweb.org/anthology/N19-1423</a>, <a class="reference external" href="https://doi.org/10.18653/v1/n19-1423">doi:10.18653/v1/n19-1423</a>.</p>
+</dd>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id4">DNB13</a></span></dt>
+<dd><p>Paul DiMaggio, Manish Nag, and David Blei. Exploiting affinities between topic modeling and the sociological perspective on culture: application to newspaper coverage of u.s. government arts funding. <em>Poetics</em>, 41(6):570–606, 2013. Topic Models and the Cultural Sciences. <a class="reference external" href="https://doi.org/https://doi.org/10.1016/j.poetic.2013.08.004">doi:https://doi.org/10.1016/j.poetic.2013.08.004</a>.</p>
+</dd>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id6">GSJZ18</a></span></dt>
+<dd><p>Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. <em>Proceedings of the National Academy of Sciences</em>, 115(16):E3635–E3644, 2018. URL: <a class="reference external" href="https://www.pnas.org/doi/abs/10.1073/pnas.1720347115">https://www.pnas.org/doi/abs/10.1073/pnas.1720347115</a>, <a class="reference external" href="https://arxiv.org/abs/https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115">arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115</a>, <a class="reference external" href="https://doi.org/10.1073/pnas.1720347115">doi:10.1073/pnas.1720347115</a>.</p>
+</dd>
+<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id7">KTE19</a></span></dt>
+<dd><p>Austin C. Kozlowski, Matt Taddy, and James A. Evans. The geometry of culture: analyzing the meanings of class through word embeddings. <em>American Sociological Review</em>, 84(5):905–949, 2019. <a class="reference external" href="https://doi.org/10.1177/0003122419877135">doi:10.1177/0003122419877135</a>.</p>
+</dd>
+<dt class="label" id="id20"><span class="brackets"><a class="fn-backref" href="#id10">LvACW23</a></span></dt>
+<dd><p>Moritz Laurer, Wouter van Atteveldt, Andreu Casas, and Kasper Welbers. Less annotating, more classifying: addressing the data scarcity issue of supervised machine learning with deep transfer learning and bert-nli. <em>Political Analysis</em>, pages 1–17, 2023. <a class="reference external" href="https://doi.org/10.1017/pan.2023.20">doi:10.1017/pan.2023.20</a>.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">計算社会科学と自然言語処理</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="nlp_basis.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">自然言語処理の基礎</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
