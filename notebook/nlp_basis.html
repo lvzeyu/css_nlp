@@ -50,8 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="機械学習の基本概念" href="ml_basis.html" />
     <link rel="prev" title="ガイダンス" href="introduction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -133,6 +136,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    自然言語処理の基礎
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_basis.html">
+   機械学習の基本概念
   </a>
  </li>
 </ul>
@@ -390,6 +398,21 @@ title="Print to PDF"
      トークン化
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     ストップワードの除去
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id">
+     単語のID化
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     パディング
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -458,6 +481,21 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id8">
      トークン化
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     ストップワードの除去
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id">
+     単語のID化
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     パディング
     </a>
    </li>
   </ul>
@@ -692,7 +730,8 @@ title="Print to PDF"
 !python -m unidic download # 辞書のダウンロード
 </pre></div>
 </div>
-<p>結果を確認すると、単語に分割されていますが、デフォルトの設定では新語に対する解析は強くないことがわかります。</p>
+<p>結果を確認すると、単語に分割しただけでなく、品詞などの情報も得られました。</p>
+<p>ただ、デフォルトの設定では新語に対する解析は強くないことがわかります。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !pip install mecab-python3 # mecab-python3のインストール</span>
@@ -723,6 +762,12 @@ EOS
 </div>
 </div>
 <p>この問題は形態素解析器に辞書を追加することである程度解決することが出来ます。特に、<em>NEologd</em>という辞書には、通常の辞書と比べて多くの新語が含まれています。</p>
+<p><em>NEologd</em>のインストールについては、以下のベージに参照してください。</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://resanaplaza.com/2022/05/08/%E3%80%90%E8%B6%85%E7%B5%B6%E7%B0%A1%E5%8D%98%E3%80%91windows-%E3%81%AEpython%EF%BC%8Bmecab%E3%81%A7%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E8%BE%9E%E6%9B%B8%E3%81%ABneologd%E3%82%92%E4%BD%BF%E3%81%86/">Windows</a></p></li>
+<li><p><a class="reference external" href="https://qiita.com/berry-clione/items/b3a537962c84244a2a09">Mac</a></p></li>
+</ul>
+<p>辞書を指定して、タガーを生成します。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_txt</span> <span class="o">=</span> <span class="s2">&quot;友たちと国立新美術館に行った。&quot;</span>
@@ -747,40 +792,131 @@ EOS
 </div>
 </div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>NEologd</em>のインストールについては、以下のベージに参照してください。</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://resanaplaza.com/2022/05/08/%E3%80%90%E8%B6%85%E7%B5%B6%E7%B0%A1%E5%8D%98%E3%80%91windows-%E3%81%AEpython%EF%BC%8Bmecab%E3%81%A7%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E8%BE%9E%E6%9B%B8%E3%81%ABneologd%E3%82%92%E4%BD%BF%E3%81%86/">Windows</a></p></li>
+<li><p><span class="xref myst">Mac</span></p></li>
+</ul>
+</div>
+<p>上の例から分かるように、NEologdは「国立新美術館」のような固有表現にも対応し、ソーシャルメディアのテキストなど新語が多数含まれている場合こちらの方が適切です。</p>
+<p>parseToNode()メソッドは、形態素（ノード）ごとに出力をしていきます。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">set_format</span><span class="p">(</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
-<span class="n">data</span><span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">][:]</span>
-<span class="n">data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">parseToNode</span><span class="p">(</span><span class="n">sample_txt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>最初は、BOS/EOS(文頭／文末)を示す符号となります。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">feature</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">dataset</span><span class="o">.</span><span class="n">set_format</span><span class="p">(</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">data</span><span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">][:]</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">data</span>
-
-<span class="ne">NameError</span>: name &#39;dataset&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;BOS/EOS,*,*,*,*,*,*,*,*&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">.next</span></code>で次のノードに進みます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">next</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">feature</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;普段使いとバイクに乗るときのブーツ兼用として購入しました。見た目や履き心地は良いです。 しかし、２ヶ月履いたらゴム底が削れて無くなりました。また、バイクのシフトペダルとの摩擦で表皮が剥がれ、本革でないことが露呈しました。ちなみに防水とも書いていますが、雨の日は内部に水が染みます。 安くて見た目も良く、履きやすかったのですが、耐久性のなさ、本革でも防水でも無かったことが残念です。結局、本革の防水ブーツを買い直しました。&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;名詞,一般,*,*,*,*,友,トモ,トモ&#39;
 </pre></div>
 </div>
 </div>
 </div>
-<p>Pythonにとるテキストクリーニングについて、テキストクリーニングの必要性を説明し、正規表現を使ったノイズの除去を例を挙げなから説明してください</p>
+<p>ところでfeatureは形態素の特徴を表す要素を格納しています。</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(0\)</span>番目が品詞、<span class="math notranslate nohighlight">\(6\)</span>番目が基本形であり、今回はこの2つを用います。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;品詞: &quot;</span><span class="o">+</span><span class="n">n</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;基本形: &quot;</span><span class="o">+</span><span class="n">n</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>品詞: 名詞
+基本形: 友
+</pre></div>
+</div>
+</div>
+</div>
+<p>文章を解析するためには、whileループを使います。その際、品詞を指定して特定の品詞の基本形だけを取り出すなどという操作が可能です。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">parseToNode</span><span class="p">(</span><span class="n">sample_txt</span><span class="p">)</span>
+<span class="k">while</span> <span class="n">n</span><span class="p">:</span>
+  <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;名詞&quot;</span><span class="p">,</span><span class="s2">&quot;形容詞&quot;</span><span class="p">,</span><span class="s2">&quot;動詞&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">6</span><span class="p">])</span>
+  <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">next</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>友
+たち
+国立新美術館
+行く
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h3>ストップワードの除去<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<p>ストップワードとは、助詞など単独で用いられなかったり、一般的に使用されすぎていて文の意味の分析に寄与しない、あるいや逆に使用頻度が少ないため、含めると分析結果が歪んでしまうなどの理由で分析からあらかじめ除外しておく語のことをいいます。</p>
+<p>一般的には、あらかじめストップワードを辞書に定義しておき、辞書内に含まれる単語をテキスとから除外します。</p>
+<p>一般的な用語のストップリストは例えばSlothLibプロジェクトから取得することができます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="n">slothlib_path</span> <span class="o">=</span> <span class="s1">&#39;http://svn.sourceforge.jp/svnroot/slothlib/CSharp/Version1/SlothLib/NLP/Filter/StopWord/word/Japanese.txt&#39;</span>
+<span class="n">slothlib_file</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">slothlib_path</span><span class="p">)</span>
+<span class="n">slothlib_stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">slothlib_file</span><span class="p">]</span>
+<span class="n">slothlib_stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="n">ss</span> <span class="k">for</span> <span class="n">ss</span> <span class="ow">in</span> <span class="n">slothlib_stopwords</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">ss</span><span class="o">==</span><span class="sa">u</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id">
+<h3>単語のID化<a class="headerlink" href="#id" title="Permalink to this headline">#</a></h3>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>先取りですが、ここからは機械学習・深層学習の適用するための前処理について解説します。</p>
+</aside>
+<p>ほとんどの機械学習・深層学習モデルは数値データを入力として受け取りますので、テキストデータを数値形式に変換する必要があります。</p>
+<p>単語のID化とは、テキストデータを機械学習モデルなどで処理する際に、単語を一意の整数値（ID）に変換するプロセスを指します。これは、テキストデータをベクトルや行列の形でモデルに入力するための前処理として行われます。</p>
+</section>
+<section id="id10">
+<h3>パディング<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<p>パディング(Padding)とは、データの一定の長さや形状を持つように調整するためのテクニックです。</p>
+<p>多くの機械学習・深層学習モデルでは、固定サイズの入力を要求しています。しかし、異なる文書や文はさまざまな長さを持っていますので、テキストデータは可変長である場合が多いです。したがって、すべての文書や文を同じ長さにするためにパディングを使用します。主な手順としては、</p>
+<ul class="simple">
+<li><p>最大長を決定</p></li>
+<li><p>最大長に達するまで、各文の末尾または先頭に特定の「パッドトークン」を追加します。パディングに使用するトークンは、モデルが誤って意味を学習しないように、他の実際の単語やトークンとは異なるものである必要があります。</p></li>
+<li><p>長すぎる文は、最大長に合わせるために切り捨て</p></li>
+</ul>
+<p><img alt="" src="../_images/attention_id.png" /></p>
 </section>
 </section>
 </section>
@@ -818,6 +954,13 @@ EOS
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">ガイダンス</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="ml_basis.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">機械学習の基本概念</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
