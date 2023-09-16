@@ -1,0 +1,827 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>自然言語処理の基礎 &#8212; My sample book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    計算社会科学と自然言語処理
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  イントロダクション
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   ガイダンス
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/notebook/nlp_basis.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fnotebook/nlp_basis.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebook/nlp_basis.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   コーパス
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     コーパスとは
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     コーパスの読み込み
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id5">
+       ファイル読み込みの基礎
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#csvtsv">
+       csvファイルとtsvファイルの読み込み
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#json">
+       jsonファイルの読み込み
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   テキストの前処理
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     正規表現によるノイズの除去
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     トークン化
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>自然言語処理の基礎</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   コーパス
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     コーパスとは
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     コーパスの読み込み
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id5">
+       ファイル読み込みの基礎
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#csvtsv">
+       csvファイルとtsvファイルの読み込み
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#json">
+       jsonファイルの読み込み
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   テキストの前処理
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     正規表現によるノイズの除去
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     トークン化
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>自然言語処理の基礎<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<section id="id2">
+<h2>コーパス<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<section id="id3">
+<h3>コーパスとは<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<p>「コーパス（Corpus）」とは、自然言語の文章や使い方を大規模に収集し、コンピュータで検索できるよう整理されたデータのことです。</p>
+<p>コーパスが大きく「ラベル付きコーパス」と「ラベルなしコーパス」に分けられます。</p>
+<ul class="simple">
+<li><p>ラベルなしコーパス: 注釈付けを行わずにテキストを集めただけのコーパス。例えば、スクリーンスクレイピングによる取得するウェブベージの生テキストデータ。</p></li>
+<li><p>ラベル付きコーパス: ラベル付きコーパスとは、テキストに付加情報（ラベルや注釈）が付与されているコーパスのことを指します。このラベルは、特定のタスクや研究の目的に応じてデータに追加されます。</p>
+<ul>
+<li><p>品詞タグ付きコーパス: 各単語に品詞（名詞、動詞、形容詞など, part of speech）のタグが付けられています。これは、文法的構造の理解や、品詞タガーの訓練データとして使用されます。</p></li>
+<li><p>固有名詞抽出のためのコーパス: テキスト内の固有名詞（人名、地名、組織名など）に対して、該当するラベルが付けられています。</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;sentence&gt;
+　&lt;LUW B=&quot;B&quot; SL=&quot;v&quot; l_lemma=&quot;公共工事請け負い金額&quot; l_lForm=&quot;コウキョウコウジウケオイキンガク&quot; l_wType=&quot;混&quot; l_pos=&quot;名詞-普通名詞-一般&quot; &gt;
+　　&lt;SUW lemma=&quot;公共&quot; lForm=&quot;コウキョウ&quot; wType=&quot;漢&quot; pos=&quot;名詞-普通名詞-一般&quot; pron=&quot;コーキョー&quot;&gt;
+　　　公共
+　　&lt;/SUW&gt;
+　　&lt;SUW lemma=&quot;工事&quot; lForm=&quot;コウジ&quot; wType=&quot;漢&quot; pos=&quot;名詞-普通名詞-サ変可能&quot; pron=&quot;コージ&quot;&gt;
+　　　工事
+　　&lt;/SUW&gt;
+　　&lt;SUW lemma=&quot;請け負い&quot; lForm=&quot;ウケオイ&quot; wType=&quot;和&quot; pos=&quot;名詞-普通名詞-一般&quot; pron=&quot;ウケオイ&quot;&gt;
+　　　請負
+　　&lt;/SUW&gt;
+　　&lt;SUW lemma=&quot;金額&quot; lForm=&quot;キンガク&quot; wType=&quot;漢&quot; pos=&quot;名詞-普通名詞-一般&quot; pron=&quot;キンガク&quot;&gt;
+　　　金額
+　　&lt;/SUW&gt;
+　&lt;/LUW&gt;
+　&lt;LUW SL=&quot;v&quot; l_lemma=&quot;の&quot; l_lForm=&quot;ノ&quot; l_wType=&quot;和&quot; l_pos=&quot;助詞-格助詞&quot; &gt;
+　　&lt;SUW lemma=&quot;の&quot; lForm=&quot;ノ&quot; wType=&quot;和&quot; pos=&quot;助詞-格助詞&quot; pron=&quot;ノ&quot;&gt;の&lt;/SUW&gt;
+　&lt;/LUW&gt;
+　&lt;LUW B=&quot;B&quot; SL=&quot;v&quot; l_lemma=&quot;動き&quot; l_lForm=&quot;ウゴキ&quot; l_wType=&quot;和&quot; l_pos=&quot;名詞-普通名詞-一般&quot; &gt;
+　　&lt;SUW lemma=&quot;動き&quot; lForm=&quot;ウゴキ&quot; wType=&quot;和&quot; pos=&quot;名詞-普通名詞-一般&quot; pron=&quot;ウゴキ&quot;&gt;
+　　　動き
+　　&lt;/SUW&gt;
+　&lt;/LUW&gt;
+（略）
+&lt;/sentence&gt;
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>コーパスの読み込み<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>多くのコーパスは、<em>txt</em>,<em>csv</em>,<em>tsv</em>, <em>json</em>フォーマットで格納されていますので、pythonでこれらのファイルを読み込む方法について紹介します。</p>
+<section id="id5">
+<h4>ファイル読み込みの基礎<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h4>
+<p>読み込み・書き込みいずれの場合も組み込み関数<code class="docutils literal notranslate"><span class="pre">open()</span></code>でファイルを開きます。</p>
+<ul class="simple">
+<li><p>第一引数に指定したパス文字列が示すファイルオブジェクトが開かれます。</p></li>
+<li><p>引数<code class="docutils literal notranslate"><span class="pre">mode</span></code>を<code class="docutils literal notranslate"><span class="pre">r</span></code>とすると読み込みモードでファイルが開かれます。デフォルト値は<code class="docutils literal notranslate"><span class="pre">r</span></code>なので省略してもよい。</p></li>
+<li><p>テキストファイル読み込み時のデコード、書き込み時のエンコードで使われるエンコーディングは引数<code class="docutils literal notranslate"><span class="pre">encoding</span></code>で指定する。日本語環境で使われるものとしては<code class="docutils literal notranslate"><span class="pre">cp932</span></code>, <code class="docutils literal notranslate"><span class="pre">euc_jp</span></code>, <code class="docutils literal notranslate"><span class="pre">shift_jis</span></code>, <code class="docutils literal notranslate"><span class="pre">utf_8</span></code>などがあります。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./Data/corpus.txt&quot;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>この商品はとても素晴らしい。
+残念ながら、私の期待を下回る製品でした。
+非常に使いやすく、価格も手頃。おすすめです！
+この商品には全く魅力を感じませんでした。
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">readlines()</span></code>メソッドで、ファイル全体を行ごとに分割したリストとして取得できます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./Data/corpus.txt&quot;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>この商品はとても素晴らしい。
+
+-----------
+残念ながら、私の期待を下回る製品でした。
+
+-----------
+非常に使いやすく、価格も手頃。おすすめです！
+
+-----------
+この商品には全く魅力を感じませんでした。
+
+-----------
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="csvtsv">
+<h4>csvファイルとtsvファイルの読み込み<a class="headerlink" href="#csvtsv" title="Permalink to this headline">#</a></h4>
+<p>csvは、値がカンマで区切られたファイル形式です。</p>
+<p>tsvは、値がタブで区切られたファイル形式です。</p>
+<p>ファイルの読み込みは、<code class="docutils literal notranslate"><span class="pre">Pandas</span></code>を使って行うことがでします。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;example.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span><span class="s2">&quot;uft-8&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="json">
+<h4>jsonファイルの読み込み<a class="headerlink" href="#json" title="Permalink to this headline">#</a></h4>
+<p>JSONは、構造化されたデータをテキスト形式で表現するためのフォーマットです。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Taro Yamada&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+        <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Tokyo&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Hanako Tanaka&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Osaka&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Jiro Suzuki&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+        <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Kyoto&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pandas</span></code>の<code class="docutils literal notranslate"><span class="pre">read_json</span></code>メソッドを使って読み込めます。</p>
+<p>特に、改行で区切られたJSONファイルはjsonlで呼ばれます。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Taro Yamada&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Tokyo&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Hanako Tanaka&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Osaka&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Jiro Suzuki&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Kyoto&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>jsonl形式のファイルを読み込むには、<code class="docutils literal notranslate"><span class="pre">read_json</span></code>メソッドの<code class="docutils literal notranslate"><span class="pre">lines</span></code>引数に<code class="docutils literal notranslate"><span class="pre">lines=True</span></code>を設定する必要があります。</p>
+</section>
+</section>
+</section>
+<section id="id6">
+<h2>テキストの前処理<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<section id="id7">
+<h3>正規表現によるノイズの除去<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<p>テキストから不要な情報やノイズを取り除き、解析や処理を行いやすくするための前処理が不可欠になります。</p>
+<p>テキストクリーニングを行う際に、正規表現を利用すると非常に柔軟にノイズの除去が可能です。以下、いくつかの一般的なケースを例に、テキストからノイズを除去する方法を紹介します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="c1">#ウェブページやSNSのテキストからURLを取り除く場合:</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;この記事はhttp://example.com に投稿されました。&quot;</span>
+<span class="n">cleaned_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http\S+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cleaned_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>この記事は に投稿されました。
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HTMLタグの除去: HTMLコンテンツからタグを取り除く場合:</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;今日は2023年9月16日です。&quot;</span>
+<span class="n">cleaned_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cleaned_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>今日は年月日です。
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#テキストからアルファベットのみを取り除く場合:</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;これはテストtextです。&quot;</span>
+<span class="n">cleaned_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[a-zA-Z]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cleaned_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>これはテストです。
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h3>トークン化<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<p>コンピュータは、入力として生の文字列を受け取ることができません。その代わりに、テキストがトークン化され、数値ベクトルとしてエンコードされていることが想定しています。</p>
+<p>トークン化は、文字列をモデルで使用される最小単位に分解するステップです。</p>
+<p>日本語は英語などとは異なり、単語の間に（スペースなどの）区切りをつけないので、文から単語を取り出すこと自体が一つのタスクとなります。文から単語（正確には形態素と呼ばれる意味の最小単位）を取り出す解析を形態素解析といいます。</p>
+<p>イメージとしては以下のように分割します。</p>
+<ul class="simple">
+<li><p>分かち書き（文章を形態素で分ける）</p></li>
+<li><p>品詞わけ（名詞や動詞などに分類する）</p></li>
+<li><p>原型付与（単語の基本形をだす） 例：食べた ⇒ 食べる、た</p></li>
+</ul>
+<p><img alt="" src="../_images/token.png" /></p>
+<p>日本語の形態素解析ツールとしては、MeCabやJUMAN++、Janomeなどが挙げられます。ここでは、MeCabを使って形態素解析をしてみましょう。</p>
+<p>初めてMeCabを使う場合、<code class="docutils literal notranslate"><span class="pre">!</span></code>が付いたコードをJupyter Notebookで実行するか、<code class="docutils literal notranslate"><span class="pre">!</span></code>を除去したコードをターミナルで実行し、MeCabを導入してください。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install mecab-python3 # mecab-python3のインストール
+!pip install unidic
+!python -m unidic download # 辞書のダウンロード
+</pre></div>
+</div>
+<p>結果を確認すると、単語に分割されていますが、デフォルトの設定では新語に対する解析は強くないことがわかります。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !pip install mecab-python3 # mecab-python3のインストール</span>
+<span class="c1"># !pip install unidic</span>
+<span class="c1"># !python -m unidic download # 辞書のダウンロード</span>
+<span class="kn">import</span> <span class="nn">MeCab</span>
+<span class="kn">import</span> <span class="nn">unidic</span>
+<span class="n">tagger</span> <span class="o">=</span> <span class="n">MeCab</span><span class="o">.</span><span class="n">Tagger</span><span class="p">()</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">tagger</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;友たちと国立新美術館に行った。&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>友	名詞,普通名詞,一般,,,,トモ,友,友,トモ,友,トモ,和,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,体,トモ,トモ,トモ,トモ,&quot;1&quot;,&quot;C3&quot;,&quot;&quot;,7324130487706112,26645
+たち	接尾辞,名詞的,一般,,,,タチ,達,たち,タチ,たち,タチ,和,&quot;タ濁&quot;,&quot;基本形&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,接尾体,タチ,タチ,タチ,タチ,&quot;&quot;,&quot;C3&quot;,&quot;&quot;,6149852035686912,22373
+と	助詞,格助詞,,,,,ト,と,と,ト,と,ト,和,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,格助,ト,ト,ト,ト,&quot;&quot;,&quot;名詞%F1,動詞%F1,形容詞%F2@-1&quot;,&quot;&quot;,7099014038299136,25826
+国立	名詞,普通名詞,一般,,,,コクリツ,国立,国立,コクリツ,国立,コクリツ,漢,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,体,コクリツ,コクリツ,コクリツ,コクリツ,&quot;0&quot;,&quot;C2&quot;,&quot;&quot;,3460171716239872,12588
+新	接頭辞,,,,,,シン,新,新,シン,新,シン,漢,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,接頭,シン,シン,シン,シン,&quot;&quot;,&quot;P2&quot;,&quot;&quot;,4736429838180864,17231
+美術	名詞,普通名詞,一般,,,,ビジュツ,美術,美術,ビジュツ,美術,ビジュツ,漢,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,体,ビジュツ,ビジュツ,ビジュツ,ビジュツ,&quot;1&quot;,&quot;C1&quot;,&quot;&quot;,8801049481716224,32018
+館	接尾辞,名詞的,一般,,,,カン,館,館,カン,館,カン,漢,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,接尾体,カン,カン,カン,カン,&quot;&quot;,&quot;C3&quot;,&quot;&quot;,2056095367569920,7480
+に	助詞,格助詞,,,,,ニ,に,に,ニ,に,ニ,和,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,格助,ニ,ニ,ニ,ニ,&quot;&quot;,&quot;名詞%F1&quot;,&quot;&quot;,7745518285496832,28178
+行っ	動詞,非自立可能,,,五段-カ行,連用形-促音便,イク,行く,行っ,イッ,行く,イク,和,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,用,イッ,イク,イッ,イク,&quot;0&quot;,&quot;C2&quot;,&quot;&quot;,470874511778436,1713
+た	助動詞,,,,助動詞-タ,終止形-一般,タ,た,た,タ,た,タ,和,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,助動,タ,タ,タ,タ,&quot;&quot;,&quot;動詞%F2@1,形容詞%F4@-2&quot;,&quot;&quot;,5948916285711019,21642
+。	補助記号,句点,,,,,,。,。,,。,,記号,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,補助,,,,,&quot;&quot;,&quot;&quot;,&quot;&quot;,6880571302400,25
+EOS
+</pre></div>
+</div>
+</div>
+</div>
+<p>この問題は形態素解析器に辞書を追加することである程度解決することが出来ます。特に、<em>NEologd</em>という辞書には、通常の辞書と比べて多くの新語が含まれています。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_txt</span> <span class="o">=</span> <span class="s2">&quot;友たちと国立新美術館に行った。&quot;</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;-d /opt/homebrew/lib/mecab/dic/mecab-ipadic-neologd&quot;</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">MeCab</span><span class="o">.</span><span class="n">Tagger</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mecab ipadic NEologd:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">m</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">sample_txt</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mecab ipadic NEologd:
+ 友	名詞,一般,*,*,*,*,友,トモ,トモ
+たち	名詞,接尾,一般,*,*,*,たち,タチ,タチ
+と	助詞,並立助詞,*,*,*,*,と,ト,ト
+国立新美術館	名詞,固有名詞,一般,*,*,*,国立新美術館,コクリツシンビジュツカン,コクリツシンビジュツカン
+に	助詞,格助詞,一般,*,*,*,に,ニ,ニ
+行っ	動詞,自立,*,*,五段・カ行促音便,連用タ接続,行く,イッ,イッ
+た	助動詞,*,*,*,特殊・タ,基本形,た,タ,タ
+。	記号,句点,*,*,*,*,。,。,。
+EOS
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">set_format</span><span class="p">(</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">][:]</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">dataset</span><span class="o">.</span><span class="n">set_format</span><span class="p">(</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">data</span><span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">][:]</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">data</span>
+
+<span class="ne">NameError</span>: name &#39;dataset&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;普段使いとバイクに乗るときのブーツ兼用として購入しました。見た目や履き心地は良いです。 しかし、２ヶ月履いたらゴム底が削れて無くなりました。また、バイクのシフトペダルとの摩擦で表皮が剥がれ、本革でないことが露呈しました。ちなみに防水とも書いていますが、雨の日は内部に水が染みます。 安くて見た目も良く、履きやすかったのですが、耐久性のなさ、本革でも防水でも無かったことが残念です。結局、本革の防水ブーツを買い直しました。&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pythonにとるテキストクリーニングについて、テキストクリーニングの必要性を説明し、正規表現を使ったノイズの除去を例を挙げなから説明してください</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
