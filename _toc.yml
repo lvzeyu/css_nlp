@@ -12,3 +12,7 @@ parts:
   chapters:
   - file: notebook/nlp_basis.ipynb
   - file: notebook/ml_basis.ipynb
+  - file: notebook/math_basis.ipynb
+- caption: ニューラルネットワーク
+  chapters:
+  - file: notebook/NN.ipynb
