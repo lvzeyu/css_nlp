@@ -533,13 +533,13 @@ title="Print to PDF"
 <h2>コーパス<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <section id="id3">
 <h3>コーパスとは<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
-<p>「コーパス（Corpus）」とは、自然言語の文章や使い方を大規模に収集し、コンピュータで検索できるよう整理されたデータのことです。</p>
+<p>「コーパス（Corpus）」とは、ひとことで言うと言語データの集まりのです。</p>
 <p>コーパスが大きく「ラベル付きコーパス」と「ラベルなしコーパス」に分けられます。</p>
 <ul class="simple">
 <li><p>ラベルなしコーパス: 注釈付けを行わずにテキストを集めただけのコーパス。例えば、スクリーンスクレイピングによる取得するウェブベージの生テキストデータ。</p></li>
 <li><p>ラベル付きコーパス: ラベル付きコーパスとは、テキストに付加情報（ラベルや注釈）が付与されているコーパスのことを指します。このラベルは、特定のタスクや研究の目的に応じてデータに追加されます。</p>
 <ul>
-<li><p>品詞タグ付きコーパス: 各単語に品詞（名詞、動詞、形容詞など, part of speech）のタグが付けられています。これは、文法的構造の理解や、品詞タガーの訓練データとして使用されます。</p></li>
+<li><p><u><strong>品詞</strong></u>タグ付きコーパス: 各単語に品詞（名詞、動詞、形容詞など, part of speech）のタグが付けられています。これは、文法的構造の理解や、品詞タガーの訓練データとして使用されます。</p></li>
 <li><p>固有名詞抽出のためのコーパス: テキスト内の固有名詞（人名、地名、組織名など）に対して、該当するラベルが付けられています。</p></li>
 </ul>
 </li>
@@ -579,7 +579,7 @@ title="Print to PDF"
 <h4>ファイル読み込みの基礎<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h4>
 <p>読み込み・書き込みいずれの場合も組み込み関数<code class="docutils literal notranslate"><span class="pre">open()</span></code>でファイルを開きます。</p>
 <ul class="simple">
-<li><p>第一引数に指定したパス文字列が示すファイルオブジェクトが開かれます。</p></li>
+<li><p>第一引数に指定したパスからコーパスファイルが開かれます。</p></li>
 <li><p>引数<code class="docutils literal notranslate"><span class="pre">mode</span></code>を<code class="docutils literal notranslate"><span class="pre">r</span></code>とすると読み込みモードでファイルが開かれます。デフォルト値は<code class="docutils literal notranslate"><span class="pre">r</span></code>なので省略してもよい。</p></li>
 <li><p>テキストファイル読み込み時のデコード、書き込み時のエンコードで使われるエンコーディングは引数<code class="docutils literal notranslate"><span class="pre">encoding</span></code>で指定する。日本語環境で使われるものとしては<code class="docutils literal notranslate"><span class="pre">cp932</span></code>, <code class="docutils literal notranslate"><span class="pre">euc_jp</span></code>, <code class="docutils literal notranslate"><span class="pre">shift_jis</span></code>, <code class="docutils literal notranslate"><span class="pre">utf_8</span></code>などがあります。</p></li>
 </ul>
@@ -640,7 +640,7 @@ title="Print to PDF"
 </section>
 <section id="json">
 <h4>jsonファイルの読み込み<a class="headerlink" href="#json" title="Permalink to this headline">#</a></h4>
-<p>JSONは、構造化されたデータをテキスト形式で表現するためのフォーマットです。</p>
+<p><u><strong>JSONは、構造化されたデータをテキスト形式で表現するためのフォーマットです。</strong></u></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
         <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -678,8 +678,14 @@ title="Print to PDF"
 <h2>テキストの前処理<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
 <section id="id7">
 <h3>正規表現によるノイズの除去<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
-<p>テキストから不要な情報やノイズを取り除き、解析や処理を行いやすくするための前処理が不可欠になります。</p>
-<p>テキストクリーニングを行う際に、正規表現を利用すると非常に柔軟にノイズの除去が可能です。以下、いくつかの一般的なケースを例に、テキストからノイズを除去する方法を紹介します。</p>
+<p>テキスト分析における、テキストから不要な情報やノイズを取り除き、解析や処理を行いやすくするための前処理が不可欠になります。</p>
+<p>テキストクリーニングを行う際に、<strong><u>正規表現</strong></u>を利用すると非常に柔軟にノイズの除去が可能です。以下、いくつかの一般的なケースを例に、テキストからノイズを除去する方法を紹介します。</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>正規表現とは、文字列内で文字の組み合わせを照合するために用いられるパターンです。</p>
+</aside>
+<p><code class="docutils literal notranslate"><span class="pre">re.sub</span></code>は、正規表現にマッチした文字列を別の文字列に置換するための関数です。対象となる文字列の中で正規表現パターンにマッチする部分を、置換後の文字列に置換します。</p>
+<p>第1引数には正規表現パターン、第2引数には置換後の文字列、第3引数には対象となる文字列を指定します。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
@@ -697,6 +703,10 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><code class="docutils literal notranslate"><span class="pre">http</span></code> から始まり、その後に1つ以上の非空白文字 (<code class="docutils literal notranslate"><span class="pre">\S+</span></code>) が続く文字列にマッチする正規表現パターン <code class="docutils literal notranslate"><span class="pre">r'http\S+'</span></code> を指定しています。</p>
+</aside>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HTMLタグの除去: HTMLコンテンツからタグを取り除く場合:</span>
@@ -712,6 +722,10 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><code class="docutils literal notranslate"><span class="pre">\d</span></code> は、0から9までの数字にマッチする特殊文字です。この正規表現パターンにマッチする部分は、空文字列 <code class="docutils literal notranslate"><span class="pre">''</span></code> に置換されます。</p>
+</aside>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#テキストからアルファベットのみを取り除く場合:</span>
@@ -727,11 +741,14 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><code class="docutils literal notranslate"><span class="pre">[a-zA-Z]</span></code> は、英字の大文字と小文字にマッチする文字クラスです。</p>
+</aside>
 </section>
 <section id="id8">
 <h3>トークン化<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
-<p>コンピュータは、入力として生の文字列を受け取ることができません。その代わりに、テキストがトークン化され、数値ベクトルとしてエンコードされていることが想定しています。</p>
-<p>トークン化は、文字列をモデルで使用される最小単位に分解するステップです。</p>
+<p>トークン化は、文字列をモデルで使用される最小単位に分解するステップです。トークンは通常、言語の基本的な構成要素である単語や部分文字列を指します。</p>
 <p>日本語は英語などとは異なり、単語の間に（スペースなどの）区切りをつけないので、文から単語を取り出すこと自体が一つのタスクとなります。文から単語（正確には形態素と呼ばれる意味の最小単位）を取り出す解析を形態素解析といいます。</p>
 <p>イメージとしては以下のように分割します。</p>
 <ul class="simple">
