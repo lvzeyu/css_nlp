@@ -635,8 +635,10 @@ z_{1} &amp; z_{2} &amp; z_{3}
 <section id="id10">
 <h4>ベクトルの数学演算<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
-<li><p>加算（足し算）及び減算（引き算）は同じサイズのベクトル同士の間だけで成立します。
-$<span class="math notranslate nohighlight">\(
+<li><p>加算（足し算）及び減算（引き算）は同じサイズのベクトル同士の間だけで成立します。</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{split}\begin{bmatrix}
 1 \\
 2 \\
@@ -654,8 +656,7 @@ $<span class="math notranslate nohighlight">\(
 7 \\
 9
 \end{bmatrix}\end{split}
-\)</span>$</p></li>
-</ul>
+\end{split}\]</div>
 <ul class="simple">
 <li><p>スカラ倍とはベクトルにスカラを掛ける演算です。</p></li>
 </ul>
@@ -715,7 +716,7 @@ x_{31} &amp; x_{32}
 <p>行列<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>と行列<span class="math notranslate nohighlight">\(\mathbf{B}\)</span>の行列積は<span class="math notranslate nohighlight">\(\mathbf{AB}\)</span>と書き 、<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>の各行と<span class="math notranslate nohighlight">\(\mathbf{B}\)</span>の各列の内積を並べたものとして定義されます。</p>
 <p>例えば、行列<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>の<span class="math notranslate nohighlight">\(1\)</span>行目の行ベクトルと、行列<span class="math notranslate nohighlight">\(\mathbf{B}\)</span>の<span class="math notranslate nohighlight">\(1\)</span>列目の列ベクトルの内積の結果は、<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>と<span class="math notranslate nohighlight">\(\mathbf{B}\)</span>の行列積の結果を表す行列<span class="math notranslate nohighlight">\(\mathbf{C}\)</span>の<span class="math notranslate nohighlight">\(1\)</span>行<span class="math notranslate nohighlight">\(1\)</span>列目に対応します。</p>
 <p><img alt="" src="../_images/matrix.png" /></p>
-<p>内積が定義される条件はベクトルのサイズが等しいということでしたが、ここでもそれが成り立つために、<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>の行のサイズ（=Aの列数）と<span class="math notranslate nohighlight">\(\mathbf{B}\)</span>の$の列のサイズ（=Bの行数）が一致する必要があります。</p>
+<p>内積が定義される条件はベクトルのサイズが等しいということでしたが、ここでもそれが成り立つために、<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>の行のサイズと <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> の列のサイズが一致する必要があります。</p>
 <p><img alt="" src="../_images/matrix2.png" /></p>
 </section>
 <section id="id14">
@@ -778,11 +779,12 @@ x_2
 \end{aligned}\end{split}
 \end{split}\]</div>
 <p>のように<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>の要素である<span class="math notranslate nohighlight">\(x_1\)</span>および<span class="math notranslate nohighlight">\(x_2\)</span>に関して一次式となっています。</p>
-<p><span class="math notranslate nohighlight">\(\mathbf{𝐛^T𝐱}\)</span>をベクトル<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>で微分したものを、
-$<span class="math notranslate nohighlight">\(
+<p><span class="math notranslate nohighlight">\(\mathbf{𝐛^T𝐱}\)</span>をベクトル<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>で微分したものを、</p>
+<div class="math notranslate nohighlight">
+\[
 \frac{\partial}{\partial {\bf x}} \left( {\bf b}^{\rm T}{\bf x} \right)
-\)</span>$
-と表します。</p>
+\]</div>
+<p>と表します。</p>
 <p>「ベクトルで微分」とは、ベクトルのそれぞれの要素で対象を微分し、その結果を要素に対応する位置に並べてベクトルを作ることです。つまり、</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
