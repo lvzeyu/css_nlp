@@ -211,6 +211,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/notebook/math_basis.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -348,6 +377,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#python">
+     Pythonによる微分計算
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
      微分の公式
     </a>
@@ -445,6 +479,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#python">
+     Pythonによる微分計算
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
      微分の公式
     </a>
@@ -539,7 +578,7 @@ title="Print to PDF"
 a= \frac{f(x + h) - f(x)}{(x+h)-x}
 \]</div>
 <ul class="simple">
-<li><p>次に<span class="math notranslate nohighlight">\(h\)</span>を<span class="math notranslate nohighlight">\(h \rightarrow 0\)</span>のように小さくしていけば、直線の開始点と終了点の2点が1点に収束し、1点での接線として考えることができます。この式を<span class="math notranslate nohighlight">\(f\)</span>の導関数 (derivative)と呼び、<span class="math notranslate nohighlight">\(f'(x)\)</span>と書きます。</p></li>
+<li><p>次に<span class="math notranslate nohighlight">\(h\)</span>を<span class="math notranslate nohighlight">\(h \rightarrow 0\)</span>のように小さくしていけば、直線の開始点と終了点の2点が1点に収束し、1点での接線として考えることができます。このように、平均変化率の極限値が存在するならば、微分可能であると言います。この式を<span class="math notranslate nohighlight">\(f\)</span>の導関数 (derivative)と呼び、<span class="math notranslate nohighlight">\(f'(x)\)</span>と書きます。関数<span class="math notranslate nohighlight">\(f(x)\)</span>の微分係数<span class="math notranslate nohighlight">\(f'(a)\)</span>はその曲線の点<span class="math notranslate nohighlight">\((a,f(a))\)</span>(接点)における接線の傾きです。</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -549,6 +588,90 @@ f'(x)= \lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}
 <ul class="simple">
 <li><p>導関数を求めることを微分(differentiation)するといいます。 記号の使い方として、<span class="math notranslate nohighlight">\(f'(x)\)</span>を<span class="math notranslate nohighlight">\(\frac{df}{dx} (x)\)</span> または <span class="math notranslate nohighlight">\( \frac{d}{dx}f (x)\)</span>と書きます。</p></li>
 </ul>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>関数 <span class="math notranslate nohighlight">\(f(x)\)</span> について、変数 <span class="math notranslate nohighlight">\(x\)</span>をある値 <span class="math notranslate nohighlight">\(a\)</span> に限りなく近づけるとき、どのような近づけ方に対しても関数 <span class="math notranslate nohighlight">\(f(x)\)</span>　の値が一定値<span class="math notranslate nohighlight">\(A\)</span>に限りなく近づくならば、<span class="math notranslate nohighlight">\(x\)</span>が<span class="math notranslate nohighlight">\(a\)</span>に近づくとき<span class="math notranslate nohighlight">\(f(x)\)</span>は値<span class="math notranslate nohighlight">\(A\)</span>に収束といい、<span class="math notranslate nohighlight">\(A\)</span>を極限値と言います。</p>
+</aside>
+</section>
+<section id="python">
+<h3>Pythonによる微分計算<a class="headerlink" href="#python" title="Permalink to this headline">#</a></h3>
+<p>Pythonで微分を計算するためには、<code class="docutils literal notranslate"><span class="pre">SymPy</span></code>というライブラリを使用するのが一般的です。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">diff</span>
+
+<span class="c1"># シンボリック変数の定義</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="c1"># 関数の定義</span>
+<span class="n">function_1</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span>
+
+<span class="c1"># 関数の微分</span>
+<span class="n">function_1_prime</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">function_1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">function_1_prime</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">diff</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># シンボリック変数の定義</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;sympy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># x=4を代入して値を計算</span>
+<span class="n">value_at_x4</span> <span class="o">=</span> <span class="n">function_1_prime</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">value_at_x4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 微分の近似計算の精度と計算の安定性のバランスをとるために、中心差分法といった関数の前後の点を使用して計算する方法を用いる</span>
+<span class="k">def</span> <span class="nf">numerical_diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">1e-4</span> <span class="c1"># 微小な変化量: 0.0001</span>
+    <span class="n">nd</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">function_1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">numerical_diff</span><span class="p">(</span><span class="n">function_1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="c1"># 25.0 に近い値が期待される</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.000000010031442
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="id4">
 <h3>微分の公式<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
@@ -573,6 +696,28 @@ f'(x)= \lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}
 \[
 \frac{d}{dx} f(g(x)) = \frac{df(u)}{du}\frac{du}{dx}
 \]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>関数
+[ y = \sin(3x^2 + 4x) ]
+の微分を求めます。</p>
+<p>ここで、
+[ f(u) = \sin(u) ]
+[ g(x) = 3x^2 + 4x ]
+とし、( y ) は ( f ) と ( g ) の合成関数、すなわち ( y = f(g(x)) ) であると考えます。</p>
+<p>連鎖律を用いると:
+[ \frac{dy}{dx} = \frac{df}{du} \cdot \frac{du}{dx} ]</p>
+<ol class="simple">
+<li><p>( f’(u) = \cos(u) )</p></li>
+<li><p>( g’(x) = 6x + 4 )</p></li>
+</ol>
+<p>これらを連鎖律の式に代入すると:
+[ \frac{dy}{dx} = \cos(3x^2 + 4x) \cdot (6x + 4) ]</p>
+<p>したがって、
+[ y’ =  \cos(3x^2 + 4x) \cdot (6x + 4) ]
+が得られます。</p>
+<p>このように、連鎖律を使用することで、合成関数の微分を計算することができます。</p>
+</div>
 </section>
 <section id="id6">
 <h3>偏微分<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
@@ -598,6 +743,76 @@ f'(x)= \lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}
 &amp;= 3
 \end{aligned}\end{split}
 \end{split}\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">diff</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
+
+<span class="c1"># 関数の定義</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># 偏微分の計算</span>
+<span class="n">partial_x</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">partial_y</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Partial Derivative with respect to x:&quot;</span><span class="p">,</span> <span class="n">partial_x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Partial Derivative with respect to y:&quot;</span><span class="p">,</span> <span class="n">partial_y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Partial Derivative with respect to x: 2*x
+Partial Derivative with respect to y: 2*y
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 可視化のためのデータ生成</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">Zx</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">X</span>
+<span class="n">Zy</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">Y</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Original Function</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Function: f(x,y) = x^2 + y^2&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;f(x, y)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Partial Derivative with respect to x</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Zx</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Partial Derivative: df/dx&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;df/dx&#39;</span><span class="p">)</span>
+
+<span class="c1"># Partial Derivative with respect to y</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Zy</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Partial Derivative: df/dy&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;df/dy&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/math_basis_15_0.png" src="../_images/math_basis_15_0.png" />
+</div>
 </div>
 </section>
 </section>
