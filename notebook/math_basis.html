@@ -614,16 +614,8 @@ f'(x)= \lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">diff</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># シンボリック変数の定義</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;sympy&#39;
-</pre></div>
-</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 3 x^{2} - 6 x + 1\]</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -699,23 +691,34 @@ f'(x)= \lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>関数
-[ y = \sin(3x^2 + 4x) ]
+<span class="math notranslate nohighlight">\(y = \sin(3x^2 + 4x)\)</span>
 の微分を求めます。</p>
-<p>ここで、
-[ f(u) = \sin(u) ]
-[ g(x) = 3x^2 + 4x ]
-とし、( y ) は ( f ) と ( g ) の合成関数、すなわち ( y = f(g(x)) ) であると考えます。</p>
-<p>連鎖律を用いると:
-[ \frac{dy}{dx} = \frac{df}{du} \cdot \frac{du}{dx} ]</p>
+<p>ここで、</p>
+<div class="math notranslate nohighlight">
+\[f(u) = \sin(u)\]</div>
+<div class="math notranslate nohighlight">
+\[g(x) = 3x^2 + 4x\]</div>
+<p>とし、<span class="math notranslate nohighlight">\(y\)</span> は <span class="math notranslate nohighlight">\(f\)</span> と <span class="math notranslate nohighlight">\(g\)</span> の合成関数、すなわち <span class="math notranslate nohighlight">\(y = f(g(x))\)</span> であると考えます。</p>
+<p>連鎖律を用いると:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy}{dx} = \frac{df}{du} \cdot \frac{du}{dx}
+\]</div>
 <ol class="simple">
-<li><p>( f’(u) = \cos(u) )</p></li>
-<li><p>( g’(x) = 6x + 4 )</p></li>
+<li><p><span class="math notranslate nohighlight">\(f'(u) = \cos(u)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(g'(x) = 6x + 4\)</span></p></li>
 </ol>
-<p>これらを連鎖律の式に代入すると:
-[ \frac{dy}{dx} = \cos(3x^2 + 4x) \cdot (6x + 4) ]</p>
-<p>したがって、
-[ y’ =  \cos(3x^2 + 4x) \cdot (6x + 4) ]
-が得られます。</p>
+<p>これらを連鎖律の式に代入すると:</p>
+<div class="math notranslate nohighlight">
+\[
+frac{dy}{dx} = \cos(3x^2 + 4x) \cdot (6x + 4)
+\]</div>
+<p>したがって、</p>
+<div class="math notranslate nohighlight">
+\[
+y' =  \cos(3x^2 + 4x) \cdot (6x + 4)
+\]</div>
+<p>が得られます。</p>
 <p>このように、連鎖律を使用することで、合成関数の微分を計算することができます。</p>
 </div>
 </section>
@@ -779,7 +782,7 @@ Partial Derivative with respect to y: 2*y
 <span class="n">Zx</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">X</span>
 <span class="n">Zy</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">Y</span>
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
 <span class="c1"># Original Function</span>
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
