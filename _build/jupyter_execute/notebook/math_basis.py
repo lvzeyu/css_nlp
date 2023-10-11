@@ -139,7 +139,7 @@ print(numerical_diff(function_1, 4)) # 25.0 に近い値が期待される
 # これらを連鎖律の式に代入すると:
 # 
 # $$
-# frac{dy}{dx} = \cos(3x^2 + 4x) \cdot (6x + 4)
+# \frac{dy}{dx} = \cos(3x^2 + 4x) \cdot (6x + 4)
 # $$
 # 
 # したがって、
@@ -188,7 +188,7 @@ print(numerical_diff(function_1, 4)) # 25.0 に近い値が期待される
 import numpy as np
 import matplotlib.pyplot as plt
 from sympy import symbols, diff
-plt.style.use('seaborn-paper') 
+plt.style.use('seaborn-poster') 
 
 x, y = symbols('x y')
 
@@ -214,29 +214,29 @@ Zy = 2*Y
 
 fig = plt.figure(figsize=(20, 6))
 
-# Original Function
+# 関数の可視化
 ax1 = fig.add_subplot(1, 3, 1, projection='3d')
 ax1.plot_surface(X, Y, Z, cmap='jet')
-ax1.set_title("Function: f(x,y) = x^2 + y^2")
-ax1.set_xlabel('x')
-ax1.set_ylabel('y')
-ax1.set_zlabel('f(x, y)')
+ax1.set_title("Function: $f(x, y) = x^2 + y^2$",size=20)
+ax1.set_xlabel('$x$', labelpad=15)
+ax1.set_ylabel('$y$', labelpad=15)
+ax1.set_zlabel('$f(x, y)$', labelpad=15)
 
-# Partial Derivative with respect to x
+# xに関する偏微分
 ax2 = fig.add_subplot(1, 3, 2, projection='3d')
 ax2.plot_surface(X, Y, Zx, cmap='jet')
-ax2.set_title("Partial Derivative: df/dx")
-ax2.set_xlabel('x')
-ax2.set_ylabel('y')
-ax2.set_zlabel('df/dx')
+ax2.set_title(r"Partial Derivative: $\frac{\partial}{\partial x}$",size=20)
+ax2.set_xlabel('$x$', labelpad=15)
+ax2.set_ylabel('$y$', labelpad=15)
+ax2.set_zlabel(r'$\frac{\partial f}{\partial x}$', labelpad=15)
 
-# Partial Derivative with respect to y
+# yに関する偏微分
 ax3 = fig.add_subplot(1, 3, 3, projection='3d')
 ax3.plot_surface(X, Y, Zy, cmap='jet')
-ax3.set_title("Partial Derivative: df/dy")
-ax3.set_xlabel('x')
-ax3.set_ylabel('y')
-ax3.set_zlabel('df/dy')
+ax3.set_title(r"Partial Derivative: $\frac{\partial}{\partial y}$",size=20)
+ax3.set_xlabel('$x$', labelpad=15)
+ax3.set_ylabel('$y$', labelpad=15)
+ax3.set_zlabel(r'$\frac{\partial f}{\partial y}$', labelpad=15)
 
 plt.tight_layout()
 plt.show()
@@ -475,8 +475,6 @@ plt.show()
 # In[8]:
 
 
-import numpy as np
-import matplotlib.pyplot as plt
 
 # 関数とその勾配
 def function(x, y):
@@ -496,13 +494,13 @@ U, V = gradient(X, Y)
 
 # 可視化
 plt.figure(figsize=(10, 8))
-plt.contour(X, Y, Z, levels=50, cmap='jet')  # 高度を等高線で表示
+plt.contour(X, Y, Z, levels=50, cmap='jet')  # 値を等高線で表示
 plt.quiver(X, Y, U, V, angles='xy', scale_units='xy', scale=10, color='red', width=0.005)  # 勾配ベクトルを矢印で表示
 plt.axhline(0, color='black', linewidth=0.5)
 plt.axvline(0, color='black', linewidth=0.5)
-plt.title('Gradient of f(x, y) = x^2 + y^2')
-plt.xlabel('x')
-plt.ylabel('y')
+plt.title('Gradient of $f(x, y) = x^2 + y^2$')
+plt.xlabel('$x$')
+plt.ylabel('$y$')
 plt.grid(True)
 plt.show()
 
