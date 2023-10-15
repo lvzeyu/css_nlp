@@ -138,4 +138,9 @@
 # ![](./Figure/nn_d.png)
 # 
 
+# ```{note}
+# ![](./Figure/nn_d.png)
+# 
+# ```
+
 # 
