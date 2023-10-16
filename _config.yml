@@ -49,3 +49,7 @@ parse:
     - replacements
     - smartquotes
     - substitution
+
+launch_buttons:
+  notebook_interface: "jupyterlab"  # or "classic"
+  colab_url: "https://colab.research.google.com"
