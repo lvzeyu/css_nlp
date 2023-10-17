@@ -16,3 +16,4 @@ parts:
 - caption: ニューラルネットワーク
   chapters:
   - file: notebook/NN.ipynb
+  - file: notebook/backpropagation.ipynb
