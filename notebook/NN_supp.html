@@ -1,0 +1,1665 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; 計算社会科学のための自然言語処理</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/tohoku-university-logo-vector.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">計算社会科学のための自然言語処理</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    計算社会科学と自然言語処理
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  イントロダクション
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   ガイダンス
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  基礎知識
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp_basis.html">
+   自然言語処理の基礎
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml_basis.html">
+   機械学習の基本概念
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  ニューラルネットワーク
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="NN.html">
+   ニューラルネットワーク
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=lab/tree/docs/notebook/NN_supp.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/notebook/NN_supp.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fnotebook/NN_supp.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebook/NN_supp.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1><no title></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="c1"># グラフプロット用基準関数</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">z</span>
+<span class="c1"># 基準関数の微分</span>
+<span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">dzdx</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="n">dzdy</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">y</span>
+    <span class="n">dz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dzdx</span><span class="p">,</span> <span class="n">dzdy</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">dz</span>
+
+<span class="c1"># 勾配降下法に必要なパラメータ</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.1</span>                           <span class="c1"># 学習率</span>
+<span class="n">max_iteration</span> <span class="o">=</span> <span class="mi">1000</span>                <span class="c1"># 最大反復回数</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>                            <span class="c1"># 初期値x0</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="mi">10</span>                             <span class="c1"># 初期値y0</span>
+<span class="n">x_pred</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>                       <span class="c1"># 描画用x0軌跡リスト(初期値をプリセット)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="n">y0</span><span class="p">]</span>                       <span class="c1"># 描画用y0軌跡リスト(初期値をプリセット)</span>
+
+<span class="c1"># 最大反復回数まで計算する</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iteration</span><span class="p">):</span>
+    <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">])</span> <span class="o">-</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">df</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">)</span>          <span class="c1"># 勾配降下法</span>
+    <span class="n">x_pred</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>               <span class="c1"># x0の軌跡をリストに追加</span>
+    <span class="n">y_pred</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>               <span class="c1"># y0の軌跡をリストに追加</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">)</span>
+
+<span class="n">x_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_pred</span><span class="p">)</span>           <span class="c1"># 描画用にx0をnumpy配列変換</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>           <span class="c1"># 描画用にx0をnumpy配列変換</span>
+<span class="n">z_pred</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>          <span class="c1"># 軌跡のz値を計算</span>
+
+<span class="c1"># 基準関数の表示用</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------------</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 -8.0 8.0
+1 -6.4 6.4
+2 -5.12 5.12
+3 -4.096 4.096
+4 -3.2768 3.2768
+5 -2.62144 2.62144
+6 -2.0971520000000003 2.0971520000000003
+7 -1.6777216000000004 1.6777216000000004
+8 -1.3421772800000003 1.3421772800000003
+9 -1.0737418240000003 1.0737418240000003
+10 -0.8589934592000003 0.8589934592000003
+11 -0.6871947673600002 0.6871947673600002
+12 -0.5497558138880001 0.5497558138880001
+13 -0.43980465111040007 0.43980465111040007
+14 -0.35184372088832006 0.35184372088832006
+15 -0.281474976710656 0.281474976710656
+16 -0.22517998136852482 0.22517998136852482
+17 -0.18014398509481985 0.18014398509481985
+18 -0.14411518807585588 0.14411518807585588
+19 -0.11529215046068471 0.11529215046068471
+20 -0.09223372036854777 0.09223372036854777
+21 -0.07378697629483821 0.07378697629483821
+22 -0.05902958103587057 0.05902958103587057
+23 -0.04722366482869646 0.04722366482869646
+24 -0.037778931862957166 0.037778931862957166
+25 -0.030223145490365734 0.030223145490365734
+26 -0.024178516392292588 0.024178516392292588
+27 -0.01934281311383407 0.01934281311383407
+28 -0.015474250491067256 0.015474250491067256
+29 -0.012379400392853806 0.012379400392853806
+30 -0.009903520314283045 0.009903520314283045
+31 -0.007922816251426436 0.007922816251426436
+32 -0.006338253001141149 0.006338253001141149
+33 -0.00507060240091292 0.00507060240091292
+34 -0.0040564819207303355 0.0040564819207303355
+35 -0.0032451855365842686 0.0032451855365842686
+36 -0.002596148429267415 0.002596148429267415
+37 -0.002076918743413932 0.002076918743413932
+38 -0.0016615349947311456 0.0016615349947311456
+39 -0.0013292279957849164 0.0013292279957849164
+40 -0.001063382396627933 0.001063382396627933
+41 -0.0008507059173023465 0.0008507059173023465
+42 -0.0006805647338418772 0.0006805647338418772
+43 -0.0005444517870735017 0.0005444517870735017
+44 -0.0004355614296588014 0.0004355614296588014
+45 -0.0003484491437270411 0.0003484491437270411
+46 -0.00027875931498163285 0.00027875931498163285
+47 -0.00022300745198530628 0.00022300745198530628
+48 -0.00017840596158824503 0.00017840596158824503
+49 -0.00014272476927059603 0.00014272476927059603
+50 -0.00011417981541647683 0.00011417981541647683
+51 -9.134385233318146e-05 9.134385233318146e-05
+52 -7.307508186654517e-05 7.307508186654517e-05
+53 -5.846006549323614e-05 5.846006549323614e-05
+54 -4.676805239458891e-05 4.676805239458891e-05
+55 -3.741444191567113e-05 3.741444191567113e-05
+56 -2.9931553532536903e-05 2.9931553532536903e-05
+57 -2.3945242826029522e-05 2.3945242826029522e-05
+58 -1.9156194260823618e-05 1.9156194260823618e-05
+59 -1.5324955408658896e-05 1.5324955408658896e-05
+60 -1.2259964326927117e-05 1.2259964326927117e-05
+61 -9.807971461541694e-06 9.807971461541694e-06
+62 -7.846377169233355e-06 7.846377169233355e-06
+63 -6.277101735386684e-06 6.277101735386684e-06
+64 -5.021681388309347e-06 5.021681388309347e-06
+65 -4.017345110647478e-06 4.017345110647478e-06
+66 -3.213876088517982e-06 3.213876088517982e-06
+67 -2.5711008708143856e-06 2.5711008708143856e-06
+68 -2.0568806966515085e-06 2.0568806966515085e-06
+69 -1.6455045573212068e-06 1.6455045573212068e-06
+70 -1.3164036458569655e-06 1.3164036458569655e-06
+71 -1.0531229166855724e-06 1.0531229166855724e-06
+72 -8.424983333484579e-07 8.424983333484579e-07
+73 -6.739986666787663e-07 6.739986666787663e-07
+74 -5.391989333430131e-07 5.391989333430131e-07
+75 -4.313591466744105e-07 4.313591466744105e-07
+76 -3.450873173395284e-07 3.450873173395284e-07
+77 -2.760698538716227e-07 2.760698538716227e-07
+78 -2.2085588309729815e-07 2.2085588309729815e-07
+79 -1.766847064778385e-07 1.766847064778385e-07
+80 -1.4134776518227082e-07 1.4134776518227082e-07
+81 -1.1307821214581666e-07 1.1307821214581666e-07
+82 -9.046256971665333e-08 9.046256971665333e-08
+83 -7.237005577332266e-08 7.237005577332266e-08
+84 -5.789604461865813e-08 5.789604461865813e-08
+85 -4.6316835694926504e-08 4.6316835694926504e-08
+86 -3.7053468555941206e-08 3.7053468555941206e-08
+87 -2.9642774844752963e-08 2.9642774844752963e-08
+88 -2.3714219875802372e-08 2.3714219875802372e-08
+89 -1.8971375900641896e-08 1.8971375900641896e-08
+90 -1.5177100720513518e-08 1.5177100720513518e-08
+91 -1.2141680576410815e-08 1.2141680576410815e-08
+92 -9.713344461128652e-09 9.713344461128652e-09
+93 -7.770675568902922e-09 7.770675568902922e-09
+94 -6.216540455122338e-09 6.216540455122338e-09
+95 -4.9732323640978705e-09 4.9732323640978705e-09
+96 -3.978585891278296e-09 3.978585891278296e-09
+97 -3.1828687130226367e-09 3.1828687130226367e-09
+98 -2.5462949704181095e-09 2.5462949704181095e-09
+99 -2.0370359763344878e-09 2.0370359763344878e-09
+100 -1.6296287810675901e-09 1.6296287810675901e-09
+101 -1.3037030248540722e-09 1.3037030248540722e-09
+102 -1.0429624198832578e-09 1.0429624198832578e-09
+103 -8.343699359066063e-10 8.343699359066063e-10
+104 -6.674959487252851e-10 6.674959487252851e-10
+105 -5.33996758980228e-10 5.33996758980228e-10
+106 -4.271974071841824e-10 4.271974071841824e-10
+107 -3.417579257473459e-10 3.417579257473459e-10
+108 -2.7340634059787676e-10 2.7340634059787676e-10
+109 -2.187250724783014e-10 2.187250724783014e-10
+110 -1.7498005798264112e-10 1.7498005798264112e-10
+111 -1.399840463861129e-10 1.399840463861129e-10
+112 -1.1198723710889032e-10 1.1198723710889032e-10
+113 -8.958978968711226e-11 8.958978968711226e-11
+114 -7.16718317496898e-11 7.16718317496898e-11
+115 -5.733746539975184e-11 5.733746539975184e-11
+116 -4.5869972319801475e-11 4.5869972319801475e-11
+117 -3.669597785584118e-11 3.669597785584118e-11
+118 -2.935678228467294e-11 2.935678228467294e-11
+119 -2.3485425827738352e-11 2.3485425827738352e-11
+120 -1.878834066219068e-11 1.878834066219068e-11
+121 -1.5030672529752545e-11 1.5030672529752545e-11
+122 -1.2024538023802037e-11 1.2024538023802037e-11
+123 -9.61963041904163e-12 9.61963041904163e-12
+124 -7.695704335233304e-12 7.695704335233304e-12
+125 -6.156563468186643e-12 6.156563468186643e-12
+126 -4.9252507745493145e-12 4.9252507745493145e-12
+127 -3.940200619639451e-12 3.940200619639451e-12
+128 -3.152160495711561e-12 3.152160495711561e-12
+129 -2.521728396569249e-12 2.521728396569249e-12
+130 -2.017382717255399e-12 2.017382717255399e-12
+131 -1.6139061738043193e-12 1.6139061738043193e-12
+132 -1.2911249390434555e-12 1.2911249390434555e-12
+133 -1.0328999512347643e-12 1.0328999512347643e-12
+134 -8.263199609878115e-13 8.263199609878115e-13
+135 -6.610559687902492e-13 6.610559687902492e-13
+136 -5.288447750321994e-13 5.288447750321994e-13
+137 -4.230758200257595e-13 4.230758200257595e-13
+138 -3.384606560206076e-13 3.384606560206076e-13
+139 -2.707685248164861e-13 2.707685248164861e-13
+140 -2.1661481985318886e-13 2.1661481985318886e-13
+141 -1.732918558825511e-13 1.732918558825511e-13
+142 -1.3863348470604087e-13 1.3863348470604087e-13
+143 -1.109067877648327e-13 1.109067877648327e-13
+144 -8.872543021186616e-14 8.872543021186616e-14
+145 -7.098034416949293e-14 7.098034416949293e-14
+146 -5.6784275335594347e-14 5.6784275335594347e-14
+147 -4.542742026847548e-14 4.542742026847548e-14
+148 -3.6341936214780386e-14 3.6341936214780386e-14
+149 -2.9073548971824307e-14 2.9073548971824307e-14
+150 -2.3258839177459446e-14 2.3258839177459446e-14
+151 -1.8607071341967557e-14 1.8607071341967557e-14
+152 -1.4885657073574046e-14 1.4885657073574046e-14
+153 -1.1908525658859236e-14 1.1908525658859236e-14
+154 -9.52682052708739e-15 9.52682052708739e-15
+155 -7.621456421669911e-15 7.621456421669911e-15
+156 -6.097165137335929e-15 6.097165137335929e-15
+157 -4.877732109868743e-15 4.877732109868743e-15
+158 -3.9021856878949945e-15 3.9021856878949945e-15
+159 -3.1217485503159957e-15 3.1217485503159957e-15
+160 -2.4973988402527965e-15 2.4973988402527965e-15
+161 -1.997919072202237e-15 1.997919072202237e-15
+162 -1.5983352577617897e-15 1.5983352577617897e-15
+163 -1.2786682062094317e-15 1.2786682062094317e-15
+164 -1.0229345649675453e-15 1.0229345649675453e-15
+165 -8.183476519740363e-16 8.183476519740363e-16
+166 -6.54678121579229e-16 6.54678121579229e-16
+167 -5.237424972633832e-16 5.237424972633832e-16
+168 -4.1899399781070657e-16 4.1899399781070657e-16
+169 -3.351951982485653e-16 3.351951982485653e-16
+170 -2.6815615859885223e-16 2.6815615859885223e-16
+171 -2.145249268790818e-16 2.145249268790818e-16
+172 -1.7161994150326545e-16 1.7161994150326545e-16
+173 -1.3729595320261235e-16 1.3729595320261235e-16
+174 -1.0983676256208988e-16 1.0983676256208988e-16
+175 -8.78694100496719e-17 8.78694100496719e-17
+176 -7.029552803973752e-17 7.029552803973752e-17
+177 -5.623642243179001e-17 5.623642243179001e-17
+178 -4.498913794543201e-17 4.498913794543201e-17
+179 -3.599131035634561e-17 3.599131035634561e-17
+180 -2.879304828507649e-17 2.879304828507649e-17
+181 -2.303443862806119e-17 2.303443862806119e-17
+182 -1.8427550902448952e-17 1.8427550902448952e-17
+183 -1.474204072195916e-17 1.474204072195916e-17
+184 -1.179363257756733e-17 1.179363257756733e-17
+185 -9.434906062053864e-18 9.434906062053864e-18
+186 -7.547924849643091e-18 7.547924849643091e-18
+187 -6.038339879714473e-18 6.038339879714473e-18
+188 -4.830671903771579e-18 4.830671903771579e-18
+189 -3.864537523017263e-18 3.864537523017263e-18
+190 -3.0916300184138106e-18 3.0916300184138106e-18
+191 -2.4733040147310485e-18 2.4733040147310485e-18
+192 -1.9786432117848388e-18 1.9786432117848388e-18
+193 -1.582914569427871e-18 1.582914569427871e-18
+194 -1.2663316555422968e-18 1.2663316555422968e-18
+195 -1.0130653244338374e-18 1.0130653244338374e-18
+196 -8.104522595470699e-19 8.104522595470699e-19
+197 -6.483618076376559e-19 6.483618076376559e-19
+198 -5.1868944611012475e-19 5.1868944611012475e-19
+199 -4.149515568880998e-19 4.149515568880998e-19
+200 -3.3196124551047986e-19 3.3196124551047986e-19
+201 -2.6556899640838387e-19 2.6556899640838387e-19
+202 -2.124551971267071e-19 2.124551971267071e-19
+203 -1.6996415770136567e-19 1.6996415770136567e-19
+204 -1.3597132616109255e-19 1.3597132616109255e-19
+205 -1.0877706092887405e-19 1.0877706092887405e-19
+206 -8.702164874309923e-20 8.702164874309923e-20
+207 -6.961731899447939e-20 6.961731899447939e-20
+208 -5.569385519558352e-20 5.569385519558352e-20
+209 -4.455508415646681e-20 4.455508415646681e-20
+210 -3.564406732517345e-20 3.564406732517345e-20
+211 -2.851525386013876e-20 2.851525386013876e-20
+212 -2.2812203088111008e-20 2.2812203088111008e-20
+213 -1.8249762470488807e-20 1.8249762470488807e-20
+214 -1.4599809976391044e-20 1.4599809976391044e-20
+215 -1.1679847981112835e-20 1.1679847981112835e-20
+216 -9.343878384890268e-21 9.343878384890268e-21
+217 -7.475102707912214e-21 7.475102707912214e-21
+218 -5.9800821663297714e-21 5.9800821663297714e-21
+219 -4.784065733063817e-21 4.784065733063817e-21
+220 -3.827252586451054e-21 3.827252586451054e-21
+221 -3.0618020691608432e-21 3.0618020691608432e-21
+222 -2.4494416553286747e-21 2.4494416553286747e-21
+223 -1.95955332426294e-21 1.95955332426294e-21
+224 -1.5676426594103519e-21 1.5676426594103519e-21
+225 -1.2541141275282815e-21 1.2541141275282815e-21
+226 -1.0032913020226252e-21 1.0032913020226252e-21
+227 -8.026330416181002e-22 8.026330416181002e-22
+228 -6.4210643329448015e-22 6.4210643329448015e-22
+229 -5.136851466355841e-22 5.136851466355841e-22
+230 -4.109481173084673e-22 4.109481173084673e-22
+231 -3.2875849384677386e-22 3.2875849384677386e-22
+232 -2.630067950774191e-22 2.630067950774191e-22
+233 -2.1040543606193528e-22 2.1040543606193528e-22
+234 -1.6832434884954823e-22 1.6832434884954823e-22
+235 -1.346594790796386e-22 1.346594790796386e-22
+236 -1.0772758326371088e-22 1.0772758326371088e-22
+237 -8.61820666109687e-23 8.61820666109687e-23
+238 -6.894565328877496e-23 6.894565328877496e-23
+239 -5.515652263101997e-23 5.515652263101997e-23
+240 -4.412521810481598e-23 4.412521810481598e-23
+241 -3.530017448385278e-23 3.530017448385278e-23
+242 -2.8240139587082227e-23 2.8240139587082227e-23
+243 -2.259211166966578e-23 2.259211166966578e-23
+244 -1.8073689335732626e-23 1.8073689335732626e-23
+245 -1.4458951468586102e-23 1.4458951468586102e-23
+246 -1.1567161174868882e-23 1.1567161174868882e-23
+247 -9.253728939895105e-24 9.253728939895105e-24
+248 -7.402983151916084e-24 7.402983151916084e-24
+249 -5.922386521532867e-24 5.922386521532867e-24
+250 -4.737909217226294e-24 4.737909217226294e-24
+251 -3.790327373781035e-24 3.790327373781035e-24
+252 -3.0322618990248282e-24 3.0322618990248282e-24
+253 -2.4258095192198626e-24 2.4258095192198626e-24
+254 -1.94064761537589e-24 1.94064761537589e-24
+255 -1.552518092300712e-24 1.552518092300712e-24
+256 -1.2420144738405697e-24 1.2420144738405697e-24
+257 -9.936115790724557e-25 9.936115790724557e-25
+258 -7.948892632579646e-25 7.948892632579646e-25
+259 -6.359114106063717e-25 6.359114106063717e-25
+260 -5.087291284850974e-25 5.087291284850974e-25
+261 -4.069833027880779e-25 4.069833027880779e-25
+262 -3.2558664223046233e-25 3.2558664223046233e-25
+263 -2.6046931378436986e-25 2.6046931378436986e-25
+264 -2.083754510274959e-25 2.083754510274959e-25
+265 -1.6670036082199672e-25 1.6670036082199672e-25
+266 -1.3336028865759738e-25 1.3336028865759738e-25
+267 -1.066882309260779e-25 1.066882309260779e-25
+268 -8.535058474086231e-26 8.535058474086231e-26
+269 -6.828046779268985e-26 6.828046779268985e-26
+270 -5.462437423415188e-26 5.462437423415188e-26
+271 -4.369949938732151e-26 4.369949938732151e-26
+272 -3.495959950985721e-26 3.495959950985721e-26
+273 -2.7967679607885764e-26 2.7967679607885764e-26
+274 -2.2374143686308611e-26 2.2374143686308611e-26
+275 -1.789931494904689e-26 1.789931494904689e-26
+276 -1.431945195923751e-26 1.431945195923751e-26
+277 -1.1455561567390009e-26 1.1455561567390009e-26
+278 -9.164449253912007e-27 9.164449253912007e-27
+279 -7.331559403129606e-27 7.331559403129606e-27
+280 -5.865247522503685e-27 5.865247522503685e-27
+281 -4.692198018002948e-27 4.692198018002948e-27
+282 -3.753758414402358e-27 3.753758414402358e-27
+283 -3.0030067315218864e-27 3.0030067315218864e-27
+284 -2.4024053852175092e-27 2.4024053852175092e-27
+285 -1.9219243081740073e-27 1.9219243081740073e-27
+286 -1.537539446539206e-27 1.537539446539206e-27
+287 -1.2300315572313648e-27 1.2300315572313648e-27
+288 -9.840252457850919e-28 9.840252457850919e-28
+289 -7.872201966280735e-28 7.872201966280735e-28
+290 -6.297761573024589e-28 6.297761573024589e-28
+291 -5.038209258419671e-28 5.038209258419671e-28
+292 -4.0305674067357365e-28 4.0305674067357365e-28
+293 -3.224453925388589e-28 3.224453925388589e-28
+294 -2.5795631403108713e-28 2.5795631403108713e-28
+295 -2.063650512248697e-28 2.063650512248697e-28
+296 -1.6509204097989575e-28 1.6509204097989575e-28
+297 -1.320736327839166e-28 1.320736327839166e-28
+298 -1.0565890622713329e-28 1.0565890622713329e-28
+299 -8.452712498170663e-29 8.452712498170663e-29
+300 -6.76216999853653e-29 6.76216999853653e-29
+301 -5.409735998829224e-29 5.409735998829224e-29
+302 -4.327788799063379e-29 4.327788799063379e-29
+303 -3.4622310392507034e-29 3.4622310392507034e-29
+304 -2.7697848314005627e-29 2.7697848314005627e-29
+305 -2.21582786512045e-29 2.21582786512045e-29
+306 -1.77266229209636e-29 1.77266229209636e-29
+307 -1.418129833677088e-29 1.418129833677088e-29
+308 -1.1345038669416704e-29 1.1345038669416704e-29
+309 -9.076030935533364e-30 9.076030935533364e-30
+310 -7.260824748426691e-30 7.260824748426691e-30
+311 -5.808659798741353e-30 5.808659798741353e-30
+312 -4.646927838993082e-30 4.646927838993082e-30
+313 -3.717542271194466e-30 3.717542271194466e-30
+314 -2.9740338169555726e-30 2.9740338169555726e-30
+315 -2.379227053564458e-30 2.379227053564458e-30
+316 -1.9033816428515664e-30 1.9033816428515664e-30
+317 -1.5227053142812531e-30 1.5227053142812531e-30
+318 -1.2181642514250024e-30 1.2181642514250024e-30
+319 -9.74531401140002e-31 9.74531401140002e-31
+320 -7.796251209120016e-31 7.796251209120016e-31
+321 -6.2370009672960125e-31 6.2370009672960125e-31
+322 -4.98960077383681e-31 4.98960077383681e-31
+323 -3.991680619069448e-31 3.991680619069448e-31
+324 -3.1933444952555584e-31 3.1933444952555584e-31
+325 -2.5546755962044465e-31 2.5546755962044465e-31
+326 -2.0437404769635572e-31 2.0437404769635572e-31
+327 -1.6349923815708457e-31 1.6349923815708457e-31
+328 -1.3079939052566765e-31 1.3079939052566765e-31
+329 -1.046395124205341e-31 1.046395124205341e-31
+330 -8.371160993642729e-32 8.371160993642729e-32
+331 -6.696928794914183e-32 6.696928794914183e-32
+332 -5.357543035931346e-32 5.357543035931346e-32
+333 -4.2860344287450765e-32 4.2860344287450765e-32
+334 -3.428827542996061e-32 3.428827542996061e-32
+335 -2.743062034396849e-32 2.743062034396849e-32
+336 -2.194449627517479e-32 2.194449627517479e-32
+337 -1.7555597020139832e-32 1.7555597020139832e-32
+338 -1.4044477616111866e-32 1.4044477616111866e-32
+339 -1.1235582092889492e-32 1.1235582092889492e-32
+340 -8.988465674311593e-33 8.988465674311593e-33
+341 -7.190772539449275e-33 7.190772539449275e-33
+342 -5.75261803155942e-33 5.75261803155942e-33
+343 -4.602094425247536e-33 4.602094425247536e-33
+344 -3.6816755401980284e-33 3.6816755401980284e-33
+345 -2.9453404321584227e-33 2.9453404321584227e-33
+346 -2.356272345726738e-33 2.356272345726738e-33
+347 -1.8850178765813904e-33 1.8850178765813904e-33
+348 -1.5080143012651124e-33 1.5080143012651124e-33
+349 -1.20641144101209e-33 1.20641144101209e-33
+350 -9.65129152809672e-34 9.65129152809672e-34
+351 -7.721033222477376e-34 7.721033222477376e-34
+352 -6.176826577981901e-34 6.176826577981901e-34
+353 -4.9414612623855205e-34 4.9414612623855205e-34
+354 -3.9531690099084164e-34 3.9531690099084164e-34
+355 -3.1625352079267332e-34 3.1625352079267332e-34
+356 -2.5300281663413868e-34 2.5300281663413868e-34
+357 -2.0240225330731096e-34 2.0240225330731096e-34
+358 -1.6192180264584877e-34 1.6192180264584877e-34
+359 -1.2953744211667901e-34 1.2953744211667901e-34
+360 -1.036299536933432e-34 1.036299536933432e-34
+361 -8.290396295467457e-35 8.290396295467457e-35
+362 -6.632317036373966e-35 6.632317036373966e-35
+363 -5.305853629099172e-35 5.305853629099172e-35
+364 -4.2446829032793374e-35 4.2446829032793374e-35
+365 -3.39574632262347e-35 3.39574632262347e-35
+366 -2.716597058098776e-35 2.716597058098776e-35
+367 -2.1732776464790206e-35 2.1732776464790206e-35
+368 -1.7386221171832164e-35 1.7386221171832164e-35
+369 -1.390897693746573e-35 1.390897693746573e-35
+370 -1.1127181549972585e-35 1.1127181549972585e-35
+371 -8.901745239978068e-36 8.901745239978068e-36
+372 -7.121396191982454e-36 7.121396191982454e-36
+373 -5.6971169535859635e-36 5.6971169535859635e-36
+374 -4.5576935628687705e-36 4.5576935628687705e-36
+375 -3.6461548502950164e-36 3.6461548502950164e-36
+376 -2.9169238802360133e-36 2.9169238802360133e-36
+377 -2.3335391041888107e-36 2.3335391041888107e-36
+378 -1.8668312833510487e-36 1.8668312833510487e-36
+379 -1.493465026680839e-36 1.493465026680839e-36
+380 -1.1947720213446712e-36 1.1947720213446712e-36
+381 -9.55817617075737e-37 9.55817617075737e-37
+382 -7.646540936605896e-37 7.646540936605896e-37
+383 -6.117232749284717e-37 6.117232749284717e-37
+384 -4.893786199427773e-37 4.893786199427773e-37
+385 -3.915028959542219e-37 3.915028959542219e-37
+386 -3.132023167633775e-37 3.132023167633775e-37
+387 -2.5056185341070197e-37 2.5056185341070197e-37
+388 -2.0044948272856158e-37 2.0044948272856158e-37
+389 -1.6035958618284927e-37 1.6035958618284927e-37
+390 -1.2828766894627942e-37 1.2828766894627942e-37
+391 -1.0263013515702353e-37 1.0263013515702353e-37
+392 -8.210410812561882e-38 8.210410812561882e-38
+393 -6.568328650049506e-38 6.568328650049506e-38
+394 -5.254662920039605e-38 5.254662920039605e-38
+395 -4.2037303360316843e-38 4.2037303360316843e-38
+396 -3.3629842688253476e-38 3.3629842688253476e-38
+397 -2.690387415060278e-38 2.690387415060278e-38
+398 -2.1523099320482225e-38 2.1523099320482225e-38
+399 -1.721847945638578e-38 1.721847945638578e-38
+400 -1.3774783565108623e-38 1.3774783565108623e-38
+401 -1.1019826852086898e-38 1.1019826852086898e-38
+402 -8.815861481669518e-39 8.815861481669518e-39
+403 -7.052689185335615e-39 7.052689185335615e-39
+404 -5.6421513482684915e-39 5.6421513482684915e-39
+405 -4.5137210786147934e-39 4.5137210786147934e-39
+406 -3.610976862891835e-39 3.610976862891835e-39
+407 -2.888781490313468e-39 2.888781490313468e-39
+408 -2.3110251922507742e-39 2.3110251922507742e-39
+409 -1.8488201538006194e-39 1.8488201538006194e-39
+410 -1.4790561230404956e-39 1.4790561230404956e-39
+411 -1.1832448984323965e-39 1.1832448984323965e-39
+412 -9.465959187459173e-40 9.465959187459173e-40
+413 -7.572767349967338e-40 7.572767349967338e-40
+414 -6.058213879973871e-40 6.058213879973871e-40
+415 -4.846571103979097e-40 4.846571103979097e-40
+416 -3.877256883183278e-40 3.877256883183278e-40
+417 -3.101805506546622e-40 3.101805506546622e-40
+418 -2.4814444052372976e-40 2.4814444052372976e-40
+419 -1.985155524189838e-40 1.985155524189838e-40
+420 -1.5881244193518706e-40 1.5881244193518706e-40
+421 -1.2704995354814965e-40 1.2704995354814965e-40
+422 -1.0163996283851972e-40 1.0163996283851972e-40
+423 -8.131197027081578e-41 8.131197027081578e-41
+424 -6.504957621665262e-41 6.504957621665262e-41
+425 -5.20396609733221e-41 5.20396609733221e-41
+426 -4.1631728778657675e-41 4.1631728778657675e-41
+427 -3.330538302292614e-41 3.330538302292614e-41
+428 -2.664430641834091e-41 2.664430641834091e-41
+429 -2.1315445134672728e-41 2.1315445134672728e-41
+430 -1.7052356107738182e-41 1.7052356107738182e-41
+431 -1.3641884886190545e-41 1.3641884886190545e-41
+432 -1.0913507908952436e-41 1.0913507908952436e-41
+433 -8.730806327161949e-42 8.730806327161949e-42
+434 -6.984645061729559e-42 6.984645061729559e-42
+435 -5.587716049383647e-42 5.587716049383647e-42
+436 -4.470172839506918e-42 4.470172839506918e-42
+437 -3.576138271605534e-42 3.576138271605534e-42
+438 -2.8609106172844275e-42 2.8609106172844275e-42
+439 -2.288728493827542e-42 2.288728493827542e-42
+440 -1.8309827950620335e-42 1.8309827950620335e-42
+441 -1.4647862360496267e-42 1.4647862360496267e-42
+442 -1.1718289888397014e-42 1.1718289888397014e-42
+443 -9.374631910717611e-43 9.374631910717611e-43
+444 -7.49970552857409e-43 7.49970552857409e-43
+445 -5.9997644228592715e-43 5.9997644228592715e-43
+446 -4.799811538287417e-43 4.799811538287417e-43
+447 -3.839849230629934e-43 3.839849230629934e-43
+448 -3.071879384503947e-43 3.071879384503947e-43
+449 -2.4575035076031575e-43 2.4575035076031575e-43
+450 -1.966002806082526e-43 1.966002806082526e-43
+451 -1.5728022448660208e-43 1.5728022448660208e-43
+452 -1.2582417958928165e-43 1.2582417958928165e-43
+453 -1.0065934367142533e-43 1.0065934367142533e-43
+454 -8.052747493714027e-44 8.052747493714027e-44
+455 -6.442197994971222e-44 6.442197994971222e-44
+456 -5.153758395976978e-44 5.153758395976978e-44
+457 -4.123006716781582e-44 4.123006716781582e-44
+458 -3.2984053734252656e-44 3.2984053734252656e-44
+459 -2.6387242987402126e-44 2.6387242987402126e-44
+460 -2.1109794389921702e-44 2.1109794389921702e-44
+461 -1.6887835511937362e-44 1.6887835511937362e-44
+462 -1.351026840954989e-44 1.351026840954989e-44
+463 -1.0808214727639912e-44 1.0808214727639912e-44
+464 -8.64657178211193e-45 8.64657178211193e-45
+465 -6.917257425689543e-45 6.917257425689543e-45
+466 -5.5338059405516347e-45 5.5338059405516347e-45
+467 -4.427044752441308e-45 4.427044752441308e-45
+468 -3.5416358019530464e-45 3.5416358019530464e-45
+469 -2.833308641562437e-45 2.833308641562437e-45
+470 -2.2666469132499495e-45 2.2666469132499495e-45
+471 -1.8133175305999597e-45 1.8133175305999597e-45
+472 -1.450654024479968e-45 1.450654024479968e-45
+473 -1.1605232195839744e-45 1.1605232195839744e-45
+474 -9.284185756671795e-46 9.284185756671795e-46
+475 -7.427348605337435e-46 7.427348605337435e-46
+476 -5.941878884269949e-46 5.941878884269949e-46
+477 -4.753503107415959e-46 4.753503107415959e-46
+478 -3.802802485932767e-46 3.802802485932767e-46
+479 -3.0422419887462138e-46 3.0422419887462138e-46
+480 -2.433793590996971e-46 2.433793590996971e-46
+481 -1.947034872797577e-46 1.947034872797577e-46
+482 -1.5576278982380614e-46 1.5576278982380614e-46
+483 -1.246102318590449e-46 1.246102318590449e-46
+484 -9.968818548723592e-47 9.968818548723592e-47
+485 -7.975054838978874e-47 7.975054838978874e-47
+486 -6.380043871183099e-47 6.380043871183099e-47
+487 -5.10403509694648e-47 5.10403509694648e-47
+488 -4.0832280775571837e-47 4.0832280775571837e-47
+489 -3.266582462045747e-47 3.266582462045747e-47
+490 -2.6132659696365975e-47 2.6132659696365975e-47
+491 -2.090612775709278e-47 2.090612775709278e-47
+492 -1.6724902205674222e-47 1.6724902205674222e-47
+493 -1.3379921764539378e-47 1.3379921764539378e-47
+494 -1.0703937411631503e-47 1.0703937411631503e-47
+495 -8.563149929305202e-48 8.563149929305202e-48
+496 -6.850519943444162e-48 6.850519943444162e-48
+497 -5.48041595475533e-48 5.48041595475533e-48
+498 -4.384332763804264e-48 4.384332763804264e-48
+499 -3.507466211043411e-48 3.507466211043411e-48
+500 -2.805972968834729e-48 2.805972968834729e-48
+501 -2.2447783750677833e-48 2.2447783750677833e-48
+502 -1.7958227000542265e-48 1.7958227000542265e-48
+503 -1.4366581600433813e-48 1.4366581600433813e-48
+504 -1.149326528034705e-48 1.149326528034705e-48
+505 -9.19461222427764e-49 9.19461222427764e-49
+506 -7.355689779422112e-49 7.355689779422112e-49
+507 -5.88455182353769e-49 5.88455182353769e-49
+508 -4.707641458830152e-49 4.707641458830152e-49
+509 -3.7661131670641215e-49 3.7661131670641215e-49
+510 -3.012890533651297e-49 3.012890533651297e-49
+511 -2.4103124269210376e-49 2.4103124269210376e-49
+512 -1.92824994153683e-49 1.92824994153683e-49
+513 -1.5425999532294641e-49 1.5425999532294641e-49
+514 -1.2340799625835713e-49 1.2340799625835713e-49
+515 -9.87263970066857e-50 9.87263970066857e-50
+516 -7.8981117605348565e-50 7.8981117605348565e-50
+517 -6.318489408427885e-50 6.318489408427885e-50
+518 -5.054791526742308e-50 5.054791526742308e-50
+519 -4.043833221393846e-50 4.043833221393846e-50
+520 -3.2350665771150766e-50 3.2350665771150766e-50
+521 -2.588053261692061e-50 2.588053261692061e-50
+522 -2.0704426093536488e-50 2.0704426093536488e-50
+523 -1.656354087482919e-50 1.656354087482919e-50
+524 -1.3250832699863353e-50 1.3250832699863353e-50
+525 -1.0600666159890682e-50 1.0600666159890682e-50
+526 -8.480532927912545e-51 8.480532927912545e-51
+527 -6.784426342330036e-51 6.784426342330036e-51
+528 -5.427541073864029e-51 5.427541073864029e-51
+529 -4.3420328590912234e-51 4.3420328590912234e-51
+530 -3.473626287272979e-51 3.473626287272979e-51
+531 -2.778901029818383e-51 2.778901029818383e-51
+532 -2.2231208238547065e-51 2.2231208238547065e-51
+533 -1.7784966590837652e-51 1.7784966590837652e-51
+534 -1.422797327267012e-51 1.422797327267012e-51
+535 -1.1382378618136097e-51 1.1382378618136097e-51
+536 -9.105902894508877e-52 9.105902894508877e-52
+537 -7.284722315607101e-52 7.284722315607101e-52
+538 -5.827777852485681e-52 5.827777852485681e-52
+539 -4.662222281988545e-52 4.662222281988545e-52
+540 -3.729777825590836e-52 3.729777825590836e-52
+541 -2.983822260472669e-52 2.983822260472669e-52
+542 -2.3870578083781353e-52 2.3870578083781353e-52
+543 -1.9096462467025084e-52 1.9096462467025084e-52
+544 -1.5277169973620067e-52 1.5277169973620067e-52
+545 -1.2221735978896053e-52 1.2221735978896053e-52
+546 -9.777388783116842e-53 9.777388783116842e-53
+547 -7.821911026493473e-53 7.821911026493473e-53
+548 -6.257528821194779e-53 6.257528821194779e-53
+549 -5.006023056955823e-53 5.006023056955823e-53
+550 -4.0048184455646587e-53 4.0048184455646587e-53
+551 -3.203854756451727e-53 3.203854756451727e-53
+552 -2.563083805161382e-53 2.563083805161382e-53
+553 -2.0504670441291054e-53 2.0504670441291054e-53
+554 -1.6403736353032844e-53 1.6403736353032844e-53
+555 -1.3122989082426276e-53 1.3122989082426276e-53
+556 -1.049839126594102e-53 1.049839126594102e-53
+557 -8.398713012752816e-54 8.398713012752816e-54
+558 -6.718970410202253e-54 6.718970410202253e-54
+559 -5.375176328161803e-54 5.375176328161803e-54
+560 -4.3001410625294423e-54 4.3001410625294423e-54
+561 -3.4401128500235536e-54 3.4401128500235536e-54
+562 -2.752090280018843e-54 2.752090280018843e-54
+563 -2.2016722240150742e-54 2.2016722240150742e-54
+564 -1.7613377792120595e-54 1.7613377792120595e-54
+565 -1.4090702233696475e-54 1.4090702233696475e-54
+566 -1.1272561786957179e-54 1.1272561786957179e-54
+567 -9.018049429565744e-55 9.018049429565744e-55
+568 -7.214439543652595e-55 7.214439543652595e-55
+569 -5.771551634922076e-55 5.771551634922076e-55
+570 -4.617241307937661e-55 4.617241307937661e-55
+571 -3.693793046350129e-55 3.693793046350129e-55
+572 -2.9550344370801032e-55 2.9550344370801032e-55
+573 -2.3640275496640826e-55 2.3640275496640826e-55
+574 -1.8912220397312662e-55 1.8912220397312662e-55
+575 -1.512977631785013e-55 1.512977631785013e-55
+576 -1.2103821054280105e-55 1.2103821054280105e-55
+577 -9.683056843424084e-56 9.683056843424084e-56
+578 -7.746445474739267e-56 7.746445474739267e-56
+579 -6.197156379791414e-56 6.197156379791414e-56
+580 -4.957725103833131e-56 4.957725103833131e-56
+581 -3.9661800830665047e-56 3.9661800830665047e-56
+582 -3.1729440664532036e-56 3.1729440664532036e-56
+583 -2.538355253162563e-56 2.538355253162563e-56
+584 -2.0306842025300504e-56 2.0306842025300504e-56
+585 -1.6245473620240402e-56 1.6245473620240402e-56
+586 -1.2996378896192323e-56 1.2996378896192323e-56
+587 -1.0397103116953859e-56 1.0397103116953859e-56
+588 -8.317682493563087e-57 8.317682493563087e-57
+589 -6.654145994850469e-57 6.654145994850469e-57
+590 -5.323316795880376e-57 5.323316795880376e-57
+591 -4.258653436704301e-57 4.258653436704301e-57
+592 -3.4069227493634405e-57 3.4069227493634405e-57
+593 -2.725538199490752e-57 2.725538199490752e-57
+594 -2.1804305595926018e-57 2.1804305595926018e-57
+595 -1.7443444476740816e-57 1.7443444476740816e-57
+596 -1.3954755581392653e-57 1.3954755581392653e-57
+597 -1.1163804465114122e-57 1.1163804465114122e-57
+598 -8.931043572091297e-58 8.931043572091297e-58
+599 -7.144834857673038e-58 7.144834857673038e-58
+600 -5.71586788613843e-58 5.71586788613843e-58
+601 -4.572694308910744e-58 4.572694308910744e-58
+602 -3.658155447128596e-58 3.658155447128596e-58
+603 -2.9265243577028765e-58 2.9265243577028765e-58
+604 -2.341219486162301e-58 2.341219486162301e-58
+605 -1.8729755889298408e-58 1.8729755889298408e-58
+606 -1.4983804711438727e-58 1.4983804711438727e-58
+607 -1.198704376915098e-58 1.198704376915098e-58
+608 -9.589635015320784e-59 9.589635015320784e-59
+609 -7.671708012256627e-59 7.671708012256627e-59
+610 -6.137366409805301e-59 6.137366409805301e-59
+611 -4.909893127844241e-59 4.909893127844241e-59
+612 -3.927914502275393e-59 3.927914502275393e-59
+613 -3.1423316018203144e-59 3.1423316018203144e-59
+614 -2.5138652814562514e-59 2.5138652814562514e-59
+615 -2.011092225165001e-59 2.011092225165001e-59
+616 -1.6088737801320008e-59 1.6088737801320008e-59
+617 -1.2870990241056007e-59 1.2870990241056007e-59
+618 -1.0296792192844806e-59 1.0296792192844806e-59
+619 -8.237433754275844e-60 8.237433754275844e-60
+620 -6.589947003420675e-60 6.589947003420675e-60
+621 -5.271957602736541e-60 5.271957602736541e-60
+622 -4.217566082189233e-60 4.217566082189233e-60
+623 -3.374052865751386e-60 3.374052865751386e-60
+624 -2.699242292601109e-60 2.699242292601109e-60
+625 -2.1593938340808872e-60 2.1593938340808872e-60
+626 -1.7275150672647097e-60 1.7275150672647097e-60
+627 -1.3820120538117678e-60 1.3820120538117678e-60
+628 -1.1056096430494142e-60 1.1056096430494142e-60
+629 -8.844877144395314e-61 8.844877144395314e-61
+630 -7.075901715516251e-61 7.075901715516251e-61
+631 -5.660721372413001e-61 5.660721372413001e-61
+632 -4.528577097930401e-61 4.528577097930401e-61
+633 -3.622861678344321e-61 3.622861678344321e-61
+634 -2.8982893426754565e-61 2.8982893426754565e-61
+635 -2.318631474140365e-61 2.318631474140365e-61
+636 -1.854905179312292e-61 1.854905179312292e-61
+637 -1.4839241434498337e-61 1.4839241434498337e-61
+638 -1.187139314759867e-61 1.187139314759867e-61
+639 -9.497114518078936e-62 9.497114518078936e-62
+640 -7.597691614463149e-62 7.597691614463149e-62
+641 -6.078153291570519e-62 6.078153291570519e-62
+642 -4.8625226332564155e-62 4.8625226332564155e-62
+643 -3.890018106605133e-62 3.890018106605133e-62
+644 -3.112014485284106e-62 3.112014485284106e-62
+645 -2.489611588227285e-62 2.489611588227285e-62
+646 -1.991689270581828e-62 1.991689270581828e-62
+647 -1.5933514164654625e-62 1.5933514164654625e-62
+648 -1.27468113317237e-62 1.27468113317237e-62
+649 -1.019744906537896e-62 1.019744906537896e-62
+650 -8.157959252303168e-63 8.157959252303168e-63
+651 -6.526367401842535e-63 6.526367401842535e-63
+652 -5.221093921474028e-63 5.221093921474028e-63
+653 -4.176875137179222e-63 4.176875137179222e-63
+654 -3.341500109743378e-63 3.341500109743378e-63
+655 -2.673200087794702e-63 2.673200087794702e-63
+656 -2.1385600702357616e-63 2.1385600702357616e-63
+657 -1.7108480561886093e-63 1.7108480561886093e-63
+658 -1.3686784449508874e-63 1.3686784449508874e-63
+659 -1.0949427559607099e-63 1.0949427559607099e-63
+660 -8.759542047685679e-64 8.759542047685679e-64
+661 -7.007633638148543e-64 7.007633638148543e-64
+662 -5.6061069105188344e-64 5.6061069105188344e-64
+663 -4.484885528415067e-64 4.484885528415067e-64
+664 -3.587908422732054e-64 3.587908422732054e-64
+665 -2.870326738185643e-64 2.870326738185643e-64
+666 -2.2962613905485143e-64 2.2962613905485143e-64
+667 -1.8370091124388116e-64 1.8370091124388116e-64
+668 -1.4696072899510492e-64 1.4696072899510492e-64
+669 -1.1756858319608394e-64 1.1756858319608394e-64
+670 -9.405486655686716e-65 9.405486655686716e-65
+671 -7.5243893245493725e-65 7.5243893245493725e-65
+672 -6.019511459639498e-65 6.019511459639498e-65
+673 -4.815609167711599e-65 4.815609167711599e-65
+674 -3.852487334169279e-65 3.852487334169279e-65
+675 -3.0819898673354235e-65 3.0819898673354235e-65
+676 -2.465591893868339e-65 2.465591893868339e-65
+677 -1.972473515094671e-65 1.972473515094671e-65
+678 -1.5779788120757368e-65 1.5779788120757368e-65
+679 -1.2623830496605895e-65 1.2623830496605895e-65
+680 -1.0099064397284716e-65 1.0099064397284716e-65
+681 -8.079251517827773e-66 8.079251517827773e-66
+682 -6.463401214262218e-66 6.463401214262218e-66
+683 -5.170720971409775e-66 5.170720971409775e-66
+684 -4.13657677712782e-66 4.13657677712782e-66
+685 -3.309261421702256e-66 3.309261421702256e-66
+686 -2.6474091373618045e-66 2.6474091373618045e-66
+687 -2.1179273098894437e-66 2.1179273098894437e-66
+688 -1.6943418479115548e-66 1.6943418479115548e-66
+689 -1.355473478329244e-66 1.355473478329244e-66
+690 -1.0843787826633952e-66 1.0843787826633952e-66
+691 -8.675030261307161e-67 8.675030261307161e-67
+692 -6.940024209045729e-67 6.940024209045729e-67
+693 -5.552019367236583e-67 5.552019367236583e-67
+694 -4.4416154937892666e-67 4.4416154937892666e-67
+695 -3.553292395031413e-67 3.553292395031413e-67
+696 -2.8426339160251306e-67 2.8426339160251306e-67
+697 -2.2741071328201044e-67 2.2741071328201044e-67
+698 -1.8192857062560834e-67 1.8192857062560834e-67
+699 -1.4554285650048668e-67 1.4554285650048668e-67
+700 -1.1643428520038935e-67 1.1643428520038935e-67
+701 -9.314742816031147e-68 9.314742816031147e-68
+702 -7.451794252824917e-68 7.451794252824917e-68
+703 -5.961435402259934e-68 5.961435402259934e-68
+704 -4.7691483218079466e-68 4.7691483218079466e-68
+705 -3.815318657446357e-68 3.815318657446357e-68
+706 -3.0522549259570855e-68 3.0522549259570855e-68
+707 -2.4418039407656684e-68 2.4418039407656684e-68
+708 -1.953443152612535e-68 1.953443152612535e-68
+709 -1.562754522090028e-68 1.562754522090028e-68
+710 -1.2502036176720223e-68 1.2502036176720223e-68
+711 -1.0001628941376178e-68 1.0001628941376178e-68
+712 -8.001303153100943e-69 8.001303153100943e-69
+713 -6.401042522480755e-69 6.401042522480755e-69
+714 -5.120834017984604e-69 5.120834017984604e-69
+715 -4.0966672143876833e-69 4.0966672143876833e-69
+716 -3.2773337715101465e-69 3.2773337715101465e-69
+717 -2.6218670172081174e-69 2.6218670172081174e-69
+718 -2.097493613766494e-69 2.097493613766494e-69
+719 -1.6779948910131952e-69 1.6779948910131952e-69
+720 -1.3423959128105561e-69 1.3423959128105561e-69
+721 -1.0739167302484449e-69 1.0739167302484449e-69
+722 -8.591333841987559e-70 8.591333841987559e-70
+723 -6.873067073590047e-70 6.873067073590047e-70
+724 -5.498453658872037e-70 5.498453658872037e-70
+725 -4.3987629270976296e-70 4.3987629270976296e-70
+726 -3.519010341678104e-70 3.519010341678104e-70
+727 -2.815208273342483e-70 2.815208273342483e-70
+728 -2.2521666186739862e-70 2.2521666186739862e-70
+729 -1.801733294939189e-70 1.801733294939189e-70
+730 -1.4413866359513511e-70 1.4413866359513511e-70
+731 -1.153109308761081e-70 1.153109308761081e-70
+732 -9.224874470088647e-71 9.224874470088647e-71
+733 -7.379899576070918e-71 7.379899576070918e-71
+734 -5.903919660856735e-71 5.903919660856735e-71
+735 -4.723135728685387e-71 4.723135728685387e-71
+736 -3.77850858294831e-71 3.77850858294831e-71
+737 -3.0228068663586483e-71 3.0228068663586483e-71
+738 -2.418245493086919e-71 2.418245493086919e-71
+739 -1.934596394469535e-71 1.934596394469535e-71
+740 -1.547677115575628e-71 1.547677115575628e-71
+741 -1.2381416924605024e-71 1.2381416924605024e-71
+742 -9.905133539684019e-72 9.905133539684019e-72
+743 -7.924106831747215e-72 7.924106831747215e-72
+744 -6.339285465397772e-72 6.339285465397772e-72
+745 -5.071428372318218e-72 5.071428372318218e-72
+746 -4.057142697854574e-72 4.057142697854574e-72
+747 -3.2457141582836594e-72 3.2457141582836594e-72
+748 -2.5965713266269274e-72 2.5965713266269274e-72
+749 -2.077257061301542e-72 2.077257061301542e-72
+750 -1.6618056490412334e-72 1.6618056490412334e-72
+751 -1.3294445192329866e-72 1.3294445192329866e-72
+752 -1.0635556153863892e-72 1.0635556153863892e-72
+753 -8.508444923091114e-73 8.508444923091114e-73
+754 -6.806755938472892e-73 6.806755938472892e-73
+755 -5.4454047507783133e-73 5.4454047507783133e-73
+756 -4.3563238006226507e-73 4.3563238006226507e-73
+757 -3.4850590404981204e-73 3.4850590404981204e-73
+758 -2.7880472323984963e-73 2.7880472323984963e-73
+759 -2.230437785918797e-73 2.230437785918797e-73
+760 -1.7843502287350377e-73 1.7843502287350377e-73
+761 -1.42748018298803e-73 1.42748018298803e-73
+762 -1.1419841463904241e-73 1.1419841463904241e-73
+763 -9.135873171123393e-74 9.135873171123393e-74
+764 -7.308698536898715e-74 7.308698536898715e-74
+765 -5.846958829518972e-74 5.846958829518972e-74
+766 -4.677567063615178e-74 4.677567063615178e-74
+767 -3.742053650892143e-74 3.742053650892143e-74
+768 -2.993642920713714e-74 2.993642920713714e-74
+769 -2.3949143365709712e-74 2.3949143365709712e-74
+770 -1.915931469256777e-74 1.915931469256777e-74
+771 -1.5327451754054215e-74 1.5327451754054215e-74
+772 -1.2261961403243372e-74 1.2261961403243372e-74
+773 -9.809569122594699e-75 9.809569122594699e-75
+774 -7.847655298075759e-75 7.847655298075759e-75
+775 -6.278124238460607e-75 6.278124238460607e-75
+776 -5.022499390768486e-75 5.022499390768486e-75
+777 -4.0179995126147885e-75 4.0179995126147885e-75
+778 -3.214399610091831e-75 3.214399610091831e-75
+779 -2.5715196880734646e-75 2.5715196880734646e-75
+780 -2.0572157504587717e-75 2.0572157504587717e-75
+781 -1.6457726003670173e-75 1.6457726003670173e-75
+782 -1.3166180802936139e-75 1.3166180802936139e-75
+783 -1.0532944642348911e-75 1.0532944642348911e-75
+784 -8.426355713879128e-76 8.426355713879128e-76
+785 -6.741084571103302e-76 6.741084571103302e-76
+786 -5.3928676568826414e-76 5.3928676568826414e-76
+787 -4.314294125506113e-76 4.314294125506113e-76
+788 -3.4514353004048904e-76 3.4514353004048904e-76
+789 -2.7611482403239122e-76 2.7611482403239122e-76
+790 -2.2089185922591298e-76 2.2089185922591298e-76
+791 -1.7671348738073038e-76 1.7671348738073038e-76
+792 -1.413707899045843e-76 1.413707899045843e-76
+793 -1.1309663192366744e-76 1.1309663192366744e-76
+794 -9.047730553893396e-77 9.047730553893396e-77
+795 -7.238184443114717e-77 7.238184443114717e-77
+796 -5.790547554491773e-77 5.790547554491773e-77
+797 -4.6324380435934185e-77 4.6324380435934185e-77
+798 -3.705950434874735e-77 3.705950434874735e-77
+799 -2.9647603478997878e-77 2.9647603478997878e-77
+800 -2.37180827831983e-77 2.37180827831983e-77
+801 -1.897446622655864e-77 1.897446622655864e-77
+802 -1.517957298124691e-77 1.517957298124691e-77
+803 -1.214365838499753e-77 1.214365838499753e-77
+804 -9.714926707998022e-78 9.714926707998022e-78
+805 -7.771941366398418e-78 7.771941366398418e-78
+806 -6.217553093118734e-78 6.217553093118734e-78
+807 -4.974042474494987e-78 4.974042474494987e-78
+808 -3.97923397959599e-78 3.97923397959599e-78
+809 -3.183387183676792e-78 3.183387183676792e-78
+810 -2.5467097469414338e-78 2.5467097469414338e-78
+811 -2.037367797553147e-78 2.037367797553147e-78
+812 -1.6298942380425176e-78 1.6298942380425176e-78
+813 -1.303915390434014e-78 1.303915390434014e-78
+814 -1.0431323123472112e-78 1.0431323123472112e-78
+815 -8.345058498777689e-79 8.345058498777689e-79
+816 -6.676046799022151e-79 6.676046799022151e-79
+817 -5.340837439217721e-79 5.340837439217721e-79
+818 -4.2726699513741766e-79 4.2726699513741766e-79
+819 -3.4181359610993415e-79 3.4181359610993415e-79
+820 -2.7345087688794735e-79 2.7345087688794735e-79
+821 -2.1876070151035787e-79 2.1876070151035787e-79
+822 -1.750085612082863e-79 1.750085612082863e-79
+823 -1.4000684896662902e-79 1.4000684896662902e-79
+824 -1.1200547917330321e-79 1.1200547917330321e-79
+825 -8.960438333864257e-80 8.960438333864257e-80
+826 -7.168350667091405e-80 7.168350667091405e-80
+827 -5.7346805336731245e-80 5.7346805336731245e-80
+828 -4.5877444269384996e-80 4.5877444269384996e-80
+829 -3.6701955415508e-80 3.6701955415508e-80
+830 -2.9361564332406397e-80 2.9361564332406397e-80
+831 -2.348925146592512e-80 2.348925146592512e-80
+832 -1.8791401172740096e-80 1.8791401172740096e-80
+833 -1.5033120938192076e-80 1.5033120938192076e-80
+834 -1.2026496750553661e-80 1.2026496750553661e-80
+835 -9.621197400442928e-81 9.621197400442928e-81
+836 -7.696957920354342e-81 7.696957920354342e-81
+837 -6.157566336283474e-81 6.157566336283474e-81
+838 -4.926053069026779e-81 4.926053069026779e-81
+839 -3.9408424552214234e-81 3.9408424552214234e-81
+840 -3.1526739641771387e-81 3.1526739641771387e-81
+841 -2.522139171341711e-81 2.522139171341711e-81
+842 -2.017711337073369e-81 2.017711337073369e-81
+843 -1.614169069658695e-81 1.614169069658695e-81
+844 -1.291335255726956e-81 1.291335255726956e-81
+845 -1.0330682045815647e-81 1.0330682045815647e-81
+846 -8.264545636652518e-82 8.264545636652518e-82
+847 -6.611636509322015e-82 6.611636509322015e-82
+848 -5.289309207457612e-82 5.289309207457612e-82
+849 -4.2314473659660895e-82 4.2314473659660895e-82
+850 -3.3851578927728716e-82 3.3851578927728716e-82
+851 -2.708126314218297e-82 2.708126314218297e-82
+852 -2.166501051374638e-82 2.166501051374638e-82
+853 -1.7332008410997104e-82 1.7332008410997104e-82
+854 -1.3865606728797682e-82 1.3865606728797682e-82
+855 -1.1092485383038145e-82 1.1092485383038145e-82
+856 -8.873988306430516e-83 8.873988306430516e-83
+857 -7.099190645144413e-83 7.099190645144413e-83
+858 -5.679352516115531e-83 5.679352516115531e-83
+859 -4.543482012892424e-83 4.543482012892424e-83
+860 -3.634785610313939e-83 3.634785610313939e-83
+861 -2.9078284882511514e-83 2.9078284882511514e-83
+862 -2.3262627906009212e-83 2.3262627906009212e-83
+863 -1.861010232480737e-83 1.861010232480737e-83
+864 -1.4888081859845896e-83 1.4888081859845896e-83
+865 -1.1910465487876717e-83 1.1910465487876717e-83
+866 -9.528372390301374e-84 9.528372390301374e-84
+867 -7.622697912241099e-84 7.622697912241099e-84
+868 -6.098158329792879e-84 6.098158329792879e-84
+869 -4.878526663834303e-84 4.878526663834303e-84
+870 -3.902821331067442e-84 3.902821331067442e-84
+871 -3.122257064853954e-84 3.122257064853954e-84
+872 -2.497805651883163e-84 2.497805651883163e-84
+873 -1.9982445215065304e-84 1.9982445215065304e-84
+874 -1.5985956172052242e-84 1.5985956172052242e-84
+875 -1.2788764937641794e-84 1.2788764937641794e-84
+876 -1.0231011950113435e-84 1.0231011950113435e-84
+877 -8.184809560090749e-85 8.184809560090749e-85
+878 -6.547847648072599e-85 6.547847648072599e-85
+879 -5.238278118458079e-85 5.238278118458079e-85
+880 -4.190622494766463e-85 4.190622494766463e-85
+881 -3.3524979958131707e-85 3.3524979958131707e-85
+882 -2.681998396650537e-85 2.681998396650537e-85
+883 -2.1455987173204294e-85 2.1455987173204294e-85
+884 -1.7164789738563436e-85 1.7164789738563436e-85
+885 -1.373183179085075e-85 1.373183179085075e-85
+886 -1.09854654326806e-85 1.09854654326806e-85
+887 -8.78837234614448e-86 8.78837234614448e-86
+888 -7.030697876915584e-86 7.030697876915584e-86
+889 -5.624558301532467e-86 5.624558301532467e-86
+890 -4.499646641225974e-86 4.499646641225974e-86
+891 -3.599717312980779e-86 3.599717312980779e-86
+892 -2.8797738503846236e-86 2.8797738503846236e-86
+893 -2.3038190803076988e-86 2.3038190803076988e-86
+894 -1.843055264246159e-86 1.843055264246159e-86
+895 -1.4744442113969273e-86 1.4744442113969273e-86
+896 -1.179555369117542e-86 1.179555369117542e-86
+897 -9.436442952940335e-87 9.436442952940335e-87
+898 -7.549154362352268e-87 7.549154362352268e-87
+899 -6.039323489881814e-87 6.039323489881814e-87
+900 -4.831458791905451e-87 4.831458791905451e-87
+901 -3.865167033524361e-87 3.865167033524361e-87
+902 -3.0921336268194885e-87 3.0921336268194885e-87
+903 -2.4737069014555907e-87 2.4737069014555907e-87
+904 -1.9789655211644725e-87 1.9789655211644725e-87
+905 -1.583172416931578e-87 1.583172416931578e-87
+906 -1.2665379335452626e-87 1.2665379335452626e-87
+907 -1.01323034683621e-87 1.01323034683621e-87
+908 -8.10584277468968e-88 8.10584277468968e-88
+909 -6.484674219751745e-88 6.484674219751745e-88
+910 -5.187739375801396e-88 5.187739375801396e-88
+911 -4.150191500641117e-88 4.150191500641117e-88
+912 -3.3201532005128937e-88 3.3201532005128937e-88
+913 -2.656122560410315e-88 2.656122560410315e-88
+914 -2.124898048328252e-88 2.124898048328252e-88
+915 -1.6999184386626014e-88 1.6999184386626014e-88
+916 -1.3599347509300813e-88 1.3599347509300813e-88
+917 -1.087947800744065e-88 1.087947800744065e-88
+918 -8.70358240595252e-89 8.70358240595252e-89
+919 -6.962865924762016e-89 6.962865924762016e-89
+920 -5.5702927398096124e-89 5.5702927398096124e-89
+921 -4.45623419184769e-89 4.45623419184769e-89
+922 -3.564987353478152e-89 3.564987353478152e-89
+923 -2.8519898827825218e-89 2.8519898827825218e-89
+924 -2.2815919062260174e-89 2.2815919062260174e-89
+925 -1.825273524980814e-89 1.825273524980814e-89
+926 -1.4602188199846512e-89 1.4602188199846512e-89
+927 -1.168175055987721e-89 1.168175055987721e-89
+928 -9.345400447901768e-90 9.345400447901768e-90
+929 -7.476320358321415e-90 7.476320358321415e-90
+930 -5.981056286657132e-90 5.981056286657132e-90
+931 -4.784845029325705e-90 4.784845029325705e-90
+932 -3.827876023460564e-90 3.827876023460564e-90
+933 -3.0623008187684514e-90 3.0623008187684514e-90
+934 -2.449840655014761e-90 2.449840655014761e-90
+935 -1.959872524011809e-90 1.959872524011809e-90
+936 -1.567898019209447e-90 1.567898019209447e-90
+937 -1.2543184153675576e-90 1.2543184153675576e-90
+938 -1.0034547322940461e-90 1.0034547322940461e-90
+939 -8.027637858352369e-91 8.027637858352369e-91
+940 -6.422110286681895e-91 6.422110286681895e-91
+941 -5.137688229345516e-91 5.137688229345516e-91
+942 -4.110150583476413e-91 4.110150583476413e-91
+943 -3.28812046678113e-91 3.28812046678113e-91
+944 -2.630496373424904e-91 2.630496373424904e-91
+945 -2.1043970987399234e-91 2.1043970987399234e-91
+946 -1.6835176789919386e-91 1.6835176789919386e-91
+947 -1.346814143193551e-91 1.346814143193551e-91
+948 -1.0774513145548408e-91 1.0774513145548408e-91
+949 -8.619610516438726e-92 8.619610516438726e-92
+950 -6.895688413150981e-92 6.895688413150981e-92
+951 -5.5165507305207846e-92 5.5165507305207846e-92
+952 -4.413240584416628e-92 4.413240584416628e-92
+953 -3.530592467533302e-92 3.530592467533302e-92
+954 -2.8244739740266416e-92 2.8244739740266416e-92
+955 -2.2595791792213134e-92 2.2595791792213134e-92
+956 -1.807663343377051e-92 1.807663343377051e-92
+957 -1.4461306747016407e-92 1.4461306747016407e-92
+958 -1.1569045397613125e-92 1.1569045397613125e-92
+959 -9.2552363180905e-93 9.2552363180905e-93
+960 -7.4041890544724e-93 7.4041890544724e-93
+961 -5.9233512435779195e-93 5.9233512435779195e-93
+962 -4.738680994862336e-93 4.738680994862336e-93
+963 -3.7909447958898686e-93 3.7909447958898686e-93
+964 -3.0327558367118948e-93 3.0327558367118948e-93
+965 -2.426204669369516e-93 2.426204669369516e-93
+966 -1.940963735495613e-93 1.940963735495613e-93
+967 -1.5527709883964902e-93 1.5527709883964902e-93
+968 -1.2422167907171923e-93 1.2422167907171923e-93
+969 -9.937734325737538e-94 9.937734325737538e-94
+970 -7.95018746059003e-94 7.95018746059003e-94
+971 -6.360149968472025e-94 6.360149968472025e-94
+972 -5.08811997477762e-94 5.08811997477762e-94
+973 -4.070495979822096e-94 4.070495979822096e-94
+974 -3.256396783857677e-94 3.256396783857677e-94
+975 -2.6051174270861415e-94 2.6051174270861415e-94
+976 -2.0840939416689133e-94 2.0840939416689133e-94
+977 -1.6672751533351305e-94 1.6672751533351305e-94
+978 -1.3338201226681045e-94 1.3338201226681045e-94
+979 -1.0670560981344836e-94 1.0670560981344836e-94
+980 -8.536448785075869e-95 8.536448785075869e-95
+981 -6.829159028060695e-95 6.829159028060695e-95
+982 -5.4633272224485563e-95 5.4633272224485563e-95
+983 -4.3706617779588453e-95 4.3706617779588453e-95
+984 -3.496529422367076e-95 3.496529422367076e-95
+985 -2.7972235378936608e-95 2.7972235378936608e-95
+986 -2.2377788303149285e-95 2.2377788303149285e-95
+987 -1.7902230642519428e-95 1.7902230642519428e-95
+988 -1.4321784514015543e-95 1.4321784514015543e-95
+989 -1.1457427611212435e-95 1.1457427611212435e-95
+990 -9.165942088969949e-96 9.165942088969949e-96
+991 -7.332753671175959e-96 7.332753671175959e-96
+992 -5.866202936940768e-96 5.866202936940768e-96
+993 -4.692962349552614e-96 4.692962349552614e-96
+994 -3.754369879642091e-96 3.754369879642091e-96
+995 -3.003495903713673e-96 3.003495903713673e-96
+996 -2.4027967229709382e-96 2.4027967229709382e-96
+997 -1.9222373783767506e-96 1.9222373783767506e-96
+998 -1.5377899027014004e-96 1.5377899027014004e-96
+999 -1.2302319221611203e-96 1.2302319221611203e-96
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>  <span class="c1"># This replaces the `Axes3D(fig)` line</span>
+
+<span class="c1"># Set axis labels</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the data</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot_wireframe</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x, y)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">scatter3D</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">z_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;gd&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Display the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/NN_supp_2_0.png" src="../_images/NN_supp_2_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 関数定義</span>
+<span class="k">def</span> <span class="nf">function_f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+<span class="c1"># 勾配</span>
+<span class="k">def</span> <span class="nf">numberical_gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># xと同じ形状の配列を生成</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+        <span class="c1"># f(x+h)の計算</span>
+        <span class="n">tmp_val</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_val</span> <span class="o">+</span> <span class="n">h</span>
+        <span class="n">fxh1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># f(x-h)の計算</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_val</span> <span class="o">-</span> <span class="n">h</span>
+        <span class="n">fxh2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="n">grad</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">fxh1</span> <span class="o">-</span> <span class="n">fxh2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_val</span> <span class="c1"># 値を元に戻す</span>
+    <span class="k">return</span> <span class="n">grad</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
+<span class="n">init_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">num_iterations</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># Run gradient descent</span>
+<span class="n">x_history</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">function_f</span><span class="p">,</span> <span class="n">init_x</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">num_iterations</span><span class="p">)</span>
+
+<span class="c1"># 勾配降下法の実装</span>
+<span class="k">def</span> <span class="nf">gradient_descent</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">init_x</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">num_iterations</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">init_x</span>
+    <span class="n">x_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_iterations</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">numberical_gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">grad</span>
+        <span class="n">x_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_history</span><span class="p">)</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">init_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">num_iterations</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># 可視化</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">contour</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_history</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_history</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;X1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gradient Descent on $f(x_0, x_1) = x_0^2 + x_1^2$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">num_iterations</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Run gradient descent</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">x_history</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">function_f</span><span class="p">,</span> <span class="n">init_x</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">num_iterations</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># 勾配降下法の実装</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="k">def</span> <span class="nf">gradient_descent</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">init_x</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">num_iterations</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+
+<span class="ne">NameError</span>: name &#39;gradient_descent&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
+<span class="n">init_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">num_iterations</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># Run gradient descent</span>
+<span class="n">x_history</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">function_f</span><span class="p">,</span> <span class="n">init_x</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">num_iterations</span><span class="p">)</span>
+
+<span class="c1"># 可視化</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">contour</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+
+<span class="c1"># Adding arrows for each gradient</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_history</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> 
+               <span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> 
+               <span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> 
+               <span class="n">angles</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_history</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_history</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$X_0$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$X_1$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gradient Descent on $f(x_0, x_1) = x_0^2 + x_1^2$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/NN_supp_5_0.png" src="../_images/NN_supp_5_0.png" />
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By 呂　沢宇<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
