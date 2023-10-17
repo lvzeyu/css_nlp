@@ -420,42 +420,54 @@ title="Print to PDF"
      数値を見ながら計算の流れを確認
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     出力層の設計
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
+       ソフトマックス関数
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id10">
+  <a class="reference internal nav-link" href="#id12">
    ニューラルネットワークの学習
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
+    <a class="reference internal nav-link" href="#id13">
      損失関数
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id12">
+      <a class="reference internal nav-link" href="#id14">
        平均二乗誤差
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id13">
+      <a class="reference internal nav-link" href="#id15">
        交差エントロピー
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id14">
+    <a class="reference internal nav-link" href="#id16">
      損失関数の最適化
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id15">
+      <a class="reference internal nav-link" href="#id17">
        勾配法
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id16">
+      <a class="reference internal nav-link" href="#id18">
        勾配下降法の実装
       </a>
       <ul class="nav section-nav flex-column">
@@ -476,6 +488,11 @@ title="Print to PDF"
         </a>
        </li>
       </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id19">
+       ニューラルネットワークに対する勾配
+      </a>
      </li>
     </ul>
    </li>
@@ -542,42 +559,54 @@ title="Print to PDF"
      数値を見ながら計算の流れを確認
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     出力層の設計
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
+       ソフトマックス関数
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id10">
+  <a class="reference internal nav-link" href="#id12">
    ニューラルネットワークの学習
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
+    <a class="reference internal nav-link" href="#id13">
      損失関数
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id12">
+      <a class="reference internal nav-link" href="#id14">
        平均二乗誤差
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id13">
+      <a class="reference internal nav-link" href="#id15">
        交差エントロピー
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id14">
+    <a class="reference internal nav-link" href="#id16">
      損失関数の最適化
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id15">
+      <a class="reference internal nav-link" href="#id17">
        勾配法
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id16">
+      <a class="reference internal nav-link" href="#id18">
        勾配下降法の実装
       </a>
       <ul class="nav section-nav flex-column">
@@ -598,6 +627,11 @@ title="Print to PDF"
         </a>
        </li>
       </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id19">
+       ニューラルネットワークに対する勾配
+      </a>
      </li>
     </ul>
    </li>
@@ -808,24 +842,60 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 </div>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>ニューラルネットワークは、分類問題と回帰問題の両方に用いることができます。ただし、分類問題と回帰問題のどちらに用いるかで、出力層の活性化関数を変更する必要があります。</p>
-<p>回帰問題では恒等関数を使います。</p>
-<p>分類問題の場合は、クラス数と同じだけのノードを出力層に用意しておき、各ノードがあるクラスに入力が属する確率を表すようにします。 このため、全出力ノードの値の合計が<span class="math notranslate nohighlight">\(1\)</span>になるよう正規化します。 これには、要素ごとに適用される活性化関数ではなく、層ごとに活性値を計算する別の関数を用いる必要があります。 そのような目的に使用される代表的な関数には、ソフトマックス関数があります。</p>
-</aside>
-</section>
 </section>
 <section id="id10">
-<h2>ニューラルネットワークの学習<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+<h3>出力層の設計<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<p>ニューラルネットワークは、分類問題と回帰問題の両方に用いることができます。ただし、分類問題と回帰問題のどちらに用いるかで、出力層の活性化関数を変更する必要があります。</p>
+<p>一般的に、回帰問題では恒等関数を使います。</p>
+<p>分類問題の場合は、クラス数と同じだけのノードを出力層に用意しておき、各ノードがあるクラスに入力が属する確率を表すようにします。 このため、全出力ノードの値の合計が<span class="math notranslate nohighlight">\(1\)</span>になるよう正規化します。 これには、要素ごとに適用される活性化関数ではなく、層ごとに活性値を計算する別の関数を用いる必要があります。 そのような目的に使用される代表的な関数には、ソフトマックス関数があります。</p>
+<section id="id11">
+<h4>ソフトマックス関数<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h4>
+<p>ソフトマックス関数は複数値からなるベクトルを入力し、それを正規化したベクトルを出力します。ソフトマックス関数は、次の式で定義されます。</p>
+<div class="math notranslate nohighlight">
+\[
+y_k = \frac{\exp(a_k)}{\sum_{k'=0}^{K-1} \exp(a_{k'})}
+\]</div>
+<p><span class="math notranslate nohighlight">\(K\)</span>個の要素<span class="math notranslate nohighlight">\(\mathbf{a} = (a_0, a_1, \cdots, a_{K-1})\)</span>を入力して、<span class="math notranslate nohighlight">\(0 \leq y_k \leq 1\)</span>、<span class="math notranslate nohighlight">\(\sum_{k=0}^{K-1} y_k = 1\)</span>となる<span class="math notranslate nohighlight">\(\mathbf{y} = (y_0, y_1, \cdots, y_{K-1})\)</span>を出力します。つまり、ソフトマックス関数を適用することで、各成分は区間 <span class="math notranslate nohighlight">\((0, 1)\)</span> に収まり、全ての成分の和が <span class="math notranslate nohighlight">\(1\)</span> になるため、「確率」として解釈できるようになります。</p>
+<p>実装の際、指数関数の計算のため容易に大きな値になり、計算結果は<code class="docutils literal notranslate"><span class="pre">inf</span></code>が返ってきますので、数値が不安定になってしまう「オーバーフロー」問題を対応するため。入力の最大値を引くことで、正しく計算するようにする方法が採用されています。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">exp_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span>
+    <span class="n">sum_exp_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">exp_x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">exp_x</span> <span class="o">/</span> <span class="n">sum_exp_x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;活性化関数に適用する前に: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最終出力: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">softmax</span><span class="p">(</span><span class="n">A3</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>活性化関数に適用する前に: [0.31682708 0.69627909]
+最終出力: [0.40625907 0.59374093]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="id12">
+<h2>ニューラルネットワークの学習<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h2>
 <p>重回帰分析では、最小二乗法などの推定方法で行列計算や微分方程式を用いて解を導出することができます。つまり、実際の数値を使うことなく変数のまま、解（最適なパラメータ）を求めることができました。このように、変数のままで解を求めることを解析的に解くと言い、その答えのことを解析解 (analytical solution) と呼びます。</p>
 <p>しかし、ニューラルネットワークで表現されるような複雑な関数の場合、パラメータの数は数億二及ぶこともありますので、最適解を解析的に解くことはほとんどの場合困難です。そのため、別の方法を考える必要があります。具体的には、解析的に解く方法に対し、計算機を使って繰り返し数値計算を行って解を求めることを数値的に解くといい、求まった解は数値解 (numerical solution) と呼ばれます。</p>
 <p>ニューラルネットワークでは、基本的に数値的な手法によって最適なパラメータを求めます。</p>
-<section id="id11">
-<h3>損失関数<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<section id="id13">
+<h3>損失関数<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
 <p>損失関数（Loss function）とは、「正解値」と、モデルによる出力された「予測値」とのズレの大きさ（これを「Loss：損失」と呼ぶ）を計算するための関数です。損失関数の値は、学習アルゴリズムがモデルのパラメータを調整する際の指標となります。</p>
-<section id="id12">
-<h4>平均二乗誤差<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h4>
+<section id="id14">
+<h4>平均二乗誤差<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h4>
 <p>平均二乗誤差 (mean squared error) は、回帰問題を解きたい場合によく用いられる目的関数です。 重回帰分析の解説中に紹介した二乗和誤差と似ていますが、各データ点における誤差の総和をとるだけでなく、それをデータ数で割って、誤差の平均値を計算している点が異なります。</p>
 <div class="math notranslate nohighlight">
 \[
@@ -833,8 +903,8 @@ L = \frac{1}{N} \sum_{n=1}^N (t_n - y_n)^2
 \]</div>
 <p>ここで、<span class="math notranslate nohighlight">\(N\)</span>はサンプルサイズ、<span class="math notranslate nohighlight">\(y_n\)</span>は<span class="math notranslate nohighlight">\(n\)</span>個目のデータに対するニューラルネットワークの出力値、<span class="math notranslate nohighlight">\(t_n\)</span>は<span class="math notranslate nohighlight">\(n\)</span>個目のデータに対する望ましい正解の値です。</p>
 </section>
-<section id="id13">
-<h4>交差エントロピー<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h4>
+<section id="id15">
+<h4>交差エントロピー<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h4>
 <p>交差エントロピー (cross entropy) は、分類問題を解きたい際によく用いられる目的関数です。</p>
 <p>例として、<span class="math notranslate nohighlight">\(K\)</span>クラスの分類問題を考えてみましょう。 ある入力<span class="math notranslate nohighlight">\(x\)</span>が与えられたとき、ニューラルネットワークの出力層に<span class="math notranslate nohighlight">\(K\)</span>個のノードがあり、それぞれがこの入力が<span class="math notranslate nohighlight">\(k\)</span>番目のクラスに属する確率</p>
 <div class="math notranslate nohighlight">
@@ -860,16 +930,45 @@ y_k = p(y=k|x)
 L = - \sum_{n=1}^{N} \sum_{k=1}^{K}t_{n, k}\log y_{n, k}
 \]</div>
 <p><img alt="" src="../_images/Average_Loss.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cross_entropy_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="mf">1e-7</span> <span class="c1"># log(0)を防ぐための微小値</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">delta</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cross_entropy_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6931469805599654
+</pre></div>
+</div>
+</div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>損失関数は、すべての訓練データを対象として求める必要がありますが、場合によるすべてのデータを一気に計算するのは現実ではありません。そこで、データの中から一部を選びだし、つまりミニバッチごとに学習を行います。このような手法をミニバッチ学習と言います。</p>
 </div>
 </section>
 </section>
-<section id="id14">
-<h3>損失関数の最適化<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
-<section id="id15">
-<h4>勾配法<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h4>
+<section id="id16">
+<h3>損失関数の最適化<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h3>
+<section id="id17">
+<h4>勾配法<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h4>
 <p>下の図は，パラメータ<span class="math notranslate nohighlight">\(w\)</span>を変化させた際の損失関数<span class="math notranslate nohighlight">\(L\)</span>の値を表しています。損失関数の値を最小にするようなパラメータの値を求めることで、ニューラルネットワークを訓練します。ただ、実際のニューラルネットワークの目的関数は、多次元で、かつもっと複雑な形をしていることがほとんどです。 そこで、勾配を利用して関数の最小値を探す勾配法がよく用いられます。</p>
 <p><img alt="" src="../_images/loss_fucnction.png" /></p>
 <p>勾配は、各地点における関数の傾きであり、関数の値が最も急速に変化する方向と大きさを示します。</p>
@@ -889,8 +988,8 @@ L = - \sum_{n=1}^{N} \sum_{k=1}^{K}t_{n, k}\log y_{n, k}
 \end{split}\]</div>
 <p><span class="math notranslate nohighlight">\(\eta\)</span>は学習率と言います。<span class="math notranslate nohighlight">\(1\)</span>回の学習で、どれだけパラメータを更新するか、ということを決めます。</p>
 </section>
-<section id="id16">
-<h4>勾配下降法の実装<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h4>
+<section id="id18">
+<h4>勾配下降法の実装<a class="headerlink" href="#id18" title="Permalink to this headline">#</a></h4>
 <section id="f-x-x-2">
 <h5><span class="math notranslate nohighlight">\(f(x)=x^2\)</span>に対する最適化<a class="headerlink" href="#f-x-x-2" title="Permalink to this headline">#</a></h5>
 <div class="cell docutils container">
@@ -971,7 +1070,18 @@ Iteration 90: x = 7.588550360298899e-09, f(x) = 5.758609657079255e-17
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/NN_33_0.png" src="../_images/NN_33_0.png" />
+<img alt="../_images/NN_39_0.png" src="../_images/NN_39_0.png" />
+</div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="7dd99f26-daba-4a4b-881c-f8132eeb889c" name="b071e9b4-3523-467b-8f71-cd64c3052296" type="radio">
+</input><label class="sd-tab-label" for="7dd99f26-daba-4a4b-881c-f8132eeb889c">
+課題</label><div class="sd-tab-content docutils">
+<p>勾配法で<span class="math notranslate nohighlight">\(f(x)=2x^3+x^2-10x-80\)</span>の最小値を求めます。</p>
+<ul class="simple">
+<li><p>勾配降下法のアルゴリズムを実装する。</p></li>
+<li><p>アルゴリズムを使って関数の最小値を求める。</p></li>
+</ul>
 </div>
 </div>
 </section>
@@ -979,7 +1089,7 @@ Iteration 90: x = 7.588550360298899e-09, f(x) = 5.758609657079255e-17
 <h5><span class="math notranslate nohighlight">\(f(x_0,x_1)=x_0^2+x_1^2\)</span>に対する最適化<a class="headerlink" href="#f-x-0-x-1-x-0-2-x-1-2" title="Permalink to this headline">#</a></h5>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
-<p>numberical_gradientは、<span class="math notranslate nohighlight">\(x\)</span>の各要素に対して数値微分を求めます。</p>
+<p>関数numberical_gradientは、<span class="math notranslate nohighlight">\(x\)</span>の各要素に対して数値微分を求めます。</p>
 </aside>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1001,6 +1111,17 @@ Iteration 90: x = 7.588550360298899e-09, f(x) = 5.758609657079255e-17
         <span class="n">grad</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">fxh1</span> <span class="o">-</span> <span class="n">fxh2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
         <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_val</span> <span class="c1"># 値を元に戻す</span>
     <span class="k">return</span> <span class="n">grad</span>
+
+<span class="k">def</span> <span class="nf">gradient_descent</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">init_x</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">num_iterations</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">init_x</span>
+    <span class="n">x_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_iterations</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">numberical_gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">grad</span>
+        <span class="n">x_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_history</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1018,18 +1139,83 @@ Iteration 90: x = 7.588550360298899e-09, f(x) = 5.758609657079255e-17
 </div>
 </div>
 </div>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="9403a70c-dffb-4c79-9f88-d2095a92a648" name="f78090ec-2333-4c34-b53c-148754eaf2d1" type="radio">
-</input><label class="sd-tab-label" for="9403a70c-dffb-4c79-9f88-d2095a92a648">
-課題</label><div class="sd-tab-content docutils">
-<p>勾配法で<span class="math notranslate nohighlight">\(f(x_0,x_1)=x_0^2+x_1^2\)</span>の最小値を求めます。</p>
-<ul class="simple">
-<li><p>勾配降下法のアルゴリズムを実装する。</p></li>
-<li><p>アルゴリズムを使って関数の最小値を求める。</p></li>
-</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
+<span class="n">init_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">num_iterations</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># Run gradient descent</span>
+<span class="n">x_history</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">function_f</span><span class="p">,</span> <span class="n">init_x</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">num_iterations</span><span class="p">)</span>
+
+<span class="c1"># Generate mesh data for visualization</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="c1"># 1st subplot: 3D plot</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">zdir</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">Z_history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">function_f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_history</span><span class="p">])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_history</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_history</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">Z_history</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_history</span><span class="p">)):</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">Z_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> 
+               <span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> 
+               <span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> 
+               <span class="n">Z_history</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">Z_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> 
+               <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">arrow_length_ratio</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$X_0$&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$X_1$&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">&quot;$f(X_0, X_1)$&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;3D Visualization&quot;</span><span class="p">)</span>
+
+<span class="c1"># 2nd subplot: 2D contour plot</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">contour</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_history</span><span class="p">)):</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> 
+               <span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> 
+               <span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x_history</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> 
+               <span class="n">angles</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_history</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_history</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$X_0$&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$X_1$&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;2D Visualization&quot;</span><span class="p">)</span>
+
+<span class="c1"># Display the figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/NN_45_0.png" src="../_images/NN_45_0.png" />
 </div>
 </div>
 </section>
+</section>
+<section id="id19">
+<h4>ニューラルネットワークに対する勾配<a class="headerlink" href="#id19" title="Permalink to this headline">#</a></h4>
+<p>ニューラルネットワークにおいて、重みパラメータの勾配を求める計算を確認します。</p>
+<p>ここで、形状が<span class="math notranslate nohighlight">\(2 \times 3\)</span>の重み<span class="math notranslate nohighlight">\(\mathbf{W}\)</span>を持つニューラルネットワークがあり、損失関数を<span class="math notranslate nohighlight">\(L\)</span>で表すことを考えましょう。この場合、勾配は<span class="math notranslate nohighlight">\(\frac{\partial L}{\partial \mathbf{W}}\)</span>で表すことができます。</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}\mathbf{W}
+    = \begin{pmatrix}
+          w_{0,0} &amp; w_{0,1} &amp; w_{0,2} \\
+          w_{1,0} &amp; w_{1,1} &amp; w_{1,2}
+      \end{pmatrix},\end{split}\\\begin{split}\frac{\partial L}{\partial \mathbf{W}}
+    = \begin{pmatrix}
+          \frac{\partial L}{\partial w_{0,0}} &amp; \frac{\partial L}{\partial w_{0,1}} &amp; \frac{\partial L}{\partial w_{0,2}} \\
+          \frac{\partial L}{\partial w_{1,0}} &amp; \frac{\partial L}{\partial w_{1,1}} &amp; \frac{\partial L}{\partial w_{0,2}}
+      \end{pmatrix}
+\end{split}\end{aligned}\end{align} \]</div>
 </section>
 </section>
 </section>
