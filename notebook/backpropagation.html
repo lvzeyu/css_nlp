@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="ニューラルネットワーク" href="NN.html" />
@@ -208,6 +210,53 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=lab/tree/docs/notebook/backpropagation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/notebook/backpropagation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -339,6 +388,35 @@ title="Print to PDF"
    連鎖律
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   線形変換の逆伝播の導出
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     重みの勾配
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     バイアスの勾配
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   ニューラルネットワークにおける誤差逆伝播法
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     順伝播の流れ
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
     </nav>
@@ -363,6 +441,35 @@ title="Print to PDF"
    連鎖律
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   線形変換の逆伝播の導出
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     重みの勾配
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     バイアスの勾配
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   ニューラルネットワークにおける誤差逆伝播法
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     順伝播の流れ
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
                         </nav>
@@ -381,6 +488,372 @@ title="Print to PDF"
 <p><img alt="誤差逆伝播法 (backpropagation) の計算過程" src="https://tutorials.chainer.org/ja/_images/13_backpropagation.gif" /></p>
 <section id="id2">
 <h2>連鎖律<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>複数の関数によって構成される関数を合成関数と呼びます。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+z &amp;= t^2 \\
+t &amp;= x + y
+\end{align}
+\end{split}\]</div>
+<p>合成関数の微分は、「<span class="math notranslate nohighlight">\(t\)</span>に関する<span class="math notranslate nohighlight">\(z\)</span>の微分<span class="math notranslate nohighlight">\(\frac{\partial z}{\partial t}\)</span>」と「<span class="math notranslate nohighlight">\(x\)</span>に関する<span class="math notranslate nohighlight">\(t\)</span>の微分<span class="math notranslate nohighlight">\(\frac{\partial t}{\partial 1}\)</span>」の積のように、それぞれの関数の微分の積で求められます。</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial z}{\partial x}
+    = \frac{\partial z}{\partial t}
+      \frac{\partial t}{\partial x}
+\]</div>
+</section>
+<section id="id3">
+<h2>線形変換の逆伝播の導出<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>入力データ<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>は<span class="math notranslate nohighlight">\((N \times D)\)</span>の行列、<span class="math notranslate nohighlight">\(\mathbf{W}\)</span>は<span class="math notranslate nohighlight">\((D \times H)\)</span>の行列、<span class="math notranslate nohighlight">\(\mathbf{b}\)</span>は要素数<span class="math notranslate nohighlight">\(H\)</span>のベクトルと考え、線形変換の計算は以下の式で表します。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbf{y}
+   &amp;= \mathbf{x} \mathbf{W} + \mathbf{b}
+\\
+   &amp;= \begin{pmatrix}
+          x_{0,0} &amp; x_{0,1} &amp; \cdots &amp; x_{0,D-1} \\
+          x_{1,0} &amp; x_{1,1} &amp; \cdots &amp; x_{1,D-1} \\
+          \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+          x_{N-1,0} &amp; x_{N-1,1} &amp; \cdots &amp; x_{N-1,D-1}
+      \end{pmatrix}
+      \begin{pmatrix}
+          w_{0,0} &amp; w_{0,1} &amp; \cdots &amp; w_{0,H-1} \\
+          w_{1,0} &amp; w_{1,1} &amp; \cdots &amp; w_{1,H-1} \\
+          \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+          w_{D-1,0} &amp; w_{D-1,1} &amp; \cdots &amp; w_{D-1,H-1}
+      \end{pmatrix}
+      + \begin{pmatrix}
+          b_0 &amp; b_1 &amp; \cdots &amp; b_{H-1}
+        \end{pmatrix}
+\\
+   &amp;= \begin{pmatrix}
+          \sum_{d=0}^{D-1} x_{0,d} w_{d,0} + b_0 &amp; 
+          \sum_{d=0}^{D-1} x_{0,d} w_{d,1} + b_1 &amp; 
+          \cdots &amp; 
+          \sum_{d=0}^{D-1} x_{0,d} w_{d,H-1} + b_{H-1} \\
+          \sum_{d=0}^{D-1} x_{1,d} w_{d,0} + b_0 &amp; 
+          \sum_{d=0}^{D-1} x_{1,d} w_{d,1} + b_1 &amp; 
+          \cdots &amp; 
+          \sum_{d=0}^{D-1} x_{1,d} w_{d,H-1} + b_{H-1}  \\
+          \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+          \sum_{d=0}^{D-1} x_{N-1,d} w_{d,0} + b_0 &amp; 
+          \sum_{d=0}^{D-1} x_{N-1,d} w_{d,1} + b_1 &amp; 
+          \cdots &amp; 
+          \sum_{d=0}^{D-1} x_{N-1,d} w_{d,H-1} + b_{H-1} 
+      \end{pmatrix}
+\\
+   &amp;= \begin{pmatrix}
+          y_{0,0} &amp; y_{0,1} &amp; \cdots &amp; y_{0,H-1} \\
+          y_{1,0} &amp; y_{1,1} &amp; \cdots &amp; y_{1,H-1} \\
+          \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+          y_{N-1,0} &amp; y_{N-1,1} &amp; \cdots &amp; y_{N-1,H-1}
+      \end{pmatrix}
+\end{aligned}\end{split}\]</div>
+<p>ここで、「<span class="math notranslate nohighlight">\(n\)</span>番目の出力データの<span class="math notranslate nohighlight">\(h\)</span>番目の項<span class="math notranslate nohighlight">\(y_{n,h}\)</span>」は、</p>
+<div class="math notranslate nohighlight">
+\[
+y_{n,h}
+    = \sum_{d=0}^{D-1} x_{n,d} w_{d,h} + b_h
+\]</div>
+<p>で計算できるのが分かります。</p>
+<section id="id4">
+<h3>重みの勾配<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>連鎖律より、<span class="math notranslate nohighlight">\(\frac{\partial L}{\partial w_{d,h}}\)</span>は次の式で求められます</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial w_{d,h}}
+    = \sum_{n=0}^{N-1}
+          \frac{\partial L}{\partial y_{n,h}}
+          \frac{\partial y_{n,h}}{\partial w_{d,h}}
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\frac{\partial L}{\partial y_{n,h}}\)</span>は、<span class="math notranslate nohighlight">\(y_{n,h}\)</span>に関する<span class="math notranslate nohighlight">\(L\)</span>の微分です。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\partial y_{n,h}}{\partial w_{d,h}}\)</span>は、<span class="math notranslate nohighlight">\(w_{d,h}\)</span>に関する<span class="math notranslate nohighlight">\(y_{n,h}\)</span>の微分です。</p></li>
+</ul>
+<p>ここで、<span class="math notranslate nohighlight">\(\frac{\partial y_{n,h}}{\partial w_{d,h}}\)</span>は、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{\partial y_{n,h}}{\partial w_{d,h}}
+   &amp;= \frac{\partial}{\partial w_{d,h}} \left\{
+          \sum_{d=0}^{D-1} x_{n,d} w_{d,h} + b_h
+      \right\}
+\\
+   &amp;= \frac{\partial}{\partial x_{n,d}} \Bigl\{
+          x_{n,0} w_{0,h} + \cdots + x_{n,d} w_{d,h} + \cdots + x_{n,D-1} w_{D-1,h} + b_h
+      \Bigr\}
+\\
+   &amp;= 0 + \cdots + x_{n,d} + \cdots + 0 + 0
+\\
+   &amp;= x_{n,d}
+\end{aligned}
+\end{split}\]</div>
+<p>になりますため、</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial w_{d,h}}
+    = \sum_{n=0}^{N-1}
+          \frac{\partial L}{\partial y_{n,h}}
+          x_{n,d}
+\]</div>
+</section>
+<section id="id5">
+<h3>バイアスの勾配<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>同じく連鎖律より、<span class="math notranslate nohighlight">\(\frac{\partial L}{\partial b_h}\)</span>は次の式で求められます。</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial b_h}
+    = \sum_{n=0}^{N-1}
+          \frac{\partial L}{\partial y_{n,h}}
+          \frac{\partial y_{n,h}}{\partial b_h}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{\partial y_{n,h}}{\partial b_h}
+   &amp;= \frac{\partial}{\partial w_{d,h}} \left\{
+          \sum_{d=0}^{D-1} x_{n,d} w_{d,h} + b_h
+      \right\}
+\\
+   &amp;= 0 + 1
+\\
+   &amp;= 1
+\end{aligned}
+\end{split}\]</div>
+<p>まとめると、</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial b_h}
+    = \sum_{n=0}^{N-1}
+          \frac{\partial L}{\partial y_{n,h}}\]</div>
+</section>
+</section>
+<section id="id6">
+<h2>ニューラルネットワークにおける誤差逆伝播法<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<p>連鎖律より勾配を計算する考え方をニューラルネットワークにも適用することができます。具体的には、ニューラルネットワークを構成する関数が持つパラメータについての<strong>目的関数の勾配</strong>を、順伝播で通った経路を逆向きにたどるようにして<strong>途中の関数の勾配の掛け算</strong>によって求めます。</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>ニューラルネットワークには、活性化関数によて変換し、次の層へ伝播するといった計算の流れになりますが、逆伝播による勾配を計算できる原理は変わらないです。</p>
+</aside>
+<p>ここから、手計算を通じて誤差逆伝播法の実装を理解しましよう。</p>
+<ul class="simple">
+<li><p>入力</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+i_{1} = 0.05,i_{2} = 0.10\]</div>
+<ul class="simple">
+<li><p>初期パラメータ</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+w_{1} = 0.15,w_{2} = 0.20,w_{3} = 0.25,w_{4} = 0.30
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+w_{5} = 0.40,w_{6} = 0.45,w_{7} = 0.50,w_{8} = 0.55
+\]</div>
+<ul class="simple">
+<li><p>活性化関数: シグモイド関数</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+h(x)
+    = \frac{1}{1 + \exp(-x)}
+\]</div>
+<ul class="simple">
+<li><p>教師データ
+$<span class="math notranslate nohighlight">\(
+o_{1} = 0.01,o_{2} = 0.99
+\)</span>$</p></li>
+<li><p>目的関数は平均二乗誤差関数を用いることにします。</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+L = \dfrac{1}{N} \sum_{n=1}^{N} (t_{n} - y_{n})^2
+\]</div>
+<a class="reference internal image-reference" href="https://images2015.cnblogs.com/blog/853467/201606/853467-20160630142019140-402363317.png"><img alt="drawing" src="https://images2015.cnblogs.com/blog/853467/201606/853467-20160630142019140-402363317.png" style="width: 500px;" /></a>
+<section id="id7">
+<h3>順伝播の流れ<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">net_h1</span><span class="o">=</span> <span class="p">(</span><span class="mf">0.15</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span><span class="o">+</span><span class="mf">0.35</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;net_h1=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">net_h1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>net_h1=0.3775
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">net_h2</span><span class="o">=</span> <span class="p">(</span><span class="mf">0.25</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span><span class="o">+</span><span class="mf">0.35</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;out_h2=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">net_h2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>out_h2=0.39249999999999996
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">net_o1</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.4</span><span class="p">)</span><span class="o">*</span><span class="n">net_h1</span><span class="o">+</span><span class="p">(</span><span class="mf">0.45</span><span class="p">)</span><span class="o">*</span><span class="n">net_h2</span><span class="o">+</span><span class="mf">0.6</span>
+<span class="n">out_o1</span><span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">net_o1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;out_o1=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">out_o1</span><span class="p">))</span>
+<span class="n">net_o2</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">net_h1</span><span class="o">+</span><span class="p">(</span><span class="mf">0.55</span><span class="p">)</span><span class="o">*</span><span class="n">net_h2</span><span class="o">+</span><span class="mf">0.6</span>
+<span class="n">out_o2</span><span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">net_o2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;out_o2=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">out_o2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>out_o1=0.7165932011681534
+out_o2=0.7319669364891265
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L_1</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="mf">0.01</span><span class="o">-</span><span class="n">out_o1</span><span class="p">)</span>
+<span class="n">L_2</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="mf">0.99</span><span class="o">-</span><span class="n">out_o2</span><span class="p">)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">L_1</span><span class="o">+</span><span class="n">L_2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loss=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">L</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss=0.2829275069009325
+</pre></div>
+</div>
+</div>
+</div>
+<p>例えば、<span class="math notranslate nohighlight">\(w_5\)</span>の勾配を計算する際には、</p>
+<a class="reference internal image-reference" href="https://images2015.cnblogs.com/blog/853467/201606/853467-20160630152018906-1524325812.png"><img alt="drawing" src="https://images2015.cnblogs.com/blog/853467/201606/853467-20160630152018906-1524325812.png" style="width: 500px;" /></a>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial w_5} = \frac{\partial L}{\partial out_{o1}}\frac{\partial out_{o1}}{\partial net_{o1}}\frac{\partial net_{o1}}{\partial w_5}
+\]</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial L}{\partial out_{o1}}\)</span>を計算する</p>
+<div class="math notranslate nohighlight">
+\[
+L= \frac{1}{2}(target_{o_{1}}-out_{o_{1}})^2+\frac{1}{2}(target_{o_{2}}-out_{o_{2}})^2
+\]</div>
+<p>合成関数の微分<span class="math notranslate nohighlight">\(g(f(x))= g^{\prime}(f(x))f^{\prime}(x)\)</span>によって
+$<span class="math notranslate nohighlight">\(
+\frac{\partial L}{\partial out_{o1}}= 2*\frac{1}{2}(target_{o_{1}}-out_{o_{1}})*-1+0
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d_out_o1</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mf">0.01</span><span class="o">-</span><span class="n">out_o1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;d_out_o1=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d_out_o1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d_out_o1=0.7065932011681534
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial out_{o1}}{\partial net_{o1}}\)</span>を計算する
+$<span class="math notranslate nohighlight">\(
+out_{o1}= sigmod(net_{o_{1}})
+\)</span><span class="math notranslate nohighlight">\(
+Sigmoid関数の微分は\)</span>f^{\prime}(x)=f(x)(1-f(X))<span class="math notranslate nohighlight">\(なので
+\)</span><span class="math notranslate nohighlight">\(
+\frac{\partial out_{o1}}{\partial net_{o1}}= out_{o1}(1-out_{o1})
+\)</span>$</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>シグモイド関数の勾配の証明</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{d y}{d x}
+   &amp;= \frac{d}{d x} \Bigl\{
+          \frac{1}{1 + \exp(-x)}
+      \Bigr\}
+\\
+   &amp;= - \frac{1}{(1 + \exp(-x))^2}
+        \frac{d}{d x} \Bigl\{
+            1 + \exp(-x)
+        \Bigr\}
+\\
+   &amp;= - \frac{1}{(1 + \exp(-x))^2} \Bigl(
+            - \exp(-x)
+        \Bigr)
+\\
+   &amp;= \frac{\exp(-x)}{(1 + \exp(-x))^2}
+\\
+  &amp;= \frac{1}{1 + \exp(-x)}
+      \frac{\exp(-x)}{1 + \exp(-x)}
+\\
+   &amp;= \frac{1}{1 + \exp(-x)}
+      \frac{1 + \exp(-x) - 1}{1 + \exp(-x)}
+\\
+   &amp;= \frac{1}{1 + \exp(-x)} \left(
+          \frac{1 + \exp(-x)}{1 + \exp(-x)}
+          - \frac{1}{1 + \exp(-x)}
+      \right)
+\\
+   &amp;= y (1 - y)
+    \end{aligned}
+\end{split}\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d_net_o1</span> <span class="o">=</span> <span class="n">out_o1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">out_o1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;d_net_o1=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d_net_o1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d_net_o1=0.20308738520773184
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\partial net_{o1}}{\partial w_5}\)</span>を計算する
+$<span class="math notranslate nohighlight">\(
+net_{o_{1}}=w_{5}*net_{h_{1}}+w_{6}*net_{h_{2}}+b_{2}*1
+\)</span><span class="math notranslate nohighlight">\(
+\)</span>$
+\frac{\partial net_{o1}}{\partial w_5}= net_{h_{1}}</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d_w5</span><span class="o">=</span> <span class="n">d_out_o1</span><span class="o">*</span><span class="n">d_net_o1</span><span class="o">*</span><span class="n">net_h1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;d_w5=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d_w5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d_w5=0.05417131252562742
+</pre></div>
+</div>
+</div>
+</div>
+<p>パラメータを更新する
+$<span class="math notranslate nohighlight">\(w_5^+ = w_{5}- \eta \frac{\partial {L}}{\partial w_5}\)</span>$</p>
+</section>
 </section>
 </section>
 
