@@ -210,7 +210,13 @@
 # L = \dfrac{1}{N} \sum_{n=1}^{N} (t_{n} - y_{n})^2
 # $$
 # 
-# <img src="https://images2015.cnblogs.com/blog/853467/201606/853467-20160630142019140-402363317.png" alt="drawing" width="500"/>
+# 
+# ```{figure} ./Figure/back1.png
+# ---
+# align: center
+# ---
+# ニューラルネットワークの実装例
+# ```
 # 
 # 
 
@@ -261,7 +267,12 @@ print("Loss={}".format(L))
 
 # 例えば、$w_5$の勾配を計算する際には、
 # 
-# <img src="https://images2015.cnblogs.com/blog/853467/201606/853467-20160630152018906-1524325812.png" alt="drawing" width="500"/>
+# ```{figure} ./Figure/back2.png
+# ---
+# align: center
+# ---
+# 誤差逆伝播法で$w_5$の勾配を求める
+# ```
 # 
 # 
 # $$
@@ -273,7 +284,9 @@ print("Loss={}".format(L))
 # $$
 # L= \frac{1}{2}(target_{o_{1}}-out_{o_{1}})^2+\frac{1}{2}(target_{o_{2}}-out_{o_{2}})^2
 # $$
+# 
 # 合成関数の微分$g(f(x))= g^{\prime}(f(x))f^{\prime}(x)$によって
+# 
 # $$
 # \frac{\partial L}{\partial out_{o1}}= 2*\frac{1}{2}(target_{o_{1}}-out_{o_{1}})*-1+0
 # $$
@@ -286,10 +299,13 @@ print("d_out_o1={}".format(d_out_o1))
 
 
 # $\frac{\partial out_{o1}}{\partial net_{o1}}$を計算する
+# 
 # $$
 # out_{o1}= sigmod(net_{o_{1}})
 # $$
-# Sigmoid関数の微分は$f^{\prime}(x)=f(x)(1-f(X))$なので
+# 
+# Sigmoid関数の微分は $f^{\prime}(x)=f(x)(1-f(x))$ なので
+# 
 # $$
 # \frac{\partial out_{o1}}{\partial net_{o1}}= out_{o1}(1-out_{o1})
 # $$
@@ -342,11 +358,14 @@ print("d_net_o1={}".format(d_net_o1))
 
 
 # $\frac{\partial net_{o1}}{\partial w_5}$を計算する
+# 
 # $$
 # net_{o_{1}}=w_{5}*net_{h_{1}}+w_{6}*net_{h_{2}}+b_{2}*1
 # $$
+# 
 # $$
 # \frac{\partial net_{o1}}{\partial w_5}= net_{h_{1}}
+# $$
 
 # In[8]:
 
@@ -356,6 +375,9 @@ print("d_w5={}".format(d_w5))
 
 
 # パラメータを更新する
-# $$w_5^+ = w_{5}- \eta \frac{\partial {L}}{\partial w_5}$$
+# 
+# $$
+# w_5^+ = w_{5}- \eta \frac{\partial {L}}{\partial w_5}
+# $$
 
 # 

@@ -54,6 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="誤差逆伝播法" href="backpropagation.html" />
     <link rel="prev" title="&lt;no title&gt;" href="math_basis.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -152,6 +153,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    ニューラルネットワーク
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="backpropagation.html">
+   誤差逆伝播法
   </a>
  </li>
 </ul>
@@ -833,7 +839,12 @@ title="Print to PDF"
 <li><p><span class="math notranslate nohighlight">\(w_1\)</span>や<span class="math notranslate nohighlight">\(w_2\)</span>は各入力の「重み」を表すパラメータで、各入力の重要性をコントロールします。</p></li>
 <li><p><span class="math notranslate nohighlight">\(b\)</span>はバイアス</p></li>
 </ul>
-<p><img alt="" src="../_images/nn1.png" /></p>
+<figure class="align-center" id="id36">
+<a class="reference internal image-reference" href="../_images/nn1.png"><img alt="../_images/nn1.png" src="../_images/nn1.png" style="width: 385.0px; height: 357.5px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">パーセプトロン</span><a class="headerlink" href="#id36" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>パーセプトロンの「○」で表されている部分は、ニューロンやノードと呼びます。</p>
 </section>
 <section id="id4">
@@ -858,14 +869,23 @@ y   = \begin{cases}
       \end{cases}
 \end{split}\]</div>
 <p>で書けます。つまり、入力の重み付き和の結果が<span class="math notranslate nohighlight">\(a\)</span>というノードになり、そして活性化関数<span class="math notranslate nohighlight">\(h()\)</span>によって<span class="math notranslate nohighlight">\(y\)</span>という出力が計算されます。</p>
-<p><img alt="" src="../_images/nn2.png" /></p>
+<figure class="align-center" id="id37">
+<a class="reference internal image-reference" href="../_images/nn2.png"><img alt="../_images/nn2.png" src="../_images/nn2.png" style="width: 575.0px; height: 357.5px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">活性化関数があるパーセプトロン</span><a class="headerlink" href="#id37" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>活性化関数を使うことで表現の自由度を上げて、複数のパーセプトロンを適当につなげることで、入出力間が非線形な関係でも表現できるようになります。</p>
-<p>例えば、線形変換のみで下図右の白い丸で表される観測データから<span class="math notranslate nohighlight">\(x\)</span>と<span class="math notranslate nohighlight">\(y\)</span>の関係を近似した場合、点線のような直線が得られたとします。これでは、一部のデータについてはあまりよく当てはまっていないのが分かります。</p>
+<p>例えば、線形変換のみで下図右の丸で表される観測データから<span class="math notranslate nohighlight">\(x\)</span>と<span class="math notranslate nohighlight">\(y\)</span>の関係を近似した場合、点線のような直線が得られたとします。これでは、一部のデータについてはあまりよく当てはまっていないのが分かります。</p>
 <p>しかし、もし図右の実線のような曲線を表現することができれば、両者の関係をより適切に表現することができます。</p>
 <p><img alt="" src="../_images/transform_function2.gif" /></p>
-<p>活性化関数にはいくつか種類があります。</p>
 <p>活性化関数にはいくつか種類があり、異なる特性や用途を持っています。</p>
-<p><img alt="" src="../_images/transform_function3.png" /></p>
+<figure class="align-center" id="id38">
+<img alt="../_images/transform_function3.png" src="../_images/transform_function3.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">活性化関数の種類</span><a class="headerlink" href="#id38" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="id5">
 <h3>ニューラルネットワークの仕組み<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
@@ -920,18 +940,25 @@ $<span class="math notranslate nohighlight">\(
 <ul class="simple">
 <li><p>入力 <span class="math notranslate nohighlight">\(\mathbf{X}=\begin{pmatrix} x_1 &amp; x_2 \end{pmatrix}\)</span></p></li>
 <li><p>バイアス <span class="math notranslate nohighlight">\(\mathbf{B} = \begin{pmatrix} b_{1}^{(1)} &amp; b_{2}^{(1)} &amp; b_{3}^{(1)} \end{pmatrix}\)</span></p></li>
-<li><p>重み $<span class="math notranslate nohighlight">\(\begin{split} \mathbf{W} = \begin{pmatrix}
-  w_{11}^{(1)} &amp; w_{21}^{(1)} &amp; w_{31}^{(1)} \\
-  w_{12}^{(1)} &amp; w_{22}^{(1)} &amp; w_{32}^{(1)}
-\end{pmatrix}\end{split}\)</span>$</p></li>
+<li><p>重み</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split} \mathbf{W} = \begin{pmatrix}
+    w_{11}^{(1)} &amp; w_{21}^{(1)} &amp; w_{31}^{(1)} \\
+    w_{12}^{(1)} &amp; w_{22}^{(1)} &amp; w_{32}^{(1)}
+\end{pmatrix}\end{split}
+\end{split}\]</div>
+<ul class="simple">
 <li><p>入力・バイアスと重みの総和: <span class="math notranslate nohighlight">\(\mathbf{A} = \begin{pmatrix}
   a_1^{(1)} &amp; a_2^{(1)} &amp; a_3^{(1)}
-\end{pmatrix}\)</span>
-$<span class="math notranslate nohighlight">\(
-\mathbf{A}^{(1)}
-   = \mathbf{X} \mathbf{W}^{(1)} + \mathbf{B}^{(1)}
-\)</span>$</p></li>
+\end{pmatrix}\)</span></p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{A}^{(1)}
+     = \mathbf{X} \mathbf{W}^{(1)} + \mathbf{B}^{(1)}
+\]</div>
 <p>さらに、活性化関数を導入します。入力・バイアスと重みの総和を<span class="math notranslate nohighlight">\(a\)</span>で表し、活性化関数<span class="math notranslate nohighlight">\(h()\)</span>による変換された結果を<span class="math notranslate nohighlight">\(z\)</span>で表すことにします。
 <img alt="" src="../_images/nn_d.png" /></p>
 </section>
@@ -1097,11 +1124,24 @@ y_k = p(y=k|x)
 - \sum_{k=1}^{K}t_{k}\log y_{k}
 \]</div>
 <p>これは、<span class="math notranslate nohighlight">\(t_k\)</span>が <span class="math notranslate nohighlight">\(k=1,2,...,K\)</span> のうち正解クラスである一つの<span class="math notranslate nohighlight">\(k\)</span>の値でだけ<span class="math notranslate nohighlight">\(1\)</span>となるので、正解クラスであるような<span class="math notranslate nohighlight">\(k\)</span>での<span class="math notranslate nohighlight">\(\log y_{k}\)</span>を取り出して<span class="math notranslate nohighlight">\(−1\)</span>を掛けているのと同じです。 また、<span class="math notranslate nohighlight">\(N\)</span>個すべてのサンプルを考慮すると、交差エントロピーは、</p>
+<figure class="margin align-default" id="id39">
+<a class="reference internal image-reference" href="../_images/Average_Loss.png"><img alt="../_images/Average_Loss.png" src="../_images/Average_Loss.png" style="width: 199.0px; height: 342.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Average_Loss</span><a class="headerlink" href="#id39" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <div class="math notranslate nohighlight">
 \[
 L = - \sum_{n=1}^{N} \sum_{k=1}^{K}t_{n, k}\log y_{n, k}
 \]</div>
-<p><img alt="" src="../_images/Average_Loss.png" /></p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="cf7c43c4-7d6f-4e9d-ad10-ad844f9d2a3c" name="07af913d-7db1-4fdc-9f7c-84c3a604541a" type="radio">
+</input><label class="sd-tab-label" for="cf7c43c4-7d6f-4e9d-ad10-ad844f9d2a3c">
+課題</label><div class="sd-tab-content docutils">
+<p>3クラス分類問題を考えます。</p>
+<p>予測は<span class="math notranslate nohighlight">\(y=(0.1,0.2,0.3)\)</span>、真のラベルは<span class="math notranslate nohighlight">\(t=(0,0,1)\)</span>の場合、交差エントロピーの計算式を書いてください。</p>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cross_entropy_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -1242,14 +1282,14 @@ Iteration 90: x = 7.588550360298899e-09, f(x) = 5.758609657079255e-17
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/NN_39_0.png" src="../_images/NN_39_0.png" />
+<img alt="../_images/NN_40_0.png" src="../_images/NN_40_0.png" />
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="a11a777f-548e-4cb9-8c05-c81e15150ffb" name="d1f19fc6-6d86-4543-8e8c-1d5eb67821e8" type="radio">
-</input><label class="sd-tab-label" for="a11a777f-548e-4cb9-8c05-c81e15150ffb">
+<input checked="checked" id="f9170635-86a4-423a-8791-ac943bf356ce" name="aa437d5e-1966-4fc3-a8e9-c9500185a898" type="radio">
+</input><label class="sd-tab-label" for="f9170635-86a4-423a-8791-ac943bf356ce">
 課題</label><div class="sd-tab-content docutils">
-<p>勾配法で<span class="math notranslate nohighlight">\(f(x)=2x^3+x^2-10x-80\)</span>の最小値を求めます。</p>
+<p>勾配法で<span class="math notranslate nohighlight">\(f(x)=2x^2-10x-80\)</span>の最小値を求めます。</p>
 <ul class="simple">
 <li><p>勾配降下法のアルゴリズムを実装する。</p></li>
 <li><p>アルゴリズムを使って関数の最小値を求める。</p></li>
@@ -1372,7 +1412,7 @@ Iteration 90: x = 7.588550360298899e-09, f(x) = 5.758609657079255e-17
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/NN_45_0.png" src="../_images/NN_45_0.png" />
+<img alt="../_images/NN_46_0.png" src="../_images/NN_46_0.png" />
 </div>
 </div>
 </section>
@@ -2348,6 +2388,13 @@ b_k^{(\mathrm{new})}
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">&lt;no title&gt;</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="backpropagation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">誤差逆伝播法</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
