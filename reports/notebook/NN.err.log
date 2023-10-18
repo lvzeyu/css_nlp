@@ -32,8 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-# 各パラメータの勾配を計算
-grads = net.numerical_gradient(x, t)
-print(grads.keys())
+['# 第1層の重みの勾配を計算', "dW1 = numerical_gradient(f, params['W1'])", 'print(dW1[:5, :5])', 'print(dW1.shape)', '']
+...
+['', '# 第2層のバイアスの勾配を計算', "db2 = numerical_gradient(f, params['b2'])", 'print(db2[:5])', 'print(db2.shape)']
 -------------------
 
