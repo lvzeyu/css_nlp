@@ -17,3 +17,4 @@ parts:
   chapters:
   - file: notebook/NN.ipynb
   - file: notebook/backpropagation.ipynb
+  - file: notebook/pytorch.ipynb

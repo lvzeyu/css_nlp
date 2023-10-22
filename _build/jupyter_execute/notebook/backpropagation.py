@@ -379,5 +379,3 @@ print("d_w5={}".format(d_w5))
 # $$
 # w_5^+ = w_{5}- \eta \frac{\partial {L}}{\partial w_5}
 # $$
-
-# 
