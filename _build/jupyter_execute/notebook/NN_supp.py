@@ -167,6 +167,131 @@ ax.set_zlabel("$f(X_0, X_1)$")
 plt.show()
 
 
+# In[5]:
+
+
+class NeuralNetwork(nn.Module):
+    def __init__(self, n_in, n_units_1, n_units_2, n_out):
+        super(NeuralNetwork, self).__init__()
+        self.l1 = nn.Linear(n_in, n_units_1)      # First hidden layer
+        self.l2 = nn.Linear(n_units_1, n_units_2) # Second hidden layer
+        self.l3 = nn.Linear(n_units_2, n_out)     # Output layer
+
+    def forward(self, x):
+        h1 = F.relu(self.l1(x))
+        h2 = F.relu(self.l2(h1))
+        y = F.log_softmax(self.l3(h2), dim=1)
+        return y
+
+
+# In[1]:
+
+
+import torch
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+# データの読み込み
+iris = datasets.load_iris()
+data = iris.data
+
+# 入力データとターゲットデータの準備
+X = data[:, :-1]  # sepal length, sepal width, petal length
+y = data[:, -1]   # petal width
+
+
+# データの分割
+X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.4, random_state=42)
+X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
+
+# データをテンソルに変換
+X_train = torch.tensor(X_train, dtype=torch.float32)
+y_train = torch.tensor(y_train, dtype=torch.float32)
+X_val = torch.tensor(X_val, dtype=torch.float32)
+y_val = torch.tensor(y_val, dtype=torch.float32)
+X_test = torch.tensor(X_test, dtype=torch.float32)
+y_test = torch.tensor(y_test, dtype=torch.float32)
+
+
+# In[2]:
+
+
+import torch.nn as nn
+import torch.nn.functional as F
+
+class RegressionNN(nn.Module):
+    def __init__(self, input_dim, hidden_dim1, hidden_dim2):
+        super(RegressionNN, self).__init__()
+        self.fc1 = nn.Linear(input_dim, hidden_dim1)
+        self.fc2 = nn.Linear(hidden_dim1, hidden_dim2)
+        self.fc3 = nn.Linear(hidden_dim2, 1)
+
+    def forward(self, x):
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        return self.fc3(x)
+
+
+# In[3]:
+
+
+# ハイパーパラメータ
+learning_rate = 0.01
+epochs = 2000
+hidden_dim1 = 10
+hidden_dim2 = 5
+
+# モデルと最適化のインスタンス化
+model = RegressionNN(input_dim=3, hidden_dim1=hidden_dim1, hidden_dim2=hidden_dim2)
+criterion = nn.MSELoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+# 学習ループ
+for epoch in range(epochs):
+    # フォワードパス
+    outputs = model(X_train)
+    loss = criterion(outputs, y_train)
+    
+    # バックワードパス
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+    
+    # 検証
+    model.eval()
+    with torch.no_grad():
+        val_outputs = model(X_val)
+        val_loss = criterion(val_outputs, y_val)
+    model.train()
+    
+    # 50エポックごとに損失を表示
+    if (epoch+1) % 50 == 0:
+        print(f"Epoch [{epoch+1}/{epochs}], Train Loss: {loss.item():.4f}, Val Loss: {val_loss.item():.4f}")
+
+
+# In[17]:
+
+
+import matplotlib.pyplot as plt
+
+model.eval()
+with torch.no_grad():
+    test_predictions = model(X_test)
+
+# データをnumpy形式に変換
+y_test_np = scaler_y.inverse_transform(y_test.numpy())
+test_predictions_np = scaler_y.inverse_transform(test_predictions.numpy())
+
+# scatter plotの可視化
+plt.scatter(y_test_np, test_predictions_np)
+plt.xlabel("Actual Petal Width")
+plt.ylabel("Predicted Petal Width")
+plt.title("Actual vs. Predicted Petal Width")
+plt.plot([min(y_test_np), max(y_test_np)], [min(y_test_np), max(y_test_np)], color='red')
+plt.show()
+
+
 # In[ ]:
 
 

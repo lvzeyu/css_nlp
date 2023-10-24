@@ -148,7 +148,7 @@ const thebe_selector_output = ".output, .cell_output"
   ニューラルネットワーク
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="NN.html">
    ニューラルネットワーク
@@ -159,6 +159,13 @@ const thebe_selector_output = ".output, .cell_output"
    誤差逆伝播法
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  PyTorch
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Pytorch
@@ -388,95 +395,132 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   テンソル
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Pytorch
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     テンソルの作成
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     テンソル要素の型
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     テンソルの操作（変形・変換等）
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#indexing">
-     テンソルの一部指定や取り出し(Indexing)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cuda-tensors-cuda">
-     CUDA Tensors（CUDA テンソル）
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   モデル構築
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     クラスの定義
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     クラスのレイヤー
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   自動微分
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     勾配情報の保存
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
-     勾配計算
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
-     最適化関数
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     テンソル
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#optimizer">
-       Optimizer
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       テンソルの作成
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       テンソル要素の型
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id4">
+       テンソルの操作（変形・変換等）
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#indexing">
+       テンソルの一部指定や取り出し(Indexing)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cuda-tensors-cuda">
+       CUDA Tensors（CUDA テンソル）
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     モデル構築
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       クラスの定義
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id7">
+       クラスのレイヤー
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     自動微分
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id9">
+       勾配情報の保存
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
+       勾配計算
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
+       最適化関数
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#optimizer">
+         Optimizer
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iris">
+     実装例(Irisデータ)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id12">
+       データの読み込み
       </a>
      </li>
     </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#iris">
-   実装例(Irisデータ)
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   入力データとターゲットデータの準備
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id12">
-     データの読み込み
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id14">
+   データの分割
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   データをテンソルに変換
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id16">
+   ハイパーパラメータ
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id17">
+   モデルと最適化のインスタンス化
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id18">
+   学習ループ
+  </a>
  </li>
 </ul>
 
@@ -497,95 +541,132 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   テンソル
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Pytorch
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     テンソルの作成
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     テンソル要素の型
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     テンソルの操作（変形・変換等）
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#indexing">
-     テンソルの一部指定や取り出し(Indexing)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cuda-tensors-cuda">
-     CUDA Tensors（CUDA テンソル）
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   モデル構築
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     クラスの定義
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     クラスのレイヤー
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   自動微分
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     勾配情報の保存
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
-     勾配計算
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
-     最適化関数
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     テンソル
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#optimizer">
-       Optimizer
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       テンソルの作成
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       テンソル要素の型
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id4">
+       テンソルの操作（変形・変換等）
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#indexing">
+       テンソルの一部指定や取り出し(Indexing)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cuda-tensors-cuda">
+       CUDA Tensors（CUDA テンソル）
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     モデル構築
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       クラスの定義
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id7">
+       クラスのレイヤー
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     自動微分
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id9">
+       勾配情報の保存
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
+       勾配計算
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
+       最適化関数
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#optimizer">
+         Optimizer
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iris">
+     実装例(Irisデータ)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id12">
+       データの読み込み
       </a>
      </li>
     </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#iris">
-   実装例(Irisデータ)
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   入力データとターゲットデータの準備
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id12">
-     データの読み込み
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id14">
+   データの分割
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   データをテンソルに変換
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id16">
+   ハイパーパラメータ
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id17">
+   モデルと最適化のインスタンス化
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id18">
+   学習ループ
+  </a>
  </li>
 </ul>
 
@@ -649,11 +730,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.4762, 0.9760, 0.4297],
-        [0.7313, 0.6994, 0.2140],
-        [0.1249, 0.7917, 0.9858],
-        [0.9688, 0.4686, 0.5608],
-        [0.1367, 0.4569, 0.1307]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.7202, 0.7038, 0.4017],
+        [0.5733, 0.7630, 0.7159],
+        [0.3112, 0.9435, 0.6106],
+        [0.1533, 0.8139, 0.7851],
+        [0.3337, 0.7949, 0.0776]])
 </pre></div>
 </div>
 </div>
@@ -696,11 +777,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.6131, 1.8047, 1.8208],
-        [1.4833, 0.9409, 0.8726],
-        [0.7285, 0.9246, 1.3216],
-        [0.9472, 0.9287, 1.1594],
-        [1.6644, 1.2854, 0.6296]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1.3125, 0.9034, 1.2409],
+        [0.7720, 1.3888, 0.6783],
+        [1.6859, 1.3080, 0.7590],
+        [0.4002, 0.7477, 1.6348],
+        [1.2359, 1.1174, 1.1691]])
 </pre></div>
 </div>
 </div>
@@ -712,11 +793,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.6131, 1.8047, 1.8208],
-        [1.4833, 0.9409, 0.8726],
-        [0.7285, 0.9246, 1.3216],
-        [0.9472, 0.9287, 1.1594],
-        [1.6644, 1.2854, 0.6296]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1.3125, 0.9034, 1.2409],
+        [0.7720, 1.3888, 0.6783],
+        [1.6859, 1.3080, 0.7590],
+        [0.4002, 0.7477, 1.6348],
+        [1.2359, 1.1174, 1.1691]])
 </pre></div>
 </div>
 </div>
@@ -732,8 +813,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1334, 0.5514, 0.3501],
-        [0.7159, 0.7884, 0.4033]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.2493, 0.6874, 0.8158],
+        [0.8731, 0.6325, 0.8663]])
 </pre></div>
 </div>
 </div>
@@ -745,7 +826,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.5553, 0.2486, 0.1334, 0.7159])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.6849, 0.7985, 0.2493, 0.8731])
 </pre></div>
 </div>
 </div>
@@ -870,9 +951,9 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0000, 0.0741, 0.0000],
-        [0.0000, 0.1358, 0.0000],
-        [0.0065, 0.1105, 0.0006]], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0000, 0.0000, 0.0000],
+        [0.0000, 0.0013, 0.0000],
+        [0.0000, 0.0088, 0.0000]], grad_fn=&lt;ReluBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -886,7 +967,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted class: tensor([1, 1, 1])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted class: tensor([0, 1, 1])
 </pre></div>
 </div>
 </div>
@@ -896,7 +977,7 @@ title="Print to PDF"
 <h3>クラスのレイヤー<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>tensorboardでニューラルネットワークの構造を確認する</p>
+<p>tensorboardでニューラルネットワークの構造を確認する。</p>
 <p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">torch.utils.tensorboard</span> <span class="pre">import</span> <span class="pre">SummaryWriter</span> <span class="pre">X</span> <span class="pre">=</span> <span class="pre">torch.rand(3,</span> <span class="pre">28,</span> <span class="pre">28)</span> <span class="pre">writer</span> <span class="pre">=</span> <span class="pre">SummaryWriter(&quot;torchlogs/&quot;)</span> <span class="pre">writer.add_graph(model,</span> <span class="pre">X)</span> <span class="pre">writer.close()</span></code></p>
 </div>
 </section>
@@ -939,8 +1020,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient function for z = &lt;AddBackward0 object at 0x11ef09c60&gt;
-Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at 0x11ef0bdf0&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient function for z = &lt;AddBackward0 object at 0x11b995e40&gt;
+Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at 0x11b997250&gt;
 </pre></div>
 </div>
 </div>
@@ -969,12 +1050,12 @@ Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0633, 0.0825, 0.1068],
-        [0.0448, 0.0583, 0.0756],
-        [0.0231, 0.0301, 0.0390],
-        [0.0082, 0.0107, 0.0138],
-        [0.0405, 0.0527, 0.0683]])
-tensor([0.1534, 0.1998, 0.2589])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0907, 0.1312, 0.0280],
+        [0.1534, 0.2217, 0.0473],
+        [0.1023, 0.1478, 0.0315],
+        [0.1236, 0.1787, 0.0381],
+        [0.0347, 0.0502, 0.0107]])
+tensor([0.1815, 0.2624, 0.0560])
 </pre></div>
 </div>
 </div>
@@ -1024,19 +1105,17 @@ tensor([0.1534, 0.1998, 0.2589])
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6821315288543701
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6884792447090149
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 200, Loss: 0.676604688167572
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 200, Loss: 0.6854588389396667
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 300, Loss: 0.6717327833175659
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 300, Loss: 0.6825042366981506
+Epoch 400, Loss: 0.679395854473114
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 400, Loss: 0.6675726175308228
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 500, Loss: 0.6639043092727661
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 500, Loss: 0.6762138605117798
 </pre></div>
 </div>
 </div>
@@ -1057,13 +1136,11 @@ tensor([0.1534, 0.1998, 0.2589])
 <p>ここでは、確率的勾配降下法（Stochastic Gradient Descent）を例として使い方を説明します。</p>
 <p>確率的勾配降下法は、ランダムに選んだ１つのデータのみで勾配を計算してパラメータを更新し、データの数だけ繰り返す方法です。</p>
 <p>訓練したいモデルパラメータをoptimizerに登録し、合わせて学習率をハイパーパラメータとして渡すことで初期化を行います。訓練ループ内で、最適化（optimization）は3つのステップから構成されます。</p>
-<p>[1] <code class="docutils literal notranslate"><span class="pre">optimizer.zero_grad()</span></code>を実行し、モデルパラメータの勾配をリセットします。</p>
-<p>勾配の計算は蓄積されていくので、毎イテレーション、明示的にリセットします。</p>
-<br>
-<p>[2] 続いて、<code class="docutils literal notranslate"><span class="pre">loss.backwards()</span></code>を実行し、バックプロパゲーションを実行します。</p>
-<p>PyTorchは損失に対する各パラメータの偏微分の値（勾配）を求めます。</p>
-<br>
-<p>[3] 最後に、<code class="docutils literal notranslate"><span class="pre">optimizer.step()</span></code>を実行し、各パラメータの勾配を使用してパラメータの値を調整します。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer.zero_grad()</span></code>を実行し、モデルパラメータの勾配をリセットします。勾配の計算は蓄積されていくので、毎イテレーション、明示的にリセットします。</p></li>
+<li><p>続いて、<code class="docutils literal notranslate"><span class="pre">loss.backwards()</span></code>を実行し、バックプロパゲーションを実行します。PyTorchは損失に対する各パラメータの偏微分の値（勾配）を求めます。</p></li>
+<li><p>最後に、<code class="docutils literal notranslate"><span class="pre">optimizer.step()</span></code>を実行し、各パラメータの勾配を使用してパラメータの値を調整します。</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
@@ -1114,22 +1191,20 @@ tensor([0.1534, 0.1998, 0.2589])
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6960307955741882
-Epoch 200, Loss: 0.6938825249671936
-Epoch 300, Loss: 0.6929448246955872
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6826850771903992
+Epoch 200, Loss: 0.6798475384712219
+Epoch 300, Loss: 0.6772798895835876
+Epoch 400, Loss: 0.6748722791671753
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 400, Loss: 0.6925660371780396
-Epoch 500, Loss: 0.6921221017837524
-Epoch 600, Loss: 0.6917848587036133
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 500, Loss: 0.6725977659225464
+Epoch 600, Loss: 0.6704510450363159
+Epoch 700, Loss: 0.668444037437439
+Epoch 800, Loss: 0.6665464639663696
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 700, Loss: 0.6915304064750671
-Epoch 800, Loss: 0.6912915110588074
-Epoch 900, Loss: 0.6910699605941772
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1000, Loss: 0.6908642649650574
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 900, Loss: 0.6647352576255798
+Epoch 1000, Loss: 0.6629980802536011
 </pre></div>
 </div>
 </div>
@@ -1202,6 +1277,9 @@ Epoch 900, Loss: 0.6910699605941772
 <img alt="../_images/pytorch_51_1.png" src="../_images/pytorch_51_1.png" />
 </div>
 </div>
+<ul class="simple">
+<li><p>データセットを訓練データ、検証データ、テストデータに分割します。</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_tmp</span><span class="p">,</span> <span class="n">xtest</span><span class="p">,</span> <span class="n">y_tmp</span><span class="p">,</span> <span class="n">ytest</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">iris_dataset</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris_dataset</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
@@ -1210,18 +1288,55 @@ Epoch 900, Loss: 0.6910699605941772
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">torch.from_numpy</span></code>関数で、NumPy配列をPyTorchのテンソルに変換します。</p>
+<ul>
+<li><p>ニューラルネットワークに入力される特徴量やパラメータは浮動小数点数型である必要があるため、<code class="docutils literal notranslate"><span class="pre">.float()</span></code>メソッドは、テンソルのデータ型を浮動小数点数型に変換します。</p></li>
+<li><p>分類タスクのラベル（目的変数）は通常整数型で表されるため、<code class="docutils literal notranslate"><span class="pre">.long()</span></code>メソッドでテンソルのデータ型を長整数型に変換します。</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.to(device)</span></code>: データをGPUに移行します。</p></li>
+</ul>
+<p>これにより、データをPyTorchでのモデル訓練や評価に使用する準備が整います。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xtrain</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">xtrain</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
-<span class="n">ytrain</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">ytrain</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
-<span class="n">xval</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">xval</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
-<span class="n">yval</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">yval</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
-<span class="n">xtest</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">xtest</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
-<span class="n">ytest</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">ytest</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xtrain</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">xtrain</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">ytrain</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">ytrain</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">xval</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">xval</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">yval</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">yval</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">xtest</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">xtest</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">ytest</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">ytest</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>ニューラルネットワークモデルを定義します。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">NeuralNetwork(nn.Module)</span></code>という新しいクラスを定義しています。このクラスは<code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>を継承しているので、モデル関連の機能（例：重みの管理、GPU対応、保存と読み込みの機能など）を利用できるようになります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">n_in,</span> <span class="pre">n_units,</span> <span class="pre">n_out)</span></code>: ネットワークをインスタンス化するときに呼び出され、初期値をモデルに渡します。</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_in</span></code>: 入力層のユニット（ニューロン）の数</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_units</span></code>: 隠れ層のユニットの数</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_out</span></code>: 出力層のユニットの数</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">super(NeuralNetwork,</span> <span class="pre">self).__init__()</span></code>: 親クラスである<code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>のコンストラクタを呼び出すことで、モデル関連の機能を初期化しています。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.l1</span> <span class="pre">=</span> <span class="pre">nn.Linear(n_in,</span> <span class="pre">n_units)</span></code>: 入力層から隠れ層への線形変換（全結合層）を定義しています。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.l2</span> <span class="pre">=</span> <span class="pre">nn.Linear(n_units,</span> <span class="pre">n_out)</span></code>: 隠れ層から出力層への線形変換を定義しています。</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">forward(self,</span> <span class="pre">x)</span></code>:モデルが入力データを受け取ったときの順伝播を定義するメソッドです。</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">F.relu(self.l1(x))</span></code>: 入力<span class="math notranslate nohighlight">\(x\)</span>を<code class="docutils literal notranslate"><span class="pre">self.l1</span></code>レイヤー（全結合層）で変換した後、ReLU活性化関数を適用しています。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">self.l2(h)</span></code>: <span class="math notranslate nohighlight">\(h\)</span>（隠れ層の出力）を<code class="docutils literal notranslate"><span class="pre">self.l2</span></code>レイヤーで変換して、ネットワークの最終出力yを生成しています。</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NeuralNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -1238,21 +1353,41 @@ Epoch 900, Loss: 0.6910699605941772
 </div>
 </div>
 </div>
+<p>学習に関連するパラメータを設定します。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">NeuralNetwork(n_in,</span> <span class="pre">n_units,</span> <span class="pre">n_out)</span></code>:指定された入力層、隠れ層、出力層のユニット数でモデルのインスタンスを作成しています。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loss_function</span> <span class="pre">=</span> <span class="pre">nn.CrossEntropyLoss()</span></code>: 損失関数を定義します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer</span> <span class="pre">=</span> <span class="pre">torch.optim.Adam(model.parameters(),</span> <span class="pre">lr=0.01)</span></code>: オプティマイザを指定します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model.to(device)</span></code>: モデルをGPUに移行します。データとモデルは必ず同じdeviceに置く必要があります。</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_in</span> <span class="o">=</span> <span class="n">xtrain</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># number of input features (4 for Iris dataset)</span>
 <span class="n">n_units</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of units in the hidden layer</span>
 <span class="n">n_out</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># number of classes in the Iris dataset</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_units</span><span class="p">,</span> <span class="n">n_out</span><span class="p">)</span>
-<span class="n">loss_function</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>  <span class="c1"># Move the model to GPU</span>
+<span class="n">loss_function</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span> <span class="c1"># 分類問題のため交差エントロピー誤差を使用</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span> <span class="c1"># optimizer</span>
 <span class="c1"># Training loop</span>
 <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">100</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>ニューラルネットワークモデルの学習と検証のループを実装します。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">model.train()</span></code>と<code class="docutils literal notranslate"><span class="pre">model.eval()</span></code>:モデルが訓練モードか評価モードかを切り替えます。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">outputs</span> <span class="pre">=</span> <span class="pre">model(xtrain)</span></code>: 訓練データxtrainをモデルに渡し、出力を取得します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loss</span> <span class="pre">=</span> <span class="pre">loss_function(outputs,</span> <span class="pre">ytrain)</span></code>: モデルの出力と実際のラベルytrainとの間の損失を計算します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer.zero_grad()</span></code>: 新しいエポックの勾配計算の前に、最適化器の勾配を初期化します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code>: 損失に基づいて、モデルのすべてのパラメータの勾配を計算します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer.step()</span></code>: 計算された勾配を使用して、モデルのパラメータを更新します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">torch.no_grad()</span></code>: 勾配の計算を無効化します。これは、評価フェーズでは勾配を計算する必要がないため、計算の効率を向上させるためです。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">val_outputs</span> <span class="pre">=</span> <span class="pre">model(xval)</span></code>: 検証データxvalをモデルに渡し、出力を取得します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_,</span> <span class="pre">val_predicted</span> <span class="pre">=</span> <span class="pre">torch.max(val_outputs,</span> <span class="pre">1)</span></code>: モデルの出力から、最も高い確率を持つクラスのインデックスを取得します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">val_accuracy</span> <span class="pre">=</span> <span class="pre">(val_predicted</span> <span class="pre">==</span> <span class="pre">yval).float().mean().item()</span></code>: 検証データに対する正解率を計算します。</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
@@ -1280,16 +1415,34 @@ Epoch 900, Loss: 0.6910699605941772
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [10/100], Loss: 0.8860, Val Accuracy: 60.00%
-Epoch [20/100], Loss: 0.6832, Val Accuracy: 73.33%
-Epoch [30/100], Loss: 0.5141, Val Accuracy: 73.33%
-Epoch [40/100], Loss: 0.4058, Val Accuracy: 90.00%
-Epoch [50/100], Loss: 0.3284, Val Accuracy: 93.33%
-Epoch [60/100], Loss: 0.2657, Val Accuracy: 93.33%
-Epoch [70/100], Loss: 0.2158, Val Accuracy: 96.67%
-Epoch [80/100], Loss: 0.1774, Val Accuracy: 96.67%
-Epoch [90/100], Loss: 0.1486, Val Accuracy: 100.00%
-Epoch [100/100], Loss: 0.1273, Val Accuracy: 100.00%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [10/100], Loss: 1.1156, Val Accuracy: 46.67%
+Epoch [20/100], Loss: 1.0964, Val Accuracy: 23.33%
+Epoch [30/100], Loss: 1.0858, Val Accuracy: 30.00%
+Epoch [40/100], Loss: 1.0808, Val Accuracy: 30.00%
+Epoch [50/100], Loss: 1.0790, Val Accuracy: 30.00%
+Epoch [60/100], Loss: 1.0786, Val Accuracy: 30.00%
+Epoch [70/100], Loss: 1.0786, Val Accuracy: 30.00%
+Epoch [80/100], Loss: 1.0786, Val Accuracy: 30.00%
+Epoch [90/100], Loss: 1.0786, Val Accuracy: 30.00%
+Epoch [100/100], Loss: 1.0786, Val Accuracy: 30.00%
+</pre></div>
+</div>
+</div>
+</div>
+<p>テストデータでモデルの有効性を検証します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">test_outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">xtest</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">test_predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">test_outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">test_accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">test_predicted</span> <span class="o">==</span> <span class="n">ytest</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Test Accuracy: </span><span class="si">{</span><span class="n">test_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test Accuracy: 16.67%
 </pre></div>
 </div>
 </div>
@@ -1297,8 +1450,8 @@ Epoch [100/100], Loss: 0.1273, Val Accuracy: 100.00%
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>``
-writer = SummaryWriter(‘runs/iris_experiment_1’)</p>
-<p>for epoch in range(n_epochs):
+writer = SummaryWriter(‘runs/iris_experiment_1’)
+for epoch in range(n_epochs):
 # Training phase
 model.train()
 outputs = model(xtrain)
@@ -1324,8 +1477,78 @@ if (epoch+1) % 10 == 0:
 </div>
 <p>``</p>
 </div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="779541ac-bb6b-41a9-8ddf-2d2f530526e9" name="d51aa6a7-e524-4dd5-b97a-c07c71183add" type="radio">
+</input><label class="sd-tab-label" for="779541ac-bb6b-41a9-8ddf-2d2f530526e9">
+実習問題</label><div class="sd-tab-content docutils">
+<p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">NeuralNetwork(nn.Module)</span></code>を以下のように改装して、改めて学習を行なってください。</p>
+<ul class="simple">
+<li><p>一つ隠れ層を追加し、<code class="docutils literal notranslate"><span class="pre">n_units_2</span></code>という引数でユニットの数を指定できるように設定しなさい。</p></li>
+<li><p>すべての隠れ層に<code class="docutils literal notranslate"><span class="pre">F.relu</span></code>で活性化関数を追加しなさい。</p></li>
+<li><p>出力層に<code class="docutils literal notranslate"><span class="pre">F.log_softmax</span></code>で出力の正規化を行きなさい。</p></li>
+</ul>
+</div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="68e97d58-a0f8-4b75-bdfa-d1b3c59eb6ba" name="a51c9ae0-8076-42da-b1d5-39e0ec8d22fc" type="radio">
+</input><label class="sd-tab-label" for="68e97d58-a0f8-4b75-bdfa-d1b3c59eb6ba">
+課題</label><div class="sd-tab-content docutils">
+<p>sepal length, sepal width, petal lengthでpetal widthを予測するニューラルネットワークを構築、学習してください。</p>
+<ul class="simple">
+<li><p>二つ以上の隠れ層を設定してください。</p></li>
+<li><p>学習の際、検証データで損失を示す。</p></li>
+</ul>
+</div>
+<input id="599cfd75-dae8-424d-9ede-06ce43592582" name="a51c9ae0-8076-42da-b1d5-39e0ec8d22fc" type="radio">
+</input><label class="sd-tab-label" for="599cfd75-dae8-424d-9ede-06ce43592582">
+ヒント</label><div class="sd-tab-content docutils">
+<p>``</p>
+</div>
+</div>
 </section>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id13">
+<h1>入力データとターゲットデータの準備<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h1>
+<p>X = data[:, :-1]  # sepal length, sepal width, petal length
+y = data[:, -1]   # petal width</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id14">
+<h1>データの分割<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h1>
+<p>X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.4, random_state=42)
+「ここからコードを追加」</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id15">
+<h1>データをテンソルに変換<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h1>
+<p>X_train = torch.tensor(X_train, dtype=torch.float32)
+y_train = torch.tensor(y_train, dtype=torch.float32)
+「ここからコードを追加」</p>
+<p>import torch.nn as nn
+import torch.nn.functional as F</p>
+<p>class RegressionNN(nn.Module):
+def <strong>init</strong>(self, input_dim, hidden_dim1, hidden_dim2):
+super(RegressionNN, self).<strong>init</strong>()
+self.fc1 = nn.Linear(input_dim, hidden_dim1)
+「ここからコードを追加」</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id16">
+<h1>ハイパーパラメータ<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h1>
+<p>learning_rate = 0.01
+epochs = 1000
+hidden_dim1 = 10
+hidden_dim2 = 5</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id17">
+<h1>モデルと最適化のインスタンス化<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h1>
+<p>model = RegressionNN(input_dim=3, hidden_dim1=hidden_dim1, hidden_dim2=hidden_dim2)
+criterion = nn.MSELoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id18">
+<h1>学習ループ<a class="headerlink" href="#id18" title="Permalink to this headline">#</a></h1>
+<p>for epoch in range(epochs):
+「ここからコードを追加」
+``</p>
 </section>
 
     <script type="text/x-thebe-config">

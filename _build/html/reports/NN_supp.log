@@ -17,59 +17,27 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Parameters
-init_x = np.array([-3.0, 4.0])
-lr = 0.1
-num_iterations = 20
+class NeuralNetwork(nn.Module):
+    def __init__(self, n_in, n_units_1, n_units_2, n_out):
+        super(NeuralNetwork, self).__init__()
+        self.l1 = nn.Linear(n_in, n_units_1)      # First hidden layer
+        self.l2 = nn.Linear(n_units_1, n_units_2) # Second hidden layer
+        self.l3 = nn.Linear(n_units_2, n_out)     # Output layer
 
-# Run gradient descent
-x_history = gradient_descent(function_f, init_x, lr, num_iterations)
-
-# 勾配降下法の実装
-def gradient_descent(f, init_x, lr=0.01, num_iterations=100):
-    x = init_x
-    x_history = [x.copy()]
-
-    for i in range(num_iterations):
-        grad = numberical_gradient(f, x)
-        x -= lr * grad
-        x_history.append(x.copy())
-
-    return np.array(x_history)
-
-# Parameters
-init_x = np.array([-3.0, 4.0])
-lr = 0.1
-num_iterations = 20
-
-# 可視化
-x = np.linspace(-4.5, 4.5, 200)
-y = np.linspace(-4.5, 4.5, 200)
-X, Y = np.meshgrid(x, y)
-Z = X**2 + Y**2
-
-plt.figure(figsize=(8, 6))
-contour = plt.contour(X, Y, Z, levels=10, colors='black', linestyles='dashed')
-plt.clabel(contour)
-
-plt.plot(x_history[:, 0], x_history[:, 1], 'o-', color='red')
-plt.xlim(-4.5, 4.5)
-plt.ylim(-4.5, 4.5)
-plt.xlabel("X0")
-plt.ylabel("X1")
-plt.title("Gradient Descent on $f(x_0, x_1) = x_0^2 + x_1^2$")
-plt.show()
+    def forward(self, x):
+        h1 = F.relu(self.l1(x))
+        h2 = F.relu(self.l2(h1))
+        y = F.log_softmax(self.l3(h2), dim=1)
+        return y
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[4], line 7[0m
-[1;32m      4[0m num_iterations [38;5;241m=[39m [38;5;241m20[39m
-[1;32m      6[0m [38;5;66;03m# Run gradient descent[39;00m
-[0;32m----> 7[0m x_history [38;5;241m=[39m [43mgradient_descent[49m(function_f, init_x, lr, num_iterations)
-[1;32m      9[0m [38;5;66;03m# 勾配降下法の実装[39;00m
-[1;32m     10[0m [38;5;28;01mdef[39;00m [38;5;21mgradient_descent[39m(f, init_x, lr[38;5;241m=[39m[38;5;241m0.01[39m, num_iterations[38;5;241m=[39m[38;5;241m100[39m):
+Cell [0;32mIn[5], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mclass[39;00m [38;5;21;01mNeuralNetwork[39;00m([43mnn[49m[38;5;241m.[39mModule):
+[1;32m      2[0m     [38;5;28;01mdef[39;00m [38;5;21m__init__[39m([38;5;28mself[39m, n_in, n_units_1, n_units_2, n_out):
+[1;32m      3[0m         [38;5;28msuper[39m(NeuralNetwork, [38;5;28mself[39m)[38;5;241m.[39m[38;5;21m__init__[39m()
 
-[0;31mNameError[0m: name 'gradient_descent' is not defined
-NameError: name 'gradient_descent' is not defined
+[0;31mNameError[0m: name 'nn' is not defined
+NameError: name 'nn' is not defined
 

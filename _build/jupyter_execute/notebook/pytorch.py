@@ -209,8 +209,8 @@ print(f"Predicted class: {y_pred}")
 # 
 
 # ```{note}
-# tensorboardでニューラルネットワークの構造を確認する
 # 
+# tensorboardでニューラルネットワークの構造を確認する。
 # 
 # ``
 # from torch.utils.tensorboard import SummaryWriter
@@ -369,19 +369,12 @@ trained_model = training_loop(n_epochs, learning_rate, model, input, target)
 
 # 訓練したいモデルパラメータをoptimizerに登録し、合わせて学習率をハイパーパラメータとして渡すことで初期化を行います。訓練ループ内で、最適化（optimization）は3つのステップから構成されます。
 # 
-# [1] ``optimizer.zero_grad()``を実行し、モデルパラメータの勾配をリセットします。
+# - ``optimizer.zero_grad()``を実行し、モデルパラメータの勾配をリセットします。勾配の計算は蓄積されていくので、毎イテレーション、明示的にリセットします。
 # 
-# 勾配の計算は蓄積されていくので、毎イテレーション、明示的にリセットします。
 # 
-# <br>
+# - 続いて、``loss.backwards()``を実行し、バックプロパゲーションを実行します。PyTorchは損失に対する各パラメータの偏微分の値（勾配）を求めます。
 # 
-# [2] 続いて、``loss.backwards()``を実行し、バックプロパゲーションを実行します。
-# 
-# PyTorchは損失に対する各パラメータの偏微分の値（勾配）を求めます。
-# 
-# <br>
-# 
-# [3] 最後に、``optimizer.step()``を実行し、各パラメータの勾配を使用してパラメータの値を調整します。
+# - 最後に、``optimizer.step()``を実行し、各パラメータの勾配を使用してパラメータの値を調整します。
 
 # In[22]:
 
@@ -487,6 +480,8 @@ plt.suptitle('Iris Dataset Feature Relationships', y=1.02)
 plt.show()
 
 
+# - データセットを訓練データ、検証データ、テストデータに分割します。
+
 # In[27]:
 
 
@@ -494,18 +489,45 @@ x_tmp, xtest, y_tmp, ytest = train_test_split(iris_dataset.data, iris_dataset.ta
 xtrain, xval, ytrain, yval = train_test_split(x_tmp, y_tmp, test_size=0.25)  # 0.25 x 0.8 = 0.2 -> 20% validation
 
 
+# - ```torch.from_numpy```関数で、NumPy配列をPyTorchのテンソルに変換します。
+#     - ニューラルネットワークに入力される特徴量やパラメータは浮動小数点数型である必要があるため、```.float()```メソッドは、テンソルのデータ型を浮動小数点数型に変換します。
+#     - 分類タスクのラベル（目的変数）は通常整数型で表されるため、```.long()```メソッドでテンソルのデータ型を長整数型に変換します。
+# - ```.to(device)```: データをGPUに移行します。
+# 
+# これにより、データをPyTorchでのモデル訓練や評価に使用する準備が整います。
+
 # In[28]:
 
 
-xtrain = torch.from_numpy(xtrain).float()
-ytrain = torch.from_numpy(ytrain).long()
-xval = torch.from_numpy(xval).float()
-yval = torch.from_numpy(yval).long()
-xtest = torch.from_numpy(xtest).float()
-ytest = torch.from_numpy(ytest).long()
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 # In[29]:
+
+
+xtrain = torch.from_numpy(xtrain).float().to(device)
+ytrain = torch.from_numpy(ytrain).long().to(device)
+xval = torch.from_numpy(xval).float().to(device)
+yval = torch.from_numpy(yval).long().to(device)
+xtest = torch.from_numpy(xtest).float().to(device)
+ytest = torch.from_numpy(ytest).long().to(device)
+
+
+# ニューラルネットワークモデルを定義します。
+# 
+# - ```class NeuralNetwork(nn.Module)```という新しいクラスを定義しています。このクラスは```nn.Module```を継承しているので、モデル関連の機能（例：重みの管理、GPU対応、保存と読み込みの機能など）を利用できるようになります。
+# - ```def __init__(self, n_in, n_units, n_out)```: ネットワークをインスタンス化するときに呼び出され、初期値をモデルに渡します。
+#     - ```n_in```: 入力層のユニット（ニューロン）の数
+#     - ```n_units```: 隠れ層のユニットの数
+#     - ```n_out```: 出力層のユニットの数
+#     - ```super(NeuralNetwork, self).__init__()```: 親クラスである```nn.Module```のコンストラクタを呼び出すことで、モデル関連の機能を初期化しています。
+#     - ```self.l1 = nn.Linear(n_in, n_units)```: 入力層から隠れ層への線形変換（全結合層）を定義しています。
+#     - ```self.l2 = nn.Linear(n_units, n_out)```: 隠れ層から出力層への線形変換を定義しています。
+# - ```def forward(self, x)```:モデルが入力データを受け取ったときの順伝播を定義するメソッドです。
+#     - ```h = F.relu(self.l1(x))```: 入力$x$を```self.l1```レイヤー（全結合層）で変換した後、ReLU活性化関数を適用しています。
+#     - ```y = self.l2(h)```: $h$（隠れ層の出力）を```self.l2```レイヤーで変換して、ネットワークの最終出力yを生成しています。
+
+# In[30]:
 
 
 class NeuralNetwork(nn.Module):
@@ -520,21 +542,41 @@ class NeuralNetwork(nn.Module):
         return y
 
 
-# In[30]:
+# 学習に関連するパラメータを設定します。
+# 
+# - ```model = NeuralNetwork(n_in, n_units, n_out)```:指定された入力層、隠れ層、出力層のユニット数でモデルのインスタンスを作成しています。
+# - ```loss_function = nn.CrossEntropyLoss()```: 損失関数を定義します。
+# - ```optimizer = torch.optim.Adam(model.parameters(), lr=0.01)```: オプティマイザを指定します。
+# - ```model.to(device)```: モデルをGPUに移行します。データとモデルは必ず同じdeviceに置く必要があります。
+
+# In[31]:
 
 
 n_in = xtrain.shape[1]  # number of input features (4 for Iris dataset)
 n_units = 10  # number of units in the hidden layer
 n_out = 3  # number of classes in the Iris dataset
 model = NeuralNetwork(n_in, n_units, n_out)
-loss_function = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
-
+model = model.to(device)  # Move the model to GPU
+loss_function = nn.CrossEntropyLoss() # 分類問題のため交差エントロピー誤差を使用
+optimizer = torch.optim.Adam(model.parameters(), lr=0.01) # optimizer
 # Training loop
 n_epochs = 100
 
 
-# In[31]:
+# ニューラルネットワークモデルの学習と検証のループを実装します。
+# 
+# - ```model.train()```と```model.eval()```:モデルが訓練モードか評価モードかを切り替えます。
+# - ```outputs = model(xtrain)```: 訓練データxtrainをモデルに渡し、出力を取得します。
+# - ```loss = loss_function(outputs, ytrain)```: モデルの出力と実際のラベルytrainとの間の損失を計算します。
+# - ```optimizer.zero_grad()```: 新しいエポックの勾配計算の前に、最適化器の勾配を初期化します。
+# - ```loss.backward()```: 損失に基づいて、モデルのすべてのパラメータの勾配を計算します。
+# - ```optimizer.step()```: 計算された勾配を使用して、モデルのパラメータを更新します。
+# - ```with torch.no_grad()```: 勾配の計算を無効化します。これは、評価フェーズでは勾配を計算する必要がないため、計算の効率を向上させるためです。
+# - ```val_outputs = model(xval)```: 検証データxvalをモデルに渡し、出力を取得します。
+# - ```_, val_predicted = torch.max(val_outputs, 1)```: モデルの出力から、最も高い確率を持つクラスのインデックスを取得します。
+# - ```val_accuracy = (val_predicted == yval).float().mean().item()```: 検証データに対する正解率を計算します。
+
+# In[32]:
 
 
 for epoch in range(n_epochs):
@@ -560,11 +602,23 @@ for epoch in range(n_epochs):
         print(f'Epoch [{epoch+1}/{n_epochs}], Loss: {loss.item():.4f}, Val Accuracy: {val_accuracy*100:.2f}%')
 
 
+# テストデータでモデルの有効性を検証します。
+
+# In[33]:
+
+
+model.eval()
+with torch.no_grad():
+    test_outputs = model(xtest)
+    _, test_predicted = torch.max(test_outputs, 1)
+    test_accuracy = (test_predicted == ytest).float().mean().item()
+    print(f'Test Accuracy: {test_accuracy*100:.2f}%')
+
+
 # ```{note}
 # 
 # ``
 # writer = SummaryWriter('runs/iris_experiment_1')
-# 
 # for epoch in range(n_epochs):
 #     # Training phase
 #     model.train()
@@ -593,8 +647,67 @@ for epoch in range(n_epochs):
 # 
 # ```
 
-# In[ ]:
+# ````{tab-set}
+# ```{tab-item} 実習問題
+# ``class NeuralNetwork(nn.Module)``を以下のように改装して、改めて学習を行なってください。
+# 
+# - 一つ隠れ層を追加し、``n_units_2``という引数でユニットの数を指定できるように設定しなさい。
+# - すべての隠れ層に``F.relu``で活性化関数を追加しなさい。
+# - 出力層に``F.log_softmax``で出力の正規化を行きなさい。
+# 
+# ```
+# ````
 
-
-
-
+# ````{tab-set}
+# ```{tab-item} 課題
+# 
+# sepal length, sepal width, petal lengthでpetal widthを予測するニューラルネットワークを構築、学習してください。
+# 
+# - 二つ以上の隠れ層を設定してください。
+# - 学習の際、検証データで損失を示す。
+# 
+# ```
+# 
+# ```{tab-item} ヒント
+# 
+# ``
+# # 入力データとターゲットデータの準備
+# X = data[:, :-1]  # sepal length, sepal width, petal length
+# y = data[:, -1]   # petal width
+# 
+# # データの分割
+# X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.4, random_state=42)
+# 「ここからコードを追加」
+# 
+# # データをテンソルに変換
+# X_train = torch.tensor(X_train, dtype=torch.float32)
+# y_train = torch.tensor(y_train, dtype=torch.float32)
+# 「ここからコードを追加」
+# 
+# import torch.nn as nn
+# import torch.nn.functional as F
+# 
+# class RegressionNN(nn.Module):
+#     def __init__(self, input_dim, hidden_dim1, hidden_dim2):
+#         super(RegressionNN, self).__init__()
+#         self.fc1 = nn.Linear(input_dim, hidden_dim1)
+#         「ここからコードを追加」
+# 
+# # ハイパーパラメータ
+# learning_rate = 0.01
+# epochs = 1000
+# hidden_dim1 = 10
+# hidden_dim2 = 5
+# 
+# # モデルと最適化のインスタンス化
+# model = RegressionNN(input_dim=3, hidden_dim1=hidden_dim1, hidden_dim2=hidden_dim2)
+# criterion = nn.MSELoss()
+# optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+# 
+# # 学習ループ
+# for epoch in range(epochs):
+# 「ここからコードを追加」
+# ``
+# 
+# ```
+# ````
