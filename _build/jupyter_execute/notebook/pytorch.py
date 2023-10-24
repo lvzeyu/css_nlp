@@ -210,6 +210,8 @@ print(f"Predicted class: {y_pred}")
 
 # ```{note}
 # tensorboardでニューラルネットワークの構造を確認する
+# 
+# 
 # ``
 # from torch.utils.tensorboard import SummaryWriter
 # X = torch.rand(3, 28, 28)
@@ -243,7 +245,7 @@ print(f"Predicted class: {y_pred}")
 
 import torch
 
-x = torch.ones(5)  # input tensor
+x = torch.rand(5)  # input tensor
 y = torch.zeros(3)  # expected output
 w = torch.randn(5, 3, requires_grad=True)
 b = torch.randn(3, requires_grad=True)
@@ -293,11 +295,140 @@ print('Gradient function for loss =', loss.grad_fn)
 # In[19]:
 
 
-loss.backward(retain_graph=True)
+loss.backward()
 print(w.grad)
 print(b.grad)
 
 
+# 最適化ループを構築し、Pytorchより自動的に逆伝播
+
+# In[20]:
+
+
+import torch.nn.functional as F
+
+def training_loop(n_epochs, learning_rate, model, input, target):
+    for epoch in range(1, n_epochs + 1):
+        # Forward pass
+        outputs = model(input)
+        
+        # Compute the loss using Binary Cross Entropy with Logits
+        loss = F.binary_cross_entropy_with_logits(outputs, target)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update the parameters
+        with torch.no_grad():
+            for param in model.parameters():
+                param -= learning_rate * param.grad
+        model.zero_grad()
+        # Zero the parameter gradients after updating 
+        if epoch % 100 == 0:
+            print(f"Epoch {epoch}, Loss: {loss.item()}")
+
+    return model
+
+
+# In[21]:
+
+
+# Example usage (with dummy data)
+input = torch.rand(10, 512)  # 10 samples with 512 features each
+target = torch.rand(10, 3)  # 10 samples with 3 target values each
+
+n_epochs = 500
+learning_rate = 0.01
+model = NeuralNetwork()
+
+trained_model = training_loop(n_epochs, learning_rate, model, input, target)
+
+
+# ```{note}
 # 
+# PyTorchの勾配計算メカニズムでは、``.backward``を呼び出すと、リーフノードで導関数の計算結果が累積されます。つまり、もし``.backward``が以前にも呼び出されていた場合、損失関数が再び計算され、``.backward``も再び呼び出され、各リーフの勾配が前の反復で計算された結果の上に累積されます。その結果、勾配の値は誤ったものになります。
+# 
+# このようなことが起こらないようにするためには、反復のルーブのたびに``model.zero_grad()``を用いて明示的に勾配をゼロに設定する必要があります。
+# 
+# 
+# ```
+
+# ### 最適化関数
+# 
+# 最適化は各訓練ステップにおいてモデルの誤差を小さくなるように、モデルパラメータを調整するプロセスです。
+# 
+# ここまでの説明は、単純な勾配下降法を最適化に使用しました。これは、シンプルなケースでは問題なく機能しますが、モデルが複雑になったときのために、パラメータ学習の収束を助ける最適化の工夫が必要されます。
+# 
+# #### Optimizer
+# 
+# ```optim```というモジュールには、様々な最適化アルゴリズムが実装されています。
+# 
+# ここでは、確率的勾配降下法（Stochastic Gradient Descent）を例として使い方を説明します。
+# 
+# 確率的勾配降下法は、ランダムに選んだ１つのデータのみで勾配を計算してパラメータを更新し、データの数だけ繰り返す方法です。
+
+# 訓練したいモデルパラメータをoptimizerに登録し、合わせて学習率をハイパーパラメータとして渡すことで初期化を行います。訓練ループ内で、最適化（optimization）は3つのステップから構成されます。
+# 
+# [1] ``optimizer.zero_grad()``を実行し、モデルパラメータの勾配をリセットします。
+# 
+# 勾配の計算は蓄積されていくので、毎イテレーション、明示的にリセットします。
+# 
+# <br>
+# 
+# [2] 続いて、``loss.backwards()``を実行し、バックプロパゲーションを実行します。
+# 
+# PyTorchは損失に対する各パラメータの偏微分の値（勾配）を求めます。
+# 
+# <br>
+# 
+# [3] 最後に、``optimizer.step()``を実行し、各パラメータの勾配を使用してパラメータの値を調整します。
+
+# In[22]:
+
+
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+
+
+# In[23]:
+
+
+def training_loop(n_epochs, learning_rate, model, input, target):
+    # Use Binary Cross Entropy with Logits as the loss function
+    
+    # Use Adam as the optimizer
+    optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+    
+    for epoch in range(1, n_epochs + 1):
+        # Zero the parameter gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(input)
+        loss = F.binary_cross_entropy_with_logits(outputs, target)
+        
+        # Backward pass and optimize
+        loss.backward()
+        optimizer.step()
+
+        # Print loss every 100 epochs
+        if epoch % 100 == 0:
+            print(f"Epoch {epoch}, Loss: {loss.item()}")
+
+    return model
+
+
+# In[24]:
+
+
+# Example usage (with dummy data)
+input = torch.rand(10, 512)  # 10 samples with 512 features each
+target = torch.rand(10, 3)  # 10 samples with 3 target values each
+
+n_epochs = 1000
+learning_rate = 0.001
+model = NeuralNetwork()
+
+trained_model = training_loop(n_epochs, learning_rate, model, input, target)
+
 
 # 

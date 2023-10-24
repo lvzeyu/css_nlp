@@ -452,6 +452,18 @@ title="Print to PDF"
      勾配計算
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     最適化関数
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#optimizer">
+       Optimizer
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
  </li>
 </ul>
@@ -537,6 +549,18 @@ title="Print to PDF"
      勾配計算
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     最適化関数
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#optimizer">
+       Optimizer
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
  </li>
 </ul>
@@ -601,11 +625,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.7670, 0.9970, 0.1101],
-        [0.9571, 0.0393, 0.4209],
-        [0.3106, 0.2934, 0.3115],
-        [0.6946, 0.9938, 0.6597],
-        [0.8569, 0.2971, 0.1774]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1090, 0.2954, 0.0416],
+        [0.8027, 0.3871, 0.6780],
+        [0.8923, 0.4001, 0.1279],
+        [0.7349, 0.2104, 0.5013],
+        [0.7472, 0.8167, 0.4524]])
 </pre></div>
 </div>
 </div>
@@ -648,11 +672,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1987, 0.7346, 0.9600],
-        [1.2823, 0.6729, 1.5602],
-        [1.2987, 1.7143, 1.7301],
-        [1.0294, 1.0561, 0.7761],
-        [0.6199, 1.0159, 1.1234]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.8148, 0.3829, 0.8157],
+        [1.6872, 1.0450, 1.9374],
+        [0.7895, 1.2006, 0.7454],
+        [1.3829, 1.1151, 0.6898],
+        [0.5497, 0.7712, 0.5594]])
 </pre></div>
 </div>
 </div>
@@ -664,11 +688,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1987, 0.7346, 0.9600],
-        [1.2823, 0.6729, 1.5602],
-        [1.2987, 1.7143, 1.7301],
-        [1.0294, 1.0561, 0.7761],
-        [0.6199, 1.0159, 1.1234]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.8148, 0.3829, 0.8157],
+        [1.6872, 1.0450, 1.9374],
+        [0.7895, 1.2006, 0.7454],
+        [1.3829, 1.1151, 0.6898],
+        [0.5497, 0.7712, 0.5594]])
 </pre></div>
 </div>
 </div>
@@ -684,8 +708,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1853, 0.0943, 0.5516],
-        [0.0230, 0.4269, 0.8353]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.5695, 0.4691, 0.4636],
+        [0.1410, 0.5229, 0.5441]])
 </pre></div>
 </div>
 </div>
@@ -697,7 +721,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.9435, 0.5628, 0.1853, 0.0230])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.7510, 0.2790, 0.5695, 0.1410])
 </pre></div>
 </div>
 </div>
@@ -822,9 +846,9 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0014, 0.0111, 0.1538],
-        [0.0000, 0.0276, 0.1576],
-        [0.0000, 0.0129, 0.1303]], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0000, 0.0000, 0.0000],
+        [0.0000, 0.0000, 0.0000],
+        [0.0220, 0.0000, 0.0000]], grad_fn=&lt;ReluBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -838,7 +862,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted class: tensor([2, 2, 2])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted class: tensor([0, 0, 0])
 </pre></div>
 </div>
 </div>
@@ -848,8 +872,8 @@ title="Print to PDF"
 <h3>クラスのレイヤー<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>tensorboardでニューラルネットワークの構造を確認する
-<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">torch.utils.tensorboard</span> <span class="pre">import</span> <span class="pre">SummaryWriter</span> <span class="pre">X</span> <span class="pre">=</span> <span class="pre">torch.rand(3,</span> <span class="pre">28,</span> <span class="pre">28)</span> <span class="pre">writer</span> <span class="pre">=</span> <span class="pre">SummaryWriter(&quot;torchlogs/&quot;)</span> <span class="pre">writer.add_graph(model,</span> <span class="pre">X)</span> <span class="pre">writer.close()</span></code></p>
+<p>tensorboardでニューラルネットワークの構造を確認する</p>
+<p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">torch.utils.tensorboard</span> <span class="pre">import</span> <span class="pre">SummaryWriter</span> <span class="pre">X</span> <span class="pre">=</span> <span class="pre">torch.rand(3,</span> <span class="pre">28,</span> <span class="pre">28)</span> <span class="pre">writer</span> <span class="pre">=</span> <span class="pre">SummaryWriter(&quot;torchlogs/&quot;)</span> <span class="pre">writer.add_graph(model,</span> <span class="pre">X)</span> <span class="pre">writer.close()</span></code></p>
 </div>
 </section>
 </section>
@@ -867,7 +891,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># input tensor</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># input tensor</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># expected output</span>
 <span class="n">w</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -891,8 +915,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient function for z = &lt;AddBackward0 object at 0x11fa5a860&gt;
-Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at 0x11fa59d50&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient function for z = &lt;AddBackward0 object at 0x11fb4fbb0&gt;
+Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at 0x11fb4dc00&gt;
 </pre></div>
 </div>
 </div>
@@ -914,23 +938,176 @@ Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at
 <p>を行います。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">retain_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.3209, 0.0132, 0.2850],
-        [0.3209, 0.0132, 0.2850],
-        [0.3209, 0.0132, 0.2850],
-        [0.3209, 0.0132, 0.2850],
-        [0.3209, 0.0132, 0.2850]])
-tensor([0.3209, 0.0132, 0.2850])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1142, 0.0061, 0.0298],
+        [0.1115, 0.0060, 0.0291],
+        [0.1366, 0.0073, 0.0357],
+        [0.2403, 0.0129, 0.0627],
+        [0.2086, 0.0112, 0.0544]])
+tensor([0.2631, 0.0141, 0.0687])
 </pre></div>
 </div>
 </div>
 </div>
+<p>最適化ループを構築し、Pytorchより自動的に逆伝播</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+
+<span class="k">def</span> <span class="nf">training_loop</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_epochs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># Forward pass</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+        
+        <span class="c1"># Compute the loss using Binary Cross Entropy with Logits</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        
+        <span class="c1"># Backward pass</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        
+        <span class="c1"># Update the parameters</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+                <span class="n">param</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="c1"># Zero the parameter gradients after updating </span>
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example usage (with dummy data)</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>  <span class="c1"># 10 samples with 512 features each</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># 10 samples with 3 target values each</span>
+
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">()</span>
+
+<span class="n">trained_model</span> <span class="o">=</span> <span class="n">training_loop</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6902127861976624
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 200, Loss: 0.6878584623336792
+Epoch 300, Loss: 0.6856774091720581
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 400, Loss: 0.6834594011306763
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 500, Loss: 0.6811065673828125
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>PyTorchの勾配計算メカニズムでは、<code class="docutils literal notranslate"><span class="pre">.backward</span></code>を呼び出すと、リーフノードで導関数の計算結果が累積されます。つまり、もし<code class="docutils literal notranslate"><span class="pre">.backward</span></code>が以前にも呼び出されていた場合、損失関数が再び計算され、<code class="docutils literal notranslate"><span class="pre">.backward</span></code>も再び呼び出され、各リーフの勾配が前の反復で計算された結果の上に累積されます。その結果、勾配の値は誤ったものになります。</p>
+<p>このようなことが起こらないようにするためには、反復のルーブのたびに<code class="docutils literal notranslate"><span class="pre">model.zero_grad()</span></code>を用いて明示的に勾配をゼロに設定する必要があります。</p>
+</div>
+</section>
+<section id="id11">
+<h3>最適化関数<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<p>最適化は各訓練ステップにおいてモデルの誤差を小さくなるように、モデルパラメータを調整するプロセスです。</p>
+<p>ここまでの説明は、単純な勾配下降法を最適化に使用しました。これは、シンプルなケースでは問題なく機能しますが、モデルが複雑になったときのために、パラメータ学習の収束を助ける最適化の工夫が必要されます。</p>
+<section id="optimizer">
+<h4>Optimizer<a class="headerlink" href="#optimizer" title="Permalink to this headline">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">optim</span></code>というモジュールには、様々な最適化アルゴリズムが実装されています。</p>
+<p>ここでは、確率的勾配降下法（Stochastic Gradient Descent）を例として使い方を説明します。</p>
+<p>確率的勾配降下法は、ランダムに選んだ１つのデータのみで勾配を計算してパラメータを更新し、データの数だけ繰り返す方法です。</p>
+<p>訓練したいモデルパラメータをoptimizerに登録し、合わせて学習率をハイパーパラメータとして渡すことで初期化を行います。訓練ループ内で、最適化（optimization）は3つのステップから構成されます。</p>
+<p>[1] <code class="docutils literal notranslate"><span class="pre">optimizer.zero_grad()</span></code>を実行し、モデルパラメータの勾配をリセットします。</p>
+<p>勾配の計算は蓄積されていくので、毎イテレーション、明示的にリセットします。</p>
+<br>
+<p>[2] 続いて、<code class="docutils literal notranslate"><span class="pre">loss.backwards()</span></code>を実行し、バックプロパゲーションを実行します。</p>
+<p>PyTorchは損失に対する各パラメータの偏微分の値（勾配）を求めます。</p>
+<br>
+<p>[3] 最後に、<code class="docutils literal notranslate"><span class="pre">optimizer.step()</span></code>を実行し、各パラメータの勾配を使用してパラメータの値を調整します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">training_loop</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="c1"># Use Binary Cross Entropy with Logits as the loss function</span>
+    
+    <span class="c1"># Use Adam as the optimizer</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_epochs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># Zero the parameter gradients</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        
+        <span class="c1"># Forward pass</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        
+        <span class="c1"># Backward pass and optimize</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="c1"># Print loss every 100 epochs</span>
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example usage (with dummy data)</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>  <span class="c1"># 10 samples with 512 features each</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># 10 samples with 3 target values each</span>
+
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">()</span>
+
+<span class="n">trained_model</span> <span class="o">=</span> <span class="n">training_loop</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6895877122879028
+Epoch 200, Loss: 0.6883584260940552
+Epoch 300, Loss: 0.6872669458389282
+Epoch 400, Loss: 0.6862838864326477
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 500, Loss: 0.685369074344635
+Epoch 600, Loss: 0.6844624876976013
+Epoch 700, Loss: 0.683560311794281
+Epoch 800, Loss: 0.682710587978363
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 900, Loss: 0.6818931698799133
+Epoch 1000, Loss: 0.681050717830658
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 </section>
