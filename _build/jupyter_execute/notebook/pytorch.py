@@ -420,7 +420,6 @@ def training_loop(n_epochs, learning_rate, model, input, target):
 # In[24]:
 
 
-# Example usage (with dummy data)
 input = torch.rand(10, 512)  # 10 samples with 512 features each
 target = torch.rand(10, 3)  # 10 samples with 3 target values each
 
@@ -431,4 +430,171 @@ model = NeuralNetwork()
 trained_model = training_loop(n_epochs, learning_rate, model, input, target)
 
 
+# ## 実装例(Irisデータ)
+
+# ### データの読み込み
 # 
+# Irisデータセットは、アイリス花の3つの異なる種類（Setosa、Versicolour、Virginica）の各50サンプルからなるデータセットです。各サンプルには、以下の4つの特徴値（特徴量）があります。
+# 
+# - がく片の長さ (sepal length)：アイリス花のがく（緑色の部分）の長さをセンチメートルで測定したもの。
+# - がく片の幅 (sepal width)：がくの幅をセンチメートルで測定したもの。
+# - 花びらの長さ (petal length)：アイリス花の花びらの長さをセンチメートルで測定したもの。
+# - 花びらの幅 (petal width)：花びらの幅をセンチメートルで測定したもの。
+# 
+# これらの特徴値を使用して、アイリス花の3つの異なる種類を分類することが目標となっています。つまり、目標値（またはラベル）は以下の3つのクラスのいずれかです：
+# 
+# - Setosa
+# - Versicolour
+# - Virginica
+# このデータセットは、分類アルゴリズムを評価するための基準としてよく使用されます。
+
+# In[25]:
+
+
+from tensorboardX import SummaryWriter
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load dataset and create splits
+iris_dataset = datasets.load_iris()
+
+
+# In[26]:
+
+
+# Load the iris dataset
+iris = datasets.load_iris()
+data = iris.data
+target = iris.target
+feature_names = iris.feature_names
+target_names = iris.target_names
+
+# Create a DataFrame for easier plotting
+import pandas as pd
+df = pd.DataFrame(data, columns=feature_names)
+df['species'] = [target_names[t] for t in target]
+
+# Set a publication-ready theme and increase font scale for better readability
+sns.set_theme(style="whitegrid", font_scale=1.2)
+
+# Pair plot to visualize relationships
+plt.figure(figsize=(10, 8))
+sns.pairplot(df, hue="species", palette="muted", height=2.5, aspect=1.2, plot_kws={'s': 50})
+plt.suptitle('Iris Dataset Feature Relationships', y=1.02)
+
+plt.show()
+
+
+# In[27]:
+
+
+x_tmp, xtest, y_tmp, ytest = train_test_split(iris_dataset.data, iris_dataset.target, test_size=0.2)
+xtrain, xval, ytrain, yval = train_test_split(x_tmp, y_tmp, test_size=0.25)  # 0.25 x 0.8 = 0.2 -> 20% validation
+
+
+# In[28]:
+
+
+xtrain = torch.from_numpy(xtrain).float()
+ytrain = torch.from_numpy(ytrain).long()
+xval = torch.from_numpy(xval).float()
+yval = torch.from_numpy(yval).long()
+xtest = torch.from_numpy(xtest).float()
+ytest = torch.from_numpy(ytest).long()
+
+
+# In[29]:
+
+
+class NeuralNetwork(nn.Module):
+    def __init__(self, n_in, n_units, n_out):
+        super(NeuralNetwork, self).__init__()
+        self.l1 = nn.Linear(n_in, n_units)
+        self.l2 = nn.Linear(n_units, n_out)
+
+    def forward(self, x):
+        h = F.relu(self.l1(x))
+        y = self.l2(h)
+        return y
+
+
+# In[30]:
+
+
+n_in = xtrain.shape[1]  # number of input features (4 for Iris dataset)
+n_units = 10  # number of units in the hidden layer
+n_out = 3  # number of classes in the Iris dataset
+model = NeuralNetwork(n_in, n_units, n_out)
+loss_function = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+
+# Training loop
+n_epochs = 100
+
+
+# In[31]:
+
+
+for epoch in range(n_epochs):
+    # Training phase
+    model.train()
+    outputs = model(xtrain)
+    loss = loss_function(outputs, ytrain)
+    
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+    
+    
+    # Validation phase
+    model.eval()
+    with torch.no_grad():
+        val_outputs = model(xval)
+        _, val_predicted = torch.max(val_outputs, 1)
+        val_accuracy = (val_predicted == yval).float().mean().item()
+
+    # Print losses and accuracies every 10 epochs
+    if (epoch+1) % 10 == 0:
+        print(f'Epoch [{epoch+1}/{n_epochs}], Loss: {loss.item():.4f}, Val Accuracy: {val_accuracy*100:.2f}%')
+
+
+# ```{note}
+# 
+# ``
+# writer = SummaryWriter('runs/iris_experiment_1')
+# 
+# for epoch in range(n_epochs):
+#     # Training phase
+#     model.train()
+#     outputs = model(xtrain)
+#     loss = loss_function(outputs, ytrain)
+#     
+#     optimizer.zero_grad()
+#     loss.backward()
+#     optimizer.step()
+#     
+#     writer.add_scalar('Training Loss', loss.item(), epoch)
+#     
+#     # Validation phase
+#     model.eval()
+#     with torch.no_grad():
+#         val_outputs = model(xval)
+#         _, val_predicted = torch.max(val_outputs, 1)
+#         val_accuracy = (val_predicted == yval).float().mean().item()
+#         writer.add_scalar('Validation Accuracy', val_accuracy, epoch)
+# 
+#     # Print losses and accuracies every 10 epochs
+#     if (epoch+1) % 10 == 0:
+#         print(f'Epoch [{epoch+1}/{n_epochs}], Loss: {loss.item():.4f}, Val Accuracy: {val_accuracy*100:.2f}%')
+# 
+# ``
+# 
+# ```
+
+# In[ ]:
+
+
+
+
