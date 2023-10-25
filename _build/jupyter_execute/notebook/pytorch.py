@@ -169,6 +169,8 @@ class NeuralNetwork(nn.Module):
 #     - [`nn.ReLU`](https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html)という活性化関数を設置することで、ニューラルネットワークの表現力を向上させます。
 # - 順伝播メソッド (```forward```): 入力テンソル```x```を受け取り、ネットワークを通して出力を生成する機能を持ちます。
 
+# ### GPUの利用
+
 # ``NeuralNetwork``クラスのインスタンスを作成し、変数``device``上に移動させます。
 # 
 # 以下でネットワークの構造を出力し確認します。
@@ -186,6 +188,8 @@ print('Using {} device'.format(device))
 model = NeuralNetwork().to(device)
 print(model)
 
+
+# ### モデルによる計算
 
 # - ニューラルネットワークの最後のlinear layerは`logits`を出力します。この`logits`は[`nn.Softmax`](https://pytorch.org/docs/stable/generated/torch.nn.Softmax.html)モジュールへと渡されます。出力ベクトルの要素の値は$[0, 1]$の範囲となり、これは各クラスである確率を示します。
 
@@ -205,20 +209,18 @@ y_pred = pred_probab.argmax(1)
 print(f"Predicted class: {y_pred}")
 
 
-# ### クラスのレイヤー
-# 
-
-# ```{note}
+# ```{admonition} おまけ：tensorboard
+# :class: tip, dropdown
 # 
 # tensorboardでニューラルネットワークの構造を確認する。
 # 
-# ``
+# ```python
 # from torch.utils.tensorboard import SummaryWriter
 # X = torch.rand(3, 28, 28)
 # writer = SummaryWriter("torchlogs/")
 # writer.add_graph(model, X)
 # writer.close()
-# ``
+# ```
 # 
 # ```
 
@@ -480,6 +482,8 @@ plt.suptitle('Iris Dataset Feature Relationships', y=1.02)
 plt.show()
 
 
+# ### 学習データの作成
+# 
 # - データセットを訓練データ、検証データ、テストデータに分割します。
 
 # In[27]:
@@ -513,6 +517,9 @@ xtest = torch.from_numpy(xtest).float().to(device)
 ytest = torch.from_numpy(ytest).long().to(device)
 
 
+# ### モデルの作成
+# 
+# 
 # ニューラルネットワークモデルを定義します。
 # 
 # - ```class NeuralNetwork(nn.Module)```という新しいクラスを定義しています。このクラスは```nn.Module```を継承しているので、モデル関連の機能（例：重みの管理、GPU対応、保存と読み込みの機能など）を利用できるようになります。
@@ -542,7 +549,9 @@ class NeuralNetwork(nn.Module):
         return y
 
 
-# 学習に関連するパラメータを設定します。
+# ### 学習の設定
+# 
+# 学習に関連するハイパーパラメータを設定します。
 # 
 # - ```model = NeuralNetwork(n_in, n_units, n_out)```:指定された入力層、隠れ層、出力層のユニット数でモデルのインスタンスを作成しています。
 # - ```loss_function = nn.CrossEntropyLoss()```: 損失関数を定義します。
@@ -563,6 +572,9 @@ optimizer = torch.optim.Adam(model.parameters(), lr=0.01) # optimizer
 n_epochs = 100
 
 
+# ### 学習ループの実装
+# 
+# 
 # ニューラルネットワークモデルの学習と検証のループを実装します。
 # 
 # - ```model.train()```と```model.eval()```:モデルが訓練モードか評価モードかを切り替えます。
@@ -602,6 +614,8 @@ for epoch in range(n_epochs):
         print(f'Epoch [{epoch+1}/{n_epochs}], Loss: {loss.item():.4f}, Val Accuracy: {val_accuracy*100:.2f}%')
 
 
+# ### モデルの検証
+# 
 # テストデータでモデルの有効性を検証します。
 
 # In[33]:
@@ -615,9 +629,10 @@ with torch.no_grad():
     print(f'Test Accuracy: {test_accuracy*100:.2f}%')
 
 
-# ```{note}
+# ```{admonition} おまけ：SummaryWriterでtensorboardを使うためのデータを用意する
+# :class: tip, dropdown
 # 
-# ``
+# ```python
 # writer = SummaryWriter('runs/iris_experiment_1')
 # for epoch in range(n_epochs):
 #     # Training phase
@@ -642,8 +657,8 @@ with torch.no_grad():
 #     # Print losses and accuracies every 10 epochs
 #     if (epoch+1) % 10 == 0:
 #         print(f'Epoch [{epoch+1}/{n_epochs}], Loss: {loss.item():.4f}, Val Accuracy: {val_accuracy*100:.2f}%')
+# ```
 # 
-# ``
 # 
 # ```
 
@@ -663,28 +678,39 @@ with torch.no_grad():
 # 
 # sepal length, sepal width, petal lengthでpetal widthを予測するニューラルネットワークを構築、学習してください。
 # 
-# - 二つ以上の隠れ層を設定してください。
-# - 学習の際、検証データで損失を示す。
+# - 二つ以上の隠れ層を設定する。
+# - 学習の際、検証データで損失を計算し、20 epochごとに示す。
+# - 学習済みのモデルを用いて、テストデータに対する予測を行う。
 # 
 # ```
 # 
-# ```{tab-item} ヒント
+# ````
+
+# ```{admonition} ヒント
+# :class: tip, dropdown
 # 
-# ``
-# # 入力データとターゲットデータの準備
+# ```python
+# #入力データとターゲットデータの準備
 # X = data[:, :-1]  # sepal length, sepal width, petal length
+# 
 # y = data[:, -1]   # petal width
 # 
-# # データの分割
-# X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.4, random_state=42)
-# 「ここからコードを追加」
+# データの分割
 # 
-# # データをテンソルに変換
+# X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.4, random_state=42)
+# 
+# #「ここからコードを追加」
+# 
+# #データをテンソルに変換
+# 
 # X_train = torch.tensor(X_train, dtype=torch.float32)
+# 
 # y_train = torch.tensor(y_train, dtype=torch.float32)
-# 「ここからコードを追加」
+# 
+# #「ここからコードを追加」
 # 
 # import torch.nn as nn
+# 
 # import torch.nn.functional as F
 # 
 # class RegressionNN(nn.Module):
@@ -693,21 +719,28 @@ with torch.no_grad():
 #         self.fc1 = nn.Linear(input_dim, hidden_dim1)
 #         「ここからコードを追加」
 # 
-# # ハイパーパラメータ
+# #ハイパーパラメータ
 # learning_rate = 0.01
+# 
 # epochs = 1000
+# 
 # hidden_dim1 = 10
+# 
 # hidden_dim2 = 5
 # 
-# # モデルと最適化のインスタンス化
+# #モデルと最適化のインスタンス化
 # model = RegressionNN(input_dim=3, hidden_dim1=hidden_dim1, hidden_dim2=hidden_dim2)
+# 
 # criterion = nn.MSELoss()
+# 
 # optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 # 
-# # 学習ループ
+# #学習ループ
+# 
 # for epoch in range(epochs):
-# 「ここからコードを追加」
-# ``
+# 
+# #「ここからコードを追加」
+# ```
+# 
 # 
 # ```
-# ````
