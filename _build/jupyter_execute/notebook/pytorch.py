@@ -588,6 +588,11 @@ n_epochs = 100
 # - ```_, val_predicted = torch.max(val_outputs, 1)```: モデルの出力から、最も高い確率を持つクラスのインデックスを取得します。
 # - ```val_accuracy = (val_predicted == yval).float().mean().item()```: 検証データに対する正解率を計算します。
 
+# ```{margin}
+# ```params```の値は関数```step```の呼び出し時に自動で更新されます。中身は、optimizerが```params.grad```の値を調べて、```params```の値に対して、学習率を掛け算した```grad```の値を引き算して更新しています。
+# 
+# ```
+
 # In[32]:
 
 
