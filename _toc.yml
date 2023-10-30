@@ -20,3 +20,6 @@ parts:
 - caption: PyTorch
   chapters:
   - file: notebook/pytorch.ipynb
+- caption: 単語分散表現
+  chapters:
+  - file: notebook/word2vec_1.ipynb
