@@ -499,6 +499,26 @@ title="Print to PDF"
 <li><p>類似性: ある概念を表現する際に、ほかの概念との共通点や類似性と紐づけながら、ベクトル空間上に表現します。</p></li>
 <li><p>単語類推: 分散表現では異なる概念を表現するベクトル同士での計算が可能です</p></li>
 </ul>
+<p><img alt="類似性" src="../_images/word2vec.png" /></p>
+<p><img alt="単語類推" src="../_images/city.png" /></p>
+<p>単語ベクトルへの変換には様々なアプローチが存在します。最初は、(1)人の手によって作られたシソーラス（類語辞書）を利用する手法について簡単の見ていきます。続いて、統計情報から単語を表現する手法ーカウントベースの手法ーについて説明します。この方法は、言語のモデル化を理解することに役に立つと考られます。そして、ニューラルネットワークを用いた手法(具体的には、word2vwcと呼ばれる手法)を扱います。</p>
+<ol class="simple">
+<li><p>シソーラスによる手法</p>
+<ul class="simple">
+<li><p>人の手によって作られたシソーラス（類語辞書）を利用する手法</p></li>
+</ul>
+</li>
+<li><p>カウントベースの手法(今週)</p>
+<ul class="simple">
+<li><p>統計情報から単語を表現する手法</p></li>
+</ul>
+</li>
+<li><p>推論ベースの手法(来週)</p>
+<ul class="simple">
+<li><p>ニューラルネットワークを用いた手法</p></li>
+</ul>
+</li>
+</ol>
 <section id="id2">
 <h2>シソーラスによる手法<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>「単語の意味」を表すためには、人の手によって単語の意味を定義することが考えられます。</p>
@@ -545,6 +565,10 @@ car = auto \ automobile \ machine \ motorcar
 <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
+<span class="c1"># ピリオドの前にスペースを挿入</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39; .&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
 <span class="c1"># 単語ごとに分割</span>
 <span class="n">words</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
@@ -553,7 +577,8 @@ car = auto \ automobile \ machine \ motorcar
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>you say goodbye and i say hello.
-[&#39;you&#39;, &#39;say&#39;, &#39;goodbye&#39;, &#39;and&#39;, &#39;i&#39;, &#39;say&#39;, &#39;hello.&#39;]
+you say goodbye and i say hello .
+[&#39;you&#39;, &#39;say&#39;, &#39;goodbye&#39;, &#39;and&#39;, &#39;i&#39;, &#39;say&#39;, &#39;hello&#39;, &#39;.&#39;]
 </pre></div>
 </div>
 </div>
@@ -593,19 +618,10 @@ car = auto \ automobile \ machine \ motorcar
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: &#39;you&#39;, 1: &#39;say&#39;, 2: &#39;goodbye&#39;, 3: &#39;and&#39;, 4: &#39;i&#39;, 5: &#39;hello.&#39;}
-hello.
-{&#39;you&#39;: 0, &#39;say&#39;: 1, &#39;goodbye&#39;: 2, &#39;and&#39;: 3, &#39;i&#39;: 4, &#39;hello.&#39;: 5}
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># 単語を指定すると単語IDを返す</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="nb">print</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">7</span> <span class="nb">print</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">])</span>
-
-<span class="ne">KeyError</span>: &#39;hello&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: &#39;you&#39;, 1: &#39;say&#39;, 2: &#39;goodbye&#39;, 3: &#39;and&#39;, 4: &#39;i&#39;, 5: &#39;hello&#39;, 6: &#39;.&#39;}
+hello
+{&#39;you&#39;: 0, &#39;say&#39;: 1, &#39;goodbye&#39;: 2, &#39;and&#39;: 3, &#39;i&#39;: 4, &#39;hello&#39;: 5, &#39;.&#39;: 6}
+5
 </pre></div>
 </div>
 </div>
@@ -699,8 +715,8 @@ hello.
 <h3>共起行列<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <p>分布仮説に基づいた単語ベクトル化の方法を考える際、一番素直な方法は、周囲の単語を”カウント”することです。つまり、ある単語に着目した場合、その周囲どのような単語がどれだけ現れるのかをカウントし、それを集計するのです。</p>
 <p>ここでは、”<em>You say goodbye and I say hello.</em>”という文章について、ウィンドウサイズを<span class="math notranslate nohighlight">\(1\)</span>とする場合、そのコンテキストに含まれる単語の頻度をカウントしてみます。</p>
-<figure class="align-right" id="id7">
-<a class="reference internal image-reference" href="../_images/co-occur.png"><img alt="../_images/co-occur.png" src="../_images/co-occur.png" style="width: 331.0px; height: 206.0px;" /></a>
+<figure class="align-center" id="id7">
+<img alt="../_images/co-occur.png" src="../_images/co-occur.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 7 </span><span class="caption-text">各単語について、そのコンテキストに含まれす単語の頻度</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -710,6 +726,189 @@ hello.
 <li><p>「say」については文字列中に2回現れていることに注意すると、<span class="math notranslate nohighlight">\([1, 0, 1, 0, 1, 1, 0]\)</span>とベクトル表記できます</p></li>
 </ul>
 <p>全ての単語に対して、共起する単語をまとめたものを共起行列と呼ばれます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ウィンドウサイズを指定</span>
+<span class="n">wndow_size</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># 単語の種類数を取得</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;単語の種類数: </span><span class="si">{</span><span class="n">vocab_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 総単語数を取得</span>
+<span class="n">corpus_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;総単語数: </span><span class="si">{</span><span class="n">corpus_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>単語の種類数: 7
+総単語数: 8
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 共起行列を初期化</span>
+<span class="n">co_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">co_matrix</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">co_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]]
+(7, 7)
+</pre></div>
+</div>
+</div>
+</div>
+<p>コーパスの7語目の単語「hello」に注目してみます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 単語インデックスを指定</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="c1"># 指定した単語のIDを取得</span>
+<span class="n">word_id</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">id_to_word</span><span class="p">[</span><span class="n">word_id</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+hello
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 左隣のインデックス</span>
+<span class="n">left_idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">left_idx</span><span class="p">)</span>
+
+<span class="c1"># 右隣のインデックス</span>
+<span class="n">right_idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">right_idx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+7
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 左隣の単語IDを取得</span>
+<span class="n">left_word_id</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="n">left_idx</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">left_word_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">id_to_word</span><span class="p">[</span><span class="n">left_word_id</span><span class="p">])</span>
+
+<span class="c1"># 共起行列に記録(加算)</span>
+<span class="n">co_matrix</span><span class="p">[</span><span class="n">word_id</span><span class="p">,</span> <span class="n">left_word_id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">co_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+say
+[[0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 1 0 0 0 0 0]
+ [0 0 0 0 0 0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 右隣の単語IDを取得</span>
+<span class="n">right_word_id</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="n">right_idx</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">right_word_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">id_to_word</span><span class="p">[</span><span class="n">right_word_id</span><span class="p">])</span>
+
+<span class="c1"># 共起行列に記録(加算)</span>
+<span class="n">co_matrix</span><span class="p">[</span><span class="n">word_id</span><span class="p">,</span> <span class="n">right_word_id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">co_matrix</span><span class="p">)</span>
+
+<span class="c1"># 対象の単語ベクトル</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">co_matrix</span><span class="p">[</span><span class="n">word_id</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+.
+[[0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 1 0 0 0 0 1]
+ [0 0 0 0 0 0 0]]
+[0 1 0 0 0 0 1]
+</pre></div>
+</div>
+</div>
+</div>
+<p>処理を共起行列を作成する関数として実装します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 共起行列作成関数の実装</span>
+<span class="k">def</span> <span class="nf">create_co_matrix</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="c1"># 総単語数を取得</span>
+    <span class="n">corpus_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+    
+    <span class="c1"># 共起行列を初期化</span>
+    <span class="n">co_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    
+    <span class="c1"># 1語ずつ処理</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">word_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">corpus</span><span class="p">):</span>
+        
+        <span class="c1"># ウィンドウサイズまでの要素を順番に処理</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">window_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># 範囲内のインデックスを計算</span>
+            <span class="n">left_idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">i</span>
+            <span class="n">right_idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="n">i</span>
+            
+            <span class="c1"># 左側の単語の処理</span>
+            <span class="k">if</span> <span class="n">left_idx</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 対象の単語が最初の単語でないとき</span>
+                <span class="c1"># 単語IDを取得</span>
+                <span class="n">left_word_id</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="n">left_idx</span><span class="p">]</span>
+                
+                <span class="c1"># 共起行列にカウント</span>
+                <span class="n">co_matrix</span><span class="p">[</span><span class="n">word_id</span><span class="p">,</span> <span class="n">left_word_id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+            <span class="c1"># 右側の単語の処理</span>
+            <span class="k">if</span> <span class="n">right_idx</span> <span class="o">&lt;</span> <span class="n">corpus_size</span><span class="p">:</span> <span class="c1"># 対象の単語が最後の単語でないとき</span>
+                <span class="c1"># 単語IDを取得</span>
+                <span class="n">right_word_id</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="n">right_idx</span><span class="p">]</span>
+                
+                <span class="c1"># 共起行列にカウント</span>
+                <span class="n">co_matrix</span><span class="p">[</span><span class="n">word_id</span><span class="p">,</span> <span class="n">right_word_id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">return</span> <span class="n">co_matrix</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
