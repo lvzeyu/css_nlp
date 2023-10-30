@@ -54,6 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Pytorch" href="pytorch.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -171,6 +172,18 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  単語分散表現
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   単語分散表現
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav></div>
@@ -221,6 +234,53 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/word2vec_1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/word2vec_1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -352,6 +412,28 @@ title="Print to PDF"
    シソーラスによる手法
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   カウントベースの手法
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     コーパスの前処理
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     分布仮説
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     共起行列
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
     </nav>
@@ -375,6 +457,28 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#id2">
    シソーラスによる手法
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   カウントベースの手法
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     コーパスの前処理
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     分布仮説
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     共起行列
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -420,6 +524,194 @@ car = auto \ automobile \ machine \ motorcar
 </li>
 </ul>
 </section>
+<section id="id3">
+<h2>カウントベースの手法<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>コーパスには、自然言語に対する人の「知識」ー文章の書き方、単語の選び方、単語の意味ーがふんだんに含まれています。カウントベースの手法の目標は、そのような人の知識が詰まったコーパスから自動的に抽出することにあります。</p>
+<section id="id4">
+<h3>コーパスの前処理<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>コーパスに対して、テキストデータを単語に分割し、その分割した単語をID化にすることが必要されます。</p>
+<p>単語のID化とは、テキストデータを機械学習モデルなどで処理する際に、単語を一意の整数値（ID）に変換するプロセスを指します。これは、テキストデータをベクトルや行列の形でモデルに入力するための前処理として行われます。</p>
+<p>例として、簡単なテキストを用意します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;You say goodbye and I say hello.&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 小文字に変換</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># 単語ごとに分割</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>you say goodbye and i say hello.
+[&#39;you&#39;, &#39;say&#39;, &#39;goodbye&#39;, &#39;and&#39;, &#39;i&#39;, &#39;say&#39;, &#39;hello.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>これで、元の文章を単語リストとして利用できるようになりました。これに基づいて、分割した単語と、単語ごとに通し番号を割り振ったIDを2つのディクショナリに格納します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ディクショナリを初期化</span>
+<span class="n">word_to_id</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">id_to_word</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># 未収録の単語をディクショナリに格納</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">word_to_id</span><span class="p">:</span> <span class="c1"># 未収録の単語のとき</span>
+        <span class="c1"># 次の単語のidを取得</span>
+        <span class="n">new_id</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
+        
+        <span class="c1"># 単語IDを格納</span>
+        <span class="n">word_to_id</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_id</span>
+        
+        <span class="c1"># 単語を格納</span>
+        <span class="n">id_to_word</span><span class="p">[</span><span class="n">new_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">word</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 単語IDを指定すると単語を返す</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">id_to_word</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">id_to_word</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># 単語を指定すると単語IDを返す</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: &#39;you&#39;, 1: &#39;say&#39;, 2: &#39;goodbye&#39;, 3: &#39;and&#39;, 4: &#39;i&#39;, 5: &#39;hello.&#39;}
+hello.
+{&#39;you&#39;: 0, &#39;say&#39;: 1, &#39;goodbye&#39;: 2, &#39;and&#39;: 3, &#39;i&#39;: 4, &#39;hello.&#39;: 5}
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># 単語を指定すると単語IDを返す</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="nb">print</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="nb">print</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">])</span>
+
+<span class="ne">KeyError</span>: &#39;hello&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>最後に、単語リストから単語IDリストに変換します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># リストに変換</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">word_to_id</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+
+<span class="c1"># NumPy配列に変換</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 3 4 1 5 6]
+</pre></div>
+</div>
+</div>
+</div>
+<p>以上の処理を<code class="docutils literal notranslate"><span class="pre">preprocess()</span></code>という関数として、まとめて実装することにします。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 前処理関数の実装</span>
+<span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># 前処理</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="c1"># 小文字に変換</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39; .&#39;</span><span class="p">)</span> <span class="c1"># ピリオドの前にスペースを挿入</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="c1"># 単語ごとに分割</span>
+    
+    <span class="c1"># ディクショナリを初期化</span>
+    <span class="n">word_to_id</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">id_to_word</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="c1"># 未収録の単語をディクショナリに格納</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">word_to_id</span><span class="p">:</span> <span class="c1"># 未収録の単語のとき</span>
+            <span class="c1"># 次の単語のidを取得</span>
+            <span class="n">new_id</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
+            
+            <span class="c1"># 単語をキーとして単語IDを格納</span>
+            <span class="n">word_to_id</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_id</span>
+            
+            <span class="c1"># 単語IDをキーとして単語を格納</span>
+            <span class="n">id_to_word</span><span class="p">[</span><span class="n">new_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">word</span>
+    
+    <span class="c1"># 単語IDリストを作成</span>
+    <span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">word_to_id</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">word_to_id</span><span class="p">,</span> <span class="n">id_to_word</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># テキストを設定</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;You say goodbye and I say hello.&#39;</span>
+
+<span class="c1"># 単語と単語IDに関する変数を取得</span>
+<span class="n">corpus</span><span class="p">,</span> <span class="n">word_to_id</span><span class="p">,</span> <span class="n">id_to_word</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">id_to_word</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: &#39;you&#39;, 1: &#39;say&#39;, 2: &#39;goodbye&#39;, 3: &#39;and&#39;, 4: &#39;i&#39;, 5: &#39;hello&#39;, 6: &#39;.&#39;}
+{&#39;you&#39;: 0, &#39;say&#39;: 1, &#39;goodbye&#39;: 2, &#39;and&#39;: 3, &#39;i&#39;: 4, &#39;hello&#39;: 5, &#39;.&#39;: 6}
+[0, 1, 2, 3, 4, 1, 5, 6]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>分布仮説<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>分布仮説（Distributional Hypothesis）は、言語学や自然言語処理の分野で重要な考え方で、単語の意味は、周囲の単語(コンテキスト)によって形成されるというものです。</p>
+<ul class="simple">
+<li><p>単語は、その単語が出現する文脈の集合によって意味が形成されるとされます。同じ文脈で出現する単語は、意味が似ていると考えられます。</p></li>
+<li><p>単語Aと単語Bが多くの共通の文脈で使用される場合、これらの単語は意味的に関連があると見なされます。</p></li>
+</ul>
+<p>この仮説は、単語の意味を捉えるためのモデルを作成する際に基本的な原則となっています。</p>
+<p><img alt="" src="../_images/DH.png" /></p>
+</section>
+<section id="id6">
+<h3>共起行列<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>分布仮説に基づいた単語ベクトル化の方法を考える際、一番素直な方法は、周囲の単語を”カウント”することです。つまり、ある単語に着目した場合、その周囲どのような単語がどれだけ現れるのかをカウントし、それを集計するのです。</p>
+<p>ここでは、”<em>You say goodbye and I say hello.</em>”という文章について、ウィンドウサイズを<span class="math notranslate nohighlight">\(1\)</span>とする場合、そのコンテキストに含まれる単語の頻度をカウントしてみます。</p>
+<figure class="align-right" id="id7">
+<a class="reference internal image-reference" href="../_images/co-occur.png"><img alt="../_images/co-occur.png" src="../_images/co-occur.png" style="width: 331.0px; height: 206.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">各単語について、そのコンテキストに含まれす単語の頻度</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>「You」の周辺単語は「say」のみであり、「say」にのみコンテキストの目印として共起した回数の<span class="math notranslate nohighlight">\(1\)</span>をカウントします</p></li>
+<li><p>「say」については文字列中に2回現れていることに注意すると、<span class="math notranslate nohighlight">\([1, 0, 1, 0, 1, 1, 0]\)</span>とベクトル表記できます</p></li>
+</ul>
+<p>全ての単語に対して、共起する単語をまとめたものを共起行列と呼ばれます。</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -449,6 +741,13 @@ car = auto \ automobile \ machine \ motorcar
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="pytorch.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Pytorch</p>
+        </div>
+    </a>
 </div>
             </footer>
         </div>
