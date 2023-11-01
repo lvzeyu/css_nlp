@@ -432,6 +432,40 @@ title="Print to PDF"
      共起行列
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     ベクトル間の類似度
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id8">
+       コサイン類似度
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id9">
+       単語間の類似度
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
+       類似度のランキングを表示
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   カウントベースの手法の改善
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     相互情報量
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -476,6 +510,40 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id6">
      共起行列
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     ベクトル間の類似度
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id8">
+       コサイン類似度
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id9">
+       単語間の類似度
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
+       類似度のランキングを表示
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   カウントベースの手法の改善
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     相互情報量
     </a>
    </li>
   </ul>
@@ -715,10 +783,10 @@ hello
 <h3>共起行列<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <p>分布仮説に基づいた単語ベクトル化の方法を考える際、一番素直な方法は、周囲の単語を”カウント”することです。つまり、ある単語に着目した場合、その周囲どのような単語がどれだけ現れるのかをカウントし、それを集計するのです。</p>
 <p>ここでは、”<em>You say goodbye and I say hello.</em>”という文章について、ウィンドウサイズを<span class="math notranslate nohighlight">\(1\)</span>とする場合、そのコンテキストに含まれる単語の頻度をカウントしてみます。</p>
-<figure class="align-center" id="id7">
+<figure class="align-center" id="id13">
 <img alt="../_images/co-occur.png" src="../_images/co-occur.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 7 </span><span class="caption-text">各単語について、そのコンテキストに含まれす単語の頻度</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">各単語について、そのコンテキストに含まれす単語の頻度</span><a class="headerlink" href="#id13" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -909,6 +977,430 @@ say
 </div>
 </div>
 </div>
+</section>
+<section id="id7">
+<h3>ベクトル間の類似度<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<section id="id8">
+<h4>コサイン類似度<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h4>
+<p>共起行列によって単語をベクトルで表すことができました。単語の意味を「計算」する手法として、ベクトル間の類似度の計測する方法について見ていきます。</p>
+<p>様々な方法がありますが、単語のベクトル表現の類似度に関して、コサイン類似度がよく用いられます。</p>
+<p>コサイン類似度とは、2つのベクトルを<span class="math notranslate nohighlight">\(\mathbf{x} = (x_1, x_2, \cdots, x_n), \mathbf{y} = (y_1, y_2, \cdots, y_n)\)</span>として、次の式で定義されます。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathrm{similarity}(\mathbf{x}, \mathbf{y})
+   &amp;= \frac{
+          \mathbf{x} \cdot \mathbf{y}
+      }{
+          \|\mathbf{x}\| \|\mathbf{y}\|
+      }
+\\
+   &amp;= \frac{
+          x_1 y_1 + x_2 y_2 + \cdots + x_n y_n
+      }{
+          \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2}
+          \sqrt{y_1^2 + y_2^2 + \cdots + y_n^2}
+      }
+\\
+   &amp;= \frac{
+          \sum_{n} x_n y_n
+      }{
+          \sqrt{\sum_{n} x_n^2}
+          \sqrt{\sum_{n} y_n^2}
+      }
+\end{align}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>分子はベクトルの内積</p></li>
+<li><p>分母は各ベクトルの「ノルム」(ベクトルの大きさ)があります。</p></li>
+</ul>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>epsは、<span class="math notranslate nohighlight">\(0\)</span>除算とならないための微小な値です。通常、このような小さな値は浮動小数点の「丸の誤差」により、他の値に”吸収”されますので、最終の計算結果に影響を与えません。</p>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># コサイン類似度の実装</span>
+<span class="k">def</span> <span class="nf">cos_similarity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
+    <span class="c1"># コサイン類似度を計算:式(2.1)</span>
+    <span class="n">nx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
+    <span class="n">ny</span> <span class="o">=</span> <span class="n">y</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>実装した関数を使って、ベクトルの値とコサイン類似度の値との関係を見ましょう。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
+<span class="n">b_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#import seaborn as sns</span>
+
+<span class="c1"># Set Seaborn theme</span>
+<span class="c1">#sns.set_context(&quot;paper&quot;) # or &quot;talk&quot;</span>
+<span class="c1">#sns.set_style(&quot;whitegrid&quot;)</span>
+
+<span class="c1"># コサイン類似度を計算</span>
+<span class="n">sim_val</span> <span class="o">=</span> <span class="n">cos_similarity</span><span class="p">(</span><span class="n">a_vec</span><span class="p">,</span> <span class="n">b_vec</span><span class="p">)</span>
+
+<span class="c1"># 作図</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">a_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;vector a&#39;</span><span class="p">)</span> <span class="c1"># 有効グラフ</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;vector b&#39;</span><span class="p">)</span> <span class="c1"># 有効グラフ</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">b_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">b_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Similarity:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sim_val</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/word2vec_1_35_0.png" src="../_images/word2vec_1_35_0.png" />
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to create a subplot for vectors with a given cosine similarity</span>
+<span class="k">def</span> <span class="nf">plot_vector_similarity</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">similarity</span><span class="p">,</span> <span class="n">vector_a</span><span class="p">):</span>
+    <span class="c1"># Generate vector b based on desired cosine similarity and vector a</span>
+    <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">similarity</span><span class="p">)</span>
+    <span class="n">vector_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vector_a</span><span class="p">)</span>
+    
+    <span class="c1"># Plotting the vectors</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vector_a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vector_a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;vector a&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vector_b</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vector_b</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;vector b&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Setting the limits of the plot</span>
+    <span class="n">lim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">vector_a</span><span class="p">,</span> <span class="n">vector_b</span><span class="p">])))</span> <span class="o">+</span> <span class="mf">0.1</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="n">lim</span><span class="p">,</span> <span class="n">lim</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="n">lim</span><span class="p">,</span> <span class="n">lim</span><span class="p">)</span>
+    
+    <span class="c1"># Adding grid, legend, and title to the subplot</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Similarity: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">similarity</span><span class="p">))</span>
+
+<span class="c1"># Initial vector a</span>
+<span class="n">a_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Similarity values to plot</span>
+<span class="n">similarities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Create subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Flatten axes array for easy iteration</span>
+<span class="n">axes_flat</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="c1"># Plot each similarity in a subplot</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">sim</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes_flat</span><span class="p">,</span> <span class="n">similarities</span><span class="p">):</span>
+    <span class="n">plot_vector_similarity</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">sim</span><span class="p">,</span> <span class="n">a_vec</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/word2vec_1_36_0.png" src="../_images/word2vec_1_36_0.png" />
+</div>
+</div>
+</section>
+<section id="id9">
+<h4>単語間の類似度<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h4>
+<p>前項で作成した各単語ベクトルを用いて、2つの単語の類似度を測りましょう。</p>
+<p>比較したい2つの単語を指定して、単語ベクトルからコサイン類似度を計算します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># テキストを設定</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;You say goodbye and I say hello.&#39;</span>
+
+<span class="c1"># 単語と単語IDに関する変数を取得</span>
+<span class="n">corpus</span><span class="p">,</span> <span class="n">word_to_id</span><span class="p">,</span> <span class="n">id_to_word</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># 単語の種類数を取得</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
+
+<span class="c1"># 共起行列を作成</span>
+<span class="n">word_matrix</span> <span class="o">=</span> <span class="n">create_co_matrix</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 単語を指定して単語ベクトルを取得</span>
+<span class="n">c0</span> <span class="o">=</span> <span class="n">word_matrix</span><span class="p">[</span><span class="n">word_to_id</span><span class="p">[</span><span class="s1">&#39;you&#39;</span><span class="p">]]</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">word_matrix</span><span class="p">[</span><span class="n">word_to_id</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+
+<span class="c1"># コサイン類似度を計算</span>
+<span class="n">sim_val</span> <span class="o">=</span> <span class="n">cos_similarity</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sim_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 0 0 0 0 0]
+[0 1 0 1 0 0 0]
+0.7071067691154799
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id10">
+<h4>類似度のランキングを表示<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h4>
+<p>単語の「意味」を分析する際には、ある単語に対して類似した単語を探すことがよく挙げられます。ここでは、指定した単語との類似度が高い単語を調べる関数を実装します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 対象とする単語を指定</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;you&#39;</span>
+
+<span class="c1"># 指定した単語のIDを取得</span>
+<span class="n">query_id</span> <span class="o">=</span> <span class="n">word_to_id</span><span class="p">[</span><span class="n">query</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;指定した単語のID:</span><span class="si">{</span><span class="n">query_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 指定した単語のベクトルを取得</span>
+<span class="n">query_vec</span> <span class="o">=</span> <span class="n">word_matrix</span><span class="p">[</span><span class="n">query_id</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;指定した単語のベクトル: </span><span class="si">{</span><span class="n">query_vec</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># コサイン類似度の記録リストを初期化</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">id_to_word</span><span class="p">)</span>
+<span class="n">similarity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">)</span>
+
+<span class="c1"># 各単語コサイン類似度を計算</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">):</span>
+    <span class="n">similarity</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cos_similarity</span><span class="p">(</span><span class="n">word_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">query_vec</span><span class="p">)</span>
+
+<span class="c1"># 値を表示</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;類似度の結果：&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">word_to_id</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">similarity</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>指定した単語のID:0
+指定した単語のベクトル: [0 1 0 0 0 0 0]
+類似度の結果：
+you:1.0
+say:0.0
+goodbye:0.70711
+and:0.0
+i:0.70711
+hello:0.70711
+.:0.0
+</pre></div>
+</div>
+</div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><code class="docutils literal notranslate"><span class="pre">.argsort()</span></code>メソッドは、配列の要素の値が小さい順にインデックスを返します。ここで知りたいのは上位のインデックスのため、similarityに-1を掛けて符号を反転させることで、大小関係を逆転させます。</p>
+</aside>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 配列を作成</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+<span class="c1"># 低い順のインデックス</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">argsort</span><span class="p">())</span>
+
+<span class="c1"># 大小関係を逆転</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">arr</span><span class="p">)</span>
+
+<span class="c1"># 高い順のインデックス</span>
+<span class="nb">print</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">argsort</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0 20 10 40 30]
+[0 2 1 4 3]
+[  0 -20 -10 -40 -30]
+[3 4 1 2 0]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 表示する順位を指定</span>
+<span class="n">top</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># 類似度上位の単語と値を表示</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 表示回数を初期化</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">similarity</span><span class="p">)</span><span class="o">.</span><span class="n">argsort</span><span class="p">():</span>
+    
+    <span class="c1"># 指定した単語のときは次の単語に移る</span>
+    <span class="k">if</span> <span class="n">id_to_word</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">query</span><span class="p">:</span>
+        <span class="k">continue</span>
+    
+    <span class="c1"># 単語と値を表示</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">id_to_word</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">similarity</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    
+    <span class="c1"># 指定した回数に達したら処理を終了</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># 表示回数を加算</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="n">top</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> goodbye: 0.7071067691154799
+ i: 0.7071067691154799
+ hello: 0.7071067691154799
+ say: 0.0
+ and: 0.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 類似度の上位単語を検索関数の実装</span>
+<span class="k">def</span> <span class="nf">most_similar</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">word_to_id</span><span class="p">,</span> <span class="n">id_to_word</span><span class="p">,</span> <span class="n">word_matrix</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    
+    <span class="c1"># 指定した単語がテキストに含まれないとき</span>
+    <span class="k">if</span> <span class="n">query</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">word_to_id</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is not found&#39;</span> <span class="o">%</span> <span class="n">query</span><span class="p">)</span>
+        <span class="k">return</span>
+    
+    <span class="c1"># 対象の単語を表示</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[query] &#39;</span> <span class="o">+</span> <span class="n">query</span><span class="p">)</span>
+    
+    <span class="c1"># 指定した単語のIDを取得</span>
+    <span class="n">query_id</span> <span class="o">=</span> <span class="n">word_to_id</span><span class="p">[</span><span class="n">query</span><span class="p">]</span>
+    
+    <span class="c1"># 指定した単語のベクトルを取得</span>
+    <span class="n">query_vec</span> <span class="o">=</span> <span class="n">word_matrix</span><span class="p">[</span><span class="n">query_id</span><span class="p">]</span>
+    
+    <span class="c1"># コサイン類似度を計算</span>
+    <span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">id_to_word</span><span class="p">)</span>
+    <span class="n">similarity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">):</span>
+        <span class="n">similarity</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cos_similarity</span><span class="p">(</span><span class="n">word_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">query_vec</span><span class="p">)</span>
+    
+    <span class="c1"># 類似度上位の単語と値を表示</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 表示回数を初期化</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">similarity</span><span class="p">)</span><span class="o">.</span><span class="n">argsort</span><span class="p">():</span>
+        
+        <span class="c1"># 指定した単語のときは次の単語に移る</span>
+        <span class="k">if</span> <span class="n">id_to_word</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">query</span><span class="p">:</span>
+            <span class="k">continue</span>
+        
+        <span class="c1"># 単語と値を表示</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">id_to_word</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">similarity</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        
+        <span class="c1"># 指定した回数に達したら処理を終了</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># 表示回数を加算</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="n">top</span><span class="p">:</span>
+            <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># クエリを指定</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;you&#39;</span>
+
+<span class="c1"># 類似の単語を表示</span>
+<span class="n">most_similar</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">word_to_id</span><span class="p">,</span> <span class="n">id_to_word</span><span class="p">,</span> <span class="n">word_matrix</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[query] you
+ goodbye: 0.7071067691154799
+ i: 0.7071067691154799
+ hello: 0.7071067691154799
+ say: 0.0
+ and: 0.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="id11">
+<h2>カウントベースの手法の改善<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h2>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>事象<span class="math notranslate nohighlight">\(x\)</span>の生起確率<span class="math notranslate nohighlight">\(p(x)\)</span>を基にして情報量<span class="math notranslate nohighlight">\(I(x)\)</span>は</p>
+<div class="math notranslate nohighlight">
+\[
+I(x) = - \log_2 p(x)
+\]</div>
+<p>になります。<span class="math notranslate nohighlight">\(0 \leq p(x) \leq 1\)</span>なので、<span class="math notranslate nohighlight">\(\log p(x)\)</span>は常に負の値になる。よって符号を反転した値を情報量とすることで、常に正の値をとるようにする。<span class="math notranslate nohighlight">\(log\)</span>の底が<span class="math notranslate nohighlight">\(2\)</span>なのは、情報学分野において0と1からなるbitとの相性からよく使われるためである。</p>
+</aside>
+<section id="id12">
+<h3>相互情報量<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
+<p>ここまでは単語がテキストに出現する頻度そのままを扱いましたが、このやり方によって単語分散を計測する際、高頻度単語によるバイアスは生じる可能性があります。</p>
+<p>例えば、日本語において、「の」は非常に一般的な助詞で、さまざまな文脈で使用されます。単語の共起行列を作成するとき、「の」は非常に頻繁に出現し、多くの異なる単語とペアを形成するため、単純な共起頻度はその単語の意味のある関連性を捉えるのには不十分です。</p>
+<p>そのような問題を解決するために、相互情報量(Pointwise Mutual Information)と呼ばれる指標が使われます。</p>
+<p>2つの単語<span class="math notranslate nohighlight">\(x\)</span>,<span class="math notranslate nohighlight">\(y\)</span>の出現確率をそれぞれ<span class="math notranslate nohighlight">\(P(x)\)</span>,<span class="math notranslate nohighlight">\(P(y)\)</span>とします。<span class="math notranslate nohighlight">\(x\)</span>の出現確率は</p>
+<div class="math notranslate nohighlight">
+\[
+P(x)
+    = \frac{C(x)}{N}
+\]</div>
+<p>で計算します。ここで<span class="math notranslate nohighlight">\(C(x)\)</span>は単語<span class="math notranslate nohighlight">\(x\)</span>が(テキストではなく)コーパス(共起行列)にカウントされた回数、<span class="math notranslate nohighlight">\(N\)</span>はコーパスの総単語数とします。</p>
+<p>また単語<span class="math notranslate nohighlight">\(x\)</span>,<span class="math notranslate nohighlight">\(y\)</span>が共起(ウィンドウサイズ内で続けて出現)した回数を<span class="math notranslate nohighlight">\(C(x,y)\)</span>とします。</p>
+<div class="math notranslate nohighlight">
+\[
+P(x, y)
+    = \frac{C(x, y)}{N}
+\]</div>
+<p>これを用いて、単語<span class="math notranslate nohighlight">\(x\)</span>,<span class="math notranslate nohighlight">\(y\)</span>の相互情報量(PMI)は次のように定義されます。</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{PMI}(x, y)
+    = \log_2 \frac{
+          P(x, y)
+      }{
+          P(x) P(y)
+      }
+\]</div>
+<p>またこの式は、次のように変形することで</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathrm{PMI}(x, y)
+   &amp;= \log_2 \left(
+          P(x, y)
+          \frac{1}{P(x)}
+          \frac{1}{P(y)}
+      \right)
+\\
+   &amp;= \log_2 \left( 
+          \frac{C(x, y)}{N}
+          \frac{N}{C(x)}
+          \frac{N}{C(y)}
+      \right)
+\\
+   &amp;= \log_2 \frac{
+          C(x, y) N
+      }{
+          C(x) C(y)
+      }
+\end{align}
+\end{split}\]</div>
+<p>出現回数と総単語数から直接で計算できることが分かります。</p>
+<p>ただし出現回数が0のときに不都合が生じるため、次の正の相互情報量(PPMI)を用います。</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{PPMI}(x, y)
+    = \max(0, \mathrm{PMI}(x, y))
+\]</div>
 </section>
 </section>
 </section>
