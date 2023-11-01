@@ -17,22 +17,30 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# 単語IDを指定すると単語を返す
-print(id_to_word)
-print(id_to_word[5])
+:tags: [hide-input]
 
-# 単語を指定すると単語IDを返す
-print(word_to_id)
-print(word_to_id['hello'])
+# .argsort()メソッドは、配列の要素の値が小さい順にインデックスを返します。
+# しかしここで知りたいのは上位のインデックスです。
+# そこでsimilarityに-1を掛けて符号を反転させることで、大小関係を逆転させます。
+
+# 配列を作成
+arr = np.array([0, 20, 10, 40, 30])
+print(arr)
+
+# 低い順のインデックス
+print(arr.argsort())
+
+# 大小関係を逆転
+print(-1 * arr)
+
+# 高い順のインデックス
+print((-1 * arr).argsort())
 ------------------
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mKeyError[0m                                  Traceback (most recent call last)
-Cell [0;32mIn[4], line 7[0m
-[1;32m      5[0m [38;5;66;03m# 単語を指定すると単語IDを返す[39;00m
-[1;32m      6[0m [38;5;28mprint[39m(word_to_id)
-[0;32m----> 7[0m [38;5;28mprint[39m([43mword_to_id[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mhello[39;49m[38;5;124;43m'[39;49m[43m][49m)
+[0;36m  Cell [0;32mIn[21], line 1[0;36m[0m
+[0;31m    :tags: [hide-input][0m
+[0m    ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
 
-[0;31mKeyError[0m: 'hello'
-KeyError: 'hello'
+SyntaxError: invalid syntax (804485789.py, line 1)
 

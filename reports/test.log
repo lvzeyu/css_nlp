@@ -1,0 +1,67 @@
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/opt/anaconda3/envs/jupyterbook/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import sys
+import re
+import pickle
+from janome.tokenizer import Tokenizer
+import numpy as np
+import collections
+
+with open("/Users/ryozawau/css_nlp/notebook/Data/dokujo-tsushin.txt", mode="r",encoding="utf-8") as f: # 注1）
+    original_corpus = f.readlines()
+
+text = re.sub("http://news.livedoor.com/article/detail/[0-9]{7}/","", original_corpus) # 注2）
+text = re.sub("[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\+[0-9]{4}","", text) # 注3）
+text = re.sub("[\f\n\r\t\v]","", text)
+text = re.sub("　","", text)
+text = re.sub("[「」]","", text)
+text = [re.sub("[（）]","", text)]
+
+# ＜ポイント＞
+t = Tokenizer()
+
+words_list = []
+for word in text:
+    words_list.append(t.tokenize(word, wakati=True))
+
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[1], line 11[0m
+[1;32m      8[0m [38;5;28;01mwith[39;00m [38;5;28mopen[39m([38;5;124m"[39m[38;5;124m/Users/ryozawau/css_nlp/notebook/Data/dokujo-tsushin.txt[39m[38;5;124m"[39m, mode[38;5;241m=[39m[38;5;124m"[39m[38;5;124mr[39m[38;5;124m"[39m,encoding[38;5;241m=[39m[38;5;124m"[39m[38;5;124mutf-8[39m[38;5;124m"[39m) [38;5;28;01mas[39;00m f: [38;5;66;03m# 注1）[39;00m
+[1;32m      9[0m     original_corpus [38;5;241m=[39m f[38;5;241m.[39mreadlines()
+[0;32m---> 11[0m text [38;5;241m=[39m [43mre[49m[38;5;241;43m.[39;49m[43msub[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mhttp://news.livedoor.com/article/detail/[0-9][39;49m[38;5;132;43;01m{7}[39;49;00m[38;5;124;43m/[39;49m[38;5;124;43m"[39;49m[43m,[49m[38;5;124;43m"[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43moriginal_corpus[49m[43m)[49m [38;5;66;03m# 注2）[39;00m
+[1;32m     12[0m text [38;5;241m=[39m re[38;5;241m.[39msub([38;5;124m"[39m[38;5;124m[0-9][39m[38;5;132;01m{4}[39;00m[38;5;124m-[0-9][39m[38;5;132;01m{2}[39;00m[38;5;124m-[0-9][39m[38;5;132;01m{2}[39;00m[38;5;124mT[0-9][39m[38;5;132;01m{2}[39;00m[38;5;124m:[0-9][39m[38;5;132;01m{2}[39;00m[38;5;124m:[0-9][39m[38;5;132;01m{2}[39;00m[38;5;124m\[39m[38;5;124m+[0-9][39m[38;5;132;01m{4}[39;00m[38;5;124m"[39m,[38;5;124m"[39m[38;5;124m"[39m, text) [38;5;66;03m# 注3）[39;00m
+[1;32m     13[0m text [38;5;241m=[39m re[38;5;241m.[39msub([38;5;124m"[39m[38;5;124m[[39m[38;5;130;01m\f[39;00m[38;5;130;01m\n[39;00m[38;5;130;01m\r[39;00m[38;5;130;01m\t[39;00m[38;5;130;01m\v[39;00m[38;5;124m][39m[38;5;124m"[39m,[38;5;124m"[39m[38;5;124m"[39m, text)
+
+File [0;32m/opt/anaconda3/envs/jupyterbook/lib/python3.10/re.py:209[0m, in [0;36msub[0;34m(pattern, repl, string, count, flags)[0m
+[1;32m    202[0m [38;5;28;01mdef[39;00m [38;5;21msub[39m(pattern, repl, string, count[38;5;241m=[39m[38;5;241m0[39m, flags[38;5;241m=[39m[38;5;241m0[39m):
+[1;32m    203[0m [38;5;250m    [39m[38;5;124;03m"""Return the string obtained by replacing the leftmost[39;00m
+[1;32m    204[0m [38;5;124;03m    non-overlapping occurrences of the pattern in string by the[39;00m
+[1;32m    205[0m [38;5;124;03m    replacement repl.  repl can be either a string or a callable;[39;00m
+[1;32m    206[0m [38;5;124;03m    if a string, backslash escapes in it are processed.  If it is[39;00m
+[1;32m    207[0m [38;5;124;03m    a callable, it's passed the Match object and must return[39;00m
+[1;32m    208[0m [38;5;124;03m    a replacement string to be used."""[39;00m
+[0;32m--> 209[0m     [38;5;28;01mreturn[39;00m [43m_compile[49m[43m([49m[43mpattern[49m[43m,[49m[43m [49m[43mflags[49m[43m)[49m[38;5;241;43m.[39;49m[43msub[49m[43m([49m[43mrepl[49m[43m,[49m[43m [49m[43mstring[49m[43m,[49m[43m [49m[43mcount[49m[43m)[49m
+
+[0;31mTypeError[0m: expected string or bytes-like object
+TypeError: expected string or bytes-like object
+
