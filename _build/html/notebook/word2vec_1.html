@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -466,7 +468,24 @@ title="Print to PDF"
      相互情報量
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     次元削減
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#svd">
+       SVD
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id14">
+   カウントベースの手法による単語分散の作成
+  </a>
  </li>
 </ul>
 
@@ -546,7 +565,24 @@ title="Print to PDF"
      相互情報量
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     次元削減
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#svd">
+       SVD
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id14">
+   カウントベースの手法による単語分散の作成
+  </a>
  </li>
 </ul>
 
@@ -569,7 +605,7 @@ title="Print to PDF"
 </ul>
 <p><img alt="類似性" src="../_images/word2vec.png" /></p>
 <p><img alt="単語類推" src="../_images/city.png" /></p>
-<p>単語ベクトルへの変換には様々なアプローチが存在します。最初は、(1)人の手によって作られたシソーラス（類語辞書）を利用する手法について簡単の見ていきます。続いて、統計情報から単語を表現する手法ーカウントベースの手法ーについて説明します。この方法は、言語のモデル化を理解することに役に立つと考られます。そして、ニューラルネットワークを用いた手法(具体的には、word2vwcと呼ばれる手法)を扱います。</p>
+<p>単語ベクトルへの変換には様々なアプローチが存在します。最初は、(1)人の手によって作られたシソーラス（類語辞書）を利用する手法について簡単の見ていきます。続いて、(2)統計情報から単語を表現する手法ーカウントベースの手法ーについて説明します。この方法は、言語のモデル化を理解することに役に立つと考られます。そして、(3)ニューラルネットワークを用いた手法(具体的には、word2vwcと呼ばれる手法)を扱います。</p>
 <ol class="simple">
 <li><p>シソーラスによる手法</p>
 <ul class="simple">
@@ -783,10 +819,10 @@ hello
 <h3>共起行列<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <p>分布仮説に基づいた単語ベクトル化の方法を考える際、一番素直な方法は、周囲の単語を”カウント”することです。つまり、ある単語に着目した場合、その周囲どのような単語がどれだけ現れるのかをカウントし、それを集計するのです。</p>
 <p>ここでは、”<em>You say goodbye and I say hello.</em>”という文章について、ウィンドウサイズを<span class="math notranslate nohighlight">\(1\)</span>とする場合、そのコンテキストに含まれる単語の頻度をカウントしてみます。</p>
-<figure class="align-center" id="id13">
+<figure class="align-center" id="id15">
 <img alt="../_images/co-occur.png" src="../_images/co-occur.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 7 </span><span class="caption-text">各単語について、そのコンテキストに含まれす単語の頻度</span><a class="headerlink" href="#id13" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">各単語について、そのコンテキストに含まれす単語の頻度</span><a class="headerlink" href="#id15" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1401,9 +1437,347 @@ P(x, y)
 \mathrm{PPMI}(x, y)
     = \max(0, \mathrm{PMI}(x, y))
 \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="c1"># 相互情報量行列の作成関数の実装</span>
+<span class="k">def</span> <span class="nf">ppmi</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
+    
+    <span class="c1"># PPMI行列の受け皿を作成</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    
+    <span class="c1"># PPMIに用いる値を計算</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="c1"># 総単語数</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 各単語の出現回数</span>
+    
+    <span class="c1"># 進行状況確認用の値を計算</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 処理回数を初期化</span>
+    
+    <span class="c1"># 1語ずつ正の相互情報量を計算</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span> <span class="c1"># 各行</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span> <span class="c1"># 各列</span>
+            
+            <span class="c1"># PPMIを計算</span>
+            <span class="n">pmi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span> <span class="o">/</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
+            <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pmi</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">M</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 共起行列を作成</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">create_co_matrix</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+
+<span class="n">W</span> <span class="o">=</span> <span class="n">ppmi</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1"># 正の相互情報量行列</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 1 0 0 0 0 0]
+ [1 0 1 0 1 1 0]
+ [0 1 0 1 0 0 0]
+ [0 0 1 0 1 0 0]
+ [0 1 0 1 0 0 0]
+ [0 1 0 0 0 0 1]
+ [0 0 0 0 0 1 0]]
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "18e1344a01ec4e7aad674e82dc6a0cf2"}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.   1.81 0.   0.   0.   0.   0.  ]
+ [1.81 0.   0.81 0.   0.81 0.81 0.  ]
+ [0.   0.81 0.   1.81 0.   0.   0.  ]
+ [0.   0.   1.81 0.   1.81 0.   0.  ]
+ [0.   0.81 0.   1.81 0.   0.   0.  ]
+ [0.   0.81 0.   0.   0.   0.   2.81]
+ [0.   0.   0.   0.   0.   2.81 0.  ]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id13">
+<h3>次元削減<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<p>次元削減は、ベクトルの次元を重要な情報を保持しながら削減する手法を指します。</p>
+<section id="svd">
+<h4>SVD<a class="headerlink" href="#svd" title="Permalink to this headline">#</a></h4>
+<p>次元削減を行う方法はいくつかあります。ここでは特異値分解(Singular Value Decomposition:SVD)を使って次元削減を行います。</p>
+<p>SVDは、任意の行列を3つの行列の積へ分解します。</p>
+<p><span class="math notranslate nohighlight">\(A = U\Sigma V^T\)</span></p>
+<p>ここで、<span class="math notranslate nohighlight">\(A\)</span>は<span class="math notranslate nohighlight">\(n \times d\)</span>の行列、<span class="math notranslate nohighlight">\(U\)</span>は<span class="math notranslate nohighlight">\(n \times n\)</span>、<span class="math notranslate nohighlight">\(V\)</span>は<span class="math notranslate nohighlight">\(d \times d\)</span>の直交行列です。</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>直交行列とは、転置行列<span class="math notranslate nohighlight">\(A^T\)</span>と逆行列<span class="math notranslate nohighlight">\(A^{-1}\)</span>が等しくなる行列。直交行列の列ベクトル（または行ベクトル）は互いに直交し、かつ正規化されています（つまり、それぞれのベクトルの長さが1）。これは、直交行列が基底変換を行う際に、ベクトルの長さや角度を保持することを意味します。そのため、直交行列は主にベクトル空間の基底を変換する際や、回転や反射などの幾何学的変換を表現するのに用いられます。</p>
+</aside>
+<p><img alt="" src="../_images/svd.png" /></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(U\)</span>は何らかの空間の基底を形成しています。ここは、<span class="math notranslate nohighlight">\(U\)</span>という行列を「単語空間」として扱うことができます。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma\)</span>は対角行列で、この対角成分には、「特異値」というものが大きい順で並んでいます。ここで、「特異値」は対応する軸の重要度とみなすことができます。次元削減は、この情報によって重要でない要素を削除することが考えれます。</p></li>
+</ul>
+<p>SVDによって、疎なベクトルが密なベクトルへ変換されています。この密なベクトルから、先頭の二つの要素を取り出すことで、元のベクトルの「情報」をできるだけ保持しながら次元を削減することができます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># 共起行列</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># PPMI行列</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># SVD</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 0 0 0 0 0]
+[0.        1.8073549 0.        0.        0.        0.        0.       ]
+[ 3.4094876e-01  0.0000000e+00 -1.2051624e-01 -3.8857806e-16
+ -9.3232495e-01 -1.1102230e-16  1.9584388e-17]
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
+<section id="id14">
+<h2>カウントベースの手法による単語分散の作成<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./Data/dokujo-tsushin.txt&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">corpus</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">cleaned_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\u3000</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cleaned_line</span><span class="o">!=</span><span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">corpus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cleaned_line</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corpus</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;  友人代表のスピーチ、独女はどうこなしている？&#39;,
+ &#39;もうすぐジューン・ブライドと呼ばれる６月。独女の中には自分の式はまだなのに呼ばれてばかり……という「お祝い貧乏」状態の人も多いのではないだろうか？さらに出席回数を重ねていくと、こんなお願いごとをされることも少なくない。&#39;,
+ &#39;「お願いがあるんだけど……友人代表のスピーチ、やってくれないかな？」&#39;,
+ &#39;さてそんなとき、独女はどう対応したらいいか？&#39;,
+ &#39;最近だとインターネット等で検索すれば友人代表スピーチ用の例文サイトがたくさん出てくるので、それらを参考にすれば、無難なものは誰でも作成できる。しかし由利さん（33歳）はネットを参考にして作成したものの「これで本当にいいのか不安でした。一人暮らしなので聞かせて感想をいってくれる人もいないし、かといって他の友人にわざわざ聞かせるのもどうかと思うし……」ということで活用したのが、なんとインターネットの悩み相談サイトに。そこに作成したスピーチ文を掲載し「これで大丈夫か添削してください」とメッセージを送ったというのである。&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MeCab</span>
+<span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="k">def</span> <span class="nf">tokenize_with_mecab</span><span class="p">(</span><span class="n">sentences</span><span class="p">):</span>
+    <span class="c1"># Initialize MeCab with the specified dictionary</span>
+    <span class="n">corpus</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;http://news.livedoor.com/article/detail/[0-9]</span><span class="si">{7}</span><span class="s2">/&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span> <span class="c1"># 注2）</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[0-9]</span><span class="si">{4}</span><span class="s2">-[0-9]</span><span class="si">{2}</span><span class="s2">-[0-9]</span><span class="si">{2}</span><span class="s2">T[0-9]</span><span class="si">{2}</span><span class="s2">:[0-9]</span><span class="si">{2}</span><span class="s2">:[0-9]</span><span class="si">{2}</span><span class="s2">\+[0-9]</span><span class="si">{4}</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span> <span class="c1"># 注3）</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[「」]&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+        <span class="c1"># Parse the sentence</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">mecab</span><span class="o">.</span><span class="n">parseToNode</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+        <span class="c1"># Iterate over all nodes</span>
+        <span class="k">while</span> <span class="n">node</span><span class="p">:</span>
+            <span class="c1"># Extract the surface form of the word</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">surface</span>
+            <span class="c1"># Skip empty words and add to the corpus</span>
+            <span class="k">if</span> <span class="n">word</span><span class="p">:</span>
+                <span class="n">corpus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
+    <span class="k">return</span> <span class="n">corpus</span>
+
+
+<span class="c1"># Initialize the MeCab tokenizer</span>
+<span class="c1">#mecab = MeCab.Tagger()</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;-d /opt/homebrew/lib/mecab/dic/mecab-ipadic-neologd&quot;</span>
+<span class="n">mecab</span> <span class="o">=</span> <span class="n">MeCab</span><span class="o">.</span><span class="n">Tagger</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="n">tokenize_with_mecab</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corpus</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;友人&#39;, &#39;代表&#39;, &#39;の&#39;, &#39;スピーチ&#39;, &#39;、&#39;, &#39;独女&#39;, &#39;は&#39;, &#39;どう&#39;, &#39;こなし&#39;, &#39;て&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word_to_id</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">id_to_word</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">word_to_id</span><span class="p">:</span>
+        <span class="n">new_id</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
+        <span class="n">word_to_id</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_id</span>
+        <span class="n">id_to_word</span><span class="p">[</span><span class="n">new_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">word</span>
+        
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;id_to_word[0]:&#39;</span><span class="p">,</span> <span class="n">id_to_word</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;id_to_word[1]:&#39;</span><span class="p">,</span> <span class="n">id_to_word</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;id_to_word[2]:&#39;</span><span class="p">,</span> <span class="n">id_to_word</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;word_to_id[&#39;女&#39;]:&quot;</span><span class="p">,</span> <span class="n">word_to_id</span><span class="p">[</span><span class="s1">&#39;女&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;word_to_id[&#39;結婚&#39;]:&quot;</span><span class="p">,</span> <span class="n">word_to_id</span><span class="p">[</span><span class="s1">&#39;結婚&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;word_to_id[&#39;夫&#39;]:&quot;</span><span class="p">,</span> <span class="n">word_to_id</span><span class="p">[</span><span class="s1">&#39;夫&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id_to_word[0]: 友人
+id_to_word[1]: 代表
+id_to_word[2]: の
+
+word_to_id[&#39;女&#39;]: 591
+word_to_id[&#39;結婚&#39;]: 446
+word_to_id[&#39;夫&#39;]: 1450
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># リストに変換</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">word_to_id</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">]</span>
+
+<span class="c1"># NumPy配列に変換</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vocab_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
+<span class="n">vocab_size</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31350
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">wordvec_size</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="o">=</span><span class="n">create_co_matrix</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span><span class="n">vocab_size</span><span class="p">,</span><span class="n">window_size</span><span class="o">=</span><span class="n">window_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#W = ppmi(C)</span>
+<span class="c1">#np.save(&#39;./Data/W.npy&#39;, W)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;./Data/W.npy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.utils.extmath</span> <span class="kn">import</span> <span class="n">randomized_svd</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span> <span class="n">randomized_svd</span><span class="p">(</span><span class="n">W</span><span class="p">,</span><span class="n">n_components</span><span class="o">=</span><span class="n">wordvec_size</span><span class="p">,</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word_vecs</span><span class="o">=</span><span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">wordvec_size</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">querys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;女&#39;</span><span class="p">,</span> <span class="s1">&#39;結婚&#39;</span><span class="p">,</span> <span class="s1">&#39;彼女&#39;</span><span class="p">,</span> <span class="s2">&quot;秋&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">querys</span><span class="p">:</span>
+    <span class="n">most_similar</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">word_to_id</span><span class="p">,</span> <span class="n">id_to_word</span><span class="p">,</span> <span class="n">word_vecs</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[query] 女
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 男: 0.6980597972869873
+ 65.5%: 0.5875857472419739
+ 恋のから騒ぎ: 0.5304428339004517
+ 女子: 0.5007545351982117
+ 女性: 0.4909106492996216
+
+[query] 結婚
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 離婚: 0.615210771560669
+ 交際: 0.6105802655220032
+ 同棲: 0.5792792439460754
+ 歴: 0.5536029934883118
+ 入籍: 0.5521197319030762
+
+[query] 彼女
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 彼: 0.7140719294548035
+ 彼氏: 0.6818654537200928
+ 夫: 0.6794707775115967
+ 子供: 0.6747638583183289
+ 家族: 0.6700843572616577
+
+[query] 秋
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 春: 0.7092013955116272
+ 今年: 0.6307002902030945
+ 夏: 0.6054424047470093
+ 以降: 0.5527648329734802
+ これから: 0.5478113293647766
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"dc3fbee638004fb681d76bc5893fd37c": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "460a34e6e9d44acf8403971114f24e85": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "634ccb48767948f1a4819586dd93ea89": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "success", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_dc3fbee638004fb681d76bc5893fd37c", "max": 7.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_460a34e6e9d44acf8403971114f24e85", "value": 7.0}}, "bc9d85d1dbba4cb983c92e86a34e37df": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "32ad754c70b84b8fa24c697d0bba67fe": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "0dec55fed6814e0f918102458db7ca50": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_bc9d85d1dbba4cb983c92e86a34e37df", "placeholder": "\u200b", "style": "IPY_MODEL_32ad754c70b84b8fa24c697d0bba67fe", "value": "100%"}}, "fdb69b5a16dc418aa7acd10cf1f08789": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "0facc994892746f3822f1573802e44fd": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "8f1897e869804b5fa272761c97a7140d": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_fdb69b5a16dc418aa7acd10cf1f08789", "placeholder": "\u200b", "style": "IPY_MODEL_0facc994892746f3822f1573802e44fd", "value": " 7/7 [00:00&lt;00:00, 1067.91it/s]"}}, "6cc6a8a4d8cb4406ae3542a5819c7b9d": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "18e1344a01ec4e7aad674e82dc6a0cf2": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_0dec55fed6814e0f918102458db7ca50", "IPY_MODEL_634ccb48767948f1a4819586dd93ea89", "IPY_MODEL_8f1897e869804b5fa272761c97a7140d"], "layout": "IPY_MODEL_6cc6a8a4d8cb4406ae3542a5819c7b9d"}}}, "version_major": 2, "version_minor": 0}
+</script>
+
 
     <script type="text/x-thebe-config">
     {

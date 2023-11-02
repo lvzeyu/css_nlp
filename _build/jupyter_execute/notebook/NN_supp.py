@@ -270,7 +270,7 @@ for epoch in range(epochs):
         print(f"Epoch [{epoch+1}/{epochs}], Train Loss: {loss.item():.4f}, Val Loss: {val_loss.item():.4f}")
 
 
-# In[17]:
+# In[1]:
 
 
 import matplotlib.pyplot as plt

@@ -20,7 +20,7 @@
 # 
 # 
 # 
-# 単語ベクトルへの変換には様々なアプローチが存在します。最初は、(1)人の手によって作られたシソーラス（類語辞書）を利用する手法について簡単の見ていきます。続いて、統計情報から単語を表現する手法ーカウントベースの手法ーについて説明します。この方法は、言語のモデル化を理解することに役に立つと考られます。そして、ニューラルネットワークを用いた手法(具体的には、word2vwcと呼ばれる手法)を扱います。
+# 単語ベクトルへの変換には様々なアプローチが存在します。最初は、(1)人の手によって作られたシソーラス（類語辞書）を利用する手法について簡単の見ていきます。続いて、(2)統計情報から単語を表現する手法ーカウントベースの手法ーについて説明します。この方法は、言語のモデル化を理解することに役に立つと考られます。そして、(3)ニューラルネットワークを用いた手法(具体的には、word2vwcと呼ばれる手法)を扱います。
 # 
 # 1. シソーラスによる手法
 #     - 人の手によって作られたシソーラス（類語辞書）を利用する手法
@@ -708,4 +708,229 @@ most_similar(query, word_to_id, id_to_word, word_matrix, top=5)
 # 
 # 
 
+# In[25]:
+
+
+from tqdm.notebook import tqdm
+# 相互情報量行列の作成関数の実装
+def ppmi(C, verbose=False, eps=1e-8):
+    
+    # PPMI行列の受け皿を作成
+    M = np.zeros_like(C, dtype=np.float32)
+    
+    # PPMIに用いる値を計算
+    N = np.sum(C) # 総単語数
+    S = np.sum(C, axis=0) # 各単語の出現回数
+    
+    # 進行状況確認用の値を計算
+    total = C.shape[0] * C.shape[1]
+    cnt = 0 # 処理回数を初期化
+    
+    # 1語ずつ正の相互情報量を計算
+    for i in tqdm(range(C.shape[0])): # 各行
+        for j in range(C.shape[1]): # 各列
+            
+            # PPMIを計算
+            pmi = np.log2(C[i, j] * N / (S[j] * S[i]) + eps)
+            M[i, j] = max(0, pmi)
+    
+    return M
+
+
+# In[26]:
+
+
+# 共起行列を作成
+C = create_co_matrix(corpus, vocab_size, window_size=1)
+print(C)
+
+W = ppmi(C, verbose=True)
+
+
+# 正の相互情報量行列
+print(np.round(W, 2))
+
+
+# ### 次元削減
 # 
+# 次元削減は、ベクトルの次元を重要な情報を保持しながら削減する手法を指します。
+
+# #### SVD
+# 
+# 次元削減を行う方法はいくつかあります。ここでは特異値分解(Singular Value Decomposition:SVD)を使って次元削減を行います。
+# 
+# SVDは、任意の行列を3つの行列の積へ分解します。
+# 
+# $A = U\Sigma V^T$
+# 
+# ここで、$A$は$n \times d$の行列、$U$は$n \times n$、$V$は$d \times d$の直交行列です。
+# 
+# ```{margin}
+# 直交行列とは、転置行列$A^T$と逆行列$A^{-1}$が等しくなる行列。直交行列の列ベクトル（または行ベクトル）は互いに直交し、かつ正規化されています（つまり、それぞれのベクトルの長さが1）。これは、直交行列が基底変換を行う際に、ベクトルの長さや角度を保持することを意味します。そのため、直交行列は主にベクトル空間の基底を変換する際や、回転や反射などの幾何学的変換を表現するのに用いられます。
+# ```
+# 
+# ![](./Figure/svd.png)
+# 
+# - $U$は何らかの空間の基底を形成しています。ここは、$U$という行列を「単語空間」として扱うことができます。
+# 
+# - $\Sigma$は対角行列で、この対角成分には、「特異値」というものが大きい順で並んでいます。ここで、「特異値」は対応する軸の重要度とみなすことができます。次元削減は、この情報によって重要でない要素を削除することが考えれます。
+
+# SVDによって、疎なベクトルが密なベクトルへ変換されています。この密なベクトルから、先頭の二つの要素を取り出すことで、元のベクトルの「情報」をできるだけ保持しながら次元を削減することができます。
+
+# In[27]:
+
+
+U, S, V = np.linalg.svd(W)
+
+print(C[0]) # 共起行列
+print(W[0]) # PPMI行列
+print(U[0]) # SVD
+
+
+# ## カウントベースの手法による単語分散の作成
+
+# In[28]:
+
+
+import re
+import pickle
+
+with open("./Data/dokujo-tsushin.txt", mode="r",encoding="utf-8") as f:
+    corpus = []
+    for line in f:
+        cleaned_line = line.replace('\u3000', '').replace('\n', '')
+        if cleaned_line!="":
+            corpus.append(cleaned_line)
+
+
+# In[29]:
+
+
+corpus[:5]
+
+
+# In[30]:
+
+
+import MeCab
+from tqdm.notebook import tqdm
+def tokenize_with_mecab(sentences):
+    # Initialize MeCab with the specified dictionary
+    corpus = []
+    for sentence in sentences:
+        sentence = re.sub("http://news.livedoor.com/article/detail/[0-9]{7}/","", sentence) # 注2）
+        sentence = re.sub("[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\+[0-9]{4}","", sentence) # 注3）
+        sentence = re.sub("[「」]","", sentence)
+        # Parse the sentence
+        node = mecab.parseToNode(sentence)
+        # Iterate over all nodes
+        while node:
+            # Extract the surface form of the word
+            word = node.surface
+            # Skip empty words and add to the corpus
+            if word:
+                corpus.append(word)
+            node = node.next
+    return corpus
+
+
+# Initialize the MeCab tokenizer
+#mecab = MeCab.Tagger()
+path = "-d /opt/homebrew/lib/mecab/dic/mecab-ipadic-neologd"
+mecab = MeCab.Tagger(path)
+corpus = tokenize_with_mecab(corpus)
+
+
+# In[31]:
+
+
+corpus[:10]
+
+
+# In[32]:
+
+
+word_to_id = {}
+id_to_word = {}
+
+for word in corpus:
+    if word not in word_to_id:
+        new_id = len(word_to_id)
+        word_to_id[word] = new_id
+        id_to_word[new_id] = word
+        
+print('id_to_word[0]:', id_to_word[0])
+print('id_to_word[1]:', id_to_word[1])
+print('id_to_word[2]:', id_to_word[2])
+print()
+print("word_to_id['女']:", word_to_id['女'])
+print("word_to_id['結婚']:", word_to_id['結婚'])
+print("word_to_id['夫']:", word_to_id['夫'])
+
+
+# In[33]:
+
+
+# リストに変換
+corpus = [word_to_id[word] for word in corpus]
+
+# NumPy配列に変換
+corpus = np.array(corpus)
+
+
+# In[34]:
+
+
+vocab_size=len(word_to_id)
+vocab_size
+
+
+# In[35]:
+
+
+window_size = 2
+wordvec_size = 100
+vocab_size = len(word_to_id)
+
+
+# In[36]:
+
+
+C=create_co_matrix(corpus,vocab_size,window_size=window_size)
+
+
+# In[37]:
+
+
+#W = ppmi(C)
+#np.save('./Data/W.npy', W)
+W = np.load('./Data/W.npy')
+
+
+# In[38]:
+
+
+from sklearn.utils.extmath import randomized_svd
+U, S, V= randomized_svd(W,n_components=wordvec_size,n_iter=5,random_state=None)
+
+
+# In[39]:
+
+
+word_vecs=U[:, :wordvec_size]
+
+
+# In[40]:
+
+
+querys = ['女', '結婚', '彼女', "秋"]
+
+for query in querys:
+    most_similar(query, word_to_id, id_to_word, word_vecs, top=5)
+
+
+# In[ ]:
+
+
+
+
