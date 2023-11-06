@@ -437,7 +437,17 @@ title="Print to PDF"
        入力層から中間層(エンコード)
       </a>
      </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       中間層から出力層(デコード)
+      </a>
+     </li>
     </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cbow">
+     CBOWモデルの学習
+    </a>
    </li>
   </ul>
  </li>
@@ -485,7 +495,17 @@ title="Print to PDF"
        入力層から中間層(エンコード)
       </a>
      </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       中間層から出力層(デコード)
+      </a>
+     </li>
     </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cbow">
+     CBOWモデルの学習
+    </a>
    </li>
   </ul>
  </li>
@@ -637,15 +657,15 @@ h_1
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>コンテキストの形状：(1, 7)
 重み
-[[-1.01382106  0.27158593 -1.26014011]
- [-0.6305151  -1.18745736  0.9510755 ]
- [-0.7907003  -0.16073873  0.05297773]
- [ 0.01090287 -0.26143684  0.4560573 ]
- [-0.27263332  0.83287429  0.44983709]
- [-1.44051516  0.80055028  0.17898516]
- [-2.29143911 -0.81755622 -0.06205793]]
+[[-0.11689672 -0.87299645 -0.77468774]
+ [-1.85511156 -0.11544881  1.60131885]
+ [ 1.91680957 -0.8995188   0.08133384]
+ [ 1.01660097  1.09108248 -0.10453889]
+ [-0.07942408  1.03069214  0.82228615]
+ [-0.14563418  0.33842248 -0.58624678]
+ [-0.7433799  -0.30346645 -0.73233679]]
 重み付き和
-[[-1.01382106  0.27158593 -1.26014011]]
+[[-0.11689672 -0.87299645 -0.77468774]]
 重み付き和の形状：(1, 3)
 </pre></div>
 </div>
@@ -654,6 +674,160 @@ h_1
 <p>コンテキストに複数な単語がある場合、入力層も複数になります。このとき、中間層にあるニューロンは、各入力層の全結合による変換後の値が平均されたものになります。</p>
 <p>中間層のニューロンの数を入力層よりも減らすことによって、中間層には、単語を予測するために必要な情報が”コンパクト”に収められて、結果としては密なベクトル表現が得られます。このとき、この中間層の情報は、人間には理解できない「ブラックボックス」ような状態になります。この作業は、「エンコード」と言います。</p>
 </section>
+<section id="id6">
+<h4>中間層から出力層(デコード)<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h4>
+<p>中間層の情報から目的の結果を得る作業は、「デコード」と言います。ここでは、中間層のニューロンの値<span class="math notranslate nohighlight">\(\mathbf{h}\)</span>を各単語に対応した値になるように、つまり要素(行)数が単語の種類数となるように再度変換したものを、CBOWモデルの出力とします。</p>
+<p>出力層の重みを</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{W}_{\mathrm{out}}
+    = \begin{pmatrix}
+          w_{1,\mathrm{you}} &amp; w_{1,\mathrm{say}} &amp; w_{1,\mathrm{goodbye}} &amp; w_{1,\mathrm{and}} &amp;
+          w_{1,\mathrm{I}} &amp; w_{1,\mathrm{hello}} &amp; w_{1,\mathrm{period}} \\
+          w_{2,\mathrm{you}} &amp; w_{2,\mathrm{say}} &amp; w_{2,\mathrm{goodbye}} &amp; w_{2,\mathrm{and}} &amp;
+          w_{2,\mathrm{I}} &amp; w_{2,\mathrm{hello}} &amp; w_{2,\mathrm{period}} \\
+          w_{3,\mathrm{you}} &amp; w_{3,\mathrm{say}} &amp; w_{3,\mathrm{goodbye}} &amp; w_{3,\mathrm{and}} &amp;
+          w_{3,\mathrm{I}} &amp; w_{3,\mathrm{hello}} &amp; w_{3\mathrm{period}} \\
+      \end{pmatrix}
+\end{split}\]</div>
+<p>とします。行数が中間層のニューロン数、列数が単語の種類数になります。</p>
+<p>出力層も全結合層とすると、最終的な出力は</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbf{s}
+   &amp;= \mathbf{h}
+      \mathbf{W}_{\mathrm{out}}
+\\
+   &amp;= \begin{pmatrix}
+          s_{\mathrm{you}} &amp; s_{\mathrm{say}} &amp; s_{\mathrm{goodbye}} &amp; s_{\mathrm{and}} &amp;
+          s_{\mathrm{I}} &amp; s_{\mathrm{hello}} &amp; s_{\mathrm{period}}
+      \end{pmatrix}
+\end{aligned}
+\end{split}\]</div>
+<p>例えば、「you」に関する要素の計算は、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+s_{\mathrm{you}}
+   &amp;= \frac{1}{2} (w_{\mathrm{you},1} + w_{\mathrm{goodbye},1}) w_{1,\mathrm{you}}
+      + \frac{1}{2} (w_{\mathrm{you},2} + w_{\mathrm{goodbye},2}) w_{2,\mathrm{you}}
+      + \frac{1}{2} (w_{\mathrm{you},3} + w_{\mathrm{goodbye},3}) w_{3,\mathrm{you}}
+\\
+   &amp;= \frac{1}{2}
+      \sum_{i=1}^3
+          (w_{\mathrm{you},i} + w_{\mathrm{goodbye},i}) w_{i,\mathrm{you}}
+\end{aligned}\end{split}\]</div>
+<p>コンテキストに対応する入力層の重みの平均と「you」に関する出力の重みの積になります。</p>
+<p>他の要素(単語)についても同様に計算できるので、最終的な出力は</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbf{s}
+   &amp;= \begin{pmatrix}
+          s_{\mathrm{you}} &amp; s_{\mathrm{say}} &amp; s_{\mathrm{goodbye}} &amp; s_{\mathrm{and}} &amp;
+          s_{\mathrm{I}} &amp; s_{\mathrm{hello}} &amp; s_{\mathrm{period}}
+      \end{pmatrix}
+\\
+   &amp;= \begin{pmatrix}
+          \frac{1}{2} \sum_{i=1}^3 (w_{\mathrm{you},i} + w_{\mathrm{goodbye},i}) w_{i,\mathrm{you}} &amp;
+          \frac{1}{2} \sum_{i=1}^3 (w_{\mathrm{you},i} + w_{\mathrm{goodbye},i}) w_{i,\mathrm{say}} &amp;
+          \cdots &amp;
+          \frac{1}{2} \sum_{i=1}^3 (w_{\mathrm{you},i} + w_{\mathrm{goodbye},i}) w_{i,\mathrm{hello}} &amp;
+          \frac{1}{2} \sum_{i=1}^3 (w_{\mathrm{you},i} + w_{\mathrm{goodbye},i}) w_{i,\mathrm{period}}
+      \end{pmatrix}
+\end{aligned}
+\end{split}\]</div>
+<p>となります。</p>
+<p>ここで、出力層のニューロンは各単語に対応し、各単語の「スコア」と言います。</p>
+<p>「スコア」の値が高ければ高いほど、それに対応する単語の出現確率も高くなり、ターゲットの単語であるとして採用します。そのため、スコアを求める処理を推論処理と言います。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Define the context data</span>
+<span class="n">c0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="c1"># you</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="c1"># goodbye</span>
+
+<span class="c1"># Initialize weights randomly</span>
+<span class="n">W_in</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Input layer weights</span>
+<span class="n">W_out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Output layer weights</span>
+
+<span class="c1"># Define the layers using PyTorch&#39;s functional API</span>
+<span class="k">def</span> <span class="nf">in_layer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">out_layer</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+
+<span class="c1"># Forward pass through the input layers</span>
+<span class="n">h0</span> <span class="o">=</span> <span class="n">in_layer</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">W_in</span><span class="p">)</span> <span class="c1"># you</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">in_layer</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">W_in</span><span class="p">)</span> <span class="c1"># goodbye</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">h0</span> <span class="o">+</span> <span class="n">h1</span><span class="p">)</span>
+
+<span class="c1"># Forward pass through the output layer (scores)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">out_layer</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">W_out</span><span class="p">)</span>
+
+<span class="c1"># Print the outputs</span>
+<span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[-1.3467, -1.5459, -0.9450]]),
+ tensor([[-1.1224,  0.4517, -1.0530]]),
+ tensor([[-1.2346, -0.5471, -0.9990]]),
+ tensor([[-2.4770,  1.5870,  2.2100,  0.6500,  0.8110, -1.7260, -0.7230]]))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="622bbb0f-6f3f-4a72-b8b9-430fe33e649f" name="93e0a589-6ac0-4ef0-b4ca-a69d28f787a8" type="radio">
+</input><label class="sd-tab-label" for="622bbb0f-6f3f-4a72-b8b9-430fe33e649f">
+課題</label><div class="sd-tab-content docutils">
+<p>正解は「you」として、Softmax関数によってスコア<code class="docutils literal notranslate"><span class="pre">s</span></code>を確率として扱えるように変換し、そして、正規化した値と教師ラベルを用いて損失を求めなさい。</p>
+</div>
+<input id="e6064bbc-8e3a-492a-ab90-4be98cf1368f" name="93e0a589-6ac0-4ef0-b4ca-a69d28f787a8" type="radio">
+</input><label class="sd-tab-label" for="e6064bbc-8e3a-492a-ab90-4be98cf1368f">
+ヒント</label><div class="sd-tab-content docutils">
+<p>正解は「you」の場合、教師ラベルは<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0]</span></code>になります。</p>
+</div>
+</div>
+</section>
+</section>
+<section id="cbow">
+<h3>CBOWモデルの学習<a class="headerlink" href="#cbow" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0044, 0.2584, 0.4818, 0.1013, 0.1190, 0.0094, 0.0256]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">loss</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor(1.3532)
+</pre></div>
+</div>
+</div>
+</div>
+<p>t = np.array([0, 1, 0, 0, 0, 0, 0, 0, 0, 0])</p>
+<p>loss()</p>
 </section>
 </section>
 </section>

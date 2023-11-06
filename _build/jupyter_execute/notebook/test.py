@@ -257,5 +257,8 @@ np.save('./Data/W.npy', W)
 # In[ ]:
 
 
-
+torch.softmax(s, dim=1)
+t = torch.tensor([[0, 1, 0, 0, 0, 0, 0]], dtype=torch.float32)
+loss = nn.CrossEntropyLoss()
+loss(s,t)
 

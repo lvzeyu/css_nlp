@@ -168,4 +168,150 @@ print(f"重み付き和の形状：{h.shape}")
 # 
 # 中間層のニューロンの数を入力層よりも減らすことによって、中間層には、単語を予測するために必要な情報が"コンパクト"に収められて、結果としては密なベクトル表現が得られます。このとき、この中間層の情報は、人間には理解できない「ブラックボックス」ような状態になります。この作業は、「エンコード」と言います。
 
+# #### 中間層から出力層(デコード)
 # 
+
+# 中間層の情報から目的の結果を得る作業は、「デコード」と言います。ここでは、中間層のニューロンの値$\mathbf{h}$を各単語に対応した値になるように、つまり要素(行)数が単語の種類数となるように再度変換したものを、CBOWモデルの出力とします。
+# 
+# 出力層の重みを
+# 
+# $$
+# \mathbf{W}_{\mathrm{out}}
+#     = \begin{pmatrix}
+#           w_{1,\mathrm{you}} & w_{1,\mathrm{say}} & w_{1,\mathrm{goodbye}} & w_{1,\mathrm{and}} &
+#           w_{1,\mathrm{I}} & w_{1,\mathrm{hello}} & w_{1,\mathrm{period}} \\
+#           w_{2,\mathrm{you}} & w_{2,\mathrm{say}} & w_{2,\mathrm{goodbye}} & w_{2,\mathrm{and}} &
+#           w_{2,\mathrm{I}} & w_{2,\mathrm{hello}} & w_{2,\mathrm{period}} \\
+#           w_{3,\mathrm{you}} & w_{3,\mathrm{say}} & w_{3,\mathrm{goodbye}} & w_{3,\mathrm{and}} &
+#           w_{3,\mathrm{I}} & w_{3,\mathrm{hello}} & w_{3\mathrm{period}} \\
+#       \end{pmatrix}
+# $$
+# 
+# とします。行数が中間層のニューロン数、列数が単語の種類数になります。
+# 
+# 出力層も全結合層とすると、最終的な出力は
+# 
+# $$
+# \begin{aligned}
+# \mathbf{s}
+#    &= \mathbf{h}
+#       \mathbf{W}_{\mathrm{out}}
+# \\
+#    &= \begin{pmatrix}
+#           s_{\mathrm{you}} & s_{\mathrm{say}} & s_{\mathrm{goodbye}} & s_{\mathrm{and}} &
+#           s_{\mathrm{I}} & s_{\mathrm{hello}} & s_{\mathrm{period}}
+#       \end{pmatrix}
+# \end{aligned}
+# $$
+# 
+
+# 例えば、「you」に関する要素の計算は、
+# 
+# $$
+# \begin{aligned}
+# s_{\mathrm{you}}
+#    &= \frac{1}{2} (w_{\mathrm{you},1} + w_{\mathrm{goodbye},1}) w_{1,\mathrm{you}}
+#       + \frac{1}{2} (w_{\mathrm{you},2} + w_{\mathrm{goodbye},2}) w_{2,\mathrm{you}}
+#       + \frac{1}{2} (w_{\mathrm{you},3} + w_{\mathrm{goodbye},3}) w_{3,\mathrm{you}}
+# \\
+#    &= \frac{1}{2}
+#       \sum_{i=1}^3
+#           (w_{\mathrm{you},i} + w_{\mathrm{goodbye},i}) w_{i,\mathrm{you}}
+# \end{aligned}
+# 
+# $$
+# 
+# コンテキストに対応する入力層の重みの平均と「you」に関する出力の重みの積になります。
+# 
+# 他の要素(単語)についても同様に計算できるので、最終的な出力は
+# 
+# $$
+# \begin{aligned}
+# \mathbf{s}
+#    &= \begin{pmatrix}
+#           s_{\mathrm{you}} & s_{\mathrm{say}} & s_{\mathrm{goodbye}} & s_{\mathrm{and}} &
+#           s_{\mathrm{I}} & s_{\mathrm{hello}} & s_{\mathrm{period}}
+#       \end{pmatrix}
+# \\
+#    &= \begin{pmatrix}
+#           \frac{1}{2} \sum_{i=1}^3 (w_{\mathrm{you},i} + w_{\mathrm{goodbye},i}) w_{i,\mathrm{you}} &
+#           \frac{1}{2} \sum_{i=1}^3 (w_{\mathrm{you},i} + w_{\mathrm{goodbye},i}) w_{i,\mathrm{say}} &
+#           \cdots &
+#           \frac{1}{2} \sum_{i=1}^3 (w_{\mathrm{you},i} + w_{\mathrm{goodbye},i}) w_{i,\mathrm{hello}} &
+#           \frac{1}{2} \sum_{i=1}^3 (w_{\mathrm{you},i} + w_{\mathrm{goodbye},i}) w_{i,\mathrm{period}}
+#       \end{pmatrix}
+# \end{aligned}
+# $$
+# 
+# となります。
+# 
+# ここで、出力層のニューロンは各単語に対応し、各単語の「スコア」と言います。
+# 
+# 「スコア」の値が高ければ高いほど、それに対応する単語の出現確率も高くなり、ターゲットの単語であるとして採用します。そのため、スコアを求める処理を推論処理と言います。
+
+# In[2]:
+
+
+import torch
+import torch.nn as nn
+import numpy as np
+
+# Define the context data
+c0 = torch.tensor([[1, 0, 0, 0, 0, 0, 0]], dtype=torch.float32) # you
+c1 = torch.tensor([[0, 0, 1, 0, 0, 0, 0]], dtype=torch.float32) # goodbye
+
+# Initialize weights randomly
+W_in = torch.randn(7, 3, requires_grad=False)  # Input layer weights
+W_out = torch.randn(3, 7, requires_grad=False) # Output layer weights
+
+# Define the layers using PyTorch's functional API
+def in_layer(x, W):
+    return torch.matmul(x, W)
+
+def out_layer(h, W):
+    return torch.matmul(h, W)
+
+# Forward pass through the input layers
+h0 = in_layer(c0, W_in) # you
+h1 = in_layer(c1, W_in) # goodbye
+h = 0.5 * (h0 + h1)
+
+# Forward pass through the output layer (scores)
+s = out_layer(h, W_out)
+
+# Print the outputs
+h0, h1, h, torch.round(s, decimals=3)
+
+
+# ````{tab-set}
+# ```{tab-item} 課題
+# 正解は「you」として、Softmax関数によってスコア``s``を確率として扱えるように変換し、そして、正規化した値と教師ラベルを用いて損失を求めなさい。
+# ```
+# 
+# ```{tab-item} ヒント
+# 正解は「you」の場合、教師ラベルは``[0, 1, 0, 0, 0, 0, 0]``になります。
+# ```
+# 
+# ````
+
+# ### CBOWモデルの学習
+# 
+
+# In[3]:
+
+
+torch.softmax(s, dim=1)
+
+
+# In[4]:
+
+
+t = torch.tensor([[0, 1, 0, 0, 0, 0, 0]], dtype=torch.float32)
+loss = nn.CrossEntropyLoss()
+loss(s,t)
+
+
+# 
+# t = np.array([0, 1, 0, 0, 0, 0, 0, 0, 0, 0])
+# 
+# loss()
