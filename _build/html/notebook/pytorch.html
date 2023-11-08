@@ -185,7 +185,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_2.html">
+  <a class="reference internal" href="word2vec_2_embedding.html">
    word2vec
   </a>
  </li>
@@ -734,11 +734,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.7957, 0.8127, 0.6851],
-        [0.3050, 0.2566, 0.5819],
-        [0.5281, 0.2107, 0.9484],
-        [0.2797, 0.3297, 0.9570],
-        [0.6449, 0.7095, 0.1298]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.7145, 0.8021, 0.3106],
+        [0.9434, 0.1363, 0.6894],
+        [0.8801, 0.7528, 0.6406],
+        [0.1933, 0.5511, 0.8266],
+        [0.3255, 0.5376, 0.5107]])
 </pre></div>
 </div>
 </div>
@@ -781,11 +781,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.8174, 0.5368, 0.9418],
-        [0.9406, 0.7971, 1.0942],
-        [1.4189, 0.5520, 0.6187],
-        [0.9262, 1.3693, 1.9305],
-        [0.7727, 0.6427, 1.1212]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.7974, 0.3322, 0.6230],
+        [0.9961, 1.0297, 1.1088],
+        [1.4761, 0.8428, 1.2889],
+        [0.2962, 1.5027, 0.4934],
+        [1.0972, 0.9579, 1.5561]])
 </pre></div>
 </div>
 </div>
@@ -797,11 +797,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.8174, 0.5368, 0.9418],
-        [0.9406, 0.7971, 1.0942],
-        [1.4189, 0.5520, 0.6187],
-        [0.9262, 1.3693, 1.9305],
-        [0.7727, 0.6427, 1.1212]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.7974, 0.3322, 0.6230],
+        [0.9961, 1.0297, 1.1088],
+        [1.4761, 0.8428, 1.2889],
+        [0.2962, 1.5027, 0.4934],
+        [1.0972, 0.9579, 1.5561]])
 </pre></div>
 </div>
 </div>
@@ -817,8 +817,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.8208, 0.5222, 0.9606],
-        [0.6854, 0.2912, 0.4848]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1553, 0.7029, 0.0149],
+        [0.7428, 0.5467, 0.7005]])
 </pre></div>
 </div>
 </div>
@@ -830,7 +830,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.5180, 0.9824, 0.8208, 0.6854])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.8146, 0.8954, 0.1553, 0.7428])
 </pre></div>
 </div>
 </div>
@@ -961,9 +961,9 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0476, 0.0000, 0.0000],
-        [0.0824, 0.0000, 0.0000],
-        [0.0453, 0.0000, 0.0000]], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1469, 0.0285, 0.1596],
+        [0.1414, 0.0000, 0.1096],
+        [0.1633, 0.0252, 0.1531]], grad_fn=&lt;ReluBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -977,7 +977,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted class: tensor([0, 0, 0])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted class: tensor([2, 0, 0])
 </pre></div>
 </div>
 </div>
@@ -1036,8 +1036,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient function for z = &lt;AddBackward0 object at 0x11f52b0d0&gt;
-Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at 0x11f52b040&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient function for z = &lt;AddBackward0 object at 0x11cea3a00&gt;
+Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at 0x11cea3ca0&gt;
 </pre></div>
 </div>
 </div>
@@ -1066,14 +1066,12 @@ Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0080, 0.0012, 0.0257],
-        [0.0578, 0.0084, 0.1867],
-        [0.0386, 0.0056, 0.1246],
-        [0.0169, 0.0025, 0.0545],
-        [0.0618, 0.0090, 0.1998]])
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.0645, 0.0094, 0.2086])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1399, 0.0798, 0.0232],
+        [0.2101, 0.1197, 0.0348],
+        [0.1595, 0.0909, 0.0264],
+        [0.2981, 0.1699, 0.0493],
+        [0.0836, 0.0477, 0.0138]])
+tensor([0.3080, 0.1756, 0.0510])
 </pre></div>
 </div>
 </div>
@@ -1123,19 +1121,17 @@ Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6899933218955994
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.685552716255188
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 200, Loss: 0.6880709528923035
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 200, Loss: 0.6809669733047485
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 300, Loss: 0.6861103773117065
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 300, Loss: 0.6765998601913452
+Epoch 400, Loss: 0.6720536947250366
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 400, Loss: 0.6840447783470154
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 500, Loss: 0.681743323802948
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 500, Loss: 0.6671751737594604
 </pre></div>
 </div>
 </div>
@@ -1211,20 +1207,20 @@ Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6930894255638123
-Epoch 200, Loss: 0.6927724480628967
-Epoch 300, Loss: 0.6925264596939087
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6926382184028625
+Epoch 200, Loss: 0.6917238831520081
+Epoch 300, Loss: 0.6907972693443298
+Epoch 400, Loss: 0.6899320483207703
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 400, Loss: 0.6923822164535522
-Epoch 500, Loss: 0.6922631859779358
-Epoch 600, Loss: 0.692155659198761
-Epoch 700, Loss: 0.6920515298843384
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 500, Loss: 0.6894210577011108
+Epoch 600, Loss: 0.6889558434486389
+Epoch 700, Loss: 0.6885276436805725
+Epoch 800, Loss: 0.6881605982780457
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 800, Loss: 0.6919524669647217
-Epoch 900, Loss: 0.6918615698814392
-Epoch 1000, Loss: 0.6917783617973328
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 900, Loss: 0.6877844333648682
+Epoch 1000, Loss: 0.6874130368232727
 </pre></div>
 </div>
 </div>
@@ -1451,16 +1447,16 @@ Epoch 1000, Loss: 0.6917783617973328
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [10/100], Loss: 1.0341, Val Accuracy: 30.00%
-Epoch [20/100], Loss: 0.9091, Val Accuracy: 70.00%
-Epoch [30/100], Loss: 0.7819, Val Accuracy: 90.00%
-Epoch [40/100], Loss: 0.6444, Val Accuracy: 90.00%
-Epoch [50/100], Loss: 0.5143, Val Accuracy: 90.00%
-Epoch [60/100], Loss: 0.4205, Val Accuracy: 93.33%
-Epoch [70/100], Loss: 0.3557, Val Accuracy: 93.33%
-Epoch [80/100], Loss: 0.3040, Val Accuracy: 93.33%
-Epoch [90/100], Loss: 0.2580, Val Accuracy: 93.33%
-Epoch [100/100], Loss: 0.2173, Val Accuracy: 93.33%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [10/100], Loss: 1.0119, Val Accuracy: 66.67%
+Epoch [20/100], Loss: 0.8504, Val Accuracy: 66.67%
+Epoch [30/100], Loss: 0.6290, Val Accuracy: 66.67%
+Epoch [40/100], Loss: 0.4690, Val Accuracy: 80.00%
+Epoch [50/100], Loss: 0.3624, Val Accuracy: 86.67%
+Epoch [60/100], Loss: 0.2740, Val Accuracy: 90.00%
+Epoch [70/100], Loss: 0.2021, Val Accuracy: 86.67%
+Epoch [80/100], Loss: 0.1505, Val Accuracy: 86.67%
+Epoch [90/100], Loss: 0.1146, Val Accuracy: 90.00%
+Epoch [100/100], Loss: 0.0904, Val Accuracy: 90.00%
 </pre></div>
 </div>
 </div>
@@ -1519,8 +1515,8 @@ Epoch [100/100], Loss: 0.2173, Val Accuracy: 93.33%
 </pre></div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="3c3e1c26-8ee3-4b4d-b87c-fdc95f0c7b4d" name="351620b1-6b5c-41f0-89aa-088d998d161e" type="radio">
-</input><label class="sd-tab-label" for="3c3e1c26-8ee3-4b4d-b87c-fdc95f0c7b4d">
+<input checked="checked" id="1c9ccb88-ed86-4de7-a99c-412ec7637302" name="bea27bb7-e760-44c8-91d3-b11b03e967c6" type="radio">
+</input><label class="sd-tab-label" for="1c9ccb88-ed86-4de7-a99c-412ec7637302">
 実習問題</label><div class="sd-tab-content docutils">
 <p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">NeuralNetwork(nn.Module)</span></code>を以下のように改装して、改めて学習を行なってください。</p>
 <ul class="simple">
@@ -1531,8 +1527,8 @@ Epoch [100/100], Loss: 0.2173, Val Accuracy: 93.33%
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="9afa1c22-0024-4c32-8e3f-ec626b4be994" name="52a2f39b-c429-4c85-9bcb-fa209d35867b" type="radio">
-</input><label class="sd-tab-label" for="9afa1c22-0024-4c32-8e3f-ec626b4be994">
+<input checked="checked" id="b38135a1-3577-4903-a5ac-a899eb5240df" name="531dd312-575f-490d-a732-d395a88bd93d" type="radio">
+</input><label class="sd-tab-label" for="b38135a1-3577-4903-a5ac-a899eb5240df">
 課題</label><div class="sd-tab-content docutils">
 <p>sepal length, sepal width, petal lengthでpetal widthを予測するニューラルネットワークを構築、学習してください。</p>
 <ul class="simple">

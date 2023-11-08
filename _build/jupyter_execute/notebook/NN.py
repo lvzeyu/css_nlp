@@ -1256,7 +1256,7 @@ print(db2.shape)
 
 # 勾配の計算結果を、辞書型の変数```grads```に格納します。
 
-# In[45]:
+# In[ ]:
 
 
 # 勾配を計算する関数を定義
@@ -1282,7 +1282,7 @@ def numerical_gradient_tmp(x, W, t):
 # ```TwoLayerNet```クラスのインスタンスを作成します。
 # 
 
-# In[46]:
+# In[200]:
 
 
 # インスタンスを作成
@@ -1290,7 +1290,7 @@ net = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)
 net.params.keys()
 
 
-# In[47]:
+# In[201]:
 
 
 # ニューラルネットワークの計算
@@ -1300,7 +1300,7 @@ print(np.sum(y[:5], axis=1)) # 正規化の確認
 print(np.argmax(y[:5], axis=1)) # 推論結果の確認
 
 
-# In[48]:
+# In[202]:
 
 
 # 損失を計算
@@ -1308,7 +1308,7 @@ L = net.loss(x, t)
 print(L)
 
 
-# In[49]:
+# In[203]:
 
 
 # 認識精度を計算
@@ -1316,7 +1316,7 @@ acc = net.accuracy(x, t)
 print(acc)
 
 
-# In[50]:
+# In[205]:
 
 
 # 各パラメータの勾配を計算

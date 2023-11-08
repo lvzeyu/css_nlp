@@ -50,12 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="単語分散表現" href="word2vec_1.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -178,14 +177,14 @@ const thebe_selector_output = ".output, .cell_output"
   単語分散表現
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="word2vec_1.html">
    単語分散表現
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_2_embedding.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    word2vec
   </a>
  </li>
@@ -248,7 +247,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/word2vec_2.ipynb"
+        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/word2vec_2_embedding.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -266,7 +265,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/word2vec_2.ipynb"
+        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/word2vec_2_embedding.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -326,7 +325,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/word2vec_2.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/word2vec_2_embedding.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -354,7 +353,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/notebook/word2vec_2.ipynb"
+        <a href="../_sources/notebook/word2vec_2_embedding.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -467,17 +466,41 @@ title="Print to PDF"
        コンテキストとターゲット
       </a>
      </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id11">
-       one-hot表現への変換
-      </a>
-     </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cbow">
-     CBOWモデルの実装
+    <a class="reference internal nav-link" href="#pytorchcbow">
+     PytorchでCBOWモデルの実装
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#embedding">
+       Embeddingレイヤ
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
+       ミニバッチ化データセットの作成
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#dataset">
+         DataSet
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#dataloader">
+         DataLoader
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cbow">
+       CBOWモデルの構築
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -554,17 +577,41 @@ title="Print to PDF"
        コンテキストとターゲット
       </a>
      </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id11">
-       one-hot表現への変換
-      </a>
-     </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cbow">
-     CBOWモデルの実装
+    <a class="reference internal nav-link" href="#pytorchcbow">
+     PytorchでCBOWモデルの実装
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#embedding">
+       Embeddingレイヤ
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
+       ミニバッチ化データセットの作成
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#dataset">
+         DataSet
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#dataloader">
+         DataLoader
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cbow">
+       CBOWモデルの構築
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -716,15 +763,15 @@ h_1
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>コンテキストの形状：(1, 7)
 重み
-[[-1.13086873e+00  2.71660979e-01  4.43787956e-01]
- [-1.41570402e+00  2.20819485e-03  2.24283921e-01]
- [-1.15433124e+00 -3.43859203e-01  1.77424386e+00]
- [ 7.20532973e-01  1.54005124e+00  1.36620858e+00]
- [ 9.58189871e-01 -1.66340321e-01  5.71113820e-01]
- [ 1.52354928e+00  2.77500406e-01 -1.21375733e+00]
- [-1.24742708e+00  2.80840703e+00  3.80850062e-01]]
+[[ 1.71670313e+00 -8.63625037e-01 -5.35290530e-01]
+ [-5.60747899e-01  1.50208489e+00 -1.67966102e+00]
+ [ 1.81526839e+00 -1.17667527e+00  4.48485314e-01]
+ [-8.65600176e-02  2.37075284e+00  6.47776688e-02]
+ [-2.33527217e+00 -6.69067439e-01 -1.44158917e+00]
+ [-9.21024532e-01 -9.52111113e-01  1.16383682e-03]
+ [ 2.74139129e+00  1.92697421e-01  8.97070946e-02]]
 重み付き和
-[[-1.13086873  0.27166098  0.44378796]]
+[[ 1.71670313 -0.86362504 -0.53529053]]
 重み付き和の形状：(1, 3)
 </pre></div>
 </div>
@@ -835,22 +882,22 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[-1.5009,  2.2751,  0.2760]]),
- tensor([[ 0.1450,  0.7981, -0.3356]]),
- tensor([[-0.6780,  1.5366, -0.0298]]),
- tensor([[ 0.8940, -0.4480, -1.5660, -1.0160, -1.1390,  1.9710, -0.5130]]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[ 0.1224, -0.2435, -2.1643]]),
+ tensor([[-1.4105, -1.4011, -0.0061]]),
+ tensor([[-0.6440, -0.8223, -1.0852]]),
+ tensor([[ 1.9580, -2.4850, -1.3920,  0.3000, -0.5260,  2.7190,  0.8220]]))
 </pre></div>
 </div>
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="aabf96af-30ad-4cce-9e95-73614bc2f6cc" name="0300e6c7-c5db-49d4-9b4b-44c58ee46ea5" type="radio">
-</input><label class="sd-tab-label" for="aabf96af-30ad-4cce-9e95-73614bc2f6cc">
+<input checked="checked" id="7d12061f-ea87-41bb-99d6-3a93c94dbad8" name="3e4b7fa6-aca7-4e31-8fa6-32186adba709" type="radio">
+</input><label class="sd-tab-label" for="7d12061f-ea87-41bb-99d6-3a93c94dbad8">
 課題</label><div class="sd-tab-content docutils">
 <p>正解は「say」として、Softmax関数によってスコア<code class="docutils literal notranslate"><span class="pre">s</span></code>を確率として扱えるように変換し、そして、正規化した値と教師ラベルを用いて損失を求めなさい。</p>
 </div>
-<input id="3270620f-bb9e-4980-b180-6194fba50889" name="0300e6c7-c5db-49d4-9b4b-44c58ee46ea5" type="radio">
-</input><label class="sd-tab-label" for="3270620f-bb9e-4980-b180-6194fba50889">
+<input id="38ed478b-363f-40f9-b079-4c7730edb13c" name="3e4b7fa6-aca7-4e31-8fa6-32186adba709" type="radio">
+</input><label class="sd-tab-label" for="38ed478b-363f-40f9-b079-4c7730edb13c">
 ヒント</label><div class="sd-tab-content docutils">
 <p>正解は「say」の場合、教師ラベルは<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0]</span></code>になります。</p>
 </div>
@@ -1028,9 +1075,9 @@ s_{\mathrm{you}}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># コンテキストとターゲットを作成</span>
-<span class="n">contexts</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">create_contexts_target</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">contexts</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">create_contexts_target</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1047,175 +1094,171 @@ s_{\mathrm{you}}
 </div>
 </div>
 </section>
+</section>
+<section id="pytorchcbow">
+<h3>PytorchでCBOWモデルの実装<a class="headerlink" href="#pytorchcbow" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">Dataset</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="embedding">
+<h4>Embeddingレイヤ<a class="headerlink" href="#embedding" title="Permalink to this headline">#</a></h4>
+<p>先ほど、理解しやすいone-hot表現でコンテキストを変換する方法を説明しましたが、大規模なコーパスで学習する際、one-hot表現の次元数も大きくになって、非効率な学習の原因になります。</p>
+<p>ただ、one-hot表現による計算は、単に行列の特定の行を抜き出すことだけですから、同じ機能を持つレイヤで入れ替えることは可能です。このような、重みパラメータから「単語IDに該当する行(ベクトル)」を抜き出すためのレイヤは「Embeddingレイヤ」と言います。</p>
+<p>PyTorchで提供されるモジュール<code class="docutils literal notranslate"><span class="pre">nn.Embedding</span></code>を使うと、簡単にEmbeddingレイヤを実装することができます。</p>
+<p>例えば、語彙に6つの単語があり、各埋め込みベクトルの次元数を3に設定した場合、nn.Embeddingの定義は以下のようになります。</p>
+<p>そして、</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>もしインデックス2のトークンの埋め込みを取得したい場合、次のようにします：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">embedding_layer</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">embedding</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[-0.3032,  1.2471,  0.5277],
+         [-0.0986, -0.0490, -1.0046]]], grad_fn=&lt;EmbeddingBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>埋め込みベクトルの和を取って、入力層から中間層までにエンコードの機能を実装できます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">out</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-0.4017,  1.1981, -0.4769]], grad_fn=&lt;SumBackward1&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">linear1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">linear1</span><span class="p">(</span><span class="n">out</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-1.8239, -1.8256, -1.6864, -2.0974, -1.3789, -2.1398]],
+       grad_fn=&lt;LogSoftmaxBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="id11">
-<h4>one-hot表現への変換<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h4>
-<p>単語IDを要素とするコンテキストとターゲットをone-hot表現のコンテキストとターゲットに変換する関数を実装します。</p>
-<p>基本的な処理は、単語の種類数個の<span class="math notranslate nohighlight">\(0\)</span>を要素とするベクトルを作成し、単語ID番目の要素だけを<span class="math notranslate nohighlight">\(1\)</span>に置き換えます。</p>
-<p>ターゲットは、要素数がターゲット数のベクトルです。変換後は、ターゲット数の行数、単語の種類数の列数の2次元配列になります。つまり、行が各ターゲットの単語、列が各単語IDに対応します。そして行ごとに1つだけ、値が<span class="math notranslate nohighlight">\(1\)</span>の要素を持ちます。</p>
+<h4>ミニバッチ化データセットの作成<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h4>
+<p>Word2Vecも含めて、深層学習によって学習を行う際には、ミニバッチ化して学習させることが一般的です。</p>
+<p>pytorchで提供されている<code class="docutils literal notranslate"><span class="pre">DataSet</span></code>と<code class="docutils literal notranslate"><span class="pre">DataLoader</span></code>という機能を用いてミニバッチ化を簡単に実現できます。</p>
+<section id="dataset">
+<h5>DataSet<a class="headerlink" href="#dataset" title="Permalink to this headline">#</a></h5>
+<p>DataSetは，元々のデータを全て持っていて、ある番号を指定されると、その番号の入出力のペアをただ一つ返します。クラスを使って実装します。</p>
+<p>DataSetを実装する際には、クラスのメンバ関数として<code class="docutils literal notranslate"><span class="pre">__len__()</span></code>と<code class="docutils literal notranslate"><span class="pre">__getitem__()</span></code>を必ず作ります．</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">np.zeros()</span></code>で変換後の形状の2次元配列を作成し、for文で行ごとに単語ID番目の要素を1を代入します。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">enumerate()</span></code>で引数に渡したリストの要素とその要素のインデックスを出力します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__len__()</span></code>は、<code class="docutils literal notranslate"><span class="pre">len()</span></code>を使ったときに呼ばれる関数です。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__getitem__()</span></code>は、<code class="docutils literal notranslate"><span class="pre">array[i]</span></code>のようにインデックスを使って要素を参照するときに呼ばれる関数です。</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ターゲットを確認</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CBOWDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contexts</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contexts</span> <span class="o">=</span> <span class="n">contexts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">targets</span>
+    
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">contexts</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert contexts and targets to tensors</span>
+<span class="n">contexts_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">contexts</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">targets_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
-<span class="c1"># ターゲットの単語数を取得</span>
-<span class="n">N</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># 単語の種類数を取得</span>
-<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
-
-<span class="c1"># 全ての要素が0の変換後の形状の2次元配列を作成</span>
-<span class="n">one_hot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">one_hot</span><span class="p">)</span>
-
-<span class="c1"># 単語ID番目の要素を1に置換</span>
-<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">word_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
-    <span class="n">one_hot</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="n">word_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">one_hot</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">one_hot</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="c1"># Create the dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">CBOWDataset</span><span class="p">(</span><span class="n">contexts_tensor</span><span class="p">,</span> <span class="n">targets_tensor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;全データ数:&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;4番目のデータ:&#39;</span><span class="p">,</span><span class="n">dataset</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;4~5番目のデータ:&#39;</span><span class="p">,</span><span class="n">dataset</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 1 5]
-(6,)
-[[0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0]
- [0 0 0 0 0 0 0]]
-[[0 1 0 0 0 0 0]
- [0 0 1 0 0 0 0]
- [0 0 0 1 0 0 0]
- [0 0 0 0 1 0 0]
- [0 1 0 0 0 0 0]
- [0 0 0 0 0 1 0]]
-(6, 7)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>全データ数: 6
+4番目のデータ: (tensor([3, 1]), tensor(4))
+4~5番目のデータ: (tensor([[3, 1],
+        [4, 5]]), tensor([4, 1]))
 </pre></div>
 </div>
 </div>
 </div>
-<p>コンテキストは、0次元目の要素数がターゲット数、1次元目の要素数がウィンドウサイズの<span class="math notranslate nohighlight">\(2\)</span>倍の2次元配列です。</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">np.zeros()</span></code>で形状が<code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">C,</span> <span class="pre">vocab_size)</span></code>である配列を作成し、単語ID番目の要素を1に置換します。</p></li>
-</ul>
+</section>
+<section id="dataloader">
+<h5>DataLoader<a class="headerlink" href="#dataloader" title="Permalink to this headline">#</a></h5>
+<p><code class="docutils literal notranslate"><span class="pre">torch.utils.data</span></code>モジュールには、データのシャッフとミニバッチの整形に役立つ<code class="docutils literal notranslate"><span class="pre">DataLoader</span></code>というクラスが用意されます。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># コンテキストを確認</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">contexts</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="c1"># ターゲットの単語数を取得</span>
-<span class="n">N</span> <span class="o">=</span> <span class="n">contexts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># コンテキストサイズを取得</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">contexts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># 単語の種類数を取得</span>
-<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
-
-<span class="c1"># 全ての要素が0の変換後の形状の3次元配列を作成</span>
-<span class="n">one_hot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;全ての要素が0の変換後の形状の3次元配列を作成&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">one_hot</span><span class="p">)</span>
-
-<span class="c1"># 単語ID番目の要素を1に置換</span>
-<span class="k">for</span> <span class="n">idx_0</span><span class="p">,</span> <span class="n">word_ids</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">contexts</span><span class="p">):</span> <span class="c1"># 0次元方向</span>
-    <span class="k">for</span> <span class="n">idx_1</span><span class="p">,</span> <span class="n">word_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">word_ids</span><span class="p">):</span> <span class="c1"># 1次元方向</span>
-        <span class="n">one_hot</span><span class="p">[</span><span class="n">idx_0</span><span class="p">,</span> <span class="n">idx_1</span><span class="p">,</span> <span class="n">word_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;単語ID番目の要素を1に置換&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">one_hot</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">one_hot</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the DataLoader</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># You can adjust the batch size</span>
+<span class="n">data_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">data_loader</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 2]
- [1 3]
- [2 4]
- [3 1]
- [4 5]
- [1 6]]
-(6, 2)
-全ての要素が0の変換後の形状の3次元配列を作成
-[[[0 0 0 0 0 0 0]
-  [0 0 0 0 0 0 0]]
-
- [[0 0 0 0 0 0 0]
-  [0 0 0 0 0 0 0]]
-
- [[0 0 0 0 0 0 0]
-  [0 0 0 0 0 0 0]]
-
- [[0 0 0 0 0 0 0]
-  [0 0 0 0 0 0 0]]
-
- [[0 0 0 0 0 0 0]
-  [0 0 0 0 0 0 0]]
-
- [[0 0 0 0 0 0 0]
-  [0 0 0 0 0 0 0]]]
-単語ID番目の要素を1に置換
-[[[1 0 0 0 0 0 0]
-  [0 0 1 0 0 0 0]]
-
- [[0 1 0 0 0 0 0]
-  [0 0 0 1 0 0 0]]
-
- [[0 0 1 0 0 0 0]
-  [0 0 0 0 1 0 0]]
-
- [[0 0 0 1 0 0 0]
-  [0 1 0 0 0 0 0]]
-
- [[0 0 0 0 1 0 0]
-  [0 0 0 0 0 1 0]]
-
- [[0 1 0 0 0 0 0]
-  [0 0 0 0 0 0 1]]]
-(6, 2, 7)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># one-hot表現への変換関数の実装</span>
-<span class="k">def</span> <span class="nf">convert_one_hot</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">):</span>
-    
-    <span class="c1"># ターゲットの単語数を取得</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    
-    <span class="c1"># one-hot表現に変換</span>
-    <span class="k">if</span> <span class="n">corpus</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># 1次元配列のとき</span>
-        
-        <span class="c1"># 変換後の形状の2次元配列を作成</span>
-        <span class="n">one_hot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
-        
-        <span class="c1"># 単語ID番目の要素を1に置換</span>
-        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">word_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">corpus</span><span class="p">):</span>
-            <span class="n">one_hot</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="n">word_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    
-    <span class="k">elif</span> <span class="n">corpus</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span> <span class="c1"># 2次元配列のとき</span>
-        
-        <span class="c1"># コンテキストサイズを取得</span>
-        <span class="n">C</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        
-        <span class="c1"># 変換後の形状の3次元配列を作成</span>
-        <span class="n">one_hot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
-        
-        <span class="c1"># 単語ID番目の要素を1に置換</span>
-        <span class="k">for</span> <span class="n">idx_0</span><span class="p">,</span> <span class="n">word_ids</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">corpus</span><span class="p">):</span> <span class="c1"># 0次元方向</span>
-            <span class="k">for</span> <span class="n">idx_1</span><span class="p">,</span> <span class="n">word_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">word_ids</span><span class="p">):</span> <span class="c1"># 1次元方向</span>
-                <span class="n">one_hot</span><span class="p">[</span><span class="n">idx_0</span><span class="p">,</span> <span class="n">idx_1</span><span class="p">,</span> <span class="n">word_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    
-    <span class="k">return</span> <span class="n">one_hot</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[tensor([[1, 6],
+        [2, 4]]), tensor([5, 3])]
+[tensor([[4, 5],
+        [0, 2]]), tensor([1, 1])]
+[tensor([[1, 3],
+        [3, 1]]), tensor([2, 4])]
 </pre></div>
 </div>
 </div>
@@ -1223,500 +1266,184 @@ s_{\mathrm{you}}
 </section>
 </section>
 <section id="cbow">
-<h3>CBOWモデルの実装<a class="headerlink" href="#cbow" title="Permalink to this headline">#</a></h3>
+<h4>CBOWモデルの構築<a class="headerlink" href="#cbow" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
-
-<span class="k">class</span> <span class="nc">SimpleCBOW</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">SimpleCBOW</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="c1"># 入力層と中間層の重み</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">in_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">)</span>
-        <span class="c1"># 中間層の次元を調整するための線形層</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">middle_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">embedding_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
-        <span class="c1"># 中間層と出力層の重み</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
-        <span class="c1"># 単語の分散表現を初期化</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">init_weights</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">init_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># 重みを標準正規分布で初期化</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">in_layer</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">middle_layer</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out_layer</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contexts</span><span class="p">):</span>
-        <span class="c1"># 入力層から中間層への順伝播</span>
-        <span class="c1"># contextsは周囲の単語のインデックスのバッチ</span>
-        <span class="n">embeds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_layer</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>  <span class="c1"># 埋め込みレイヤーを適用</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="n">embeds</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 埋め込みの平均を取る</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">middle_layer</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>  <span class="c1"># 中間層に適用</span>
-        <span class="c1"># 中間層から出力層への順伝播</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_layer</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">out</span>
-
-    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contexts</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
-        <span class="c1"># 順伝播</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>
-        <span class="c1"># 損失の計算</span>
-        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">loss</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">Dataset</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">=</span><span class="n">SimpleCBOW</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">contexts</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">contexts</span><span class="p">))</span>
-
-<span class="nn">Cell In[12], line 26,</span> in <span class="ni">SimpleCBOW.forward</span><span class="nt">(self, contexts)</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contexts</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="c1"># 入力層から中間層への順伝播</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="c1"># contextsは周囲の単語のインデックスのバッチ</span>
-<span class="ne">---&gt; </span><span class="mi">26</span>     <span class="n">embeds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_layer</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>  <span class="c1"># 埋め込みレイヤーを適用</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="n">h</span> <span class="o">=</span> <span class="n">embeds</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 埋め込みの平均を取る</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">middle_layer</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>  <span class="c1"># 中間層に適用</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1518,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1516</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1517</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1518</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1527,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1522</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
-<span class="g g-Whitespace">   </span><span class="mi">1523</span> <span class="c1"># this function, and just call forward.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1524</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1525</span>         <span class="ow">or</span> <span class="n">_global_backward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1526</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1527</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1529</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1530</span>     <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/sparse.py:162,</span> in <span class="ni">Embedding.forward</span><span class="nt">(self, input)</span>
-<span class="g g-Whitespace">    </span><span class="mi">161</span> <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">162</span>     <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">163</span>         <span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_norm</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">164</span>         <span class="bp">self</span><span class="o">.</span><span class="n">norm_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_grad_by_freq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sparse</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/functional.py:2233,</span> in <span class="ni">embedding</span><span class="nt">(input, weight, padding_idx, max_norm, norm_type, scale_grad_by_freq, sparse)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2227</span>     <span class="c1"># Note [embedding_renorm set_grad_enabled]</span>
-<span class="g g-Whitespace">   </span><span class="mi">2228</span>     <span class="c1"># XXX: equivalent to</span>
-<span class="g g-Whitespace">   </span><span class="mi">2229</span>     <span class="c1"># with torch.no_grad():</span>
-<span class="g g-Whitespace">   </span><span class="mi">2230</span>     <span class="c1">#   torch.embedding_renorm_</span>
-<span class="g g-Whitespace">   </span><span class="mi">2231</span>     <span class="c1"># remove once script supports set_grad_enabled</span>
-<span class="g g-Whitespace">   </span><span class="mi">2232</span>     <span class="n">_no_grad_embedding_renorm_</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">max_norm</span><span class="p">,</span> <span class="n">norm_type</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2233</span> <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">,</span> <span class="n">scale_grad_by_freq</span><span class="p">,</span> <span class="n">sparse</span><span class="p">)</span>
-
-<span class="ne">IndexError</span>: index out of range in self
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># テキストを設定</span>
-<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;You say goodbye and I say hello.&#39;</span>
-
-<span class="c1"># 前処理</span>
-<span class="n">corpus</span><span class="p">,</span> <span class="n">word_to_id</span><span class="p">,</span> <span class="n">id_to_word</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">id_to_word</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;you&#39;: 0, &#39;say&#39;: 1, &#39;goodbye&#39;: 2, &#39;and&#39;: 3, &#39;i&#39;: 4, &#39;hello&#39;: 5, &#39;.&#39;: 6}
-{0: &#39;you&#39;, 1: &#39;say&#39;, 2: &#39;goodbye&#39;, 3: &#39;and&#39;, 4: &#39;i&#39;, 5: &#39;hello&#39;, 6: &#39;.&#39;}
-[0, 1, 2, 3, 4, 1, 5, 6]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ウインドウサイズ</span>
-<span class="n">window_size</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="c1"># 単語の種類数を取得</span>
-<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">)</span>
-
-<span class="c1"># コンテキストとターゲットを作成</span>
-<span class="n">contexts</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">create_contexts_target</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">window_size</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">contexts</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="c1"># one-hot表現に変換</span>
-<span class="n">contexts</span> <span class="o">=</span> <span class="n">convert_one_hot</span><span class="p">(</span><span class="n">contexts</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
-<span class="n">target</span> <span class="o">=</span> <span class="n">convert_one_hot</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">contexts</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
-[[0 2]
- [1 3]
- [2 4]
- [3 1]
- [4 5]
- [1 6]]
-(6, 2)
-[1 2 3 4 1 5]
-(6,)
-[[[1 0 0 0 0 0 0]
-  [0 0 1 0 0 0 0]]
-
- [[0 1 0 0 0 0 0]
-  [0 0 0 1 0 0 0]]
-
- [[0 0 1 0 0 0 0]
-  [0 0 0 0 1 0 0]]
-
- [[0 0 0 1 0 0 0]
-  [0 1 0 0 0 0 0]]
-
- [[0 0 0 0 1 0 0]
-  [0 0 0 0 0 1 0]]
-
- [[0 1 0 0 0 0 0]
-  [0 0 0 0 0 0 1]]]
-(6, 2, 7)
-[[0 1 0 0 0 0 0]
- [0 0 1 0 0 0 0]
- [0 0 0 1 0 0 0]
- [0 0 0 0 1 0 0]
- [0 1 0 0 0 0 0]
- [0 0 0 0 0 1 0]]
-(6, 7)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out</span><span class="o">=</span><span class="n">model</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">contexts</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embeds</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[[-1.0733, -1.1314,  0.7917],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342]],
-
-         [[-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-1.0733, -1.1314,  0.7917],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342]]],
-
-
-        [[[-0.1738, -0.3991, -0.0342],
-          [-1.0733, -1.1314,  0.7917],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342]],
-
-         [[-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-1.0733, -1.1314,  0.7917],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342]]],
-
-
-        [[[-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-1.0733, -1.1314,  0.7917],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342]],
-
-         [[-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-1.0733, -1.1314,  0.7917],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342]]],
-
-
-        [[[-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-1.0733, -1.1314,  0.7917],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342]],
-
-         [[-0.1738, -0.3991, -0.0342],
-          [-1.0733, -1.1314,  0.7917],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342]]],
-
-
-        [[[-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-1.0733, -1.1314,  0.7917],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342]],
-
-         [[-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-1.0733, -1.1314,  0.7917],
-          [-0.1738, -0.3991, -0.0342]]],
-
-
-        [[[-0.1738, -0.3991, -0.0342],
-          [-1.0733, -1.1314,  0.7917],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342]],
-
-         [[-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-0.1738, -0.3991, -0.0342],
-          [-1.0733, -1.1314,  0.7917]]]], grad_fn=&lt;EmbeddingBackward0&gt;)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">embeds</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([6, 7, 3])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
-</pre></div>
-</div>
-</div>
-</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">self.embeddings</span> <span class="pre">=</span> <span class="pre">nn.Embedding(vocab_size,</span> <span class="pre">embedding_size)</span></code>: 語彙の各単語に対して<code class="docutils literal notranslate"><span class="pre">embedding_size</span></code>次元のベクトルを割り当てる埋め込み層を作成します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.linear1</span> <span class="pre">=</span> <span class="pre">nn.Linear(embedding_size,</span> <span class="pre">vocab_size)</span></code>: 埋め込みベクトルを受け取り、語彙のサイズに対応する出力を生成します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">embeds</span> <span class="pre">=</span> <span class="pre">self.embeddings(inputs)</span></code>:入力された単語のインデックスに基づいて、埋め込み層から対応するベクトルを取得します。</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SimpleCBOW</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">SimpleCBOW</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">)</span>  <span class="c1"># 単語埋め込み</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">linear1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">embedding_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>  <span class="c1"># 中間層</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">linear2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>  <span class="c1"># 出力層</span>
-    
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contexts</span><span class="p">):</span>
-        <span class="c1"># contextは [batch_size, context_window * 2]</span>
-        <span class="n">embeds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>  <span class="c1"># [batch_size, context_window * 2, embedding_size]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">embeds</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-        <span class="n">embeds</span> <span class="o">=</span> <span class="n">embeds</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># [batch_size, embedding_size]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">embeds</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear1</span><span class="p">(</span><span class="n">embeds</span><span class="p">)</span>  <span class="c1"># [batch_size, hidden_size]</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>  <span class="c1"># 活性化関数</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear2</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>  <span class="c1"># [batch_size, vocab_size]</span>
-        <span class="k">return</span> <span class="n">out</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">embedding_size</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+        <span class="n">embeds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">embeds</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear1</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="n">log_probs</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">log_probs</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">=</span><span class="n">SimpleCBOW</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">contexts</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># パラメータの設定</span>
+<span class="n">embedding_size</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_id</span><span class="p">)</span>
+
+<span class="c1"># モデルのインスタンス化</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">SimpleCBOW</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">loss_function</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+
+
+<span class="c1"># Training loop with batch processing</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">context_batch</span><span class="p">,</span> <span class="n">target_batch</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_loader</span><span class="p">):</span>
+        <span class="c1"># Zero out the gradients from the last step</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="c1"># Forward pass through the model</span>
+        <span class="n">log_probs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">context_batch</span><span class="p">)</span>
+        <span class="c1"># Compute the loss</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">log_probs</span><span class="p">,</span> <span class="n">target_batch</span><span class="p">)</span>
+        <span class="c1"># Backward pass to compute gradients</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="c1"># Update the model parameters</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="c1"># Accumulate the loss</span>
+        <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="c1"># Log the total loss for the epoch</span>
+    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s1">, Total loss: </span><span class="si">{</span><span class="n">total_loss</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([6, 7, 6])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 0, Total loss: 6.11926794052124
+Epoch 10, Total loss: 4.030880689620972
+Epoch 20, Total loss: 2.9468559622764587
+Epoch 30, Total loss: 2.3361576795578003
+Epoch 40, Total loss: 1.9521117806434631
+Epoch 50, Total loss: 1.6938353776931763
+Epoch 60, Total loss: 1.515379935503006
+Epoch 70, Total loss: 1.3846017718315125
+Epoch 80, Total loss: 1.2865969985723495
+Epoch 90, Total loss: 1.2101848423480988
+</pre></div>
+</div>
+</div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><code class="docutils literal notranslate"><span class="pre">nn.CrossEntropyLoss</span></code>ターゲットラベルをクラスのインデックスとして受け取り、内部で必要な変換を行いますので、ターゲットをワンホットエンコーディングに変換する必要はありません。</p>
+</aside>
+<p>モデルの入力層の重みが単語分散表現であり、<span class="math notranslate nohighlight">\(単語 \times  埋め込み次元数\)</span>の形の行列になります。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([7, 10])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">contexts</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word_embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span>
+
+<span class="c1"># 各単語とそれに対応する分散表現を表示</span>
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">word_to_id</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">vector</span> <span class="o">=</span> <span class="n">word_embeddings</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Word: </span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vector: </span><span class="si">{</span><span class="n">vector</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[-9.3958e+00, -1.9546e+01, -1.3012e+01, -9.7609e-01, -2.8456e+01,
-          -4.7300e-01],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-9.3958e+00, -1.9546e+01, -1.3012e+01, -9.7609e-01, -2.8456e+01,
-          -4.7300e-01],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00]],
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Word: you
+Vector: [ 0.43640447  2.3994656  -0.66580415 -1.234674    0.9123322   0.6803118
+  1.0000849  -1.5062922  -1.2563758  -1.0379189 ]
 
-        [[-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-9.3958e+00, -1.9546e+01, -1.3012e+01, -9.7609e-01, -2.8456e+01,
-          -4.7300e-01],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-9.3958e+00, -1.9546e+01, -1.3012e+01, -9.7609e-01, -2.8456e+01,
-          -4.7300e-01],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00]],
+Word: say
+Vector: [-0.5300385   2.7432108   1.0345757  -0.07852454  0.10993158  0.10987139
+ -1.8046503   1.3043185   0.3196185  -0.01576389]
 
-        [[-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-9.3958e+00, -1.9546e+01, -1.3012e+01, -9.7609e-01, -2.8456e+01,
-          -4.7300e-01],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-9.3958e+00, -1.9546e+01, -1.3012e+01, -9.7609e-01, -2.8456e+01,
-          -4.7300e-01],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00]],
+Word: goodbye
+Vector: [-1.3162869   0.74525213  1.0486401   1.687265    1.0929755  -0.41140622
+  0.03988009  0.6244155   0.46562314 -1.2834216 ]
 
-        [[-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-9.3958e+00, -1.9546e+01, -1.3012e+01, -9.7609e-01, -2.8456e+01,
-          -4.7300e-01],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-9.3958e+00, -1.9546e+01, -1.3012e+01, -9.7609e-01, -2.8456e+01,
-          -4.7300e-01],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00]],
+Word: and
+Vector: [ 1.7745872   0.21953514  0.2982137   0.39705753  1.0635732  -1.9176912
+  0.7215232  -0.12871008 -1.112822    0.41692844]
 
-        [[-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-9.3958e+00, -1.9546e+01, -1.3012e+01, -9.7609e-01, -2.8456e+01,
-          -4.7300e-01],
-         [-9.3958e+00, -1.9546e+01, -1.3012e+01, -9.7609e-01, -2.8456e+01,
-          -4.7300e-01],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00]],
+Word: i
+Vector: [ 0.5610625  -0.3060593  -1.854972    0.5215753  -1.4160546   0.30283335
+  0.69122404 -0.04279682  1.5830791   0.41434464]
 
-        [[-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-9.3958e+00, -1.9546e+01, -1.3012e+01, -9.7609e-01, -2.8456e+01,
-          -4.7300e-01],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-7.3104e+00, -2.8340e+01, -1.1410e+01, -1.4202e-02, -3.5601e+01,
-          -4.3108e+00],
-         [-9.3958e+00, -1.9546e+01, -1.3012e+01, -9.7608e-01, -2.8456e+01,
-          -4.7300e-01]]], grad_fn=&lt;LogSoftmaxBackward0&gt;)
+Word: hello
+Vector: [ 1.1180049   0.45558804  0.10969823 -1.3822559   0.27533448  0.89500386
+ -0.50628495 -1.0254172  -0.06035456 -1.0706526 ]
+
+Word: .
+Vector: [-0.7480286  -0.7040065  -0.76120883  1.2911949  -1.2853703   1.6336079
+ -0.31998158  0.6653414   3.1988146   1.4568119 ]
 </pre></div>
 </div>
 </div>
 </div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="e59a1d66-92c6-45ee-814b-08ec9c99c446" name="1aa1fb95-694d-4278-8071-226cf140976f" type="radio">
+</input><label class="sd-tab-label" for="e59a1d66-92c6-45ee-814b-08ec9c99c446">
+課題</label><div class="sd-tab-content docutils">
+<p>与えられたテキストを用いて、単語分散表現を学習しなさい。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">window_size</span></code>を2に設定します</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_size</span></code>を10に設定します</p></li>
+</ul>
+</div>
+<input id="6f4ae699-a06d-4eb0-bf0f-70b5c816d974" name="1aa1fb95-694d-4278-8071-226cf140976f" type="radio">
+</input><label class="sd-tab-label" for="6f4ae699-a06d-4eb0-bf0f-70b5c816d974">
+テキスト</label><div class="sd-tab-content docutils">
+<p>““When forty winters shall besiege thy brow,
+And dig deep trenches in thy beauty’s field,
+Thy youth’s proud livery so gazed on now,
+Will be a totter’d weed of small worth held:
+Then being asked, where all thy beauty lies,
+Where all the treasure of thy lusty days;
+To say, within thine own deep sunken eyes,
+Were an all-eating shame, and thriftless praise.
+How much more praise deserv’d thy beauty’s use,
+If thou couldst answer ‘This fair child of mine
+Shall sum my count, and make my old excuse,’
+Proving his beauty by succession thine!
+This were to be new made when thou art old,
+And see thy blood warm when thou feel’st it cold.””</p>
+</div>
+</div>
+</section>
 </section>
 </section>
 </section>
@@ -1748,6 +1475,13 @@ s_{\mathrm{you}}
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="word2vec_1.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">単語分散表現</p>
+        </div>
+    </a>
 </div>
             </footer>
         </div>

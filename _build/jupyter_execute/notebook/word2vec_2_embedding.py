@@ -450,325 +450,267 @@ def create_contexts_target(corpus, window_size=1):
 
 
 # コンテキストとターゲットを作成
-contexts, target = create_contexts_target(corpus, window_size=1)
+contexts, targets = create_contexts_target(corpus, window_size=1)
 print(contexts)
-print(target)
+print(targets)
 
 
-# #### one-hot表現への変換
-# 
-
-# 単語IDを要素とするコンテキストとターゲットをone-hot表現のコンテキストとターゲットに変換する関数を実装します。
-# 
-# 基本的な処理は、単語の種類数個の$0$を要素とするベクトルを作成し、単語ID番目の要素だけを$1$に置き換えます。
-# 
-# ターゲットは、要素数がターゲット数のベクトルです。変換後は、ターゲット数の行数、単語の種類数の列数の2次元配列になります。つまり、行が各ターゲットの単語、列が各単語IDに対応します。そして行ごとに1つだけ、値が$1$の要素を持ちます。
-# 
-# -  ```np.zeros()```で変換後の形状の2次元配列を作成し、for文で行ごとに単語ID番目の要素を1を代入します。
-# - ```enumerate()```で引数に渡したリストの要素とその要素のインデックスを出力します。
+# ### PytorchでCBOWモデルの実装
 # 
 
 # In[9]:
 
 
-# ターゲットを確認
-print(target)
-print(target.shape)
-
-# ターゲットの単語数を取得
-N = target.shape[0]
-
-# 単語の種類数を取得
-vocab_size = len(word_to_id)
-
-# 全ての要素が0の変換後の形状の2次元配列を作成
-one_hot = np.zeros((N, vocab_size), dtype=np.int32)
-print(one_hot)
-
-# 単語ID番目の要素を1に置換
-for idx, word_id in enumerate(target):
-    one_hot[idx, word_id] = 1
-print(one_hot)
-print(one_hot.shape)
+import numpy as np
+import torch
+import torch.optim as optim
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.utils.data import DataLoader, Dataset
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-# コンテキストは、0次元目の要素数がターゲット数、1次元目の要素数がウィンドウサイズの$2$倍の2次元配列です。
+# #### Embeddingレイヤ
 # 
-# - ```np.zeros()```で形状が```(N, C, vocab_size)```である配列を作成し、単語ID番目の要素を1に置換します。
+
+# 先ほど、理解しやすいone-hot表現でコンテキストを変換する方法を説明しましたが、大規模なコーパスで学習する際、one-hot表現の次元数も大きくになって、非効率な学習の原因になります。
+# 
+# ただ、one-hot表現による計算は、単に行列の特定の行を抜き出すことだけですから、同じ機能を持つレイヤで入れ替えることは可能です。このような、重みパラメータから「単語IDに該当する行(ベクトル)」を抜き出すためのレイヤは「Embeddingレイヤ」と言います。
+# 
+# PyTorchで提供されるモジュール```nn.Embedding```を使うと、簡単にEmbeddingレイヤを実装することができます。
+# 
+# 例えば、語彙に6つの単語があり、各埋め込みベクトルの次元数を3に設定した場合、nn.Embeddingの定義は以下のようになります。
+# 
+# そして、
 
 # In[10]:
 
 
-# コンテキストを確認
-print(contexts)
-print(contexts.shape)
+embedding_layer = nn.Embedding(6, 3)
 
-# ターゲットの単語数を取得
-N = contexts.shape[0]
 
-# コンテキストサイズを取得
-C = contexts.shape[1]
-
-# 単語の種類数を取得
-vocab_size = len(word_to_id)
-
-# 全ての要素が0の変換後の形状の3次元配列を作成
-one_hot = np.zeros((N, C, vocab_size), dtype=np.int32)
-print("全ての要素が0の変換後の形状の3次元配列を作成")
-print(one_hot)
-
-# 単語ID番目の要素を1に置換
-for idx_0, word_ids in enumerate(contexts): # 0次元方向
-    for idx_1, word_id in enumerate(word_ids): # 1次元方向
-        one_hot[idx_0, idx_1, word_id] = 1
-
-print("単語ID番目の要素を1に置換")
-print(one_hot)
-print(one_hot.shape)
-
+# もしインデックス2のトークンの埋め込みを取得したい場合、次のようにします：
 
 # In[11]:
 
 
-# one-hot表現への変換関数の実装
-def convert_one_hot(corpus, vocab_size):
-    
-    # ターゲットの単語数を取得
-    N = corpus.shape[0]
-    
-    # one-hot表現に変換
-    if corpus.ndim == 1: # 1次元配列のとき
-        
-        # 変換後の形状の2次元配列を作成
-        one_hot = np.zeros((N, vocab_size), dtype=np.int32)
-        
-        # 単語ID番目の要素を1に置換
-        for idx, word_id in enumerate(corpus):
-            one_hot[idx, word_id] = 1
-    
-    elif corpus.ndim == 2: # 2次元配列のとき
-        
-        # コンテキストサイズを取得
-        C = corpus.shape[1]
-        
-        # 変換後の形状の3次元配列を作成
-        one_hot = np.zeros((N, C, vocab_size), dtype=np.int32)
-        
-        # 単語ID番目の要素を1に置換
-        for idx_0, word_ids in enumerate(corpus): # 0次元方向
-            for idx_1, word_id in enumerate(word_ids): # 1次元方向
-                one_hot[idx_0, idx_1, word_id] = 1
-    
-    return one_hot
+inputs = torch.tensor([[1,2]], dtype=torch.long)
+embedding = embedding_layer(inputs)
+embedding
 
 
-# ### CBOWモデルの実装
-# 
+# 埋め込みベクトルの和を取って、入力層から中間層までにエンコードの機能を実装できます。
 
 # In[12]:
 
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class SimpleCBOW(nn.Module):
-    def __init__(self, vocab_size, hidden_size, embedding_size):
-        super(SimpleCBOW, self).__init__()
-        # 入力層と中間層の重み
-        self.in_layer = nn.Embedding(vocab_size, embedding_size)
-        # 中間層の次元を調整するための線形層
-        self.middle_layer = nn.Linear(embedding_size, hidden_size)
-        # 中間層と出力層の重み
-        self.out_layer = nn.Linear(hidden_size, vocab_size)
-        # 単語の分散表現を初期化
-        self.init_weights()
-
-    def init_weights(self):
-        # 重みを標準正規分布で初期化
-        self.in_layer.weight.data.normal_(0, 1)
-        self.middle_layer.weight.data.normal_(0, 1)
-        self.out_layer.weight.data.normal_(0, 1)
-
-    def forward(self, contexts):
-        # 入力層から中間層への順伝播
-        # contextsは周囲の単語のインデックスのバッチ
-        embeds = self.in_layer(contexts)  # 埋め込みレイヤーを適用
-        h = embeds.mean(dim=1)  # 埋め込みの平均を取る
-        h = self.middle_layer(h)  # 中間層に適用
-        # 中間層から出力層への順伝播
-        out = self.out_layer(h)
-        return out
-
-    def loss(self, contexts, target):
-        # 順伝播
-        out = self.forward(contexts)
-        # 損失の計算
-        loss = F.cross_entropy(out, target)
-        return loss
+out=torch.sum(embedding, dim=1)
+out
 
 
 # In[13]:
 
 
-model=SimpleCBOW(6, 20, 3)
+linear1 = nn.Linear(3, 6)
 
 
 # In[14]:
 
 
-model.forward(torch.tensor(contexts))
+F.log_softmax(linear1(out), dim=1)
 
 
-# In[136]:
+# #### ミニバッチ化データセットの作成
+# 
+# Word2Vecも含めて、深層学習によって学習を行う際には、ミニバッチ化して学習させることが一般的です。
+# 
+# pytorchで提供されている```DataSet```と```DataLoader```という機能を用いてミニバッチ化を簡単に実現できます。
+# 
+# ##### DataSet
+# 
+# DataSetは，元々のデータを全て持っていて、ある番号を指定されると、その番号の入出力のペアをただ一つ返します。クラスを使って実装します。
+# 
+# DataSetを実装する際には、クラスのメンバ関数として```__len__()```と```__getitem__()```を必ず作ります．
+# 
+# - ```__len__()```は、```len()```を使ったときに呼ばれる関数です。
+# - ```__getitem__()```は、```array[i]```のようにインデックスを使って要素を参照するときに呼ばれる関数です。
+# 
+
+# In[15]:
 
 
-# テキストを設定
-text = 'You say goodbye and I say hello.'
-
-# 前処理
-corpus, word_to_id, id_to_word = preprocess(text)
-print(word_to_id)
-print(id_to_word)
-print(corpus)
-
-
-# In[95]:
-
-
-# ウインドウサイズ
-window_size = 1
-
-# 単語の種類数を取得
-vocab_size = len(word_to_id)
-print(vocab_size)
-
-# コンテキストとターゲットを作成
-contexts, target = create_contexts_target(corpus, window_size)
-print(contexts)
-print(contexts.shape)
-print(target)
-print(target.shape)
-
-# one-hot表現に変換
-contexts = convert_one_hot(contexts, vocab_size)
-target = convert_one_hot(target, vocab_size)
-print(contexts)
-print(contexts.shape)
-print(target)
-print(target.shape)
+class CBOWDataset(Dataset):
+    def __init__(self, contexts, targets):
+        self.contexts = contexts
+        self.targets = targets
+    
+    def __len__(self):
+        return len(self.targets)
+    
+    def __getitem__(self, idx):
+        return self.contexts[idx], self.targets[idx]
 
 
-# In[126]:
+# In[16]:
 
 
-embedding = nn.Embedding(6, 3)
+# Convert contexts and targets to tensors
+contexts_tensor = torch.tensor(contexts, dtype=torch.long).to(device)
+targets_tensor = torch.tensor(targets, dtype=torch.long).to(device)
+
+# Create the dataset
+dataset = CBOWDataset(contexts_tensor, targets_tensor)
 
 
-# In[127]:
+# In[17]:
 
 
-out=model (torch.tensor(contexts))
+print('全データ数:',len(dataset))
+print('4番目のデータ:',dataset[3]) 
+print('4~5番目のデータ:',dataset[3:5])
 
 
-# In[130]:
+# ##### DataLoader
+# 
+# ```torch.utils.data```モジュールには、データのシャッフとミニバッチの整形に役立つ```DataLoader```というクラスが用意されます。
+
+# In[18]:
 
 
-embeds
+# Create the DataLoader
+batch_size = 2  # You can adjust the batch size
+data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
 
-# In[104]:
+# In[19]:
 
 
-h = embeds.mean(dim=1)
+for data in data_loader:
+    print(data)
 
 
-# In[107]:
+# #### CBOWモデルの構築
+
+# In[20]:
 
 
-h.shape
+import numpy as np
+import torch
+import torch.optim as optim
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.utils.data import DataLoader, Dataset
 
 
-# In[55]:
+# - ```self.embeddings = nn.Embedding(vocab_size, embedding_size)```: 語彙の各単語に対して```embedding_size```次元のベクトルを割り当てる埋め込み層を作成します。
+# - ```self.linear1 = nn.Linear(embedding_size, vocab_size)```: 埋め込みベクトルを受け取り、語彙のサイズに対応する出力を生成します。
+# - ```embeds = self.embeddings(inputs)```:入力された単語のインデックスに基づいて、埋め込み層から対応するベクトルを取得します。
 
-
-embedding = nn.Embedding(10, 3)
-
-
-# In[56]:
-
-
-input = torch.LongTensor([[1, 2, 4, 5], [4, 3, 2, 9]])
-
-
-# In[123]:
+# In[21]:
 
 
 class SimpleCBOW(nn.Module):
-    def __init__(self, vocab_size, embedding_size, hidden_size):
+    def __init__(self, vocab_size, embedding_size):
         super(SimpleCBOW, self).__init__()
-        self.embeddings = nn.Embedding(vocab_size, embedding_size)  # 単語埋め込み
-        self.linear1 = nn.Linear(embedding_size, hidden_size)  # 中間層
-        self.linear2 = nn.Linear(hidden_size, vocab_size)  # 出力層
-    
-    def forward(self, contexts):
-        # contextは [batch_size, context_window * 2]
-        embeds = self.embeddings(contexts)  # [batch_size, context_window * 2, embedding_size]
-        print(embeds.shape)
-        embeds = embeds.sum(dim=1)  # [batch_size, embedding_size]
-        print(embeds.shape)
-        h = self.linear1(embeds)  # [batch_size, hidden_size]
-        h = F.relu(h)  # 活性化関数
-        out = self.linear2(h)  # [batch_size, vocab_size]
-        return out
+        self.embeddings = nn.Embedding(vocab_size, embedding_size)
+        self.linear1 = nn.Linear(embedding_size, vocab_size)
+
+    def forward(self, inputs):
+        embeds = self.embeddings(inputs)
+        out = torch.sum(embeds, dim=1)
+        out = self.linear1(out)
+        log_probs = F.log_softmax(out, dim=1)
+        return log_probs
 
 
-# In[132]:
+# In[22]:
 
 
-model=SimpleCBOW(6, 20, 3)
+# パラメータの設定
+embedding_size = 10
+learning_rate = 0.01
+epochs = 100
+vocab_size = len(word_to_id)
+
+# モデルのインスタンス化
+model = SimpleCBOW(vocab_size, embedding_size).to(device)
+loss_function = nn.CrossEntropyLoss()
+optimizer = optim.SGD(model.parameters(), lr=learning_rate)
 
 
-# In[133]:
+# Training loop with batch processing
+for epoch in range(epochs):
+    total_loss = 0
+    for i, (context_batch, target_batch) in enumerate(data_loader):
+        # Zero out the gradients from the last step
+        model.zero_grad()
+        # Forward pass through the model
+        log_probs = model(context_batch)
+        # Compute the loss
+        loss = loss_function(log_probs, target_batch)
+        # Backward pass to compute gradients
+        loss.backward()
+        # Update the model parameters
+        optimizer.step()
+        # Accumulate the loss
+        total_loss += loss.item()
+    # Log the total loss for the epoch
+    if epoch % 10 == 0:
+        print(f'Epoch {epoch}, Total loss: {total_loss}')
 
 
-model.forward(torch.tensor(contexts)).shape
+# ```{margin}
+# ``nn.CrossEntropyLoss``ターゲットラベルをクラスのインデックスとして受け取り、内部で必要な変換を行いますので、ターゲットをワンホットエンコーディングに変換する必要はありません。
+# ```
+
+# モデルの入力層の重みが単語分散表現であり、$単語 \times  埋め込み次元数$の形の行列になります。
+
+# In[23]:
 
 
-# In[134]:
+model.embeddings.weight.shape
 
 
-model.forward(torch.tensor(contexts))
+# In[24]:
 
 
-# In[ ]:
+word_embeddings = model.embeddings.weight.data
+
+# 各単語とそれに対応する分散表現を表示
+for word, idx in word_to_id.items():
+    vector = word_embeddings[idx].cpu().numpy()
+    print(f"Word: {word}")
+    print(f"Vector: {vector}\n")
 
 
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
+# ````{tab-set}
+# ```{tab-item} 課題
+# 与えられたテキストを用いて、単語分散表現を学習しなさい。
+# 
+# - ``window_size``を2に設定します
+# - ``batch_size``を10に設定します
+# 
+# ```
+# 
+# ```{tab-item} テキスト
+# 
+# ""When forty winters shall besiege thy brow,
+# And dig deep trenches in thy beauty's field,
+# Thy youth's proud livery so gazed on now,
+# Will be a totter'd weed of small worth held:
+# Then being asked, where all thy beauty lies,
+# Where all the treasure of thy lusty days;
+# To say, within thine own deep sunken eyes,
+# Were an all-eating shame, and thriftless praise.
+# How much more praise deserv'd thy beauty's use,
+# If thou couldst answer 'This fair child of mine
+# Shall sum my count, and make my old excuse,'
+# Proving his beauty by succession thine!
+# This were to be new made when thou art old,
+# And see thy blood warm when thou feel'st it cold.""
+# 
+# ```
+# 
+# ````
 
 # 
