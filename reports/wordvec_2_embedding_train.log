@@ -32,8 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['# 第1層の重みの勾配を計算', "dW1 = numerical_gradient(f, params['W1'])", 'print(dW1[:5, :5])', 'print(dW1.shape)', '']
+['# パラメータの設定', 'embedding_size = 10', 'learning_rate = 0.01', 'epochs = 500', 'vocab_size = len(word_to_id)']
 ...
-['', '# 第2層のバイアスの勾配を計算', "db2 = numerical_gradient(f, params['b2'])", 'print(db2[:5])', 'print(db2.shape)']
+['        total_loss += loss.item()', "        writer.add_scalar('Training loss', loss.item(), epoch * len(data_loader) + i)", '    # Log the total loss for the epoch', "    writer.add_scalar('Total Training loss', total_loss, epoch)", "    print(f'Epoch {epoch}, Total loss: {total_loss}')"]
 -------------------
 
