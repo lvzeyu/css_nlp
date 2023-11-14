@@ -1,3 +1,4 @@
 /notebook/Data/*
 /notebook/runs/cbow_embeddings/*
 /notebook/runs/*
+/notebook/Model/*

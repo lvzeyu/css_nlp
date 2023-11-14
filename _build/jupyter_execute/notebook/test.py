@@ -410,3 +410,9 @@ for epoch in range(epochs):
     if epoch % 10 == 0:
         print(f'Epoch {epoch}, Total loss: {total_loss}')
 
+
+# In[ ]:
+
+
+model.most_similar(positive=['woman', 'king'], negative=['man'])
+

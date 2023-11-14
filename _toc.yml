@@ -24,3 +24,5 @@ parts:
   chapters:
   - file: notebook/word2vec_1.ipynb
   - file: notebook/word2vec_2_embedding.ipynb
+  - file: notebook/word2vec_gensim.ipynb
+  - file: notebook/word2vec_sentiment.ipynb

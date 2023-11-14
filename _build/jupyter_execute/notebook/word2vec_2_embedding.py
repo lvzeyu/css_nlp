@@ -694,7 +694,7 @@ for word, idx in word_to_id.items():
 # 
 # ```{tab-item} テキスト
 # 
-# ""When forty winters shall besiege thy brow,
+# "When forty winters shall besiege thy brow,
 # And dig deep trenches in thy beauty's field,
 # Thy youth's proud livery so gazed on now,
 # Will be a totter'd weed of small worth held:
@@ -707,10 +707,34 @@ for word, idx in word_to_id.items():
 # Shall sum my count, and make my old excuse,'
 # Proving his beauty by succession thine!
 # This were to be new made when thou art old,
-# And see thy blood warm when thou feel'st it cold.""
+# And see thy blood warm when thou feel'st it cold."
 # 
 # ```
 # 
 # ````
+
+# ## 補足
+# 
+# ### Negative Sampling
+
+# 今まで紹介した学習の仕組みでは、正例(正しい答え)について学習を行いました。ここで、「良い重み」があれば、ターゲット単語についてSigmoidレイヤの出力は$1$に近づくことになります。
+# 
+# それだけでなく、本当に行いたいのは、コンテキストが与えられるときに、間違った単語を予測してしまう確率も低いことが望まれます。ただ、全ての誤った単語(負例)を対象として、学習を行うことは非効率であるので、そこで、負例をいくつかピックアップします。これが「Negative Sampling」という手法の意味です。
+# 
+# Negative Samplingでは、正例をターゲットとした場合の損失を求めると同時に、負例をいくつかサンプリングし、その負例に対しても同様に損失を求めます。そして、両者を足し合わせ、最終的な損失とします。このプロセスは、モデルが正しい単語を予測するだけでなく、不適切な単語を予測しない能力を同時に学習することを目的としています。
+# 
+# それでは、負例をどのようにサンプリングすべきですか？単純にランダムサンプリングの場合、高頻度の単語はサンプリングされやすく、低頻度の単語はサンプリングされにくく、珍しい単語や文脈に適切に対応できない原因になります。
+# 
+# この問題点を克服するために、word2vecで提案されるNegative Samplingでは、元となる確率分布に対して以下のように改装しました
+# 
+# $$
+# P'(w_i)= \frac{P(w_i)^{0.75}}{\sum_{i=j}^n P(w_i)^{0.75}}
+# $$
+# 
+# $0.75$乗して調整することで、確率の低い単語に対してその確率を少しだけ高くすることができます。これにより、モデルはより現実的な言語パターンを学習し、実際の使用状況においてより正確な予測を行うことができます。
+
+# ## 補足
+# 
+# ### Skip-gram
 
 # 
