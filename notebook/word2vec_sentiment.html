@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>データ準備 &#8212; 計算社会科学のための自然言語処理</title>
+    <title>Word2Vecを用いるセンチメント分析 &#8212; 計算社会科学のための自然言語処理</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -193,7 +193,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   データ準備
+   Word2Vecを用いるセンチメント分析
   </a>
  </li>
 </ul>
@@ -420,49 +420,49 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
    データ準備
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#csv">
      CSVファイルを読み込む
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id2">
      トレーニング、バリデーション、テストデータに分割
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id3">
      テキストデータの前処理
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
      単語分散表現によって特徴量の作成
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id5">
      学習用データセットの作成
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id6">
      モデルの作成
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id7">
    学習の実行
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id8">
    テストデータでモデルを検証する
   </a>
@@ -476,7 +476,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>データ準備</h1>
+                <h1>Word2Vecを用いるセンチメント分析</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -486,49 +486,49 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
    データ準備
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#csv">
      CSVファイルを読み込む
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id2">
      トレーニング、バリデーション、テストデータに分割
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id3">
      テキストデータの前処理
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
      単語分散表現によって特徴量の作成
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id5">
      学習用データセットの作成
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id6">
      モデルの作成
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id7">
    学習の実行
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id8">
    テストデータでモデルを検証する
   </a>
@@ -543,15 +543,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install torchtext</span>
-<span class="c1">#!pip install spacy</span>
-<span class="c1">#!python -m spacy download en_core_web_sm</span>
-</pre></div>
-</div>
-</div>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="word2vec">
+<h1>Word2Vecを用いるセンチメント分析<a class="headerlink" href="#word2vec" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -564,9 +557,9 @@ title="Print to PDF"
 </div>
 </div>
 <section id="id1">
-<h1>データ準備<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h2>データ準備<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <section id="csv">
-<h2>CSVファイルを読み込む<a class="headerlink" href="#csv" title="Permalink to this headline">#</a></h2>
+<h3>CSVファイルを読み込む<a class="headerlink" href="#csv" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./Data/twitter_training.csv&#39;</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="s1">&#39;brand&#39;</span><span class="p">,</span><span class="s1">&#39;sentiment&#39;</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
@@ -672,7 +665,7 @@ Name: sentiment, dtype: int64
 </div>
 </section>
 <section id="id2">
-<h2>トレーニング、バリデーション、テストデータに分割<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<h3>トレーニング、バリデーション、テストデータに分割<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -685,7 +678,7 @@ Name: sentiment, dtype: int64
 </div>
 </section>
 <section id="id3">
-<h2>テキストデータの前処理<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<h3>テキストデータの前処理<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>テキストを小文字に変換</p></li>
 <li><p>句読点を削除</p></li>
@@ -728,7 +721,7 @@ Name: sentiment, dtype: int64
 </div>
 </section>
 <section id="id4">
-<h2>単語分散表現によって特徴量の作成<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<h3>単語分散表現によって特徴量の作成<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gensim.downloader</span>
@@ -739,7 +732,7 @@ Name: sentiment, dtype: int64
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">gensim.downloader</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">word2vec</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">downloader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;word2vec-google-news-300&#39;</span><span class="p">)</span>
 
@@ -788,57 +781,12 @@ Name: sentiment, dtype: int64
 <span class="g g-Whitespace">   </span><span class="mi">1962</span> <span class="n">tot_processed_words</span> <span class="o">+=</span> <span class="n">processed_words</span>
 <span class="g g-Whitespace">   </span><span class="mi">1963</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_chunk</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">binary_chunk_size</span><span class="p">:</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1943,</span> in <span class="ni">_add_bytes_to_kv</span><span class="nt">(kv, counts, chunk, vocab_size, vector_size, datatype, unicode_errors, encoding)</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1939,</span> in <span class="ni">_add_bytes_to_kv</span><span class="nt">(kv, counts, chunk, vocab_size, vector_size, datatype, unicode_errors, encoding)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1936</span> <span class="k">if</span> <span class="n">i_space</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="o">-</span> <span class="n">i_vector</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">bytes_per_vector</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1937</span>     <span class="k">break</span>
+<span class="ne">-&gt; </span><span class="mi">1939</span> <span class="n">word</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">i_space</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">unicode_errors</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1940</span> <span class="c1"># Some binary files are reported to have obsolete new line in the beginning of word, remove it</span>
 <span class="g g-Whitespace">   </span><span class="mi">1941</span> <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1942</span> <span class="n">vector</span> <span class="o">=</span> <span class="n">frombuffer</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">i_vector</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="n">vector_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">REAL</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">datatype</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1943</span> <span class="n">_add_word_to_kv</span><span class="p">(</span><span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1944</span> <span class="n">start</span> <span class="o">=</span> <span class="n">i_vector</span> <span class="o">+</span> <span class="n">bytes_per_vector</span>
-<span class="g g-Whitespace">   </span><span class="mi">1945</span> <span class="n">processed_words</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1923,</span> in <span class="ni">_add_word_to_kv</span><span class="nt">(kv, counts, word, weights, vocab_size)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1921</span>     <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;vocabulary file is incomplete: &#39;</span><span class="si">%s</span><span class="s2">&#39; is missing&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1922</span>     <span class="n">word_count</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">1923</span> <span class="n">kv</span><span class="o">.</span><span class="n">set_vecattr</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">word_count</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:353,</span> in <span class="ni">KeyedVectors.set_vecattr</span><span class="nt">(self, key, attr, val)</span>
-<span class="g g-Whitespace">    </span><span class="mi">334</span> <span class="k">def</span> <span class="nf">set_vecattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">335</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Set attribute associated with the given key to value.</span>
-<span class="g g-Whitespace">    </span><span class="mi">336</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">337</span><span class="sd">     Parameters</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">351</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">352</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">353</span>     <span class="bp">self</span><span class="o">.</span><span class="n">allocate_vecattrs</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="n">attr</span><span class="p">],</span> <span class="n">types</span><span class="o">=</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">)])</span>
-<span class="g g-Whitespace">    </span><span class="mi">354</span>     <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">355</span>     <span class="bp">self</span><span class="o">.</span><span class="n">expandos</span><span class="p">[</span><span class="n">attr</span><span class="p">][</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:323,</span> in <span class="ni">KeyedVectors.allocate_vecattrs</span><span class="nt">(self, attrs, types)</span>
-<span class="g g-Whitespace">    </span><span class="mi">321</span>     <span class="k">continue</span>
-<span class="g g-Whitespace">    </span><span class="mi">322</span> <span class="n">prev_expando</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expandos</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span>
-<span class="ne">--&gt; </span><span class="mi">323</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">prev_expando</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">324</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">325</span>         <span class="sa">f</span><span class="s2">&quot;Can&#39;t allocate type </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> for attribute </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2">, &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span>         <span class="sa">f</span><span class="s2">&quot;conflicts with its existing type </span><span class="si">{</span><span class="n">prev_expando</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">327</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">328</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prev_expando</span><span class="p">)</span> <span class="o">==</span> <span class="n">target_size</span><span class="p">:</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/numpy/core/numerictypes.py:358,</span> in <span class="ni">issubdtype</span><span class="nt">(arg1, arg2)</span>
-<span class="g g-Whitespace">    </span><span class="mi">328</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">329</span><span class="sd">     Determine if the first argument is a subclass of the second argument.</span>
-<span class="g g-Whitespace">    </span><span class="mi">330</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">353</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">354</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">355</span>     <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">obj2sctype</span><span class="p">(</span><span class="n">arg1</span><span class="p">),</span> <span class="n">obj2sctype</span><span class="p">(</span><span class="n">arg2</span><span class="p">))</span>
-<span class="ne">--&gt; </span><span class="mi">358</span> <span class="nd">@set_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">359</span> <span class="k">def</span> <span class="nf">issubdtype</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">360</span><span class="w">     </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">361</span><span class="sd">     Returns True if first argument is a typecode lower/equal in type hierarchy.</span>
-<span class="g g-Whitespace">    </span><span class="mi">362</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">415</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">416</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">417</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">issubclass_</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">generic</span><span class="p">):</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -868,7 +816,7 @@ Name: sentiment, dtype: int64
 </div>
 </section>
 <section id="id5">
-<h2>学習用データセットの作成<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<h3>学習用データセットの作成<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">TensorDataset</span>
@@ -892,7 +840,7 @@ Name: sentiment, dtype: int64
 </div>
 </section>
 <section id="id6">
-<h2>モデルの作成<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<h3>モデルの作成<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
@@ -924,7 +872,7 @@ Name: sentiment, dtype: int64
 </section>
 </section>
 <section id="id7">
-<h1>学習の実行<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h1>
+<h2>学習の実行<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">f1_score</span>
@@ -1232,7 +1180,7 @@ Epoch 200, Accuracy: 0.8421, F1 Score: 0.8419
 </div>
 </section>
 <section id="id8">
-<h1>テストデータでモデルを検証する<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h1>
+<h2>テストデータでモデルを検証する<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#model.load_state_dict(torch.load(&#39;./Model/best_model.pth&#39;))</span>
@@ -1269,6 +1217,7 @@ Epoch 200, Accuracy: 0.8421, F1 Score: 0.8419
 <img alt="../_images/word2vec_sentiment_24_0.png" src="../_images/word2vec_sentiment_24_0.png" />
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
