@@ -196,7 +196,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="word2vec_sentiment.html">
-   データ準備
+   Word2Vecを用いるセンチメント分析
   </a>
  </li>
 </ul>
@@ -525,13 +525,6 @@ title="Print to PDF"
      Negative Sampling
     </a>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id13">
-   補足
-  </a>
-  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#skip-gram">
      Skip-gram
@@ -660,13 +653,6 @@ title="Print to PDF"
      Negative Sampling
     </a>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id13">
-   補足
-  </a>
-  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#skip-gram">
      Skip-gram
@@ -822,15 +808,15 @@ h_1
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>コンテキストの形状：(1, 7)
 重み
-[[-1.7189166  -0.87457259  0.57771694]
- [ 0.92128013 -0.25198273 -0.16882163]
- [ 1.43579267 -0.68180286 -0.06246337]
- [ 1.03649521  1.83181562  0.44046239]
- [-0.01428631  1.66990352  0.12445968]
- [-0.57710971 -0.75769969 -0.291006  ]
- [ 1.3133665  -0.78740701  0.61559829]]
+[[ 0.20023108 -0.35485205 -1.81626392]
+ [ 1.094726   -0.00272206  0.35223526]
+ [-1.74856502  1.02473064  0.03729952]
+ [ 0.57264334  0.91913059  1.18745289]
+ [ 0.2766542  -0.5195102   0.78194649]
+ [-1.37085831 -0.82728773  1.27276026]
+ [-0.99414825  0.03291285 -0.64691639]]
 重み付き和
-[[-1.7189166  -0.87457259  0.57771694]]
+[[ 0.20023108 -0.35485205 -1.81626392]]
 重み付き和の形状：(1, 3)
 </pre></div>
 </div>
@@ -941,22 +927,22 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[-0.4661, -0.2585,  1.7290]]),
- tensor([[0.3174, 0.4986, 0.6045]]),
- tensor([[-0.0744,  0.1201,  1.1667]]),
- tensor([[-0.9910, -0.8590, -2.2640, -0.9950, -2.1460,  0.8380,  0.9050]]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[-0.5027, -0.5044,  1.1068]]),
+ tensor([[0.4113, 0.9708, 0.1789]]),
+ tensor([[-0.0457,  0.2332,  0.6429]]),
+ tensor([[-0.2280,  0.9450, -0.0920, -0.7770, -0.2820, -0.1810, -0.7530]]))
 </pre></div>
 </div>
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="a32e8748-ee07-4056-82f4-1eb9ed1e306b" name="46a61475-cf39-4fa6-8b90-70f48d919a44" type="radio">
-</input><label class="sd-tab-label" for="a32e8748-ee07-4056-82f4-1eb9ed1e306b">
+<input checked="checked" id="7099aef2-741e-4939-bdc9-779f24f7f36f" name="ef74212c-81a0-46a1-9b15-4486209ce82b" type="radio">
+</input><label class="sd-tab-label" for="7099aef2-741e-4939-bdc9-779f24f7f36f">
 課題</label><div class="sd-tab-content docutils">
 <p>正解は「say」として、Softmax関数によってスコア<code class="docutils literal notranslate"><span class="pre">s</span></code>を確率として扱えるように変換し、そして、正規化した値と教師ラベルを用いて損失を求めなさい。</p>
 </div>
-<input id="35859664-df57-4a16-9cc6-c38f1f8b216a" name="46a61475-cf39-4fa6-8b90-70f48d919a44" type="radio">
-</input><label class="sd-tab-label" for="35859664-df57-4a16-9cc6-c38f1f8b216a">
+<input id="286c69a7-d465-4119-b467-da7c3bd3e79a" name="ef74212c-81a0-46a1-9b15-4486209ce82b" type="radio">
+</input><label class="sd-tab-label" for="286c69a7-d465-4119-b467-da7c3bd3e79a">
 ヒント</label><div class="sd-tab-content docutils">
 <p>正解は「say」の場合、教師ラベルは<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0]</span></code>になります。</p>
 </div>
@@ -1193,8 +1179,8 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[-0.8262,  0.1554, -0.8486],
-         [ 2.2564,  0.0462, -1.4014]]], grad_fn=&lt;EmbeddingBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[ 0.3662,  0.1403, -0.7195],
+         [ 0.8472,  1.6687, -1.5899]]], grad_fn=&lt;EmbeddingBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -1208,7 +1194,7 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 1.4302,  0.2016, -2.2500]], grad_fn=&lt;SumBackward1&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 1.2134,  1.8089, -2.3094]], grad_fn=&lt;SumBackward1&gt;)
 </pre></div>
 </div>
 </div>
@@ -1227,7 +1213,7 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-4.7400, -2.2159, -1.1487, -1.0164, -1.7382, -3.5968]],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-4.5301, -2.3054, -0.4426, -2.6779, -3.5296, -1.9032]],
        grad_fn=&lt;LogSoftmaxBackward0&gt;)
 </pre></div>
 </div>
@@ -1312,12 +1298,12 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[tensor([[0, 2],
-        [4, 5]]), tensor([1, 1])]
-[tensor([[1, 6],
-        [1, 3]]), tensor([5, 2])]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[tensor([[2, 4],
+        [1, 6]]), tensor([3, 5])]
+[tensor([[0, 2],
+        [1, 3]]), tensor([1, 2])]
 [tensor([[3, 1],
-        [2, 4]]), tensor([4, 3])]
+        [4, 5]]), tensor([4, 1])]
 </pre></div>
 </div>
 </div>
@@ -1398,16 +1384,16 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 0, Total loss: 6.242560625076294
-Epoch 10, Total loss: 4.6856162548065186
-Epoch 20, Total loss: 3.7232621908187866
-Epoch 30, Total loss: 3.0920523405075073
-Epoch 40, Total loss: 2.632925868034363
-Epoch 50, Total loss: 2.32918643951416
-Epoch 60, Total loss: 2.061891794204712
-Epoch 70, Total loss: 1.8904610872268677
-Epoch 80, Total loss: 1.742799997329712
-Epoch 90, Total loss: 1.6161246299743652
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 0, Total loss: 7.571089029312134
+Epoch 10, Total loss: 5.504413962364197
+Epoch 20, Total loss: 4.365613579750061
+Epoch 30, Total loss: 3.6440069675445557
+Epoch 40, Total loss: 3.1746776700019836
+Epoch 50, Total loss: 2.8250375986099243
+Epoch 60, Total loss: 2.5544521808624268
+Epoch 70, Total loss: 2.3444074988365173
+Epoch 80, Total loss: 2.1740952730178833
+Epoch 90, Total loss: 2.0322096943855286
 </pre></div>
 </div>
 </div>
@@ -1443,39 +1429,39 @@ Epoch 90, Total loss: 1.6161246299743652
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Word: you
-Vector: [-0.32865846 -0.34744436 -0.93596184 -0.50609255  0.28105637 -2.0572815
- -0.6974492   0.90229774 -0.09391685  0.09350178]
+Vector: [ 0.5111989   0.37142602 -0.18579945 -1.1431242   0.23927121 -0.29279527
+ -0.06579706 -0.9408192   0.11428434 -1.2405633 ]
 
 Word: say
-Vector: [-0.31545877  0.45870963 -0.9282107   1.2908472   0.01909271  0.5483473
-  0.15327266  0.20212814 -1.450953   -0.40250185]
+Vector: [ 2.071888   -0.00723937 -0.6055544  -1.14169    -1.8512801   0.06967335
+ -0.77423054 -1.1392152   0.2952154  -0.86411834]
 
 Word: goodbye
-Vector: [-0.8497086   1.9231379  -1.3791672  -1.2718811   0.17282239  0.16557142
-  1.54573    -0.85160583  0.7771231   0.87538415]
+Vector: [-0.31477746  1.705572   -0.47051716 -2.1481493   0.550143   -0.66298765
+ -1.2863357   1.1937126   0.03175043 -1.4515636 ]
 
 Word: and
-Vector: [-0.5734976   0.43408754 -0.45149094  1.89465    -0.28852904 -0.42727843
- -1.3953141  -0.6841427   0.53856355  0.03685127]
+Vector: [ 0.44126123  2.1255052  -0.86913174  1.181391    1.3824853   0.30655336
+ -0.07561116  0.00316406 -0.10250175 -1.7711053 ]
 
 Word: i
-Vector: [ 0.09797855 -1.1853831  -1.8889004   1.4003974   0.45006084 -0.16776283
- -0.6844281  -0.55733466  0.09322394  0.9782527 ]
+Vector: [ 0.24268098 -0.5714434  -0.5997382  -1.402882   -0.73246133  0.48241034
+ -0.09415045 -1.0266181   0.8898414   0.59956354]
 
 Word: hello
-Vector: [ 0.27110982  0.4893387   0.6527485   0.9505634  -0.49711332 -0.9083725
-  0.08791155 -0.14309038  1.505219   -0.5253173 ]
+Vector: [-0.0257057   0.00554416  1.4885762   0.12582567 -2.0215666  -0.3000334
+  0.46164426  0.33400884 -0.83181894  1.879357  ]
 
 Word: .
-Vector: [ 1.0049262  -0.91077065 -0.0634358   0.113742    0.14689308  0.7223443
-  0.57995445  1.4776657  -0.85241485 -0.45649108]
+Vector: [-1.1475794  -0.4878714  -0.94229084 -0.6547065  -0.06464809  0.8619976
+ -1.4031909  -1.1060177   0.60889107  0.7622212 ]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="e0edc903-95ca-48e3-8abd-e95da16f8782" name="e72229dc-7046-444d-a921-e81410976307" type="radio">
-</input><label class="sd-tab-label" for="e0edc903-95ca-48e3-8abd-e95da16f8782">
+<input checked="checked" id="b88e287d-c972-46e6-a688-5e8b866fb8e7" name="8c20c410-956e-45ad-86b5-6d06fd2db3a6" type="radio">
+</input><label class="sd-tab-label" for="b88e287d-c972-46e6-a688-5e8b866fb8e7">
 課題</label><div class="sd-tab-content docutils">
 <p>与えられたテキストを用いて、単語分散表現を学習しなさい。</p>
 <ul class="simple">
@@ -1483,8 +1469,8 @@ Vector: [ 1.0049262  -0.91077065 -0.0634358   0.113742    0.14689308  0.7223443
 <li><p><code class="docutils literal notranslate"><span class="pre">batch_size</span></code>を10に設定します</p></li>
 </ul>
 </div>
-<input id="1a14a1fe-2593-4289-b16b-e6f0f18f7c84" name="e72229dc-7046-444d-a921-e81410976307" type="radio">
-</input><label class="sd-tab-label" for="1a14a1fe-2593-4289-b16b-e6f0f18f7c84">
+<input id="00d9645b-0eed-42c5-920b-682b24d9031d" name="8c20c410-956e-45ad-86b5-6d06fd2db3a6" type="radio">
+</input><label class="sd-tab-label" for="00d9645b-0eed-42c5-920b-682b24d9031d">
 テキスト</label><div class="sd-tab-content docutils">
 <p>“When forty winters shall besiege thy brow,
 And dig deep trenches in thy beauty’s field,
@@ -1520,11 +1506,11 @@ P'(w_i)= \frac{P(w_i)^{0.75}}{\sum_{i=j}^n P(w_i)^{0.75}}
 \]</div>
 <p><span class="math notranslate nohighlight">\(0.75\)</span>乗して調整することで、確率の低い単語に対してその確率を少しだけ高くすることができます。これにより、モデルはより現実的な言語パターンを学習し、実際の使用状況においてより正確な予測を行うことができます。</p>
 </section>
-</section>
-<section id="id13">
-<h2>補足<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h2>
 <section id="skip-gram">
 <h3>Skip-gram<a class="headerlink" href="#skip-gram" title="Permalink to this headline">#</a></h3>
+<p>これまで見てきたCBOWモデル以外、word2vecを学習する方法として、Skip-gramと呼ばれる言語モデルが提案されます。</p>
+<p>Skip-gramは、CBOWで扱うコンテキストとターゲットを逆転させて、ターゲットから、周囲の複数ある単語(コンテキスト)を推測します。</p>
+<p>実に、単語の分散表現の精度の点において、多くの場合、Skip-gramモデルの方が良い結果が得られています。特に、コーパスが大規模になるにつれて、低頻出の単語や類推問題の性能の点において、Skip-gramモデルの方が優れている傾向にあります。</p>
 </section>
 </section>
 </section>
