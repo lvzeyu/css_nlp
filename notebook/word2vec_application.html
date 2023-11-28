@@ -609,7 +609,7 @@ title="Print to PDF"
 <li><p><span class="math notranslate nohighlight">\(\vec{male}-\vec{female}\)</span>は<span class="math notranslate nohighlight">\(Gender\)</span>という概念反映しています。同じロジックで、<span class="math notranslate nohighlight">\(\vec{king}-\vec{queen}\)</span>のような単語のペアも<span class="math notranslate nohighlight">\(Gender\)</span>という概念を反映できると考えられます。</p></li>
 <li><p><span class="math notranslate nohighlight">\(\vec{rich}-\vec{poor}\)</span>、<span class="math notranslate nohighlight">\(\vec{affluence}-\vec{poverty}\)</span>のような単語のペアは<span class="math notranslate nohighlight">\(Affluence\)</span>という概念を反映できると考えられます。</p></li>
 </ul>
-<div class="cell docutils container">
+<div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gensim.downloader</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">downloader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;word2vec-google-news-300&#39;</span><span class="p">)</span>
@@ -713,13 +713,13 @@ title="Print to PDF"
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="14c31471-9b5c-46fb-82bf-4185789e6c66" name="40495348-b178-4b19-90d5-ab7f1b4e97f5" type="radio">
-</input><label class="sd-tab-label" for="14c31471-9b5c-46fb-82bf-4185789e6c66">
+<input checked="checked" id="f29756f6-cf4f-4fb7-90ab-b53f92225692" name="1b6c9eeb-165a-4b7a-a9ac-9b12eae92a15" type="radio">
+</input><label class="sd-tab-label" for="f29756f6-cf4f-4fb7-90ab-b53f92225692">
 質問1</label><div class="sd-tab-content docutils">
 <p>なぜ複数の単語ペアで計算する必要がありますか？</p>
 </div>
-<input id="c8664fb6-f707-4d55-aca9-34a099a65e0b" name="40495348-b178-4b19-90d5-ab7f1b4e97f5" type="radio">
-</input><label class="sd-tab-label" for="c8664fb6-f707-4d55-aca9-34a099a65e0b">
+<input id="4ac80145-2125-4ff3-bbc7-bfc4a9c330c1" name="1b6c9eeb-165a-4b7a-a9ac-9b12eae92a15" type="radio">
+</input><label class="sd-tab-label" for="4ac80145-2125-4ff3-bbc7-bfc4a9c330c1">
 質問2</label><div class="sd-tab-content docutils">
 <p>単語ペアでベクトル減法を行なって、結果の平均を取る方法以外、Dimensionsを測定する方法がありますか？</p>
 </div>
@@ -812,13 +812,13 @@ hockey 88.2316913132707
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="6db8f6aa-a356-4d1b-91ba-b1f448f7a184" name="8fb6d578-fd8e-47db-816d-e3491c0a5da3" type="radio">
-</input><label class="sd-tab-label" for="6db8f6aa-a356-4d1b-91ba-b1f448f7a184">
+<input checked="checked" id="54220978-e069-4240-a50d-1fe3fff1ee38" name="bfc94541-ec99-420f-92e8-fa1299a851dc" type="radio">
+</input><label class="sd-tab-label" for="54220978-e069-4240-a50d-1fe3fff1ee38">
 質問3</label><div class="sd-tab-content docutils">
 <p>この結果をどのように解釈すべきですか？</p>
 </div>
-<input id="f47959fc-5650-41cf-be1c-83fe912e67ee" name="8fb6d578-fd8e-47db-816d-e3491c0a5da3" type="radio">
-</input><label class="sd-tab-label" for="f47959fc-5650-41cf-be1c-83fe912e67ee">
+<input id="2ad9249a-34b9-4d05-baf3-e1b9c0dea8aa" name="bfc94541-ec99-420f-92e8-fa1299a851dc" type="radio">
+</input><label class="sd-tab-label" for="2ad9249a-34b9-4d05-baf3-e1b9c0dea8aa">
 課題</label><div class="sd-tab-content docutils">
 <ul class="simple">
 <li><p>性別に関するDimensionを作成しなさい</p></li>
@@ -903,8 +903,8 @@ hockey 88.2316913132707
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="42de6b34-0060-44d4-8c7b-974e285fa08e" name="af4c06f0-873a-47c2-9980-87a3a3a46aa6" type="radio">
-</input><label class="sd-tab-label" for="42de6b34-0060-44d4-8c7b-974e285fa08e">
+<input checked="checked" id="34bfea52-f3d7-4373-b054-1e650fab2974" name="9cfc0fd6-2aa4-4f86-805d-77ec109e62e3" type="radio">
+</input><label class="sd-tab-label" for="34bfea52-f3d7-4373-b054-1e650fab2974">
 質問4</label><div class="sd-tab-content docutils">
 <p>この結果をどのように解釈すべきですか？</p>
 </div>
@@ -913,13 +913,15 @@ hockey 88.2316913132707
 <li><p>言語モデルは学習コーパスに含まれている「バイアス」をそのまま反映しています。例えば、言語モデルでは、エンジニア、トラック運転手は男性、モデル、看護師は女性というような、職業と性別の関係についての典型的なステレオタイプを学習していることがわかります。</p></li>
 <li><p>同様に、異なる時期のコーパスには、特定な時期の考え方や認識に関する情報が含められますので、そのコーパスで学習した言語モデルも特定な時期の考え方や認識を反映できると考えられます。</p></li>
 </ul>
-<div style="display: flex;">
-    <img src="./Figure/sim_dynamics.jpeg" alt="Sim Dynamics" style="width: 50%;"/>
-    <img src="./Figure/OLS_dynamic.jpeg" alt="OLS Dynamics" style="width: 50%;"/>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display: flex;&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;./Figure/sim_dynamics.jpeg&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;Sim Dynamics&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 50%;&quot;</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;./Figure/OLS_dynamic.jpeg&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;OLS Dynamics&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 50%;&quot;</span><span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="e3acc5ca-4f2f-41cf-955a-12d37ff75ef6" name="533b9432-4e7b-4cc0-b746-18e49649ce30" type="radio">
-</input><label class="sd-tab-label" for="e3acc5ca-4f2f-41cf-955a-12d37ff75ef6">
+<input checked="checked" id="1d670903-38e1-42f7-ac7e-356c420f9a48" name="de262637-3b2c-4b26-8e24-7f6c051691fd" type="radio">
+</input><label class="sd-tab-label" for="1d670903-38e1-42f7-ac7e-356c420f9a48">
 質問4</label><div class="sd-tab-content docutils">
 <p>この図の結果をどのように解釈すべきですか？</p>
 </div>
