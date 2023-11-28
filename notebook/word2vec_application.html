@@ -474,18 +474,18 @@ title="Print to PDF"
      </span>
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018">
+     Word embeddings quantify 100 years of gender and ethnic stereotypes
+     <span class="xref cite">
+      Garg2018
+     </span>
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018">
-   Word embeddings quantify 100 years of gender and ethnic stereotypes
-   <span class="xref cite">
-    Garg2018
-   </span>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id7">
+  <a class="reference internal nav-link" href="#id8">
    参考文献
   </a>
  </li>
@@ -555,18 +555,18 @@ title="Print to PDF"
      </span>
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018">
+     Word embeddings quantify 100 years of gender and ethnic stereotypes
+     <span class="xref cite">
+      Garg2018
+     </span>
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018">
-   Word embeddings quantify 100 years of gender and ethnic stereotypes
-   <span class="xref cite">
-    Garg2018
-   </span>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id7">
+  <a class="reference internal nav-link" href="#id8">
    参考文献
   </a>
  </li>
@@ -660,53 +660,35 @@ title="Print to PDF"
 <span class="g g-Whitespace">   </span><span class="mi">2068</span> <span class="k">else</span><span class="p">:</span>
 <span class="g g-Whitespace">   </span><span class="mi">2069</span>     <span class="n">_word2vec_read_text</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1960,</span> in <span class="ni">_word2vec_read_binary</span><span class="nt">(fin, kv, counts, vocab_size, vector_size, datatype, unicode_errors, binary_chunk_size, encoding)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1958</span> <span class="n">new_chunk</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">binary_chunk_size</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1959</span> <span class="n">chunk</span> <span class="o">+=</span> <span class="n">new_chunk</span>
-<span class="ne">-&gt; </span><span class="mi">1960</span> <span class="n">processed_words</span><span class="p">,</span> <span class="n">chunk</span> <span class="o">=</span> <span class="n">_add_bytes_to_kv</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1961</span>     <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1962</span> <span class="n">tot_processed_words</span> <span class="o">+=</span> <span class="n">processed_words</span>
-<span class="g g-Whitespace">   </span><span class="mi">1963</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_chunk</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">binary_chunk_size</span><span class="p">:</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1958,</span> in <span class="ni">_word2vec_read_binary</span><span class="nt">(fin, kv, counts, vocab_size, vector_size, datatype, unicode_errors, binary_chunk_size, encoding)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1955</span> <span class="n">tot_processed_words</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">   </span><span class="mi">1957</span> <span class="k">while</span> <span class="n">tot_processed_words</span> <span class="o">&lt;</span> <span class="n">vocab_size</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1958</span>     <span class="n">new_chunk</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">binary_chunk_size</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1959</span>     <span class="n">chunk</span> <span class="o">+=</span> <span class="n">new_chunk</span>
+<span class="g g-Whitespace">   </span><span class="mi">1960</span>     <span class="n">processed_words</span><span class="p">,</span> <span class="n">chunk</span> <span class="o">=</span> <span class="n">_add_bytes_to_kv</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1961</span>         <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1943,</span> in <span class="ni">_add_bytes_to_kv</span><span class="nt">(kv, counts, chunk, vocab_size, vector_size, datatype, unicode_errors, encoding)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1941</span> <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1942</span> <span class="n">vector</span> <span class="o">=</span> <span class="n">frombuffer</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">i_vector</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="n">vector_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">REAL</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">datatype</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1943</span> <span class="n">_add_word_to_kv</span><span class="p">(</span><span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1944</span> <span class="n">start</span> <span class="o">=</span> <span class="n">i_vector</span> <span class="o">+</span> <span class="n">bytes_per_vector</span>
-<span class="g g-Whitespace">   </span><span class="mi">1945</span> <span class="n">processed_words</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/gzip.py:301,</span> in <span class="ni">GzipFile.read</span><span class="nt">(self, size)</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span>     <span class="kn">import</span> <span class="nn">errno</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span>     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">EBADF</span><span class="p">,</span> <span class="s2">&quot;read() on write-only GzipFile object&quot;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">301</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1923,</span> in <span class="ni">_add_word_to_kv</span><span class="nt">(kv, counts, word, weights, vocab_size)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1921</span>     <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;vocabulary file is incomplete: &#39;</span><span class="si">%s</span><span class="s2">&#39; is missing&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1922</span>     <span class="n">word_count</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">1923</span> <span class="n">kv</span><span class="o">.</span><span class="n">set_vecattr</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">word_count</span><span class="p">)</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/_compression.py:68,</span> in <span class="ni">DecompressReader.readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="k">def</span> <span class="nf">readinto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="k">with</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">as</span> <span class="n">view</span><span class="p">,</span> <span class="n">view</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">byte_view</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">68</span>         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">byte_view</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="n">byte_view</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:353,</span> in <span class="ni">KeyedVectors.set_vecattr</span><span class="nt">(self, key, attr, val)</span>
-<span class="g g-Whitespace">    </span><span class="mi">334</span> <span class="k">def</span> <span class="nf">set_vecattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">335</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Set attribute associated with the given key to value.</span>
-<span class="g g-Whitespace">    </span><span class="mi">336</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">337</span><span class="sd">     Parameters</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">351</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">352</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">353</span>     <span class="bp">self</span><span class="o">.</span><span class="n">allocate_vecattrs</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="n">attr</span><span class="p">],</span> <span class="n">types</span><span class="o">=</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">)])</span>
-<span class="g g-Whitespace">    </span><span class="mi">354</span>     <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">355</span>     <span class="bp">self</span><span class="o">.</span><span class="n">expandos</span><span class="p">[</span><span class="n">attr</span><span class="p">][</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:323,</span> in <span class="ni">KeyedVectors.allocate_vecattrs</span><span class="nt">(self, attrs, types)</span>
-<span class="g g-Whitespace">    </span><span class="mi">321</span>     <span class="k">continue</span>
-<span class="g g-Whitespace">    </span><span class="mi">322</span> <span class="n">prev_expando</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expandos</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span>
-<span class="ne">--&gt; </span><span class="mi">323</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">prev_expando</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">324</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">325</span>         <span class="sa">f</span><span class="s2">&quot;Can&#39;t allocate type </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> for attribute </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2">, &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span>         <span class="sa">f</span><span class="s2">&quot;conflicts with its existing type </span><span class="si">{</span><span class="n">prev_expando</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">327</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">328</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prev_expando</span><span class="p">)</span> <span class="o">==</span> <span class="n">target_size</span><span class="p">:</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/numpy/core/numerictypes.py:420,</span> in <span class="ni">issubdtype</span><span class="nt">(arg1, arg2)</span>
-<span class="g g-Whitespace">    </span><span class="mi">418</span>     <span class="n">arg1</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span><span class="o">.</span><span class="n">type</span>
-<span class="g g-Whitespace">    </span><span class="mi">419</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">issubclass_</span><span class="p">(</span><span class="n">arg2</span><span class="p">,</span> <span class="n">generic</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">420</span>     <span class="n">arg2</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span><span class="o">.</span><span class="n">type</span>
-<span class="g g-Whitespace">    </span><span class="mi">422</span> <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/gzip.py:484,</span> in <span class="ni">_GzipReader.read</span><span class="nt">(self, size)</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_new_member</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decomp_factory</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">482</span>         <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_decomp_args</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">484</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new_member</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">485</span>     <span class="c1"># If the _new_member flag is set, we have to</span>
+<span class="g g-Whitespace">    </span><span class="mi">486</span>     <span class="c1"># jump to the next member, if there is one.</span>
+<span class="g g-Whitespace">    </span><span class="mi">487</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_init_read</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">488</span>     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_gzip_header</span><span class="p">():</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -734,13 +716,13 @@ title="Print to PDF"
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="62847ee0-c64e-430a-a2e2-9861a0908cd9" name="faf5413c-c854-437a-bfa7-4bacf3cd60cb" type="radio">
-</input><label class="sd-tab-label" for="62847ee0-c64e-430a-a2e2-9861a0908cd9">
+<input checked="checked" id="38ced3dc-2839-4e76-bea5-8e23a14ed4eb" name="e5747153-efbc-4588-8822-fd713d913808" type="radio">
+</input><label class="sd-tab-label" for="38ced3dc-2839-4e76-bea5-8e23a14ed4eb">
 質問1</label><div class="sd-tab-content docutils">
 <p>なぜ複数の単語ペアで計算する必要がありますか？</p>
 </div>
-<input id="6a8414dd-7eeb-4c9d-8846-04dc32e8f8ac" name="faf5413c-c854-437a-bfa7-4bacf3cd60cb" type="radio">
-</input><label class="sd-tab-label" for="6a8414dd-7eeb-4c9d-8846-04dc32e8f8ac">
+<input id="fc7cc90d-3b0c-41b7-b504-22f835a002c9" name="e5747153-efbc-4588-8822-fd713d913808" type="radio">
+</input><label class="sd-tab-label" for="fc7cc90d-3b0c-41b7-b504-22f835a002c9">
 質問2</label><div class="sd-tab-content docutils">
 <p>単語ペアでベクトル減法を行なって、結果の平均を取る方法以外、Dimensionsを測定する方法がありますか？</p>
 </div>
@@ -833,13 +815,13 @@ hockey 88.2316913132707
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="b03a5ee9-ecbe-45f4-b2b2-460ff2185f0f" name="54a8e8fb-31db-479d-9da8-964f77bdce4f" type="radio">
-</input><label class="sd-tab-label" for="b03a5ee9-ecbe-45f4-b2b2-460ff2185f0f">
+<input checked="checked" id="31b6b9e6-fe5e-4b26-bfd6-c3dc9a4d98c8" name="091aa6c7-6221-4a4c-9b55-19d5c2c9075c" type="radio">
+</input><label class="sd-tab-label" for="31b6b9e6-fe5e-4b26-bfd6-c3dc9a4d98c8">
 質問3</label><div class="sd-tab-content docutils">
 <p>この結果をどのように解釈すべきですか？</p>
 </div>
-<input id="b01bed6b-a89a-4a9e-95c1-5b9041752461" name="54a8e8fb-31db-479d-9da8-964f77bdce4f" type="radio">
-</input><label class="sd-tab-label" for="b01bed6b-a89a-4a9e-95c1-5b9041752461">
+<input id="367bfbf7-8e12-447e-867c-6e91b8ca9994" name="091aa6c7-6221-4a4c-9b55-19d5c2c9075c" type="radio">
+</input><label class="sd-tab-label" for="367bfbf7-8e12-447e-867c-6e91b8ca9994">
 課題</label><div class="sd-tab-content docutils">
 <ul class="simple">
 <li><p>性別に関するDimensionを作成しなさい</p></li>
@@ -924,8 +906,8 @@ hockey 88.2316913132707
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="88047241-a9f5-4614-b092-a559d9523c2e" name="682cf829-671d-41b8-9f18-cc97df8dceb2" type="radio">
-</input><label class="sd-tab-label" for="88047241-a9f5-4614-b092-a559d9523c2e">
+<input checked="checked" id="22ac197f-a09a-4259-a36c-07d805cfe38a" name="9d738199-7b09-4e28-bae2-aadc3536b28e" type="radio">
+</input><label class="sd-tab-label" for="22ac197f-a09a-4259-a36c-07d805cfe38a">
 質問4</label><div class="sd-tab-content docutils">
 <p>この結果をどのように解釈すべきですか？</p>
 </div>
@@ -937,8 +919,8 @@ hockey 88.2316913132707
 <p><img alt="" src="../_images/sim_dynamics.jpeg" />
 <img alt="" src="../_images/OLS_dynamic.jpeg" /></p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="2e820bc7-048f-49fc-92d3-9cdd6799bce0" name="188f1621-42c9-48b1-b430-6f686f574f72" type="radio">
-</input><label class="sd-tab-label" for="2e820bc7-048f-49fc-92d3-9cdd6799bce0">
+<input checked="checked" id="6aa4c2a9-a368-41c1-adc3-9a7b06796df4" name="01f38f5c-c4f7-49d8-8d25-ca70dfb1ed08" type="radio">
+</input><label class="sd-tab-label" for="6aa4c2a9-a368-41c1-adc3-9a7b06796df4">
 質問4</label><div class="sd-tab-content docutils">
 <p>この図の結果をどのように解釈すべきですか？</p>
 </div>
@@ -949,37 +931,74 @@ hockey 88.2316913132707
 <section id="id4">
 <h2>Word2Vecを応用する研究<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
 <section id="semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings-grand2022">
-<h3>Semantic projection recovers rich human knowledge of multiple object features from word embeddings <span id="id5">[<a class="reference internal" href="#id16" title="Gabriel Grand, Idan Asher Blank, Francisco Pereira, and Evelina Fedorenko. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. Nature Human Behaviour, 6(7):975–987, 2022. doi:10.1038/s41562-022-01316-8.">Grand <em>et al.</em>, 2022</a>]</span><a class="headerlink" href="#semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings-grand2022" title="Permalink to this headline">#</a></h3>
+<h3>Semantic projection recovers rich human knowledge of multiple object features from word embeddings <span id="id5">[<a class="reference internal" href="#id17" title="Gabriel Grand, Idan Asher Blank, Francisco Pereira, and Evelina Fedorenko. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. Nature Human Behaviour, 6(7):975–987, 2022. doi:10.1038/s41562-022-01316-8.">Grand <em>et al.</em>, 2022</a>]</span><a class="headerlink" href="#semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings-grand2022" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>単語分散表現は表出する意味的特徴が人間の評価を近似することができることを体系的に説明しました。</p></li>
+</ul>
 <p><img alt="" src="../_images/projection_example.jpeg" /></p>
 <p><img alt="" src="../_images/projection_example2.jpeg" /></p>
 </section>
-</section>
 <section id="word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018">
-<h2>Word embeddings quantify 100 years of gender and ethnic stereotypes <span id="id6">[<a class="reference internal" href="#id10" title="Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16):E3635-E3644, 2018. URL: https://www.pnas.org/doi/abs/10.1073/pnas.1720347115, arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115, doi:10.1073/pnas.1720347115.">Garg <em>et al.</em>, 2018</a>]</span><a class="headerlink" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018" title="Permalink to this headline">#</a></h2>
+<h3>Word embeddings quantify 100 years of gender and ethnic stereotypes <span id="id6">[<a class="reference internal" href="#id11" title="Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16):E3635-E3644, 2018. URL: https://www.pnas.org/doi/abs/10.1073/pnas.1720347115, arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115, doi:10.1073/pnas.1720347115.">Garg <em>et al.</em>, 2018</a>]</span><a class="headerlink" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>単語分散表現が、性別ステレオタイプと民族マイノリティに対する態度の変化を定量化するのにどのように役立つかを示しています。</p></li>
+<li><p>性別と民族に関する単語で、形容詞や職業などの中立的な単語(neutral words )と比較する手法</p>
+<ul>
+<li><p>性別(男性、女性)と職業に関連する単語リストをまとめます</p></li>
+<li><p>女性を代表する単語（例：she, female）と職業の単語（例：teacher, lawyer）との間の平均埋め込み距離を計算します</p></li>
+<li><p>男性を代表する単語と同じ職業の単語との平均埋め込み距離も計算します</p></li>
+<li><p>女性の平均距離から男性の平均距離を引く結果は「性別バイアス」と考えます。<span class="math notranslate nohighlight">\(\to\)</span> 値がマイナスの場合、該当する職業は男性とより密接に関連付けていることを意味しています</p></li>
+</ul>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{relative norm distance} = \sum_{v_m \in M} \left( \|v_m - v_1\|_2 - \|v_m - v_2\|_2 \right).
+\]</div>
+<p><img alt="" src="../_images/gender_bias.jpeg" /></p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="98fcf6e4-edd5-49c1-8dc1-e3c484635d2f" name="b8c0bfeb-f5bb-4f09-9e8c-5468acb558da" type="radio">
+</input><label class="sd-tab-label" for="98fcf6e4-edd5-49c1-8dc1-e3c484635d2f">
+課題</label><div class="sd-tab-content docutils">
+<p>-「engineer」、「nurse」、「housekeeper」の<span class="math notranslate nohighlight">\(Gender Bias\)</span>を計算しなさい</p>
+<ul class="simple">
+<li><p>Norm distanceはNumpyを使って実装できます</p></li>
+</ul>
+</div>
+<input id="7ccc1a53-2a93-4a63-9d20-4a6d49ad40a9" name="b8c0bfeb-f5bb-4f09-9e8c-5468acb558da" type="radio">
+</input><label class="sd-tab-label" for="7ccc1a53-2a93-4a63-9d20-4a6d49ad40a9">
+質問5</label><div class="sd-tab-content docutils">
+<p><span class="math notranslate nohighlight">\(Ethnic Bias\)</span>はどのように計算すべきのかを考えなさい。Ethnicのグループでは<span class="math notranslate nohighlight">\(2\)</span>以上であることを注意してください。</p>
+</div>
+</div>
+<ul class="simple">
+<li><p>同じ手法を使用した研究 <span id="id7">[]</span></p></li>
+</ul>
 </section>
-<section id="id7">
-<h2>参考文献<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
-<div class="docutils container" id="id8">
+</section>
+<section id="id8">
+<h2>参考文献<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<div class="docutils container" id="id9">
 <dl class="citation">
-<dt class="label" id="id12"><span class="brackets">DCLT19</span></dt>
+<dt class="label" id="id13"><span class="brackets">DCLT19</span></dt>
 <dd><p>Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. \BERT\: Pre-training of Deep Bidirectional Transformers for Language Understanding. In <em>Proceedings of the 2019 Conference of the North \A\merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)</em>, Proceedings of the 2019 Conference of the North, 4171–4186. Minneapolis, Minnesota, 2019. Association for Computational Linguistics. URL: <a class="reference external" href="https://www.aclweb.org/anthology/N19-1423">https://www.aclweb.org/anthology/N19-1423</a>, <a class="reference external" href="https://doi.org/10.18653/v1/n19-1423">doi:10.18653/v1/n19-1423</a>.</p>
 </dd>
-<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id6">GSJZ18</a></span></dt>
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id6">GSJZ18</a></span></dt>
 <dd><p>Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. <em>Proceedings of the National Academy of Sciences</em>, 115(16):E3635–E3644, 2018. URL: <a class="reference external" href="https://www.pnas.org/doi/abs/10.1073/pnas.1720347115">https://www.pnas.org/doi/abs/10.1073/pnas.1720347115</a>, <a class="reference external" href="https://arxiv.org/abs/https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115">arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115</a>, <a class="reference external" href="https://doi.org/10.1073/pnas.1720347115">doi:10.1073/pnas.1720347115</a>.</p>
 </dd>
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id5">GBPF22</a></span></dt>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id5">GBPF22</a></span></dt>
 <dd><p>Gabriel Grand, Idan Asher Blank, Francisco Pereira, and Evelina Fedorenko. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. <em>Nature Human Behaviour</em>, 6(7):975–987, 2022. <a class="reference external" href="https://doi.org/10.1038/s41562-022-01316-8">doi:10.1038/s41562-022-01316-8</a>.</p>
 </dd>
-<dt class="label" id="id11"><span class="brackets">KTE19</span></dt>
+<dt class="label" id="id12"><span class="brackets">KTE19</span></dt>
 <dd><p>Austin C. Kozlowski, Matt Taddy, and James A. Evans. The geometry of culture: analyzing the meanings of class through word embeddings. <em>American Sociological Review</em>, 84(5):905–949, 2019. <a class="reference external" href="https://doi.org/10.1177/0003122419877135">doi:10.1177/0003122419877135</a>.</p>
 </dd>
-<dt class="label" id="id13"><span class="brackets">LvACW23</span></dt>
+<dt class="label" id="id14"><span class="brackets">LvACW23</span></dt>
 <dd><p>Moritz Laurer, Wouter van Atteveldt, Andreu Casas, and Kasper Welbers. Less annotating, more classifying: addressing the data scarcity issue of supervised machine learning with deep transfer learning and bert-nli. <em>Political Analysis</em>, pages 1–17, 2023. <a class="reference external" href="https://doi.org/10.1017/pan.2023.20">doi:10.1017/pan.2023.20</a>.</p>
 </dd>
-<dt class="label" id="id15"><span class="brackets">MSC+13</span></dt>
+<dt class="label" id="id16"><span class="brackets">MSC+13</span></dt>
 <dd><p>Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S Corrado, and Jeff Dean. Distributed representations of words and phrases and their compositionality. In C.J. Burges, L. Bottou, M. Welling, Z. Ghahramani, and K.Q. Weinberger, editors, <em>Advances in Neural Information Processing Systems</em>, volume 26. Curran Associates, Inc., 2013. URL: <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2013/file/9aa42b31882ec039965f3c4923ce901b-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2013/file/9aa42b31882ec039965f3c4923ce901b-Paper.pdf</a>.</p>
 </dd>
-<dt class="label" id="id14"><span class="brackets">MYZ13</span></dt>
+<dt class="label" id="id15"><span class="brackets">MYZ13</span></dt>
 <dd><p>Tomas Mikolov, Wen-tau Yih, and Geoffrey Zweig. Linguistic regularities in continuous space word representations. In Lucy Vanderwende, Hal Daumé III, and Katrin Kirchhoff, editors, <em>Proceedings of the 2013 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies</em>, 746–751. Atlanta, Georgia, June 2013. Association for Computational Linguistics. URL: <a class="reference external" href="https://aclanthology.org/N13-1090">https://aclanthology.org/N13-1090</a>.</p>
 </dd>
 </dl>
