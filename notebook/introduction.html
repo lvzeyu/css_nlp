@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -189,6 +187,21 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="word2vec_2_embedding.html">
    word2vec
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_gensim.html">
+   GensimによるWord2Vecの学習と使用
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_sentiment.html">
+   Word2Vecを用いるセンチメント分析
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_application.html">
+   Word2Vecが人文・社会科学研究における応用
   </a>
  </li>
 </ul>
@@ -508,11 +521,11 @@ title="Print to PDF"
 <li><p>類似性: ある概念を表現する際に、ほかの概念との共通点や類似性と紐づけながら、ベクトル空間上に表現します。</p></li>
 <li><p>単語類推: 分散表現では異なる概念を表現するベクトル同士での計算が可能です
 <img alt="" src="../_images/word2vec.png" /></p></li>
-<li><p>1910年代からのテキストデータで単語分散表現を学習し、単語分散表現で男性と女性はそれぞれどのような単語と関連していることを検証することで、ジェンダーのステレオタイプの実態と変化を定量的に分析する <span id="id5">[<a class="reference internal" href="#id16" title="Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16):E3635-E3644, 2018. URL: https://www.pnas.org/doi/abs/10.1073/pnas.1720347115, arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115, doi:10.1073/pnas.1720347115.">Garg <em>et al.</em>, 2018</a>]</span></p></li>
+<li><p>1910年代からのテキストデータで単語分散表現を学習し、単語分散表現で男性と女性はそれぞれどのような単語と関連していることを検証することで、ジェンダーのステレオタイプの実態と変化を定量的に分析する <span id="id5">[<a class="reference internal" href="word2vec_application.html#id10" title="Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16):E3635-E3644, 2018. URL: https://www.pnas.org/doi/abs/10.1073/pnas.1720347115, arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115, doi:10.1073/pnas.1720347115.">Garg <em>et al.</em>, 2018</a>]</span></p></li>
 </ul>
 <p><img alt="" src="../_images/word2vec_gender.jpeg" /></p>
 <ul class="simple">
-<li><p>単語分散表現の類似性と単語類推特性で、単語分散表現の計算を通じて、文化概念の潜在的意味と関係を定量的に測定できました<span id="id6">[<a class="reference internal" href="#id17" title="Austin C. Kozlowski, Matt Taddy, and James A. Evans. The geometry of culture: analyzing the meanings of class through word embeddings. American Sociological Review, 84(5):905-949, 2019. doi:10.1177/0003122419877135.">Kozlowski <em>et al.</em>, 2019</a>]</span></p></li>
+<li><p>単語分散表現の類似性と単語類推特性で、単語分散表現の計算を通じて、文化概念の潜在的意味と関係を定量的に測定できました<span id="id6">[<a class="reference internal" href="word2vec_application.html#id11" title="Austin C. Kozlowski, Matt Taddy, and James A. Evans. The geometry of culture: analyzing the meanings of class through word embeddings. American Sociological Review, 84(5):905-949, 2019. doi:10.1177/0003122419877135.">Kozlowski <em>et al.</em>, 2019</a>]</span></p></li>
 </ul>
 <p><img alt="" src="../_images/city.png" /></p>
 </section>
@@ -520,9 +533,9 @@ title="Print to PDF"
 <h3>テキスト分類<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <p>キスト分類とは、事前定義済みカテゴリまたはラベルを非構造化テキスト形式に割り当てる処理のことです。主な使用例として、感情分析、偽情報の検出や内容判定などが挙げられます。</p>
 <p>言語は本質的に曖昧で、変化し続け、適切に定義されていないため、テキスト分類は決して簡単なタスクではないが、深層学習による自然言語処理が発展したことにより、高精度化させることが可能になってきています。</p>
-<p>とくに2018年に発表されたBERT <span id="id8">[<a class="reference internal" href="#id18" title="Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. \BERT\: Pre-training of Deep Bidirectional Transformers for Language Understanding. In Proceedings of the 2019 Conference of the North \A\merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers), Proceedings of the 2019 Conference of the North, 4171–4186. Minneapolis, Minnesota, 2019. Association for Computational Linguistics. URL: https://www.aclweb.org/anthology/N19-1423, doi:10.18653/v1/n19-1423.">Devlin <em>et al.</em>, 2019</a>]</span> はセンチメント分析を含めた多くのタスクに関して、当時の最高性能(SOTA: State of the Art)を達成する画期的な技術でした。</p>
+<p>とくに2018年に発表されたBERT <span id="id8">[<a class="reference internal" href="word2vec_application.html#id12" title="Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. \BERT\: Pre-training of Deep Bidirectional Transformers for Language Understanding. In Proceedings of the 2019 Conference of the North \A\merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers), Proceedings of the 2019 Conference of the North, 4171–4186. Minneapolis, Minnesota, 2019. Association for Computational Linguistics. URL: https://www.aclweb.org/anthology/N19-1423, doi:10.18653/v1/n19-1423.">Devlin <em>et al.</em>, 2019</a>]</span> はセンチメント分析を含めた多くのタスクに関して、当時の最高性能(SOTA: State of the Art)を達成する画期的な技術でした。</p>
 <p>BERTは事前学習モデルの一種で、事前に一定のタスクに基づいて事前学習することで汎用性を獲得することに特徴があります。そのため、特定のタスクについてより少ないデータで性能を発揮することができます。</p>
-<p>BERTのような事前学習モデルによるテキスト分類の社会科学における応用可能性について多くの注目を集めています <span id="id9">[<a class="reference internal" href="#id19" title="Moritz Laurer, Wouter van Atteveldt, Andreu Casas, and Kasper Welbers. Less annotating, more classifying: addressing the data scarcity issue of supervised machine learning with deep transfer learning and bert-nli. Political Analysis, pages 1–17, 2023. doi:10.1017/pan.2023.20.">Laurer <em>et al.</em>, 2023</a>]</span>。</p>
+<p>BERTのような事前学習モデルによるテキスト分類の社会科学における応用可能性について多くの注目を集めています <span id="id9">[<a class="reference internal" href="word2vec_application.html#id13" title="Moritz Laurer, Wouter van Atteveldt, Andreu Casas, and Kasper Welbers. Less annotating, more classifying: addressing the data scarcity issue of supervised machine learning with deep transfer learning and bert-nli. Political Analysis, pages 1–17, 2023. doi:10.1017/pan.2023.20.">Laurer <em>et al.</em>, 2023</a>]</span>。</p>
 <p><img alt="" src="../_images/text_class.png" /></p>
 </section>
 </section>
@@ -637,6 +650,9 @@ title="Print to PDF"
 </dd>
 <dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id5">GSJZ18</a></span></dt>
 <dd><p>Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. <em>Proceedings of the National Academy of Sciences</em>, 115(16):E3635–E3644, 2018. URL: <a class="reference external" href="https://www.pnas.org/doi/abs/10.1073/pnas.1720347115">https://www.pnas.org/doi/abs/10.1073/pnas.1720347115</a>, <a class="reference external" href="https://arxiv.org/abs/https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115">arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115</a>, <a class="reference external" href="https://doi.org/10.1073/pnas.1720347115">doi:10.1073/pnas.1720347115</a>.</p>
+</dd>
+<dt class="label" id="id22"><span class="brackets">GBPF22</span></dt>
+<dd><p>Gabriel Grand, Idan Asher Blank, Francisco Pereira, and Evelina Fedorenko. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. <em>Nature Human Behaviour</em>, 6(7):975–987, 2022. <a class="reference external" href="https://doi.org/10.1038/s41562-022-01316-8">doi:10.1038/s41562-022-01316-8</a>.</p>
 </dd>
 <dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id6">KTE19</a></span></dt>
 <dd><p>Austin C. Kozlowski, Matt Taddy, and James A. Evans. The geometry of culture: analyzing the meanings of class through word embeddings. <em>American Sociological Review</em>, 84(5):905–949, 2019. <a class="reference external" href="https://doi.org/10.1177/0003122419877135">doi:10.1177/0003122419877135</a>.</p>
