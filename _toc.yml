@@ -26,3 +26,4 @@ parts:
   - file: notebook/word2vec_2_embedding.ipynb
   - file: notebook/word2vec_gensim.ipynb
   - file: notebook/word2vec_sentiment.ipynb
+  - file: notebook/word2vec_application.ipynb

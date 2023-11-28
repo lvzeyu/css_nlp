@@ -251,53 +251,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/answer.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/answer.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -337,7 +290,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/answer.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/answer1115.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -365,7 +318,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/notebook/answer.ipynb"
+        <a href="../_sources/notebook/answer1115.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -453,73 +406,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">male_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;man&quot;</span><span class="p">,</span><span class="s2">&quot;men&quot;</span><span class="p">,</span><span class="s2">&quot;his&quot;</span><span class="p">,</span><span class="s2">&quot;his&quot;</span><span class="p">,</span><span class="s2">&quot;he&quot;</span><span class="p">,</span><span class="s2">&quot;male&quot;</span><span class="p">,</span><span class="s2">&quot;masculine&quot;</span><span class="p">]</span>
-<span class="n">female_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;woman&quot;</span><span class="p">,</span><span class="s2">&quot;women&quot;</span><span class="p">,</span><span class="s2">&quot;her&quot;</span><span class="p">,</span><span class="s2">&quot;hers&quot;</span><span class="p">,</span><span class="s2">&quot;she&quot;</span><span class="p">,</span><span class="s2">&quot;female&quot;</span><span class="p">,</span><span class="s2">&quot;feminine&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">male_vec</span><span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">male_list</span><span class="p">,</span><span class="n">female_list</span><span class="p">):</span>
-    <span class="n">male_vec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">model</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-<span class="n">male_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">male_vec</span><span class="p">)</span>
-<span class="n">male_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">male_vec</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">male_vec</span><span class="o">=</span><span class="p">[]</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">male_list</span><span class="p">,</span><span class="n">female_list</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">4</span>     <span class="n">male_vec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">model</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">male_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">male_vec</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">male_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">male_vec</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;model&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">sport</span> <span class="ow">in</span> <span class="n">sports</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">sport</span><span class="p">,</span><span class="n">get_angle</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">sport</span><span class="p">],</span><span class="n">male_vec</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employment_pair</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;employer&quot;</span><span class="p">,</span><span class="s2">&quot;employee&quot;</span><span class="p">),(</span><span class="s2">&quot;employers&quot;</span><span class="p">,</span><span class="s2">&quot;employees&quot;</span><span class="p">),(</span><span class="s2">&quot;owner&quot;</span><span class="p">,</span><span class="s2">&quot;worker&quot;</span><span class="p">),</span>
-                    <span class="p">(</span><span class="s2">&quot;owners&quot;</span><span class="p">,</span><span class="s2">&quot;workers&quot;</span><span class="p">),(</span><span class="s2">&quot;manager&quot;</span><span class="p">,</span><span class="s2">&quot;worker&quot;</span><span class="p">),(</span><span class="s2">&quot;managers&quot;</span><span class="p">,</span><span class="s2">&quot;staff&quot;</span><span class="p">),</span>
-                    <span class="p">(</span><span class="s2">&quot;boss&quot;</span><span class="p">,</span><span class="s2">&quot;worker&quot;</span><span class="p">),(</span><span class="s2">&quot;bosses&quot;</span><span class="p">,</span><span class="s2">&quot;workers&quot;</span><span class="p">),(</span><span class="s2">&quot;supervisor&quot;</span><span class="p">,</span><span class="s2">&quot;staff&quot;</span><span class="p">),</span>
-                    <span class="p">(</span><span class="s2">&quot;supervisors&quot;</span><span class="p">,</span><span class="s2">&quot;staff&quot;</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employment_vec</span><span class="o">=</span><span class="n">create_vector</span><span class="p">(</span><span class="n">employment_pair</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cosine_similarity</span><span class="p">(</span><span class="n">employment_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">affluence_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-
+  
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
