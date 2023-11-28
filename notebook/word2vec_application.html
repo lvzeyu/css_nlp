@@ -467,17 +467,20 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings">
+    <a class="reference internal nav-link" href="#semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings-grand2022">
      Semantic projection recovers rich human knowledge of multiple object features from word embeddings
+     <span class="xref cite">
+      Grand2022
+     </span>
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-grand2022">
+  <a class="reference internal nav-link" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018">
    Word embeddings quantify 100 years of gender and ethnic stereotypes
    <span class="xref cite">
-    Grand2022
+    Garg2018
    </span>
   </a>
  </li>
@@ -545,17 +548,20 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings">
+    <a class="reference internal nav-link" href="#semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings-grand2022">
      Semantic projection recovers rich human knowledge of multiple object features from word embeddings
+     <span class="xref cite">
+      Grand2022
+     </span>
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-grand2022">
+  <a class="reference internal nav-link" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018">
    Word embeddings quantify 100 years of gender and ethnic stereotypes
    <span class="xref cite">
-    Grand2022
+    Garg2018
    </span>
   </a>
  </li>
@@ -654,29 +660,32 @@ title="Print to PDF"
 <span class="g g-Whitespace">   </span><span class="mi">2068</span> <span class="k">else</span><span class="p">:</span>
 <span class="g g-Whitespace">   </span><span class="mi">2069</span>     <span class="n">_word2vec_read_text</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1960,</span> in <span class="ni">_word2vec_read_binary</span><span class="nt">(fin, kv, counts, vocab_size, vector_size, datatype, unicode_errors, binary_chunk_size, encoding)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1958</span> <span class="n">new_chunk</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">binary_chunk_size</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1959</span> <span class="n">chunk</span> <span class="o">+=</span> <span class="n">new_chunk</span>
-<span class="ne">-&gt; </span><span class="mi">1960</span> <span class="n">processed_words</span><span class="p">,</span> <span class="n">chunk</span> <span class="o">=</span> <span class="n">_add_bytes_to_kv</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1961</span>     <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1962</span> <span class="n">tot_processed_words</span> <span class="o">+=</span> <span class="n">processed_words</span>
-<span class="g g-Whitespace">   </span><span class="mi">1963</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_chunk</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">binary_chunk_size</span><span class="p">:</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1958,</span> in <span class="ni">_word2vec_read_binary</span><span class="nt">(fin, kv, counts, vocab_size, vector_size, datatype, unicode_errors, binary_chunk_size, encoding)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1955</span> <span class="n">tot_processed_words</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">   </span><span class="mi">1957</span> <span class="k">while</span> <span class="n">tot_processed_words</span> <span class="o">&lt;</span> <span class="n">vocab_size</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1958</span>     <span class="n">new_chunk</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">binary_chunk_size</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1959</span>     <span class="n">chunk</span> <span class="o">+=</span> <span class="n">new_chunk</span>
+<span class="g g-Whitespace">   </span><span class="mi">1960</span>     <span class="n">processed_words</span><span class="p">,</span> <span class="n">chunk</span> <span class="o">=</span> <span class="n">_add_bytes_to_kv</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1961</span>         <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1943,</span> in <span class="ni">_add_bytes_to_kv</span><span class="nt">(kv, counts, chunk, vocab_size, vector_size, datatype, unicode_errors, encoding)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1941</span> <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1942</span> <span class="n">vector</span> <span class="o">=</span> <span class="n">frombuffer</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">i_vector</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="n">vector_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">REAL</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">datatype</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1943</span> <span class="n">_add_word_to_kv</span><span class="p">(</span><span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1944</span> <span class="n">start</span> <span class="o">=</span> <span class="n">i_vector</span> <span class="o">+</span> <span class="n">bytes_per_vector</span>
-<span class="g g-Whitespace">   </span><span class="mi">1945</span> <span class="n">processed_words</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/gzip.py:301,</span> in <span class="ni">GzipFile.read</span><span class="nt">(self, size)</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span>     <span class="kn">import</span> <span class="nn">errno</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span>     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">EBADF</span><span class="p">,</span> <span class="s2">&quot;read() on write-only GzipFile object&quot;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">301</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1911,</span> in <span class="ni">_add_word_to_kv</span><span class="nt">(kv, counts, word, weights, vocab_size)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1909</span>     <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;duplicate word &#39;</span><span class="si">%s</span><span class="s2">&#39; in word2vec file, ignoring all but first&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1910</span>     <span class="k">return</span>
-<span class="ne">-&gt; </span><span class="mi">1911</span> <span class="n">word_id</span> <span class="o">=</span> <span class="n">kv</span><span class="o">.</span><span class="n">add_vector</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1913</span> <span class="k">if</span> <span class="n">counts</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1914</span>     <span class="c1"># Most common scenario: no vocab file given. Just make up some bogus counts, in descending order.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1915</span>     <span class="c1"># TODO (someday): make this faking optional, include more realistic (Zipf-based) fake numbers.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1916</span>     <span class="n">word_count</span> <span class="o">=</span> <span class="n">vocab_size</span> <span class="o">-</span> <span class="n">word_id</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/_compression.py:68,</span> in <span class="ni">DecompressReader.readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="k">def</span> <span class="nf">readinto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="k">with</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">as</span> <span class="n">view</span><span class="p">,</span> <span class="n">view</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">byte_view</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">68</span>         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">byte_view</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="n">byte_view</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/gzip.py:496,</span> in <span class="ni">_GzipReader.read</span><span class="nt">(self, size)</span>
+<span class="g g-Whitespace">    </span><span class="mi">493</span> <span class="c1"># Read a chunk of data from the file</span>
+<span class="g g-Whitespace">    </span><span class="mi">494</span> <span class="n">buf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_BUFFER_SIZE</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">496</span> <span class="n">uncompress</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">decompress</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">497</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">unconsumed_tail</span> <span class="o">!=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">498</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">unconsumed_tail</span><span class="p">)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -704,13 +713,13 @@ title="Print to PDF"
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="ef49ce3e-8d3a-41a6-bc61-8f49e8ba1f00" name="13fb9053-b782-42d1-ae3d-cc172aadf5aa" type="radio">
-</input><label class="sd-tab-label" for="ef49ce3e-8d3a-41a6-bc61-8f49e8ba1f00">
+<input checked="checked" id="14c31471-9b5c-46fb-82bf-4185789e6c66" name="40495348-b178-4b19-90d5-ab7f1b4e97f5" type="radio">
+</input><label class="sd-tab-label" for="14c31471-9b5c-46fb-82bf-4185789e6c66">
 質問1</label><div class="sd-tab-content docutils">
 <p>なぜ複数の単語ペアで計算する必要がありますか？</p>
 </div>
-<input id="b65534f6-4280-40de-b224-0a948fa6601a" name="13fb9053-b782-42d1-ae3d-cc172aadf5aa" type="radio">
-</input><label class="sd-tab-label" for="b65534f6-4280-40de-b224-0a948fa6601a">
+<input id="c8664fb6-f707-4d55-aca9-34a099a65e0b" name="40495348-b178-4b19-90d5-ab7f1b4e97f5" type="radio">
+</input><label class="sd-tab-label" for="c8664fb6-f707-4d55-aca9-34a099a65e0b">
 質問2</label><div class="sd-tab-content docutils">
 <p>単語ペアでベクトル減法を行なって、結果の平均を取る方法以外、Dimensionsを測定する方法がありますか？</p>
 </div>
@@ -803,13 +812,13 @@ hockey 88.2316913132707
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="a5540460-9e3c-404c-b457-31c3bde80e9a" name="87ba629f-486b-41f8-bd61-e2d3a725aa54" type="radio">
-</input><label class="sd-tab-label" for="a5540460-9e3c-404c-b457-31c3bde80e9a">
+<input checked="checked" id="6db8f6aa-a356-4d1b-91ba-b1f448f7a184" name="8fb6d578-fd8e-47db-816d-e3491c0a5da3" type="radio">
+</input><label class="sd-tab-label" for="6db8f6aa-a356-4d1b-91ba-b1f448f7a184">
 質問3</label><div class="sd-tab-content docutils">
 <p>この結果をどのように解釈すべきですか？</p>
 </div>
-<input id="22b8281d-dc50-456d-bc38-5c48d01ca3bf" name="87ba629f-486b-41f8-bd61-e2d3a725aa54" type="radio">
-</input><label class="sd-tab-label" for="22b8281d-dc50-456d-bc38-5c48d01ca3bf">
+<input id="f47959fc-5650-41cf-be1c-83fe912e67ee" name="8fb6d578-fd8e-47db-816d-e3491c0a5da3" type="radio">
+</input><label class="sd-tab-label" for="f47959fc-5650-41cf-be1c-83fe912e67ee">
 課題</label><div class="sd-tab-content docutils">
 <ul class="simple">
 <li><p>性別に関するDimensionを作成しなさい</p></li>
@@ -894,8 +903,8 @@ hockey 88.2316913132707
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="c67377f8-f784-46a3-9265-5edadd54b743" name="16b8e8a8-1c24-4a12-b0d2-dcd5aa059b53" type="radio">
-</input><label class="sd-tab-label" for="c67377f8-f784-46a3-9265-5edadd54b743">
+<input checked="checked" id="42de6b34-0060-44d4-8c7b-974e285fa08e" name="af4c06f0-873a-47c2-9980-87a3a3a46aa6" type="radio">
+</input><label class="sd-tab-label" for="42de6b34-0060-44d4-8c7b-974e285fa08e">
 質問4</label><div class="sd-tab-content docutils">
 <p>この結果をどのように解釈すべきですか？</p>
 </div>
@@ -909,8 +918,8 @@ hockey 88.2316913132707
     <img src="./Figure/OLS_dynamic.jpeg" alt="OLS Dynamics" style="width: 50%;"/>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="013fdea6-9c33-4f60-828d-c92fe550e827" name="1f26dff3-9576-4299-be80-0866f326eb15" type="radio">
-</input><label class="sd-tab-label" for="013fdea6-9c33-4f60-828d-c92fe550e827">
+<input checked="checked" id="e3acc5ca-4f2f-41cf-955a-12d37ff75ef6" name="533b9432-4e7b-4cc0-b746-18e49649ce30" type="radio">
+</input><label class="sd-tab-label" for="e3acc5ca-4f2f-41cf-955a-12d37ff75ef6">
 質問4</label><div class="sd-tab-content docutils">
 <p>この図の結果をどのように解釈すべきですか？</p>
 </div>
@@ -920,15 +929,14 @@ hockey 88.2316913132707
 </section>
 <section id="id4">
 <h2>Word2Vecを応用する研究<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
-<section id="semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings">
-<h3>Semantic projection recovers rich human knowledge of multiple object features from word embeddings<a class="headerlink" href="#semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings" title="Permalink to this headline">#</a></h3>
-<p><span id="id5">[<a class="reference internal" href="#id16" title="Gabriel Grand, Idan Asher Blank, Francisco Pereira, and Evelina Fedorenko. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. Nature Human Behaviour, 6(7):975–987, 2022. doi:10.1038/s41562-022-01316-8.">Grand <em>et al.</em>, 2022</a>]</span></p>
+<section id="semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings-grand2022">
+<h3>Semantic projection recovers rich human knowledge of multiple object features from word embeddings <span id="id5">[<a class="reference internal" href="#id16" title="Gabriel Grand, Idan Asher Blank, Francisco Pereira, and Evelina Fedorenko. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. Nature Human Behaviour, 6(7):975–987, 2022. doi:10.1038/s41562-022-01316-8.">Grand <em>et al.</em>, 2022</a>]</span><a class="headerlink" href="#semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings-grand2022" title="Permalink to this headline">#</a></h3>
 <p><img alt="" src="../_images/projection_example.jpeg" /></p>
 <p><img alt="" src="../_images/projection_example2.jpeg" /></p>
 </section>
 </section>
-<section id="word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-grand2022">
-<h2>Word embeddings quantify 100 years of gender and ethnic stereotypes <span id="id6">[<a class="reference internal" href="#id16" title="Gabriel Grand, Idan Asher Blank, Francisco Pereira, and Evelina Fedorenko. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. Nature Human Behaviour, 6(7):975–987, 2022. doi:10.1038/s41562-022-01316-8.">Grand <em>et al.</em>, 2022</a>]</span><a class="headerlink" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-grand2022" title="Permalink to this headline">#</a></h2>
+<section id="word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018">
+<h2>Word embeddings quantify 100 years of gender and ethnic stereotypes <span id="id6">[<a class="reference internal" href="#id10" title="Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16):E3635-E3644, 2018. URL: https://www.pnas.org/doi/abs/10.1073/pnas.1720347115, arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115, doi:10.1073/pnas.1720347115.">Garg <em>et al.</em>, 2018</a>]</span><a class="headerlink" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="id7">
 <h2>参考文献<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
@@ -937,10 +945,10 @@ hockey 88.2316913132707
 <dt class="label" id="id12"><span class="brackets">DCLT19</span></dt>
 <dd><p>Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. \BERT\: Pre-training of Deep Bidirectional Transformers for Language Understanding. In <em>Proceedings of the 2019 Conference of the North \A\merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)</em>, Proceedings of the 2019 Conference of the North, 4171–4186. Minneapolis, Minnesota, 2019. Association for Computational Linguistics. URL: <a class="reference external" href="https://www.aclweb.org/anthology/N19-1423">https://www.aclweb.org/anthology/N19-1423</a>, <a class="reference external" href="https://doi.org/10.18653/v1/n19-1423">doi:10.18653/v1/n19-1423</a>.</p>
 </dd>
-<dt class="label" id="id10"><span class="brackets">GSJZ18</span></dt>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id6">GSJZ18</a></span></dt>
 <dd><p>Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. <em>Proceedings of the National Academy of Sciences</em>, 115(16):E3635–E3644, 2018. URL: <a class="reference external" href="https://www.pnas.org/doi/abs/10.1073/pnas.1720347115">https://www.pnas.org/doi/abs/10.1073/pnas.1720347115</a>, <a class="reference external" href="https://arxiv.org/abs/https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115">arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115</a>, <a class="reference external" href="https://doi.org/10.1073/pnas.1720347115">doi:10.1073/pnas.1720347115</a>.</p>
 </dd>
-<dt class="label" id="id16"><span class="brackets">GBPF22</span><span class="fn-backref">(<a href="#id5">1</a>,<a href="#id6">2</a>)</span></dt>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id5">GBPF22</a></span></dt>
 <dd><p>Gabriel Grand, Idan Asher Blank, Francisco Pereira, and Evelina Fedorenko. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. <em>Nature Human Behaviour</em>, 6(7):975–987, 2022. <a class="reference external" href="https://doi.org/10.1038/s41562-022-01316-8">doi:10.1038/s41562-022-01316-8</a>.</p>
 </dd>
 <dt class="label" id="id11"><span class="brackets">KTE19</span></dt>
