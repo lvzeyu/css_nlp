@@ -102,7 +102,7 @@ word2vec = gensim.downloader.load('word2vec-google-news-300')
 def tokens_to_embedding(tokens, model, embedding_size=300):
     embeddings = [model[word] for word in tokens if word in model]
     if len(embeddings) == 0:
-        return np.zeros(embedding_size)  # Return a zero vector if no words are found
+        return np.zeros(embedding_size)
     else:
         return np.mean(embeddings, axis=0)
 

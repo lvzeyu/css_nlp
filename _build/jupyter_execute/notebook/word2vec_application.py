@@ -3,7 +3,7 @@
 
 # # Word2Vecが人文・社会科学研究における応用 
 
-# ## The Geometry of Culture: Analyzing the Meanings of Class through Word Embeddings
+# ## The Geometry of Culture: Analyzing the Meanings of Class through Word Embeddings  {cite}`Kozlowski2019`
 
 # ### 問題関心
 # 
@@ -245,16 +245,15 @@ cosine_similarity(education_vec.reshape(1,-1),affluence_vec.reshape(1,-1))
 
 # ````{tab-set}
 # ```{tab-item} 課題
-# -「engineer」、「nurse」、「housekeeper」の$Gender Bias$を計算しなさい
+# - 「engineer」、「nurse」、「housekeeper」の$Gender Bias$を計算しなさい
 # - Norm distanceはNumpyを使って実装できます
 # ```
-# 
 # ```{tab-item} 質問5
 # $Ethnic Bias$はどのように計算すべきのかを考えなさい。Ethnicのグループでは$2$以上であることを注意してください。
 # ```
 # ````
 
-# - 同じ手法を使用した研究 {cite}`Jones2020`
+# 同じ手法を使用した研究 {cite}`Jones2020`
 
 # ## 参考文献
 # 

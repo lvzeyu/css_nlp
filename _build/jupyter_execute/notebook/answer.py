@@ -52,3 +52,13 @@ employment_vec=create_vector(employment_pair)
 
 cosine_similarity(employment_vec.reshape(1,-1),affluence_vec.reshape(1,-1))
 
+
+# In[ ]:
+
+
+ocuupation=["engineer","nurse"]
+male_word =[i[0] for i in gender_pair]
+female_word =[i[1] for i in gender_pair]
+np.linalg.norm(model["engineer"] - model["male"]) - np.linalg.norm(model["engineer"] - model["female"])
+np.linalg.norm(model["nurse"] - model["male"]) - np.linalg.norm(model["nurse"] - model["female"])
+
