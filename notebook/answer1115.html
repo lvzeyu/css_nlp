@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>データ準備 &#8212; 計算社会科学のための自然言語処理</title>
+    <title>Answer1115 &#8212; 計算社会科学のための自然言語処理</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -426,65 +426,87 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   復習
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     ニューラルネットワーク
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     機械学習・深層学習ためテキストの処理
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#word2vec">
+     Word2Vec
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
    データ準備
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#csv">
      CSVファイルを読み込む
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
      データの確認
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
      ラベルデータの処理
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#sentiment">
        sentimentラベル
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#emotion">
        emotionラベル
       </a>
      </li>
     </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
      テキストデータの前処理
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
      単語分散表現によって特徴量の作成
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
      トレーニング、バリデーション、テストデータに分割
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#batch-datasets">
      学習用データセットの作成(Batch Datasets)
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id7">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
        sentimentデータセット
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id8">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
        emotionデータセット
       </a>
      </li>
@@ -492,45 +514,45 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id9">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
    学習の実行
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
      ニューラルネットワークモデルの作成
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
      sentimentモデル
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id12">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id15">
        sentimentモデルの学習
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id13">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id16">
        sentimentモデルの検証
       </a>
      </li>
     </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id14">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id17">
      emotionモデル
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id15">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id18">
        emotionモデルの学習
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id16">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id19">
        emotionモデルの検証
       </a>
      </li>
@@ -547,7 +569,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>データ準備</h1>
+                <h1>Answer1115</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -557,65 +579,87 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   復習
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     ニューラルネットワーク
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     機械学習・深層学習ためテキストの処理
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#word2vec">
+     Word2Vec
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
    データ準備
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#csv">
      CSVファイルを読み込む
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
      データの確認
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
      ラベルデータの処理
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#sentiment">
        sentimentラベル
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#emotion">
        emotionラベル
       </a>
      </li>
     </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
      テキストデータの前処理
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
      単語分散表現によって特徴量の作成
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
      トレーニング、バリデーション、テストデータに分割
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#batch-datasets">
      学習用データセットの作成(Batch Datasets)
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id7">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
        sentimentデータセット
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id8">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
        emotionデータセット
       </a>
      </li>
@@ -623,45 +667,45 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id9">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
    学習の実行
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
      ニューラルネットワークモデルの作成
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
      sentimentモデル
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id12">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id15">
        sentimentモデルの学習
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id13">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id16">
        sentimentモデルの検証
       </a>
      </li>
     </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id14">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id17">
      emotionモデル
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id15">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id18">
        emotionモデルの学習
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id16">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id19">
        emotionモデルの検証
       </a>
      </li>
@@ -679,7 +723,47 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="answer1115">
+<h1>Answer1115<a class="headerlink" href="#answer1115" title="Permalink to this headline">#</a></h1>
+<section id="id1">
+<h2>復習<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<section id="id2">
+<h3>ニューラルネットワーク<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p>ニューラルネットワークは、特定の入力と出力の間の複雑な非線形関係をモデル化する能力を持っています。適切に入力と出力を設計することで、様々なモデル構築に柔軟に適用できます。</p>
+<ul class="simple">
+<li><p>日英通訳</p>
+<ul>
+<li><p>入力:日本語トークン</p></li>
+<li><p>出力:英語トークン</p></li>
+</ul>
+</li>
+<li><p>センチメント分類</p>
+<ul>
+<li><p>入力:テキストトークン</p></li>
+<li><p>出力:センチメントラベル</p></li>
+</ul>
+</li>
+<li><p>CBOW</p>
+<ul>
+<li><p>入力：周辺単語のトークン</p></li>
+<li><p>出力: ターゲット単語のトークン</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h3>機械学習・深層学習ためテキストの処理<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<p>機械学習・深層学習はテキストをそのまま扱うことができないので、テキストの「情報」(単語の出現頻度、単語の順番、単語の意味など)を「特徴量」としてまとめる必要があります。</p>
+<p>特徴量では、テキストの「情報」がより多く、全面的に反映できれば、モデルのパフォーマンスが良くなると考えられます。</p>
+<p>単語分散表現では、「単語の意味」を数値的に捉えることができますので、テキストの特徴量の作成に有用な方法となっています。</p>
+</section>
+<section id="word2vec">
+<h3>Word2Vec<a class="headerlink" href="#word2vec" title="Permalink to this headline">#</a></h3>
+<p>Word2Vecとは、単語分散表現（word embedding）を学習するための手法です。</p>
+<p>この手法は、(CBOWの場合)周囲単語からターゲットを予測する「偽タスク」を通じて単語の意味を捉えるように設計されています。</p>
+<p>ターゲットをうまく予測するために、入力テキストの単語を適切に処理し、単語間の関係や意味をより正確に捉えるよう調整する必要があります。このプロセスは、エンコーディング(encoding)と言います。</p>
+<p>モデルが偽タスクでのパフォーマンスを向上させるにつれて、単語意味のエンコーディングもより精度が高くなります。単語意味のエンコーディングは、単語間の意味的および文法的な関係をより良く捉えた単語分散表現として扱えます。</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -689,10 +773,12 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<section id="id1">
-<h1>データ準備<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+</section>
+</section>
+<section id="id4">
+<h2>データ準備<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
 <section id="csv">
-<h2>CSVファイルを読み込む<a class="headerlink" href="#csv" title="Permalink to this headline">#</a></h2>
+<h3>CSVファイルを読み込む<a class="headerlink" href="#csv" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./Data/sentiment-emotion-labelled_Dell_tweets.csv&quot;</span><span class="p">)</span>
@@ -796,8 +882,8 @@ title="Print to PDF"
 </div></div></div>
 </div>
 </section>
-<section id="id2">
-<h2>データの確認<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<section id="id5">
+<h3>データの確認<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Text: テキストデータ</p>
 <ul>
@@ -819,10 +905,10 @@ title="Print to PDF"
 </li>
 </ul>
 </section>
-<section id="id3">
-<h2>ラベルデータの処理<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<section id="id6">
+<h3>ラベルデータの処理<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <section id="sentiment">
-<h3>sentimentラベル<a class="headerlink" href="#sentiment" title="Permalink to this headline">#</a></h3>
+<h4>sentimentラベル<a class="headerlink" href="#sentiment" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;sentiment&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -862,7 +948,7 @@ Name: sentiment, dtype: int64
 </div>
 </section>
 <section id="emotion">
-<h3>emotionラベル<a class="headerlink" href="#emotion" title="Permalink to this headline">#</a></h3>
+<h4>emotionラベル<a class="headerlink" href="#emotion" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;emotion&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -933,8 +1019,8 @@ Name: emotion, dtype: int64
 </div>
 </section>
 </section>
-<section id="id4">
-<h2>テキストデータの前処理<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<section id="id7">
+<h3>テキストデータの前処理<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>テキストを小文字に変換</p></li>
 <li><p>句読点を削除</p></li>
@@ -1080,8 +1166,8 @@ Name: emotion, dtype: int64
 </div></div></div>
 </div>
 </section>
-<section id="id5">
-<h2>単語分散表現によって特徴量の作成<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<section id="id8">
+<h3>単語分散表現によって特徴量の作成<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gensim.downloader</span>
@@ -1133,29 +1219,32 @@ Name: emotion, dtype: int64
 <span class="g g-Whitespace">   </span><span class="mi">2068</span> <span class="k">else</span><span class="p">:</span>
 <span class="g g-Whitespace">   </span><span class="mi">2069</span>     <span class="n">_word2vec_read_text</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1960,</span> in <span class="ni">_word2vec_read_binary</span><span class="nt">(fin, kv, counts, vocab_size, vector_size, datatype, unicode_errors, binary_chunk_size, encoding)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1958</span> <span class="n">new_chunk</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">binary_chunk_size</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1959</span> <span class="n">chunk</span> <span class="o">+=</span> <span class="n">new_chunk</span>
-<span class="ne">-&gt; </span><span class="mi">1960</span> <span class="n">processed_words</span><span class="p">,</span> <span class="n">chunk</span> <span class="o">=</span> <span class="n">_add_bytes_to_kv</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1961</span>     <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1962</span> <span class="n">tot_processed_words</span> <span class="o">+=</span> <span class="n">processed_words</span>
-<span class="g g-Whitespace">   </span><span class="mi">1963</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_chunk</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">binary_chunk_size</span><span class="p">:</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1958,</span> in <span class="ni">_word2vec_read_binary</span><span class="nt">(fin, kv, counts, vocab_size, vector_size, datatype, unicode_errors, binary_chunk_size, encoding)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1955</span> <span class="n">tot_processed_words</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">   </span><span class="mi">1957</span> <span class="k">while</span> <span class="n">tot_processed_words</span> <span class="o">&lt;</span> <span class="n">vocab_size</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1958</span>     <span class="n">new_chunk</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">binary_chunk_size</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1959</span>     <span class="n">chunk</span> <span class="o">+=</span> <span class="n">new_chunk</span>
+<span class="g g-Whitespace">   </span><span class="mi">1960</span>     <span class="n">processed_words</span><span class="p">,</span> <span class="n">chunk</span> <span class="o">=</span> <span class="n">_add_bytes_to_kv</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1961</span>         <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1943,</span> in <span class="ni">_add_bytes_to_kv</span><span class="nt">(kv, counts, chunk, vocab_size, vector_size, datatype, unicode_errors, encoding)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1941</span> <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1942</span> <span class="n">vector</span> <span class="o">=</span> <span class="n">frombuffer</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">i_vector</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="n">vector_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">REAL</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">datatype</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1943</span> <span class="n">_add_word_to_kv</span><span class="p">(</span><span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1944</span> <span class="n">start</span> <span class="o">=</span> <span class="n">i_vector</span> <span class="o">+</span> <span class="n">bytes_per_vector</span>
-<span class="g g-Whitespace">   </span><span class="mi">1945</span> <span class="n">processed_words</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/gzip.py:301,</span> in <span class="ni">GzipFile.read</span><span class="nt">(self, size)</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span>     <span class="kn">import</span> <span class="nn">errno</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span>     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">EBADF</span><span class="p">,</span> <span class="s2">&quot;read() on write-only GzipFile object&quot;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">301</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1911,</span> in <span class="ni">_add_word_to_kv</span><span class="nt">(kv, counts, word, weights, vocab_size)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1909</span>     <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;duplicate word &#39;</span><span class="si">%s</span><span class="s2">&#39; in word2vec file, ignoring all but first&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1910</span>     <span class="k">return</span>
-<span class="ne">-&gt; </span><span class="mi">1911</span> <span class="n">word_id</span> <span class="o">=</span> <span class="n">kv</span><span class="o">.</span><span class="n">add_vector</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1913</span> <span class="k">if</span> <span class="n">counts</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1914</span>     <span class="c1"># Most common scenario: no vocab file given. Just make up some bogus counts, in descending order.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1915</span>     <span class="c1"># TODO (someday): make this faking optional, include more realistic (Zipf-based) fake numbers.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1916</span>     <span class="n">word_count</span> <span class="o">=</span> <span class="n">vocab_size</span> <span class="o">-</span> <span class="n">word_id</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/_compression.py:68,</span> in <span class="ni">DecompressReader.readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="k">def</span> <span class="nf">readinto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="k">with</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">as</span> <span class="n">view</span><span class="p">,</span> <span class="n">view</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">byte_view</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">68</span>         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">byte_view</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="n">byte_view</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/gzip.py:496,</span> in <span class="ni">_GzipReader.read</span><span class="nt">(self, size)</span>
+<span class="g g-Whitespace">    </span><span class="mi">493</span> <span class="c1"># Read a chunk of data from the file</span>
+<span class="g g-Whitespace">    </span><span class="mi">494</span> <span class="n">buf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_BUFFER_SIZE</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">496</span> <span class="n">uncompress</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">decompress</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">497</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">unconsumed_tail</span> <span class="o">!=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">498</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">unconsumed_tail</span><span class="p">)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -1297,8 +1386,8 @@ Name: emotion, dtype: int64
 </div></div></div>
 </div>
 </section>
-<section id="id6">
-<h2>トレーニング、バリデーション、テストデータに分割<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<section id="id9">
+<h3>トレーニング、バリデーション、テストデータに分割<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -1310,7 +1399,7 @@ Name: emotion, dtype: int64
 </div>
 </section>
 <section id="batch-datasets">
-<h2>学習用データセットの作成(Batch Datasets)<a class="headerlink" href="#batch-datasets" title="Permalink to this headline">#</a></h2>
+<h3>学習用データセットの作成(Batch Datasets)<a class="headerlink" href="#batch-datasets" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">TensorDataset</span>
@@ -1323,8 +1412,8 @@ Name: emotion, dtype: int64
 </div>
 </div>
 </div>
-<section id="id7">
-<h3>sentimentデータセット<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<section id="id10">
+<h4>sentimentデータセット<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
@@ -1346,8 +1435,8 @@ Name: emotion, dtype: int64
 </div>
 </div>
 </section>
-<section id="id8">
-<h3>emotionデータセット<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<section id="id11">
+<h4>emotionデータセット<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
@@ -1371,10 +1460,10 @@ Name: emotion, dtype: int64
 </section>
 </section>
 </section>
-<section id="id9">
-<h1>学習の実行<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h1>
-<section id="id10">
-<h2>ニューラルネットワークモデルの作成<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+<section id="id12">
+<h2>学習の実行<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h2>
+<section id="id13">
+<h3>ニューラルネットワークモデルの作成<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
@@ -1419,10 +1508,10 @@ Name: emotion, dtype: int64
 </div>
 </div>
 </section>
-<section id="id11">
-<h2>sentimentモデル<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h2>
-<section id="id12">
-<h3>sentimentモデルの学習<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
+<section id="id14">
+<h3>sentimentモデル<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
+<section id="id15">
+<h4>sentimentモデルの学習<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label_size</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;sentiment&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
@@ -1525,8 +1614,8 @@ Epoch 50, Accuracy: 0.7685, F1 Score: 0.7690
 </div>
 </div>
 </section>
-<section id="id13">
-<h3>sentimentモデルの検証<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<section id="id16">
+<h4>sentimentモデルの検証<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
@@ -1563,10 +1652,10 @@ Epoch 50, Accuracy: 0.7685, F1 Score: 0.7690
 </div>
 </section>
 </section>
-<section id="id14">
-<h2>emotionモデル<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h2>
-<section id="id15">
-<h3>emotionモデルの学習<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h3>
+<section id="id17">
+<h3>emotionモデル<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h3>
+<section id="id18">
+<h4>emotionモデルの学習<a class="headerlink" href="#id18" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label_size</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;emotion&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
@@ -1666,8 +1755,8 @@ Epoch 50, Accuracy: 0.6449, F1 Score: 0.6354
 </div>
 </div>
 </section>
-<section id="id16">
-<h3>emotionモデルの検証<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h3>
+<section id="id19">
+<h4>emotionモデルの検証<a class="headerlink" href="#id19" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
@@ -1697,6 +1786,7 @@ Epoch 50, Accuracy: 0.6449, F1 Score: 0.6354
 <img alt="../_images/answer1115_51_0.png" src="../_images/answer1115_51_0.png" />
 </div>
 </div>
+</section>
 </section>
 </section>
 </section>
