@@ -50,11 +50,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="データ準備" href="word2vec_sentiment.html" />
+    <link rel="next" title="Word2Vecを用いるセンチメント分析" href="word2vec_sentiment.html" />
     <link rel="prev" title="word2vec" href="word2vec_2_embedding.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -196,7 +198,24 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="word2vec_sentiment.html">
-   データ準備
+   Word2Vecを用いるセンチメント分析
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_application.html">
+   Word2Vecが人文・社会科学研究における応用
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  RNN
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rnn.html">
+   RNN
   </a>
  </li>
 </ul>
@@ -635,8 +654,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="03c0b1b4-7540-495b-90a0-5dc39394e648" name="21bd71cb-5e18-4263-94c2-d19bb968aef7" type="radio">
-</input><label class="sd-tab-label" for="03c0b1b4-7540-495b-90a0-5dc39394e648">
+<input checked="checked" id="aecb5afc-1ca6-4838-bfaa-0170818bdd9e" name="7055852c-c86b-4364-a889-c1125db50b40" type="radio">
+</input><label class="sd-tab-label" for="aecb5afc-1ca6-4838-bfaa-0170818bdd9e">
 課題</label><div class="sd-tab-content docutils">
 <p><a class="reference external" href="https://radimrehurek.com/gensim/models/word2vec.html">ドキュメント</a>を参照しながら、以下の指示に従ってモデルを実装してください。</p>
 <ul class="simple">
@@ -693,26 +712,26 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.01523077,  0.24818785,  0.1084044 ,  0.2128867 ,  0.07677957,
-       -0.75206316,  0.294865  ,  0.96194184, -0.34568942, -0.44070968,
-       -0.30963343, -0.66954654, -0.29728898,  0.07255475,  0.17454077,
-       -0.22000301,  0.15591018, -0.18929528,  0.1287731 , -0.9184    ,
-        0.19445905,  0.20504795,  0.44018605, -0.1547908 , -0.16223125,
-       -0.14639932, -0.52758825, -0.13857491, -0.4058093 ,  0.08137008,
-        0.589094  , -0.13274606,  0.39031842, -0.72420293, -0.0857408 ,
-        0.3680027 ,  0.16723984, -0.37232053, -0.48394045, -0.60102004,
-        0.15623167, -0.3288197 , -0.3949438 ,  0.25773326,  0.28598258,
-       -0.2251924 , -0.43225387, -0.11953888,  0.24525346,  0.33431062,
-        0.22290935, -0.3181079 , -0.20824368, -0.15870784, -0.24407038,
-       -0.00583023,  0.17857493, -0.17095673, -0.43457416,  0.105928  ,
-       -0.07671807,  0.136672  ,  0.04657332,  0.01773726, -0.596094  ,
-        0.54775953,  0.05461283,  0.1834311 , -0.537828  ,  0.3236357 ,
-       -0.3622253 ,  0.25774518,  0.5309706 , -0.14991726,  0.5337398 ,
-        0.11168198, -0.0767389 , -0.01262075, -0.33252817,  0.037796  ,
-       -0.34333748, -0.03265623, -0.2222078 ,  0.6303768 , -0.20813428,
-       -0.20822497, -0.04234859,  0.05858192,  0.58124727, -0.02702224,
-        0.6606507 ,  0.3857007 ,  0.06621595,  0.04685428,  0.73725283,
-        0.29317498,  0.09183199, -0.10438277,  0.12209693, -0.24089299],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.01955878,  0.23760737,  0.08624359,  0.23176762,  0.07768093,
+       -0.7730639 ,  0.29753113,  0.9506419 , -0.36420536, -0.45274746,
+       -0.28820178, -0.6818679 , -0.27447   ,  0.07585317,  0.16149026,
+       -0.23213369,  0.1356584 , -0.18800561,  0.14164801, -0.90509045,
+        0.21500997,  0.19327609,  0.43587556, -0.14708444, -0.15819708,
+       -0.14492755, -0.52023107, -0.12544046, -0.39281872,  0.07534824,
+        0.597077  , -0.11641099,  0.37067735, -0.7197579 , -0.06213377,
+        0.34813905,  0.1539449 , -0.35367858, -0.4453832 , -0.6412594 ,
+        0.14452343, -0.3251846 , -0.40699026,  0.27088606,  0.2807835 ,
+       -0.22798546, -0.4351668 , -0.11758936,  0.24796194,  0.3342767 ,
+        0.23265927, -0.30068317, -0.23268035, -0.19075954, -0.2161348 ,
+       -0.02259099,  0.18425396, -0.17584062, -0.43471783,  0.09690897,
+       -0.08698869,  0.14127013,  0.04958015,  0.02455294, -0.59545493,
+        0.56266534,  0.04993773,  0.17407547, -0.52165055,  0.3226274 ,
+       -0.3517651 ,  0.26038453,  0.5212256 , -0.12726067,  0.5554784 ,
+        0.09757318, -0.07757214, -0.01927667, -0.34825307,  0.03948191,
+       -0.34005928, -0.04186369, -0.23001537,  0.6189364 , -0.21654902,
+       -0.2240897 , -0.02051629,  0.02020353,  0.57382953, -0.01938878,
+        0.6551917 ,  0.37754795,  0.07158637,  0.06285442,  0.7467078 ,
+        0.300077  ,  0.09780832, -0.09670246,  0.12873173, -0.260617  ],
       dtype=float32)
 </pre></div>
 </div>
@@ -728,7 +747,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.99928963
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.99931145
 </pre></div>
 </div>
 </div>
@@ -743,16 +762,16 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;this&#39;, 0.9997782707214355),
- (&#39;also&#39;, 0.9997510313987732),
- (&#39;are&#39;, 0.9997506141662598),
- (&#39;last&#39;, 0.9997457265853882),
- (&#39;police&#39;, 0.9997425675392151),
- (&#39;us&#39;, 0.9997356534004211),
- (&#39;with&#39;, 0.9997310638427734),
- (&#39;all&#39;, 0.9997296929359436),
- (&#39;is&#39;, 0.9997270107269287),
- (&#39;no&#39;, 0.9997225403785706)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;this&#39;, 0.9997767210006714),
+ (&#39;also&#39;, 0.9997580647468567),
+ (&#39;last&#39;, 0.9997541308403015),
+ (&#39;are&#39;, 0.9997477531433105),
+ (&#39;with&#39;, 0.9997434616088867),
+ (&#39;us&#39;, 0.9997416138648987),
+ (&#39;police&#39;, 0.9997385740280151),
+ (&#39;all&#39;, 0.999736487865448),
+ (&#39;were&#39;, 0.9997210502624512),
+ (&#39;some&#39;, 0.9997204542160034)]
 </pre></div>
 </div>
 </div>
@@ -839,72 +858,39 @@ title="Print to PDF"
 <span class="g g-Whitespace">   </span><span class="mi">2068</span> <span class="k">else</span><span class="p">:</span>
 <span class="g g-Whitespace">   </span><span class="mi">2069</span>     <span class="n">_word2vec_read_text</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1960,</span> in <span class="ni">_word2vec_read_binary</span><span class="nt">(fin, kv, counts, vocab_size, vector_size, datatype, unicode_errors, binary_chunk_size, encoding)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1958</span> <span class="n">new_chunk</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">binary_chunk_size</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1959</span> <span class="n">chunk</span> <span class="o">+=</span> <span class="n">new_chunk</span>
-<span class="ne">-&gt; </span><span class="mi">1960</span> <span class="n">processed_words</span><span class="p">,</span> <span class="n">chunk</span> <span class="o">=</span> <span class="n">_add_bytes_to_kv</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1961</span>     <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1962</span> <span class="n">tot_processed_words</span> <span class="o">+=</span> <span class="n">processed_words</span>
-<span class="g g-Whitespace">   </span><span class="mi">1963</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_chunk</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">binary_chunk_size</span><span class="p">:</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1958,</span> in <span class="ni">_word2vec_read_binary</span><span class="nt">(fin, kv, counts, vocab_size, vector_size, datatype, unicode_errors, binary_chunk_size, encoding)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1955</span> <span class="n">tot_processed_words</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">   </span><span class="mi">1957</span> <span class="k">while</span> <span class="n">tot_processed_words</span> <span class="o">&lt;</span> <span class="n">vocab_size</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1958</span>     <span class="n">new_chunk</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">binary_chunk_size</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1959</span>     <span class="n">chunk</span> <span class="o">+=</span> <span class="n">new_chunk</span>
+<span class="g g-Whitespace">   </span><span class="mi">1960</span>     <span class="n">processed_words</span><span class="p">,</span> <span class="n">chunk</span> <span class="o">=</span> <span class="n">_add_bytes_to_kv</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1961</span>         <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1943,</span> in <span class="ni">_add_bytes_to_kv</span><span class="nt">(kv, counts, chunk, vocab_size, vector_size, datatype, unicode_errors, encoding)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1941</span> <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1942</span> <span class="n">vector</span> <span class="o">=</span> <span class="n">frombuffer</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">i_vector</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="n">vector_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">REAL</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">datatype</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1943</span> <span class="n">_add_word_to_kv</span><span class="p">(</span><span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1944</span> <span class="n">start</span> <span class="o">=</span> <span class="n">i_vector</span> <span class="o">+</span> <span class="n">bytes_per_vector</span>
-<span class="g g-Whitespace">   </span><span class="mi">1945</span> <span class="n">processed_words</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/gzip.py:301,</span> in <span class="ni">GzipFile.read</span><span class="nt">(self, size)</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span>     <span class="kn">import</span> <span class="nn">errno</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span>     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">EBADF</span><span class="p">,</span> <span class="s2">&quot;read() on write-only GzipFile object&quot;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">301</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1923,</span> in <span class="ni">_add_word_to_kv</span><span class="nt">(kv, counts, word, weights, vocab_size)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1921</span>     <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;vocabulary file is incomplete: &#39;</span><span class="si">%s</span><span class="s2">&#39; is missing&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1922</span>     <span class="n">word_count</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">1923</span> <span class="n">kv</span><span class="o">.</span><span class="n">set_vecattr</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">word_count</span><span class="p">)</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/_compression.py:68,</span> in <span class="ni">DecompressReader.readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="k">def</span> <span class="nf">readinto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="k">with</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">as</span> <span class="n">view</span><span class="p">,</span> <span class="n">view</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">byte_view</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">68</span>         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">byte_view</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="n">byte_view</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:353,</span> in <span class="ni">KeyedVectors.set_vecattr</span><span class="nt">(self, key, attr, val)</span>
-<span class="g g-Whitespace">    </span><span class="mi">334</span> <span class="k">def</span> <span class="nf">set_vecattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">335</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Set attribute associated with the given key to value.</span>
-<span class="g g-Whitespace">    </span><span class="mi">336</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">337</span><span class="sd">     Parameters</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">351</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">352</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">353</span>     <span class="bp">self</span><span class="o">.</span><span class="n">allocate_vecattrs</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="n">attr</span><span class="p">],</span> <span class="n">types</span><span class="o">=</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">)])</span>
-<span class="g g-Whitespace">    </span><span class="mi">354</span>     <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">355</span>     <span class="bp">self</span><span class="o">.</span><span class="n">expandos</span><span class="p">[</span><span class="n">attr</span><span class="p">][</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/gzip.py:494,</span> in <span class="ni">_GzipReader.read</span><span class="nt">(self, size)</span>
+<span class="g g-Whitespace">    </span><span class="mi">491</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_new_member</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">493</span> <span class="c1"># Read a chunk of data from the file</span>
+<span class="ne">--&gt; </span><span class="mi">494</span> <span class="n">buf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_BUFFER_SIZE</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">496</span> <span class="n">uncompress</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">decompress</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">497</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">unconsumed_tail</span> <span class="o">!=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">:</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:323,</span> in <span class="ni">KeyedVectors.allocate_vecattrs</span><span class="nt">(self, attrs, types)</span>
-<span class="g g-Whitespace">    </span><span class="mi">321</span>     <span class="k">continue</span>
-<span class="g g-Whitespace">    </span><span class="mi">322</span> <span class="n">prev_expando</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expandos</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span>
-<span class="ne">--&gt; </span><span class="mi">323</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">prev_expando</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">324</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">325</span>         <span class="sa">f</span><span class="s2">&quot;Can&#39;t allocate type </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> for attribute </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2">, &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span>         <span class="sa">f</span><span class="s2">&quot;conflicts with its existing type </span><span class="si">{</span><span class="n">prev_expando</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">327</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">328</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prev_expando</span><span class="p">)</span> <span class="o">==</span> <span class="n">target_size</span><span class="p">:</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/numpy/core/numerictypes.py:417,</span> in <span class="ni">issubdtype</span><span class="nt">(arg1, arg2)</span>
-<span class="g g-Whitespace">    </span><span class="mi">358</span> <span class="nd">@set_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">359</span> <span class="k">def</span> <span class="nf">issubdtype</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">360</span><span class="w">     </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">361</span><span class="sd">     Returns True if first argument is a typecode lower/equal in type hierarchy.</span>
-<span class="g g-Whitespace">    </span><span class="mi">362</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">415</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">416</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">417</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">issubclass_</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">generic</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">418</span>         <span class="n">arg1</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span><span class="o">.</span><span class="n">type</span>
-<span class="g g-Whitespace">    </span><span class="mi">419</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">issubclass_</span><span class="p">(</span><span class="n">arg2</span><span class="p">,</span> <span class="n">generic</span><span class="p">):</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/numpy/core/numerictypes.py:321,</span> in <span class="ni">issubclass_</span><span class="nt">(arg1, arg2)</span>
-<span class="g g-Whitespace">    </span><span class="mi">286</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">287</span><span class="sd"> Determine if a class is a subclass of a second class.</span>
-<span class="g g-Whitespace">    </span><span class="mi">288</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">318</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">319</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">320</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">321</span>     <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">322</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">323</span>     <span class="k">return</span> <span class="kc">False</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/gzip.py:88,</span> in <span class="ni">_PaddedFile.read</span><span class="nt">(self, size)</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span> <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">88</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span> <span class="o">+</span> <span class="n">size</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_length</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span>         <span class="n">read</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -925,8 +911,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="5cfb069b-68ff-423f-900c-6468b4790538" name="f0563d56-2427-4e42-9874-8ed895b3be43" type="radio">
-</input><label class="sd-tab-label" for="5cfb069b-68ff-423f-900c-6468b4790538">
+<input checked="checked" id="e5f06206-5f71-4f7d-82cf-b5249aa13db9" name="b308158b-7e77-44ad-b390-9bc6a79af6b6" type="radio">
+</input><label class="sd-tab-label" for="e5f06206-5f71-4f7d-82cf-b5249aa13db9">
 課題</label><div class="sd-tab-content docutils">
 <p>学習済みモデルを読み込み、<span class="math notranslate nohighlight">\(vec(king) - vec(man) + vec(woman)\)</span>を計算し，そのベクトルと類似度の高い10語とその類似度を出力せよ．</p>
 </div>
@@ -1127,7 +1113,7 @@ title="Print to PDF"
     <a class='right-next' id="next-link" href="word2vec_sentiment.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">データ準備</p>
+        <p class="prev-next-title">Word2Vecを用いるセンチメント分析</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

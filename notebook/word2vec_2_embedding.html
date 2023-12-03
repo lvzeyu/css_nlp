@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -197,6 +199,23 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="word2vec_sentiment.html">
    Word2Vecを用いるセンチメント分析
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_application.html">
+   Word2Vecが人文・社会科学研究における応用
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  RNN
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rnn.html">
+   RNN
   </a>
  </li>
 </ul>
@@ -678,7 +697,7 @@ title="Print to PDF"
 <li><p>大規模なコーパスを扱う場合、巨大な共起行列に対してSVDを計算することが難しい。</p></li>
 <li><p>コーパスの全体から一回の学習で単語分散表現を獲得していますので、新しい単語が追加される場合、再度最初から学習を行う必要があり、単語分散表現更新の効率が低い。</p></li>
 </ul>
-<p>「カウントベースの手法」に代わる強力な手法として「推論ベース」の手法が挙げられます。特に、Mikolov et al. <span id="id1">[<a class="reference internal" href="introduction.html#id20" title="Tomas Mikolov, Wen-tau Yih, and Geoffrey Zweig. Linguistic regularities in continuous space word representations. In Lucy Vanderwende, Hal Daumé III, and Katrin Kirchhoff, editors, Proceedings of the 2013 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 746–751. Atlanta, Georgia, June 2013. Association for Computational Linguistics. URL: https://aclanthology.org/N13-1090.">Mikolov <em>et al.</em>, 2013</a>]</span> <span id="id2">[<a class="reference internal" href="introduction.html#id21" title="Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S Corrado, and Jeff Dean. Distributed representations of words and phrases and their compositionality. In C.J. Burges, L. Bottou, M. Welling, Z. Ghahramani, and K.Q. Weinberger, editors, Advances in Neural Information Processing Systems, volume 26. Curran Associates, Inc., 2013. URL: https://proceedings.neurips.cc/paper_files/paper/2013/file/9aa42b31882ec039965f3c4923ce901b-Paper.pdf.">Mikolov <em>et al.</em>, 2013</a>]</span>　によって提案されたword2vecの有用性が多くの自然言語処理タスクにおいて示されてきたのです。</p>
+<p>「カウントベースの手法」に代わる強力な手法として「推論ベース」の手法が挙げられます。特に、Mikolov et al. <span id="id1">[<a class="reference internal" href="word2vec_application.html#id16" title="Tomas Mikolov, Wen-tau Yih, and Geoffrey Zweig. Linguistic regularities in continuous space word representations. In Lucy Vanderwende, Hal Daumé III, and Katrin Kirchhoff, editors, Proceedings of the 2013 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 746–751. Atlanta, Georgia, June 2013. Association for Computational Linguistics. URL: https://aclanthology.org/N13-1090.">Mikolov <em>et al.</em>, 2013</a>]</span> <span id="id2">[<a class="reference internal" href="word2vec_application.html#id17" title="Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S Corrado, and Jeff Dean. Distributed representations of words and phrases and their compositionality. In C.J. Burges, L. Bottou, M. Welling, Z. Ghahramani, and K.Q. Weinberger, editors, Advances in Neural Information Processing Systems, volume 26. Curran Associates, Inc., 2013. URL: https://proceedings.neurips.cc/paper_files/paper/2013/file/9aa42b31882ec039965f3c4923ce901b-Paper.pdf.">Mikolov <em>et al.</em>, 2013</a>]</span>　によって提案されたword2vecの有用性が多くの自然言語処理タスクにおいて示されてきたのです。</p>
 <p>本章では、word2vecの仕組みについて説明し、それを実装することで理解を深めます。</p>
 <section id="id3">
 <h2>推論ベース手法とニューラルネットワーク<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
@@ -808,15 +827,15 @@ h_1
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>コンテキストの形状：(1, 7)
 重み
-[[ 0.20023108 -0.35485205 -1.81626392]
- [ 1.094726   -0.00272206  0.35223526]
- [-1.74856502  1.02473064  0.03729952]
- [ 0.57264334  0.91913059  1.18745289]
- [ 0.2766542  -0.5195102   0.78194649]
- [-1.37085831 -0.82728773  1.27276026]
- [-0.99414825  0.03291285 -0.64691639]]
+[[-0.89813503 -0.1648622   1.5424998 ]
+ [-0.13752367 -0.35212638 -0.91171951]
+ [ 0.91204131 -1.49973551 -0.14464406]
+ [ 0.37228272 -0.36375203 -0.67612384]
+ [ 0.24870096 -0.73974537 -0.41220316]
+ [ 0.69131718  0.12009226  0.52312337]
+ [ 1.0122267   1.20030658  0.73278909]]
 重み付き和
-[[ 0.20023108 -0.35485205 -1.81626392]]
+[[-0.89813503 -0.1648622   1.5424998 ]]
 重み付き和の形状：(1, 3)
 </pre></div>
 </div>
@@ -927,22 +946,22 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[-0.5027, -0.5044,  1.1068]]),
- tensor([[0.4113, 0.9708, 0.1789]]),
- tensor([[-0.0457,  0.2332,  0.6429]]),
- tensor([[-0.2280,  0.9450, -0.0920, -0.7770, -0.2820, -0.1810, -0.7530]]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[0.6278, 0.2557, 0.1010]]),
+ tensor([[-0.8605,  1.4752,  0.4272]]),
+ tensor([[-0.1163,  0.8654,  0.2641]]),
+ tensor([[ 2.0130, -0.1820, -0.1720, -0.6690,  0.2020,  0.3390, -0.9300]]))
 </pre></div>
 </div>
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="7099aef2-741e-4939-bdc9-779f24f7f36f" name="ef74212c-81a0-46a1-9b15-4486209ce82b" type="radio">
-</input><label class="sd-tab-label" for="7099aef2-741e-4939-bdc9-779f24f7f36f">
+<input checked="checked" id="9409c639-dfdf-40e8-984e-c109e9a7bc44" name="1cf22541-e799-46dc-a28e-2136a4d1e4de" type="radio">
+</input><label class="sd-tab-label" for="9409c639-dfdf-40e8-984e-c109e9a7bc44">
 課題</label><div class="sd-tab-content docutils">
 <p>正解は「say」として、Softmax関数によってスコア<code class="docutils literal notranslate"><span class="pre">s</span></code>を確率として扱えるように変換し、そして、正規化した値と教師ラベルを用いて損失を求めなさい。</p>
 </div>
-<input id="286c69a7-d465-4119-b467-da7c3bd3e79a" name="ef74212c-81a0-46a1-9b15-4486209ce82b" type="radio">
-</input><label class="sd-tab-label" for="286c69a7-d465-4119-b467-da7c3bd3e79a">
+<input id="b87b2096-2c71-4a12-98de-23c8621bad36" name="1cf22541-e799-46dc-a28e-2136a4d1e4de" type="radio">
+</input><label class="sd-tab-label" for="b87b2096-2c71-4a12-98de-23c8621bad36">
 ヒント</label><div class="sd-tab-content docutils">
 <p>正解は「say」の場合、教師ラベルは<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0]</span></code>になります。</p>
 </div>
@@ -1179,8 +1198,8 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[ 0.3662,  0.1403, -0.7195],
-         [ 0.8472,  1.6687, -1.5899]]], grad_fn=&lt;EmbeddingBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[ 1.1103,  0.3253,  0.7449],
+         [-0.7731, -1.2171,  0.1108]]], grad_fn=&lt;EmbeddingBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -1194,7 +1213,7 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 1.2134,  1.8089, -2.3094]], grad_fn=&lt;SumBackward1&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 0.3373, -0.8918,  0.8557]], grad_fn=&lt;SumBackward1&gt;)
 </pre></div>
 </div>
 </div>
@@ -1213,7 +1232,7 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-4.5301, -2.3054, -0.4426, -2.6779, -3.5296, -1.9032]],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-1.8401, -2.0143, -2.3925, -1.6532, -1.7585, -1.3757]],
        grad_fn=&lt;LogSoftmaxBackward0&gt;)
 </pre></div>
 </div>
@@ -1298,12 +1317,12 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[tensor([[2, 4],
-        [1, 6]]), tensor([3, 5])]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[tensor([[1, 6],
+        [3, 1]]), tensor([5, 4])]
 [tensor([[0, 2],
         [1, 3]]), tensor([1, 2])]
-[tensor([[3, 1],
-        [4, 5]]), tensor([4, 1])]
+[tensor([[4, 5],
+        [2, 4]]), tensor([1, 3])]
 </pre></div>
 </div>
 </div>
@@ -1384,16 +1403,16 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 0, Total loss: 7.571089029312134
-Epoch 10, Total loss: 5.504413962364197
-Epoch 20, Total loss: 4.365613579750061
-Epoch 30, Total loss: 3.6440069675445557
-Epoch 40, Total loss: 3.1746776700019836
-Epoch 50, Total loss: 2.8250375986099243
-Epoch 60, Total loss: 2.5544521808624268
-Epoch 70, Total loss: 2.3444074988365173
-Epoch 80, Total loss: 2.1740952730178833
-Epoch 90, Total loss: 2.0322096943855286
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 0, Total loss: 5.2291295528411865
+Epoch 10, Total loss: 3.844847798347473
+Epoch 20, Total loss: 3.028220534324646
+Epoch 30, Total loss: 2.4869145154953003
+Epoch 40, Total loss: 2.1138741075992584
+Epoch 50, Total loss: 1.8488310277462006
+Epoch 60, Total loss: 1.6573341488838196
+Epoch 70, Total loss: 1.5126736164093018
+Epoch 80, Total loss: 1.4017627835273743
+Epoch 90, Total loss: 1.3125330731272697
 </pre></div>
 </div>
 </div>
@@ -1429,39 +1448,39 @@ Epoch 90, Total loss: 2.0322096943855286
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Word: you
-Vector: [ 0.5111989   0.37142602 -0.18579945 -1.1431242   0.23927121 -0.29279527
- -0.06579706 -0.9408192   0.11428434 -1.2405633 ]
+Vector: [-0.19484144  0.3603536  -1.368342   -0.96892893  0.13093871  0.5446211
+ -1.723225   -1.6217551   0.61139065 -1.0811853 ]
 
 Word: say
-Vector: [ 2.071888   -0.00723937 -0.6055544  -1.14169    -1.8512801   0.06967335
- -0.77423054 -1.1392152   0.2952154  -0.86411834]
+Vector: [ 0.54614836  0.21225356 -0.80114156 -0.2937866  -0.7748914  -0.45637512
+  2.5968997   0.18757194 -0.49823314  1.551151  ]
 
 Word: goodbye
-Vector: [-0.31477746  1.705572   -0.47051716 -2.1481493   0.550143   -0.66298765
- -1.2863357   1.1937126   0.03175043 -1.4515636 ]
+Vector: [-0.49382728 -0.38379696  0.20068847 -0.09574077 -0.13344502  0.06153299
+ -0.64423877  1.3363429  -0.4440008  -1.6504431 ]
 
 Word: and
-Vector: [ 0.44126123  2.1255052  -0.86913174  1.181391    1.3824853   0.30655336
- -0.07561116  0.00316406 -0.10250175 -1.7711053 ]
+Vector: [-2.1066391  -0.55690396  0.52324253 -1.381905    0.6726322   0.99502975
+ -2.0087118  -0.62952167 -1.156117    0.7885594 ]
 
 Word: i
-Vector: [ 0.24268098 -0.5714434  -0.5997382  -1.402882   -0.73246133  0.48241034
- -0.09415045 -1.0266181   0.8898414   0.59956354]
+Vector: [-0.81259364 -0.35457468  0.46703458  0.5130161  -0.0907345   0.0163417
+ -0.75752175 -0.10294527 -0.26366314  0.36331877]
 
 Word: hello
-Vector: [-0.0257057   0.00554416  1.4885762   0.12582567 -2.0215666  -0.3000334
-  0.46164426  0.33400884 -0.83181894  1.879357  ]
+Vector: [-0.099681   -0.63864934 -1.5057917  -0.1864925   1.1407535  -0.7592193
+  0.16698703 -1.4504186   0.5332515  -0.20508483]
 
 Word: .
-Vector: [-1.1475794  -0.4878714  -0.94229084 -0.6547065  -0.06464809  0.8619976
- -1.4031909  -1.1060177   0.60889107  0.7622212 ]
+Vector: [ 1.4244131   0.8803502  -0.67341334  1.1633879   0.26061562 -1.9218872
+  1.6779591   0.9175703  -0.68875057  1.2642142 ]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="b88e287d-c972-46e6-a688-5e8b866fb8e7" name="8c20c410-956e-45ad-86b5-6d06fd2db3a6" type="radio">
-</input><label class="sd-tab-label" for="b88e287d-c972-46e6-a688-5e8b866fb8e7">
+<input checked="checked" id="a3461f85-7e32-4e05-9c26-8db7fd6c4f41" name="84f1c609-1c2f-4e84-83b2-b10cfdaa5f9a" type="radio">
+</input><label class="sd-tab-label" for="a3461f85-7e32-4e05-9c26-8db7fd6c4f41">
 課題</label><div class="sd-tab-content docutils">
 <p>与えられたテキストを用いて、単語分散表現を学習しなさい。</p>
 <ul class="simple">
@@ -1469,8 +1488,8 @@ Vector: [-1.1475794  -0.4878714  -0.94229084 -0.6547065  -0.06464809  0.8619976
 <li><p><code class="docutils literal notranslate"><span class="pre">batch_size</span></code>を10に設定します</p></li>
 </ul>
 </div>
-<input id="00d9645b-0eed-42c5-920b-682b24d9031d" name="8c20c410-956e-45ad-86b5-6d06fd2db3a6" type="radio">
-</input><label class="sd-tab-label" for="00d9645b-0eed-42c5-920b-682b24d9031d">
+<input id="0925d31b-a970-4f31-892f-e74fe41febc4" name="84f1c609-1c2f-4e84-83b2-b10cfdaa5f9a" type="radio">
+</input><label class="sd-tab-label" for="0925d31b-a970-4f31-892f-e74fe41febc4">
 テキスト</label><div class="sd-tab-content docutils">
 <p>“When forty winters shall besiege thy brow,
 And dig deep trenches in thy beauty’s field,

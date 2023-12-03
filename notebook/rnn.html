@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; 計算社会科学のための自然言語処理</title>
+    <title>RNN &#8212; 計算社会科学のための自然言語処理</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Word2Vecが人文・社会科学研究における応用" href="word2vec_application.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -208,9 +211,9 @@ const thebe_selector_output = ".output, .cell_output"
   RNN
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="rnn.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    RNN
   </a>
  </li>
@@ -273,7 +276,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/pytorch_text_classification.ipynb"
+        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/rnn.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -291,7 +294,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/pytorch_text_classification.ipynb"
+        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/rnn.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -351,7 +354,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/pytorch_text_classification.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/rnn.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -379,7 +382,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/notebook/pytorch_text_classification.ipynb"
+        <a href="../_sources/notebook/rnn.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -437,7 +440,29 @@ title="Print to PDF"
         <i class="fas fa-list"></i> Contents
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="simple visible nav section-nav flex-column">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   基本的なRNN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     RNNの主要な要素
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     RNNの動作プロセス
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rnnlm">
+   RNNLM
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -447,7 +472,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1><no title></h1>
+                <h1>RNN</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -456,7 +481,29 @@ title="Print to PDF"
                             <h2> Contents </h2>
                         </div>
                         <nav aria-label="Page">
-                            <ul class="simple visible nav section-nav flex-column">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   基本的なRNN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     RNNの主要な要素
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     RNNの動作プロセス
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rnnlm">
+   RNNLM
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -467,7 +514,79 @@ title="Print to PDF"
                 
               <div>
                 
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="rnn">
+<h1>RNN<a class="headerlink" href="#rnn" title="Permalink to this headline">#</a></h1>
+<p>これまで見てきたニューラルネットワークは、フィードフォワードと呼ばれるタイプのネットワークです。具体的には、入力信号が次の層へ信号を伝達し、信号を受け取った層その次の層へ伝達しといったように一方向だけの信号伝達を行います。</p>
+<p>フィードフォワードが複雑なパターンや関係を学習でき、様々なタスクに応用できます。しかし、フィードフォワードネットワークは時間的なシーケンスやデータの順序を考慮する能力に欠けています。</p>
+<ul class="simple">
+<li><p>フィードフォワードネットワークでは、データは入力層から隠れ層を経て出力層へと一方向に流れます。この構造では、前の層の出力が次の層の入力となるだけで、過去の入力に関する情報は保存されません。</p></li>
+<li><p>フィードフォワードネットワークは、各入力を独立したものとして扱い、入力間の時間的な連続性や順序を認識しません。</p></li>
+</ul>
+<p>時系列データや言語のように、順序が重要なタスクに対しては、フィードフォワードネットワークはこれらの関連性を捉えることができず、効果的な処理が難しいです。そごで、RNN(Recurrent Neural Network)の出番です。</p>
+<section id="id1">
+<h2>基本的なRNN<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>RNNは名前通り、「循環する」構造が設計されています。つまり、ある地点をスタートしたものが、時間を経て再び元の場所へと戻って来ること、そして、それを繰り返すこと。</p>
+<p>循環するためには、RNNではループする経路を持っています。このループする経路によって、データは絶えず循環することができます。そしてデータが循環することにより、過去の情報を記憶しながら、最新のデータへと更新されます。</p>
+<section id="id2">
+<h3>RNNの主要な要素<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>入力<span class="math notranslate nohighlight">\(x_t\)</span></strong>:時刻を<span class="math notranslate nohighlight">\(t\)</span>として、<span class="math notranslate nohighlight">\(x_t\)</span>を入力としています。これは時系列データとして、<span class="math notranslate nohighlight">\(x_0,x_1,...,x_t\)</span>というデータがレイヤへ入力されることを示しています。</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(x_t\)</span>は何らかのベクトルを想定します。文章(単語の並び)を扱う場合、各単語の分散表現を<span class="math notranslate nohighlight">\(x_t\)</span>になります。</p></li>
+</ul>
+</li>
+<li><p><strong>隠れ状態<span class="math notranslate nohighlight">\(h_t\)</span></strong>:入力に対応する形で、<span class="math notranslate nohighlight">\((h_0,h_1,...,h_t)\)</span>が出力されます。</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>RNNの動作プロセス<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>各時刻<span class="math notranslate nohighlight">\(t\)</span>において、RNNは現在の入力<span class="math notranslate nohighlight">\(x_t\)</span>と前の時刻の隠れ状態<span class="math notranslate nohighlight">\(h_{t-1}\)</span>を受け取ります。</p></li>
+<li><p>これらの情報は、隠れ層のニューロンを通じて処理され、新しい隠れ状態<span class="math notranslate nohighlight">\(h_t\)</span>が生成されます。</p></li>
+<li><p>この新しい隠れ状態は、次の時刻<span class="math notranslate nohighlight">\(t+1\)</span>の計算における「記憶」の一部として使用され、また必要に応じて出力も生成されます。</p></li>
+</ul>
+<p>隠れ状態<span class="math notranslate nohighlight">\(h_t\)</span>は通常、以下のような形で計算されます：</p>
+<p><span class="math notranslate nohighlight">\(h_t = f(W_{h} h_{t-1} + W_{x} x_t + b)\)</span></p>
+<p>ここで、</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> は非線形活性化関数（例：tanh、ReLU）。</p></li>
+<li><p><span class="math notranslate nohighlight">\(W_{h}\)</span> は隠れ状態間の接続を表す重み行列。</p></li>
+<li><p><span class="math notranslate nohighlight">\(W_{x}\)</span> は入力と隠れ状態の接続を表す重み行列。</p></li>
+<li><p><span class="math notranslate nohighlight">\(b\)</span> はバイアスベクトル。</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(h_t\)</span>は、別のレイヤへ出力されると同時に、次時刻のRNNレイヤへも出力されます。これで、現在の出力<span class="math notranslate nohighlight">\(h_t\)</span>は、ひとつ前の出力<span class="math notranslate nohighlight">\(h_{t-1}\)</span>によって計算されることがわかります。</p>
+<p><img alt="" src="../_images/rnn.png" /></p>
+<p>RNNレイヤの順伝播と逆伝播は以下の計算グラフで示されます。</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>ここで行う計算は、行列の積「MatMul」、足し算「＋」、そして「tanh」を示しています。</p>
+</aside>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>順伝播</p></th>
+<th class="head"><p>逆伝播</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><img alt="" src="../_images/rnn2.png" /></p></td>
+<td><p><img alt="" src="../_images/rnn3.png" /></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="rnnlm">
+<h2>RNNLM<a class="headerlink" href="#rnnlm" title="Permalink to this headline">#</a></h2>
+<p>言語モデル(Language Model)は、単語の並びに対して確率を与えることで、自然言語の文や文書を生成または理解します。</p>
+<p>言語モデルの基本的な機能は、与えられたトークン列に対して、次のトークンの生成される確率を予測することです。</p>
+<div class="math notranslate nohighlight">
+\[
+P(w_n | w_1, w_2, \ldots, w_{n-1})
+\]</div>
+<p>RNNでは時系列データを扱えますので、言語モデルの実装に用いられます。RNNによる言語モデルは、RNN Language Model(RNNLM)と呼びます。</p>
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -495,6 +614,13 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="word2vec_application.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Word2Vecが人文・社会科学研究における応用</p>
+        </div>
+    </a>
 </div>
             </footer>
         </div>
