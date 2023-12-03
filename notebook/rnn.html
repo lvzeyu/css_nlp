@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>RNN &#8212; 計算社会科学のための自然言語処理</title>
+    <title>RNNの基礎 &#8212; 計算社会科学のための自然言語処理</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,12 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LSTM" href="lstm.html" />
     <link rel="prev" title="Word2Vecが人文・社会科学研究における応用" href="word2vec_application.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -214,7 +213,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   RNN
+   RNNの基礎
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lstm.html">
+   LSTM
   </a>
  </li>
 </ul>
@@ -463,6 +467,11 @@ title="Print to PDF"
    RNNLM
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   RNNの問題点
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -472,7 +481,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>RNN</h1>
+                <h1>RNNの基礎</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -504,6 +513,11 @@ title="Print to PDF"
    RNNLM
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   RNNの問題点
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -515,7 +529,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="rnn">
-<h1>RNN<a class="headerlink" href="#rnn" title="Permalink to this headline">#</a></h1>
+<h1>RNNの基礎<a class="headerlink" href="#rnn" title="Permalink to this headline">#</a></h1>
 <p>これまで見てきたニューラルネットワークは、フィードフォワードと呼ばれるタイプのネットワークです。具体的には、入力信号が次の層へ信号を伝達し、信号を受け取った層その次の層へ伝達しといったように一方向だけの信号伝達を行います。</p>
 <p>フィードフォワードが複雑なパターンや関係を学習でき、様々なタスクに応用できます。しかし、フィードフォワードネットワークは時間的なシーケンスやデータの順序を考慮する能力に欠けています。</p>
 <ul class="simple">
@@ -584,6 +598,37 @@ title="Print to PDF"
 P(w_n | w_1, w_2, \ldots, w_{n-1})
 \]</div>
 <p>RNNでは時系列データを扱えますので、言語モデルの実装に用いられます。RNNによる言語モデルは、RNN Language Model(RNNLM)と呼びます。</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="e466b18a-600e-4df9-81d7-69a5da22acf9" name="eab0fd7d-7734-4dd5-a237-0ee556ddfd00" type="radio">
+</input><label class="sd-tab-label" for="e466b18a-600e-4df9-81d7-69a5da22acf9">
+質問</label><div class="sd-tab-content docutils">
+<p>CBOWモデルでも言語モデルとして適用することは可能ですか？RNNLMと比較することで考えなさい。</p>
+</div>
+</div>
+<p><img alt="" src="../_images/rnnlm.png" /></p>
+<ul class="simple">
+<li><p>Embeddingレイヤ：　Embeddingレイヤは、単語を単語の分散表現へ変換します</p></li>
+<li><p>RNNレイヤ：単語の分散表現がRNNレイヤへと入力されます</p>
+<ul>
+<li><p>隠れ状態を次の層へ出力されます</p></li>
+<li><p>隠れ状態を次時刻のRNNレイヤへ出力します</p></li>
+</ul>
+</li>
+<li><p>次の層へ出力されます隠れ状態は、Affineレイヤを経てSoftmaxレイヤへと伝わっていきます。</p>
+<ul>
+<li><p>Softmaxレイヤが出力するのは確率分布です</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h2>RNNの問題点<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>RNNは過去の情報を継続的に更新しながら新しい入力を処理する機能を持っていますが、長期間の依存関係を捉えるのが難しいという「長期依存問題」が存在します。例えば、次で示されたタスクを考えてみたいと思います。</p>
+<p><code class="docutils literal notranslate"><span class="pre">Tom</span> <span class="pre">was</span> <span class="pre">watching</span> <span class="pre">TV</span> <span class="pre">in</span> <span class="pre">his</span> <span class="pre">home.</span> <span class="pre">Mary</span> <span class="pre">came</span> <span class="pre">into</span> <span class="pre">the</span> <span class="pre">room.</span> <span class="pre">Mary</span> <span class="pre">said</span> <span class="pre">hi</span> <span class="pre">to</span> <span class="pre">「？」</span> </code></p>
+<p>提示されたタスクは、文脈に基づいた適切な単語を特定することを要求しています。</p>
+<p>この例では、「Tom」が以前の文で言及されており、Maryが部屋に入って「hi」と言っているため、空白に当てはまる最も適切な単語は「Tom」です。</p>
+<p>RNNで処理する際、正解ラベルとして「Tom」という単語が与えられた場所から、過去の方向に向かって「意味のある勾配」を伝達することによって、時間方向の依存関係を学習することができます。しかし、勾配が途中で弱まったらーほとんど何も情報を持たなくなってしまったらー、重みパラメタは更新されなくなります。特に、期依存問題を処理する場合このような状況が生じる可能性が高い、これが「勾配消失」と呼ばれる現象です。</p>
+<p>つまり、RNNは、時系列の問題に取り組むために設計されていますが、「長期依存問題」のために、長い文脈を持つタスクでは性能が低下することがあります。この問題は、RNNが過去の情報を十分に保持し続けることが困難であることに起因します。</p>
 </section>
 </section>
 
@@ -620,6 +665,13 @@ P(w_n | w_1, w_2, \ldots, w_{n-1})
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Word2Vecが人文・社会科学研究における応用</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="lstm.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">LSTM</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
