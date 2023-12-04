@@ -165,7 +165,7 @@ import gensim.downloader
 word2vec = gensim.downloader.load('word2vec-google-news-300')
 
 
-# In[17]:
+# In[16]:
 
 
 def tokens_to_embedding(tokens, model, embedding_size=300):
@@ -173,18 +173,18 @@ def tokens_to_embedding(tokens, model, embedding_size=300):
     # embeddingsが空の場合は、ゼロベクトルを返す
     if len(embeddings) == 0:
         return np.zeros(embedding_size)
-    # embeddingsが空でない場合は、ベクトルの平均を返す。その結果は、1次元のベクトルになる、センテンスの埋め込みとして使用できる
+    # embeddingsが空でない場合は、ベクトルの平均を返す。その結果は、ベクトルになる、センテンスの埋め込みとして使用できる
     else:
         return np.mean(embeddings, axis=0)
 
 
-# In[18]:
+# In[17]:
 
 
 df["embedding"] = df["processed_text"].apply(lambda x: tokens_to_embedding(x, word2vec))
 
 
-# In[19]:
+# In[18]:
 
 
 df.head()
@@ -192,7 +192,7 @@ df.head()
 
 # ### トレーニング、バリデーション、テストデータに分割
 
-# In[20]:
+# In[19]:
 
 
 from sklearn.model_selection import train_test_split
@@ -202,7 +202,7 @@ val_df, test_df = train_test_split(temp_df, test_size=0.5, random_state=42)
 
 # ### 学習用データセットの作成(Batch Datasets)
 
-# In[24]:
+# In[20]:
 
 
 from torch.utils.data import DataLoader, TensorDataset
@@ -215,7 +215,7 @@ def create_dataset(df,label):
 
 # #### sentimentデータセット
 
-# In[27]:
+# In[21]:
 
 
 batch_size = 32
@@ -225,7 +225,7 @@ val_dataset_sentiment = create_dataset(val_df,label="sentiment")
 test_dataset_sentiment = create_dataset(test_df,label="sentiment")
 
 
-# In[28]:
+# In[22]:
 
 
 train_loader_sentiment  = DataLoader(train_dataset_sentiment, batch_size=batch_size, shuffle=True)
@@ -235,7 +235,7 @@ test_loader_sentiment  = DataLoader(test_dataset_sentiment, batch_size=batch_siz
 
 # #### emotionデータセット
 
-# In[29]:
+# In[23]:
 
 
 batch_size = 32
@@ -245,7 +245,7 @@ val_dataset_emotion = create_dataset(val_df,label="emotion")
 test_dataset_emotion = create_dataset(test_df,label="emotion")
 
 
-# In[30]:
+# In[24]:
 
 
 train_loader_emotion  = DataLoader(train_dataset_emotion, batch_size=batch_size, shuffle=True)
@@ -257,7 +257,7 @@ test_loader_emotion  = DataLoader(test_dataset_emotion, batch_size=batch_size)
 
 # ### ニューラルネットワークモデルの作成
 
-# In[31]:
+# In[25]:
 
 
 import torch.nn as nn
@@ -284,7 +284,7 @@ class SimpleNN(nn.Module):
 #     - 一つの単語トークンの単語分散表現は$300$のため、複数単語分散表現の平均(テキストの特徴量)の次元数も$300$です
 # - 出力の次元数はラベルデータのカテゴリ数と一致しています $\to$ 交差エントロピーを計算するため
 
-# In[37]:
+# In[26]:
 
 
 df["embedding"][0].shape
@@ -294,7 +294,7 @@ df["embedding"][0].shape
 # 
 # #### sentimentモデルの学習
 
-# In[42]:
+# In[27]:
 
 
 label_size = df["sentiment"].nunique()
@@ -304,7 +304,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 
-# In[43]:
+# In[28]:
 
 
 from sklearn.metrics import accuracy_score, f1_score
@@ -374,7 +374,7 @@ plt.show()
 # 
 # #### emotionモデルの学習
 
-# In[47]:
+# In[29]:
 
 
 label_size = df["emotion"].nunique()
@@ -382,6 +382,12 @@ embedding_size = 300
 model = SimpleNN(input_size=embedding_size, hidden_size=100, num_classes=label_size).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+
+# In[30]:
+
+
+label_size
 
 
 # In[48]:

@@ -187,6 +187,33 @@ const thebe_selector_output = ".output, .cell_output"
    word2vec
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_gensim.html">
+   GensimによるWord2Vecの学習と使用
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_sentiment.html">
+   Word2Vecを用いるセンチメント分析
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_application.html">
+   Word2Vecが人文・社会科学研究における応用
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  RNN
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rnn.html">
+   RNN
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -641,9 +668,9 @@ tensor([   2,    3,    4,  ...,  504, 1228, 1229])
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/wm/5xxpvjcj15g89khxd5jwn9200000gn/T/ipykernel_5786/1217301416.py:15: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/wm/5xxpvjcj15g89khxd5jwn9200000gn/T/ipykernel_9526/1217301416.py:15: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
   contexts_tensor = torch.tensor(contexts, dtype=torch.long).to(device)
-/var/folders/wm/5xxpvjcj15g89khxd5jwn9200000gn/T/ipykernel_5786/1217301416.py:16: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+/var/folders/wm/5xxpvjcj15g89khxd5jwn9200000gn/T/ipykernel_9526/1217301416.py:16: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
   targets_tensor = torch.tensor(targets, dtype=torch.long).to(device)
 </pre></div>
 </div>
@@ -718,39 +745,38 @@ tensor([   2,    3,    4,  ...,  504, 1228, 1229])
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">25</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">log_probs</span><span class="p">,</span> <span class="n">target_batch</span><span class="p">)</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">23</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">log_probs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">context_batch</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="c1"># Compute the loss</span>
+<span class="ne">---&gt; </span><span class="mi">23</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">log_probs</span><span class="p">,</span> <span class="n">target_batch</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="c1"># Backward pass to compute gradients</span>
-<span class="ne">---&gt; </span><span class="mi">25</span> <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="c1"># Update the model parameters</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/_tensor.py:492,</span> in <span class="ni">Tensor.backward</span><span class="nt">(self, gradient, retain_graph, create_graph, inputs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">482</span> <span class="k">if</span> <span class="n">has_torch_function_unary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">483</span>     <span class="k">return</span> <span class="n">handle_torch_function</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">484</span>         <span class="n">Tensor</span><span class="o">.</span><span class="n">backward</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">485</span>         <span class="p">(</span><span class="bp">self</span><span class="p">,),</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">490</span>         <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">491</span>     <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">492</span> <span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">493</span>     <span class="bp">self</span><span class="p">,</span> <span class="n">gradient</span><span class="p">,</span> <span class="n">retain_graph</span><span class="p">,</span> <span class="n">create_graph</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span>
-<span class="g g-Whitespace">    </span><span class="mi">494</span> <span class="p">)</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1518,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1516</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1517</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1518</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/autograd/__init__.py:251,</span> in <span class="ni">backward</span><span class="nt">(tensors, grad_tensors, retain_graph, create_graph, grad_variables, inputs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">246</span>     <span class="n">retain_graph</span> <span class="o">=</span> <span class="n">create_graph</span>
-<span class="g g-Whitespace">    </span><span class="mi">248</span> <span class="c1"># The reason we repeat the same comment below is that</span>
-<span class="g g-Whitespace">    </span><span class="mi">249</span> <span class="c1"># some Python versions print out the first line of a multi-line function</span>
-<span class="g g-Whitespace">    </span><span class="mi">250</span> <span class="c1"># calls in the traceback and some print out the last line</span>
-<span class="ne">--&gt; </span><span class="mi">251</span> <span class="n">Variable</span><span class="o">.</span><span class="n">_execution_engine</span><span class="o">.</span><span class="n">run_backward</span><span class="p">(</span>  <span class="c1"># Calls into the C++ engine to run the backward pass</span>
-<span class="g g-Whitespace">    </span><span class="mi">252</span>     <span class="n">tensors</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">253</span>     <span class="n">grad_tensors_</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">254</span>     <span class="n">retain_graph</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">255</span>     <span class="n">create_graph</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">256</span>     <span class="n">inputs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">257</span>     <span class="n">allow_unreachable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">258</span>     <span class="n">accumulate_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">259</span> <span class="p">)</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1527,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1522</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
+<span class="g g-Whitespace">   </span><span class="mi">1523</span> <span class="c1"># this function, and just call forward.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1524</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1525</span>         <span class="ow">or</span> <span class="n">_global_backward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1526</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1527</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1529</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1530</span>     <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/loss.py:1179,</span> in <span class="ni">CrossEntropyLoss.forward</span><span class="nt">(self, input, target)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1178</span> <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1179</span>     <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1180</span>                            <span class="n">ignore_index</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ignore_index</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">reduction</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1181</span>                            <span class="n">label_smoothing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">label_smoothing</span><span class="p">)</span>
+
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/functional.py:3053,</span> in <span class="ni">cross_entropy</span><span class="nt">(input, target, weight, size_average, ignore_index, reduce, reduction, label_smoothing)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3051</span> <span class="k">if</span> <span class="n">size_average</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">reduce</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3052</span>     <span class="n">reduction</span> <span class="o">=</span> <span class="n">_Reduction</span><span class="o">.</span><span class="n">legacy_get_string</span><span class="p">(</span><span class="n">size_average</span><span class="p">,</span> <span class="n">reduce</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3053</span> <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">_C</span><span class="o">.</span><span class="n">_nn</span><span class="o">.</span><span class="n">cross_entropy_loss</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">_Reduction</span><span class="o">.</span><span class="n">get_enum</span><span class="p">(</span><span class="n">reduction</span><span class="p">),</span> <span class="n">ignore_index</span><span class="p">,</span> <span class="n">label_smoothing</span><span class="p">)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>

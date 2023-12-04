@@ -27,3 +27,7 @@ parts:
   - file: notebook/word2vec_gensim.ipynb
   - file: notebook/word2vec_sentiment.ipynb
   - file: notebook/word2vec_application.ipynb
+- caption: RNN
+  chapters:
+  - file: notebook/rnn.ipynb
+  - file: notebook/lstm.ipynb

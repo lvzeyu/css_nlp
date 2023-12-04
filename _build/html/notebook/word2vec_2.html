@@ -189,6 +189,33 @@ const thebe_selector_output = ".output, .cell_output"
    word2vec
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_gensim.html">
+   GensimによるWord2Vecの学習と使用
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_sentiment.html">
+   Word2Vecを用いるセンチメント分析
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_application.html">
+   Word2Vecが人文・社会科学研究における応用
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  RNN
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rnn.html">
+   RNN
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -586,7 +613,7 @@ title="Print to PDF"
 <li><p>大規模なコーパスを扱う場合、巨大な共起行列に対してSVDを計算することが難しい。</p></li>
 <li><p>コーパスの全体から一回の学習で単語分散表現を獲得していますので、新しい単語が追加される場合、再度最初から学習を行う必要があり、単語分散表現更新の効率が低い。</p></li>
 </ul>
-<p>「カウントベースの手法」に代わる強力な手法として「推論ベース」の手法が挙げられます。特に、Mikolov et al. <span id="id1">[<a class="reference internal" href="introduction.html#id20" title="Tomas Mikolov, Wen-tau Yih, and Geoffrey Zweig. Linguistic regularities in continuous space word representations. In Lucy Vanderwende, Hal Daumé III, and Katrin Kirchhoff, editors, Proceedings of the 2013 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 746–751. Atlanta, Georgia, June 2013. Association for Computational Linguistics. URL: https://aclanthology.org/N13-1090.">Mikolov <em>et al.</em>, 2013</a>]</span> <span id="id2">[<a class="reference internal" href="introduction.html#id21" title="Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S Corrado, and Jeff Dean. Distributed representations of words and phrases and their compositionality. In C.J. Burges, L. Bottou, M. Welling, Z. Ghahramani, and K.Q. Weinberger, editors, Advances in Neural Information Processing Systems, volume 26. Curran Associates, Inc., 2013. URL: https://proceedings.neurips.cc/paper_files/paper/2013/file/9aa42b31882ec039965f3c4923ce901b-Paper.pdf.">Mikolov <em>et al.</em>, 2013</a>]</span>　によって提案されたword2vecの有用性が多くの自然言語処理タスクにおいて示されてきたのです。</p>
+<p>「カウントベースの手法」に代わる強力な手法として「推論ベース」の手法が挙げられます。特に、Mikolov et al. <span id="id1">[<a class="reference internal" href="word2vec_application.html#id16" title="Tomas Mikolov, Wen-tau Yih, and Geoffrey Zweig. Linguistic regularities in continuous space word representations. In Lucy Vanderwende, Hal Daumé III, and Katrin Kirchhoff, editors, Proceedings of the 2013 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 746–751. Atlanta, Georgia, June 2013. Association for Computational Linguistics. URL: https://aclanthology.org/N13-1090.">Mikolov <em>et al.</em>, 2013</a>]</span> <span id="id2">[<a class="reference internal" href="word2vec_application.html#id17" title="Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S Corrado, and Jeff Dean. Distributed representations of words and phrases and their compositionality. In C.J. Burges, L. Bottou, M. Welling, Z. Ghahramani, and K.Q. Weinberger, editors, Advances in Neural Information Processing Systems, volume 26. Curran Associates, Inc., 2013. URL: https://proceedings.neurips.cc/paper_files/paper/2013/file/9aa42b31882ec039965f3c4923ce901b-Paper.pdf.">Mikolov <em>et al.</em>, 2013</a>]</span>　によって提案されたword2vecの有用性が多くの自然言語処理タスクにおいて示されてきたのです。</p>
 <p>本章では、word2vecの仕組みについて説明し、それを実装することで理解を深めます。</p>
 <section id="id3">
 <h2>推論ベース手法とニューラルネットワーク<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
@@ -716,15 +743,15 @@ h_1
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>コンテキストの形状：(1, 7)
 重み
-[[-1.13086873e+00  2.71660979e-01  4.43787956e-01]
- [-1.41570402e+00  2.20819485e-03  2.24283921e-01]
- [-1.15433124e+00 -3.43859203e-01  1.77424386e+00]
- [ 7.20532973e-01  1.54005124e+00  1.36620858e+00]
- [ 9.58189871e-01 -1.66340321e-01  5.71113820e-01]
- [ 1.52354928e+00  2.77500406e-01 -1.21375733e+00]
- [-1.24742708e+00  2.80840703e+00  3.80850062e-01]]
+[[ 0.15934263  0.45679331 -0.7596429 ]
+ [-1.64469721  0.70711971  1.08730806]
+ [-0.24061154 -1.00736781  0.78578819]
+ [ 1.17422763  0.87932174  0.49089718]
+ [ 0.94867032 -1.64499429 -0.99757142]
+ [-0.38434571  1.40087279 -0.35217056]
+ [-0.28448281 -0.63479044 -1.56293268]]
 重み付き和
-[[-1.13086873  0.27166098  0.44378796]]
+[[ 0.15934263  0.45679331 -0.7596429 ]]
 重み付き和の形状：(1, 3)
 </pre></div>
 </div>
@@ -835,22 +862,22 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[-1.5009,  2.2751,  0.2760]]),
- tensor([[ 0.1450,  0.7981, -0.3356]]),
- tensor([[-0.6780,  1.5366, -0.0298]]),
- tensor([[ 0.8940, -0.4480, -1.5660, -1.0160, -1.1390,  1.9710, -0.5130]]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[ 0.2354, -0.4196, -0.5373]]),
+ tensor([[ 0.2883,  0.8756, -0.2079]]),
+ tensor([[ 0.2618,  0.2280, -0.3726]]),
+ tensor([[0.6860, 0.8970, 0.4820, 0.0780, 0.3910, 0.3790, 0.2750]]))
 </pre></div>
 </div>
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="aabf96af-30ad-4cce-9e95-73614bc2f6cc" name="0300e6c7-c5db-49d4-9b4b-44c58ee46ea5" type="radio">
-</input><label class="sd-tab-label" for="aabf96af-30ad-4cce-9e95-73614bc2f6cc">
+<input checked="checked" id="d89c1f10-7c97-4637-8648-74a9f7ff3775" name="8bb274ef-9cba-48f0-b69a-199843506efd" type="radio">
+</input><label class="sd-tab-label" for="d89c1f10-7c97-4637-8648-74a9f7ff3775">
 課題</label><div class="sd-tab-content docutils">
 <p>正解は「say」として、Softmax関数によってスコア<code class="docutils literal notranslate"><span class="pre">s</span></code>を確率として扱えるように変換し、そして、正規化した値と教師ラベルを用いて損失を求めなさい。</p>
 </div>
-<input id="3270620f-bb9e-4980-b180-6194fba50889" name="0300e6c7-c5db-49d4-9b4b-44c58ee46ea5" type="radio">
-</input><label class="sd-tab-label" for="3270620f-bb9e-4980-b180-6194fba50889">
+<input id="b64e6370-bdfb-44d2-926c-f67a1607ed1e" name="8bb274ef-9cba-48f0-b69a-199843506efd" type="radio">
+</input><label class="sd-tab-label" for="b64e6370-bdfb-44d2-926c-f67a1607ed1e">
 ヒント</label><div class="sd-tab-content docutils">
 <p>正解は「say」の場合、教師ラベルは<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0]</span></code>になります。</p>
 </div>

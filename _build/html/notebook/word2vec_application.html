@@ -50,10 +50,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="RNN" href="rnn.html" />
     <link rel="prev" title="Word2Vecを用いるセンチメント分析" href="word2vec_sentiment.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -201,6 +204,18 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Word2Vecが人文・社会科学研究における応用
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  RNN
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rnn.html">
+   RNN
   </a>
  </li>
 </ul>
@@ -719,13 +734,13 @@ title="Print to PDF"
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="42938ea9-ac0f-49c9-a57b-f9ddb1223db8" name="825964c1-7676-41ac-bb78-f4a5155a7ed9" type="radio">
-</input><label class="sd-tab-label" for="42938ea9-ac0f-49c9-a57b-f9ddb1223db8">
+<input checked="checked" id="b172e400-856e-4b64-9e9d-535c71e16c9e" name="5a090432-96ef-461a-a99e-f55da4f646ff" type="radio">
+</input><label class="sd-tab-label" for="b172e400-856e-4b64-9e9d-535c71e16c9e">
 質問1</label><div class="sd-tab-content docutils">
 <p>なぜ複数の単語ペアで計算する必要がありますか？</p>
 </div>
-<input id="06704697-bd36-430c-92eb-934639124ec2" name="825964c1-7676-41ac-bb78-f4a5155a7ed9" type="radio">
-</input><label class="sd-tab-label" for="06704697-bd36-430c-92eb-934639124ec2">
+<input id="4f2e9654-7a2f-431f-a963-9695d4c60cc2" name="5a090432-96ef-461a-a99e-f55da4f646ff" type="radio">
+</input><label class="sd-tab-label" for="4f2e9654-7a2f-431f-a963-9695d4c60cc2">
 質問2</label><div class="sd-tab-content docutils">
 <p>単語ペアでベクトル減法を行なって、結果の平均を取る方法以外、Dimensionsを測定する方法がありますか？</p>
 </div>
@@ -755,6 +770,11 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_consine</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;tennis&quot;</span><span class="p">],</span><span class="n">affluence_vec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.10311404
 </pre></div>
 </div>
 </div>
@@ -818,18 +838,61 @@ hockey 88.2316913132707
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="f61b5efc-f5eb-4d9b-83cb-be07dc7596b6" name="a38b5f42-d52a-44ab-a8d7-18e3aa3f1a34" type="radio">
-</input><label class="sd-tab-label" for="f61b5efc-f5eb-4d9b-83cb-be07dc7596b6">
+<input checked="checked" id="ad16affa-06e4-4e7e-8742-24ecadde5324" name="24ed267a-b7e9-4081-b7fd-d7a7456443ed" type="radio">
+</input><label class="sd-tab-label" for="ad16affa-06e4-4e7e-8742-24ecadde5324">
 質問3</label><div class="sd-tab-content docutils">
 <p>この結果をどのように解釈すべきですか？</p>
 </div>
-<input id="759e5551-61ae-46e4-abd3-45a92dd1d933" name="a38b5f42-d52a-44ab-a8d7-18e3aa3f1a34" type="radio">
-</input><label class="sd-tab-label" for="759e5551-61ae-46e4-abd3-45a92dd1d933">
+<input id="d71102df-01e1-4ce1-baf7-92c11c95f4f4" name="24ed267a-b7e9-4081-b7fd-d7a7456443ed" type="radio">
+</input><label class="sd-tab-label" for="d71102df-01e1-4ce1-baf7-92c11c95f4f4">
 課題</label><div class="sd-tab-content docutils">
 <ul class="simple">
 <li><p>性別に関するDimensionを作成しなさい</p></li>
 <li><p>性別Dimensionで運動の位置付けを確認し、その結果を解釈しなさい</p></li>
 </ul>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">male_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;man&quot;</span><span class="p">,</span><span class="s2">&quot;men&quot;</span><span class="p">,</span><span class="s2">&quot;his&quot;</span><span class="p">,</span><span class="s2">&quot;his&quot;</span><span class="p">,</span><span class="s2">&quot;he&quot;</span><span class="p">,</span><span class="s2">&quot;male&quot;</span><span class="p">,</span><span class="s2">&quot;masculine&quot;</span><span class="p">]</span>
+<span class="n">female_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;woman&quot;</span><span class="p">,</span><span class="s2">&quot;women&quot;</span><span class="p">,</span><span class="s2">&quot;her&quot;</span><span class="p">,</span><span class="s2">&quot;hers&quot;</span><span class="p">,</span><span class="s2">&quot;she&quot;</span><span class="p">,</span><span class="s2">&quot;female&quot;</span><span class="p">,</span><span class="s2">&quot;feminine&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">male_vec</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">male_list</span><span class="p">,</span><span class="n">female_list</span><span class="p">):</span>
+    <span class="n">male_vec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">model</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+<span class="n">male_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">male_vec</span><span class="p">)</span>
+<span class="n">male_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">male_vec</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">sport</span> <span class="ow">in</span> <span class="n">sports</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sport</span><span class="p">,</span><span class="n">get_angle</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">sport</span><span class="p">],</span><span class="n">male_vec</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tennis 97.40878931781465
+soccer 91.80367294960222
+basketball 92.62550110826957
+boxing 88.10336004089726
+golf 89.92069959744806
+swimming 95.5663930896144
+volleyball 102.37309292835671
+camping 90.67382084420579
+weightlifting 90.39126375746197
+hiking 93.58319273998538
+hockey 89.98937662535967
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -909,8 +972,8 @@ hockey 88.2316913132707
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="9250adba-2147-4b8a-b4ee-58d5b37492a1" name="734fd69e-aa6d-483d-8300-ed60d5412e2e" type="radio">
-</input><label class="sd-tab-label" for="9250adba-2147-4b8a-b4ee-58d5b37492a1">
+<input checked="checked" id="4cdcea06-a5a4-466d-9bd0-0edac514e457" name="79a2d4c7-9b7a-4961-a579-9e954dcda55d" type="radio">
+</input><label class="sd-tab-label" for="4cdcea06-a5a4-466d-9bd0-0edac514e457">
 質問4</label><div class="sd-tab-content docutils">
 <p>この結果をどのように解釈すべきですか？</p>
 </div>
@@ -922,8 +985,8 @@ hockey 88.2316913132707
 <p><img alt="" src="../_images/sim_dynamics.jpeg" />
 <img alt="" src="../_images/OLS_dynamic.jpeg" /></p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="7af221bf-b08c-4caa-8ca9-6d5712f996eb" name="6257c854-ced7-4fdd-b366-bec3b37bc34c" type="radio">
-</input><label class="sd-tab-label" for="7af221bf-b08c-4caa-8ca9-6d5712f996eb">
+<input checked="checked" id="f2e92581-5992-4e80-a4c6-6e4012b39595" name="45d621be-ac5b-4b17-90a1-c138d054913a" type="radio">
+</input><label class="sd-tab-label" for="f2e92581-5992-4e80-a4c6-6e4012b39595">
 質問4</label><div class="sd-tab-content docutils">
 <p>この図の結果をどのように解釈すべきですか？</p>
 </div>
@@ -960,16 +1023,16 @@ hockey 88.2316913132707
 \]</div>
 <p><img alt="" src="../_images/gender_bias.jpeg" /></p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="8dc27642-7678-4b87-be13-04b97556c9f1" name="bb957aad-9bde-4548-bcb8-b36725c83a10" type="radio">
-</input><label class="sd-tab-label" for="8dc27642-7678-4b87-be13-04b97556c9f1">
+<input checked="checked" id="f9ed43a7-5c32-4fc6-b86d-ff8e20bf9a1c" name="b4e80cbd-217a-4886-8ae5-23ddf05bbde8" type="radio">
+</input><label class="sd-tab-label" for="f9ed43a7-5c32-4fc6-b86d-ff8e20bf9a1c">
 課題</label><div class="sd-tab-content docutils">
 <ul class="simple">
 <li><p>「engineer」、「nurse」、「housekeeper」の<span class="math notranslate nohighlight">\(Gender Bias\)</span>を計算しなさい</p></li>
 <li><p>Norm distanceはNumpyを使って実装できます</p></li>
 </ul>
 </div>
-<input id="d8c19638-b7bd-43f2-9509-94550b821875" name="bb957aad-9bde-4548-bcb8-b36725c83a10" type="radio">
-</input><label class="sd-tab-label" for="d8c19638-b7bd-43f2-9509-94550b821875">
+<input id="ab706086-fce4-45c0-95a0-97ebd9ccc339" name="b4e80cbd-217a-4886-8ae5-23ddf05bbde8" type="radio">
+</input><label class="sd-tab-label" for="ab706086-fce4-45c0-95a0-97ebd9ccc339">
 質問5</label><div class="sd-tab-content docutils">
 <p><span class="math notranslate nohighlight">\(Ethnic Bias\)</span>はどのように計算すべきのかを考えなさい。Ethnicのグループでは<span class="math notranslate nohighlight">\(2\)</span>以上であることを注意してください。</p>
 </div>
@@ -1040,6 +1103,13 @@ hockey 88.2316913132707
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Word2Vecを用いるセンチメント分析</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="rnn.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">RNN</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

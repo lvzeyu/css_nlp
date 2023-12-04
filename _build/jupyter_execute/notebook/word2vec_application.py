@@ -35,14 +35,14 @@ import gensim.downloader
 model = gensim.downloader.load('word2vec-google-news-300')
 
 
-# In[87]:
+# In[3]:
 
 
 rich_list=["rich","richer","affluence","luxury"]
 poor_list=["poor","poorer","poverty","cheap"]
 
 
-# In[49]:
+# In[4]:
 
 
 import numpy as np
@@ -75,7 +75,7 @@ affluence_vec=np.mean(affluence_vec,axis=0)
 # $$cos(\theta))=\frac{D \cdot V}{|D||V|} $$
 # $$\theta = \arccos(cos(\theta))$$
 
-# In[14]:
+# In[5]:
 
 
 def get_consine(vector, dimension):
@@ -87,20 +87,20 @@ def get_consine(vector, dimension):
     return v_dot_d / v_d
 
 
-# In[ ]:
+# In[6]:
 
 
 get_consine(model["tennis"],affluence_vec)
 
 
-# In[15]:
+# In[7]:
 
 
 from sklearn.metrics.pairwise import cosine_similarity
 cosine_similarity(model["tennis"].reshape(1,-1),affluence_vec.reshape(1,-1))
 
 
-# In[ ]:
+# In[8]:
 
 
 def get_angle(vector, dimension,degree=False):
@@ -114,13 +114,13 @@ def get_angle(vector, dimension,degree=False):
         return np.arccos(np.clip(c, -1, 1)) #return radian
 
 
-# In[30]:
+# In[9]:
 
 
 sports=["tennis","soccer","basketball","boxing","golf","swimming","volleyball","camping","weightlifting","hiking","hockey"]
 
 
-# In[31]:
+# In[10]:
 
 
 for sport in sports:
@@ -137,6 +137,31 @@ for sport in sports:
 # ```
 # ````
 
+# In[11]:
+
+
+male_list=["man","men","his","his","he","male","masculine"]
+female_list=["woman","women","her","hers","she","female","feminine"]
+
+
+# In[12]:
+
+
+import numpy as np
+male_vec=[]
+for i,j in zip(male_list,female_list):
+    male_vec.append(model[i]-model[j])
+male_vec=np.array(male_vec)
+male_vec=np.mean(male_vec,axis=0)
+
+
+# In[13]:
+
+
+for sport in sports:
+    print(sport,get_angle(model[sport],male_vec,degree=True))
+
+
 # #### Class意味の推移
 # 
 # 階層という概念は多次元な側面より構成されて、さらにその構成は時間とともに変化している。
@@ -144,7 +169,7 @@ for sport in sports:
 # - Cultural Dimensionsを構築することで、「階層」の各構成の「意味」を定量的に測定する
 # - 「Affluence」が他の要素とどのように関係していることは、階層の意味構成を説明している
 
-# In[63]:
+# In[14]:
 
 
 def create_vector(word_pair):
@@ -156,7 +181,7 @@ def create_vector(word_pair):
     return vec
 
 
-# In[52]:
+# In[15]:
 
 
 education_pair=[("educated","uneducated"),("learned","unlearned"),("taught","untaught"),
@@ -164,32 +189,32 @@ education_pair=[("educated","uneducated"),("learned","unlearned"),("taught","unt
                 ("tutored","untutored"),("literate","illiterate")]
 
 
-# In[65]:
+# In[16]:
 
 
 education_vec=create_vector(education_pair)
 
 
-# In[53]:
+# In[17]:
 
 
 gender_pair=[("man","woman"),("men","women"),("he","she"),("him","her"),
              ("his","her"),("boy","girl"),("male","female"),("masculine","feminine")]
 
 
-# In[64]:
+# In[18]:
 
 
 gender_vec=create_vector(gender_pair)
 
 
-# In[66]:
+# In[19]:
 
 
 cosine_similarity(gender_vec.reshape(1,-1),affluence_vec.reshape(1,-1))
 
 
-# In[68]:
+# In[20]:
 
 
 cosine_similarity(education_vec.reshape(1,-1),affluence_vec.reshape(1,-1))

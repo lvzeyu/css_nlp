@@ -191,6 +191,33 @@ const thebe_selector_output = ".output, .cell_output"
    word2vec
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_gensim.html">
+   GensimによるWord2Vecの学習と使用
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_sentiment.html">
+   Word2Vecを用いるセンチメント分析
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec_application.html">
+   Word2Vecが人文・社会科学研究における応用
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  RNN
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rnn.html">
+   RNN
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -1166,8 +1193,8 @@ y_k = p(y=k|x)
 L = - \sum_{n=1}^{N} \sum_{k=1}^{K}t_{n, k}\log y_{n, k}
 \]</div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="1d6a344b-4e59-4d91-bc03-52c6f5dfd2fa" name="03994e59-1920-441f-80b6-6cf7514aa1a0" type="radio">
-</input><label class="sd-tab-label" for="1d6a344b-4e59-4d91-bc03-52c6f5dfd2fa">
+<input checked="checked" id="25bd636a-a645-4679-b562-32137749e4f7" name="b9394fd8-3fa0-40fa-81a1-b49770742bca" type="radio">
+</input><label class="sd-tab-label" for="25bd636a-a645-4679-b562-32137749e4f7">
 課題</label><div class="sd-tab-content docutils">
 <p>3クラス分類問題を考えます。</p>
 <p>予測は<span class="math notranslate nohighlight">\(y=(0.1,0.2,0.3)\)</span>、真のラベルは<span class="math notranslate nohighlight">\(t=(0,0,1)\)</span>の場合、交差エントロピーの計算式を書いてください。</p>
@@ -1317,8 +1344,8 @@ Iteration 90: x = 7.588550360298899e-09, f(x) = 5.758609657079255e-17
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="6525c1b8-bb9a-43de-8e30-ae9a672ce7fb" name="79841e7a-9991-4db4-b7c2-54d9b70861e4" type="radio">
-</input><label class="sd-tab-label" for="6525c1b8-bb9a-43de-8e30-ae9a672ce7fb">
+<input checked="checked" id="c3a76d11-3b6a-4602-a122-1a82b49e8988" name="b86a4661-671f-4e90-8e49-6730790a0211" type="radio">
+</input><label class="sd-tab-label" for="c3a76d11-3b6a-4602-a122-1a82b49e8988">
 課題</label><div class="sd-tab-content docutils">
 <p>勾配法で<span class="math notranslate nohighlight">\(f(x)=2x^2-10x-80\)</span>の最小値を求めます。</p>
 <ul class="simple">
@@ -2255,31 +2282,20 @@ b_k^{(\mathrm{new})}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.01030198  0.01006837  0.0033475   0.00659793 -0.01253644]
- [ 0.00597723  0.00040936 -0.01768688  0.01055332  0.00396445]
- [ 0.00248837  0.00806983 -0.01069088  0.00980558 -0.00552886]
- [ 0.00725557  0.00542029 -0.00638163  0.00605275 -0.00658106]
- [-0.00318009 -0.00191105 -0.00355752  0.01074521 -0.00887875]]
-(784, 50)
-[ 0.00779335  0.00918967 -0.0036937   0.01265242 -0.01600009]
-(50,)
-</pre></div>
-</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">44</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="nb">print</span><span class="p">(</span><span class="n">db1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># 第2層の重みの勾配を計算</span>
-<span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">dW2</span> <span class="o">=</span> <span class="n">numerical_gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;W2&#39;</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="nb">print</span><span class="p">(</span><span class="n">dW2</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">5</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="nb">print</span><span class="p">(</span><span class="n">dW2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">44</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># 第1層の重みの勾配を計算</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">dW1</span> <span class="o">=</span> <span class="n">numerical_gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;W1&#39;</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">dW1</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="n">dW1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-<span class="nn">Cell In[18], line 12,</span> in <span class="ni">numerical_gradient</span><span class="nt">(f, x, h)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">tmp_val</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_val</span> <span class="o">+</span> <span class="n">h</span>
-<span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">fxh1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># f(x+h)</span>
+<span class="nn">Cell In[18], line 15,</span> in <span class="ni">numerical_gradient</span><span class="nt">(f, x, h)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">fxh1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># f(x+h)</span>
 <span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_val</span> <span class="o">-</span> <span class="n">h</span> 
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">fxh2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># f(x-h)</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">fxh2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># f(x-h)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">grad</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">fxh1</span> <span class="o">-</span> <span class="n">fxh2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_val</span> 
 
 <span class="nn">Cell In[43], line 3,</span> in <span class="ni">f</span><span class="nt">(W)</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
@@ -2292,16 +2308,14 @@ b_k^{(\mathrm{new})}
 <span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="c1"># 交差エントロピー誤差を計算</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="k">return</span> <span class="n">cross_entropy_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
-<span class="nn">Cell In[36], line 9,</span> in <span class="ni">predict</span><span class="nt">(x, params)</span>
+<span class="nn">Cell In[36], line 8,</span> in <span class="ni">predict</span><span class="nt">(x, params)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;b1&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;b2&#39;</span><span class="p">]</span> <span class="c1"># バイアス</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># 第1層の計算</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">W1</span><span class="p">)</span> <span class="o">+</span> <span class="n">b1</span> <span class="c1"># 重み付き和</span>
-<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c1"># 活性化</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">W1</span><span class="p">)</span> <span class="o">+</span> <span class="n">b1</span> <span class="c1"># 重み付き和</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c1"># 活性化</span>
 <span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># 第2層の計算</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">a2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">W2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b2</span> <span class="c1"># 重み付き和</span>
 
-<span class="nn">Cell In[3], line 2,</span> in <span class="ni">sigmoid</span><span class="nt">(x)</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+<span class="nn">File &lt;__array_function__ internals&gt;:5,</span> in <span class="ni">dot</span><span class="nt">(*args, **kwargs)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>

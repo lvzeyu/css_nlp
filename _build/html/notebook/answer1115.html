@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -200,6 +202,18 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="word2vec_application.html">
    Word2Vecが人文・社会科学研究における応用
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  RNN
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rnn.html">
+   RNN
   </a>
  </li>
 </ul>
@@ -1177,6 +1191,16 @@ Name: emotion, dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/numpy/core/numerictypes.py:321,</span> in <span class="ni">issubclass_</span><span class="nt">(arg1, arg2)</span>
+<span class="g g-Whitespace">    </span><span class="mi">320</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">321</span>     <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">322</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+
+<span class="ne">TypeError</span>: issubclass() arg 1 must be a class
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">gensim.downloader</span>
@@ -1219,32 +1243,66 @@ Name: emotion, dtype: int64
 <span class="g g-Whitespace">   </span><span class="mi">2068</span> <span class="k">else</span><span class="p">:</span>
 <span class="g g-Whitespace">   </span><span class="mi">2069</span>     <span class="n">_word2vec_read_text</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1958,</span> in <span class="ni">_word2vec_read_binary</span><span class="nt">(fin, kv, counts, vocab_size, vector_size, datatype, unicode_errors, binary_chunk_size, encoding)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1955</span> <span class="n">tot_processed_words</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="g g-Whitespace">   </span><span class="mi">1957</span> <span class="k">while</span> <span class="n">tot_processed_words</span> <span class="o">&lt;</span> <span class="n">vocab_size</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1958</span>     <span class="n">new_chunk</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">binary_chunk_size</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1959</span>     <span class="n">chunk</span> <span class="o">+=</span> <span class="n">new_chunk</span>
-<span class="g g-Whitespace">   </span><span class="mi">1960</span>     <span class="n">processed_words</span><span class="p">,</span> <span class="n">chunk</span> <span class="o">=</span> <span class="n">_add_bytes_to_kv</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1961</span>         <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1960,</span> in <span class="ni">_word2vec_read_binary</span><span class="nt">(fin, kv, counts, vocab_size, vector_size, datatype, unicode_errors, binary_chunk_size, encoding)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1958</span> <span class="n">new_chunk</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">binary_chunk_size</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1959</span> <span class="n">chunk</span> <span class="o">+=</span> <span class="n">new_chunk</span>
+<span class="ne">-&gt; </span><span class="mi">1960</span> <span class="n">processed_words</span><span class="p">,</span> <span class="n">chunk</span> <span class="o">=</span> <span class="n">_add_bytes_to_kv</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1961</span>     <span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">vector_size</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">unicode_errors</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1962</span> <span class="n">tot_processed_words</span> <span class="o">+=</span> <span class="n">processed_words</span>
+<span class="g g-Whitespace">   </span><span class="mi">1963</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_chunk</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">binary_chunk_size</span><span class="p">:</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/gzip.py:301,</span> in <span class="ni">GzipFile.read</span><span class="nt">(self, size)</span>
-<span class="g g-Whitespace">    </span><span class="mi">299</span>     <span class="kn">import</span> <span class="nn">errno</span>
-<span class="g g-Whitespace">    </span><span class="mi">300</span>     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">EBADF</span><span class="p">,</span> <span class="s2">&quot;read() on write-only GzipFile object&quot;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">301</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1943,</span> in <span class="ni">_add_bytes_to_kv</span><span class="nt">(kv, counts, chunk, vocab_size, vector_size, datatype, unicode_errors, encoding)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1941</span> <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1942</span> <span class="n">vector</span> <span class="o">=</span> <span class="n">frombuffer</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">i_vector</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="n">vector_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">REAL</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">datatype</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1943</span> <span class="n">_add_word_to_kv</span><span class="p">(</span><span class="n">kv</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1944</span> <span class="n">start</span> <span class="o">=</span> <span class="n">i_vector</span> <span class="o">+</span> <span class="n">bytes_per_vector</span>
+<span class="g g-Whitespace">   </span><span class="mi">1945</span> <span class="n">processed_words</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/_compression.py:68,</span> in <span class="ni">DecompressReader.readinto</span><span class="nt">(self, b)</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="k">def</span> <span class="nf">readinto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="k">with</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">as</span> <span class="n">view</span><span class="p">,</span> <span class="n">view</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">byte_view</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">68</span>         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">byte_view</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="n">byte_view</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
-<span class="g g-Whitespace">     </span><span class="mi">70</span>     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:1923,</span> in <span class="ni">_add_word_to_kv</span><span class="nt">(kv, counts, word, weights, vocab_size)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1921</span>     <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;vocabulary file is incomplete: &#39;</span><span class="si">%s</span><span class="s2">&#39; is missing&quot;</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1922</span>     <span class="n">word_count</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1923</span> <span class="n">kv</span><span class="o">.</span><span class="n">set_vecattr</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">word_count</span><span class="p">)</span>
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/gzip.py:496,</span> in <span class="ni">_GzipReader.read</span><span class="nt">(self, size)</span>
-<span class="g g-Whitespace">    </span><span class="mi">493</span> <span class="c1"># Read a chunk of data from the file</span>
-<span class="g g-Whitespace">    </span><span class="mi">494</span> <span class="n">buf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_BUFFER_SIZE</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">496</span> <span class="n">uncompress</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">decompress</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">497</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">unconsumed_tail</span> <span class="o">!=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">498</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_decompressor</span><span class="o">.</span><span class="n">unconsumed_tail</span><span class="p">)</span>
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:353,</span> in <span class="ni">KeyedVectors.set_vecattr</span><span class="nt">(self, key, attr, val)</span>
+<span class="g g-Whitespace">    </span><span class="mi">334</span> <span class="k">def</span> <span class="nf">set_vecattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">335</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Set attribute associated with the given key to value.</span>
+<span class="g g-Whitespace">    </span><span class="mi">336</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">337</span><span class="sd">     Parameters</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">351</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">352</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">353</span>     <span class="bp">self</span><span class="o">.</span><span class="n">allocate_vecattrs</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="n">attr</span><span class="p">],</span> <span class="n">types</span><span class="o">=</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">)])</span>
+<span class="g g-Whitespace">    </span><span class="mi">354</span>     <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">355</span>     <span class="bp">self</span><span class="o">.</span><span class="n">expandos</span><span class="p">[</span><span class="n">attr</span><span class="p">][</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/gensim/models/keyedvectors.py:323,</span> in <span class="ni">KeyedVectors.allocate_vecattrs</span><span class="nt">(self, attrs, types)</span>
+<span class="g g-Whitespace">    </span><span class="mi">321</span>     <span class="k">continue</span>
+<span class="g g-Whitespace">    </span><span class="mi">322</span> <span class="n">prev_expando</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expandos</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span>
+<span class="ne">--&gt; </span><span class="mi">323</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">prev_expando</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">324</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">325</span>         <span class="sa">f</span><span class="s2">&quot;Can&#39;t allocate type </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> for attribute </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2">, &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">326</span>         <span class="sa">f</span><span class="s2">&quot;conflicts with its existing type </span><span class="si">{</span><span class="n">prev_expando</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">327</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">328</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prev_expando</span><span class="p">)</span> <span class="o">==</span> <span class="n">target_size</span><span class="p">:</span>
+
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/numpy/core/numerictypes.py:419,</span> in <span class="ni">issubdtype</span><span class="nt">(arg1, arg2)</span>
+<span class="g g-Whitespace">    </span><span class="mi">417</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">issubclass_</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">generic</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">418</span>     <span class="n">arg1</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span><span class="o">.</span><span class="n">type</span>
+<span class="ne">--&gt; </span><span class="mi">419</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">issubclass_</span><span class="p">(</span><span class="n">arg2</span><span class="p">,</span> <span class="n">generic</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">420</span>     <span class="n">arg2</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span><span class="o">.</span><span class="n">type</span>
+<span class="g g-Whitespace">    </span><span class="mi">422</span> <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+
+<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/numpy/core/numerictypes.py:321,</span> in <span class="ni">issubclass_</span><span class="nt">(arg1, arg2)</span>
+<span class="g g-Whitespace">    </span><span class="mi">286</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">287</span><span class="sd"> Determine if a class is a subclass of a second class.</span>
+<span class="g g-Whitespace">    </span><span class="mi">288</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">318</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">319</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">320</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">321</span>     <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">322</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">323</span>     <span class="k">return</span> <span class="kc">False</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -1258,7 +1316,7 @@ Name: emotion, dtype: int64
     <span class="c1"># embeddingsが空の場合は、ゼロベクトルを返す</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">embedding_size</span><span class="p">)</span>
-    <span class="c1"># embeddingsが空でない場合は、ベクトルの平均を返す。その結果は、1次元のベクトルになる、センテンスの埋め込みとして使用できる</span>
+    <span class="c1"># embeddingsが空でない場合は、ベクトルの平均を返す。その結果は、ベクトルになる、センテンスの埋め込みとして使用できる</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
@@ -1424,6 +1482,12 @@ Name: emotion, dtype: int64
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/wm/5xxpvjcj15g89khxd5jwn9200000gn/T/ipykernel_56351/3818610132.py:4: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:264.)
+  features = torch.tensor(df[&#39;embedding&#39;].tolist(),dtype=torch.float32).to(device)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1559,56 +1623,56 @@ Name: emotion, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1, Accuracy: 0.7402, F1 Score: 0.7342
-Epoch 2, Accuracy: 0.7570, F1 Score: 0.7540
-Epoch 3, Accuracy: 0.7661, F1 Score: 0.7639
-Epoch 4, Accuracy: 0.7714, F1 Score: 0.7684
-Epoch 5, Accuracy: 0.7725, F1 Score: 0.7709
-Epoch 6, Accuracy: 0.7720, F1 Score: 0.7665
-Epoch 7, Accuracy: 0.7805, F1 Score: 0.7802
-Epoch 8, Accuracy: 0.7725, F1 Score: 0.7677
-Epoch 9, Accuracy: 0.7741, F1 Score: 0.7704
-Epoch 10, Accuracy: 0.7714, F1 Score: 0.7645
-Epoch 11, Accuracy: 0.7810, F1 Score: 0.7782
-Epoch 12, Accuracy: 0.7786, F1 Score: 0.7752
-Epoch 13, Accuracy: 0.7781, F1 Score: 0.7759
-Epoch 14, Accuracy: 0.7794, F1 Score: 0.7755
-Epoch 15, Accuracy: 0.7786, F1 Score: 0.7765
-Epoch 16, Accuracy: 0.7765, F1 Score: 0.7778
-Epoch 17, Accuracy: 0.7784, F1 Score: 0.7769
-Epoch 18, Accuracy: 0.7789, F1 Score: 0.7779
-Epoch 19, Accuracy: 0.7744, F1 Score: 0.7690
-Epoch 20, Accuracy: 0.7808, F1 Score: 0.7767
-Epoch 21, Accuracy: 0.7794, F1 Score: 0.7783
-Epoch 22, Accuracy: 0.7786, F1 Score: 0.7771
-Epoch 23, Accuracy: 0.7760, F1 Score: 0.7701
-Epoch 24, Accuracy: 0.7765, F1 Score: 0.7776
-Epoch 25, Accuracy: 0.7786, F1 Score: 0.7776
-Epoch 26, Accuracy: 0.7768, F1 Score: 0.7713
-Epoch 27, Accuracy: 0.7797, F1 Score: 0.7777
-Epoch 28, Accuracy: 0.7741, F1 Score: 0.7710
-Epoch 29, Accuracy: 0.7786, F1 Score: 0.7767
-Epoch 30, Accuracy: 0.7728, F1 Score: 0.7722
-Epoch 31, Accuracy: 0.7821, F1 Score: 0.7802
-Epoch 32, Accuracy: 0.7728, F1 Score: 0.7696
-Epoch 33, Accuracy: 0.7746, F1 Score: 0.7716
-Epoch 34, Accuracy: 0.7765, F1 Score: 0.7764
-Epoch 35, Accuracy: 0.7776, F1 Score: 0.7759
-Epoch 36, Accuracy: 0.7704, F1 Score: 0.7646
-Epoch 37, Accuracy: 0.7754, F1 Score: 0.7757
-Epoch 38, Accuracy: 0.7650, F1 Score: 0.7541
-Epoch 39, Accuracy: 0.7709, F1 Score: 0.7680
-Epoch 40, Accuracy: 0.7712, F1 Score: 0.7719
-Epoch 41, Accuracy: 0.7765, F1 Score: 0.7744
-Epoch 42, Accuracy: 0.7685, F1 Score: 0.7650
-Epoch 43, Accuracy: 0.7677, F1 Score: 0.7609
-Epoch 44, Accuracy: 0.7738, F1 Score: 0.7721
-Epoch 45, Accuracy: 0.7677, F1 Score: 0.7666
-Epoch 46, Accuracy: 0.7722, F1 Score: 0.7660
-Epoch 47, Accuracy: 0.7741, F1 Score: 0.7691
-Epoch 48, Accuracy: 0.7712, F1 Score: 0.7703
-Epoch 49, Accuracy: 0.7746, F1 Score: 0.7741
-Epoch 50, Accuracy: 0.7685, F1 Score: 0.7690
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1, Accuracy: 0.7426, F1 Score: 0.7310
+Epoch 2, Accuracy: 0.7581, F1 Score: 0.7591
+Epoch 3, Accuracy: 0.7656, F1 Score: 0.7620
+Epoch 4, Accuracy: 0.7698, F1 Score: 0.7674
+Epoch 5, Accuracy: 0.7626, F1 Score: 0.7570
+Epoch 6, Accuracy: 0.7714, F1 Score: 0.7672
+Epoch 7, Accuracy: 0.7778, F1 Score: 0.7771
+Epoch 8, Accuracy: 0.7754, F1 Score: 0.7743
+Epoch 9, Accuracy: 0.7685, F1 Score: 0.7650
+Epoch 10, Accuracy: 0.7696, F1 Score: 0.7636
+Epoch 11, Accuracy: 0.7704, F1 Score: 0.7640
+Epoch 12, Accuracy: 0.7800, F1 Score: 0.7785
+Epoch 13, Accuracy: 0.7781, F1 Score: 0.7765
+Epoch 14, Accuracy: 0.7786, F1 Score: 0.7754
+Epoch 15, Accuracy: 0.7749, F1 Score: 0.7706
+Epoch 16, Accuracy: 0.7810, F1 Score: 0.7791
+Epoch 17, Accuracy: 0.7808, F1 Score: 0.7780
+Epoch 18, Accuracy: 0.7786, F1 Score: 0.7778
+Epoch 19, Accuracy: 0.7794, F1 Score: 0.7797
+Epoch 20, Accuracy: 0.7744, F1 Score: 0.7716
+Epoch 21, Accuracy: 0.7733, F1 Score: 0.7738
+Epoch 22, Accuracy: 0.7824, F1 Score: 0.7773
+Epoch 23, Accuracy: 0.7792, F1 Score: 0.7766
+Epoch 24, Accuracy: 0.7746, F1 Score: 0.7696
+Epoch 25, Accuracy: 0.7712, F1 Score: 0.7685
+Epoch 26, Accuracy: 0.7786, F1 Score: 0.7764
+Epoch 27, Accuracy: 0.7784, F1 Score: 0.7776
+Epoch 28, Accuracy: 0.7800, F1 Score: 0.7746
+Epoch 29, Accuracy: 0.7760, F1 Score: 0.7764
+Epoch 30, Accuracy: 0.7714, F1 Score: 0.7701
+Epoch 31, Accuracy: 0.7661, F1 Score: 0.7650
+Epoch 32, Accuracy: 0.7762, F1 Score: 0.7756
+Epoch 33, Accuracy: 0.7789, F1 Score: 0.7761
+Epoch 34, Accuracy: 0.7709, F1 Score: 0.7684
+Epoch 35, Accuracy: 0.7770, F1 Score: 0.7744
+Epoch 36, Accuracy: 0.7754, F1 Score: 0.7721
+Epoch 37, Accuracy: 0.7757, F1 Score: 0.7707
+Epoch 38, Accuracy: 0.7706, F1 Score: 0.7655
+Epoch 39, Accuracy: 0.7741, F1 Score: 0.7738
+Epoch 40, Accuracy: 0.7741, F1 Score: 0.7723
+Epoch 41, Accuracy: 0.7746, F1 Score: 0.7740
+Epoch 42, Accuracy: 0.7741, F1 Score: 0.7720
+Epoch 43, Accuracy: 0.7698, F1 Score: 0.7712
+Epoch 44, Accuracy: 0.7733, F1 Score: 0.7735
+Epoch 45, Accuracy: 0.7762, F1 Score: 0.7747
+Epoch 46, Accuracy: 0.7728, F1 Score: 0.7712
+Epoch 47, Accuracy: 0.7701, F1 Score: 0.7688
+Epoch 48, Accuracy: 0.7725, F1 Score: 0.7713
+Epoch 49, Accuracy: 0.7749, F1 Score: 0.7736
+Epoch 50, Accuracy: 0.7685, F1 Score: 0.7677
 </pre></div>
 </div>
 </div>
@@ -1663,6 +1727,18 @@ Epoch 50, Accuracy: 0.7685, F1 Score: 0.7690
 <span class="n">model</span> <span class="o">=</span> <span class="n">SimpleNN</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="n">embedding_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">label_size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 <span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label_size</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
 </pre></div>
 </div>
 </div>
@@ -1783,7 +1859,7 @@ Epoch 50, Accuracy: 0.6449, F1 Score: 0.6354
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/answer1115_51_0.png" src="../_images/answer1115_51_0.png" />
+<img alt="../_images/answer1115_52_0.png" src="../_images/answer1115_52_0.png" />
 </div>
 </div>
 </section>
