@@ -407,6 +407,38 @@ title="Print to PDF"
      LSTMの全体像
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     ゲート機構
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   LSTMの構造
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#forget">
+     forgetゲート
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#input">
+     inputゲート
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     新しい記憶セル
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output">
+     outputゲート
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -438,6 +470,38 @@ title="Print to PDF"
      LSTMの全体像
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     ゲート機構
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   LSTMの構造
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#forget">
+     forgetゲート
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#input">
+     inputゲート
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     新しい記憶セル
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output">
+     outputゲート
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -462,6 +526,126 @@ title="Print to PDF"
 <p><span class="math notranslate nohighlight">\(c_t\)</span>には、時刻<span class="math notranslate nohighlight">\(t\)</span>におけるLSTMの記憶が格納されています。具体的に言えば、現在の記憶セル<span class="math notranslate nohighlight">\(c_t\)</span>は、三つの入力<span class="math notranslate nohighlight">\((c_{t-1},h_{t-1},x_t)\)</span>から何らかの計算によって求められています。そのため、これに過去から時刻<span class="math notranslate nohighlight">\(t\)</span>までにおいて必要な情報が全て格納されていると考えられます。</p>
 <p>必要な情報が詰まった記憶を元に、外部のレイヤへ隠れ状態<span class="math notranslate nohighlight">\(h_t\)</span>を出力します。</p>
 <p><img alt="" src="../_images/lstm1.png" /></p>
+</section>
+<section id="id3">
+<h3>ゲート機構<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<p>ゲートは、セル状態に流れる情報を制御するために使用される仕組みです。</p>
+<p>ゲートの「開き具合」は<span class="math notranslate nohighlight">\(0.0 - 1.0\)</span>までの実数で表されます。そしてその数値によって、必要な情報を保持し、不要な情報を排除し、適切な時に適切な情報を出力することができます。</p>
+<p>ここで重要なのは、ゲートの「開き具合」ということは、データから自動的に学ばせるということです。</p>
+</section>
+</section>
+<section id="id4">
+<h2>LSTMの構造<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><span class="math notranslate nohighlight">\(\odot\)</span>はアダマール積（要素ごとの積）を表します。シグモイド関数によって得られたゲートの値<span class="math notranslate nohighlight">\(0_t\)</span>と、tanh関数によって得られたセル状態<span class="math notranslate nohighlight">\(c_t\)</span>の正規化された値を要素ごとに掛け合わせることを意味します。</p>
+</aside>
+<p><img alt="" src="../_images/lstm2.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>tanh関数:tanh関数は出力を<span class="math notranslate nohighlight">\(-1\)</span>から<span class="math notranslate nohighlight">\(1\)</span>の範囲に正規化します。この数値は、何らかのエンコードされた「情報」に対する度合いが表されていると解釈できます。</p></li>
+<li><p>シグモイド関数: シグモイド関数は出力を0から1の範囲に正規化します。データをどれだけ通すかという割合を表しますので、各ゲート（忘却ゲート、入力ゲート、出力ゲート）で情報の流れを制御するのに適しています。</p></li>
+</ul>
+<p>そのため、ゲートではシグモイド関数、実質的な「情報」を持つデータにはtanh関数が活性化関数として使われます。</p>
+</div>
+<section id="forget">
+<h3>forgetゲート<a class="headerlink" href="#forget" title="Permalink to this headline">#</a></h3>
+<p>LSTMのforgetゲートでは、長期記憶から不要な情報を忘却するための制御を行っている。</p>
+<p>ここで、forgetゲートで行う一連の計算を<span class="math notranslate nohighlight">\(\sigma\)</span>で表すことにします。計算は次の式で表されます。<span class="math notranslate nohighlight">\(\sigma\)</span>はsigmoid関数を表します。</p>
+<div class="math notranslate nohighlight">
+\[f_t = \sigma(x_tW_x^{(f)}+h_{t-1}W_h^{(f)} + b^{(f)})\]</div>
+<ul class="simple">
+<li><p>入力</p>
+<ul>
+<li><p>現在の入力<span class="math notranslate nohighlight">\(x_t\)</span></p></li>
+<li><p>前の時点の隠れ層の出力<span class="math notranslate nohighlight">\(h_{t-1}\)</span></p></li>
+</ul>
+</li>
+<li><p>重みとバイアス</p>
+<ul>
+<li><p>現在の入力<span class="math notranslate nohighlight">\(x_t\)</span>に適用されるゲートの重み行列<span class="math notranslate nohighlight">\(W_x^{(f)}\)</span></p></li>
+<li><p>前の時点の隠れ層の出力<span class="math notranslate nohighlight">\(h_{t-1}\)</span>に適用されるゲートの重み行列<span class="math notranslate nohighlight">\(W_h^{(f)}\)</span></p></li>
+</ul>
+</li>
+</ul>
+<p>み付けされた入力とバイアスの合計にシグモイド関数によって計算されるため、<span class="math notranslate nohighlight">\(0\)</span> から <span class="math notranslate nohighlight">\(1\)</span> の値をとります。</p>
+<p><img alt="" src="../_images/forget.png" /></p>
+</section>
+<section id="input">
+<h3>inputゲート<a class="headerlink" href="#input" title="Permalink to this headline">#</a></h3>
+<p>新しい情報を追加する際、何も考えずに追加するのではなく、追加する情報としてどれだけ価値があるかを判断する上で、追加する情報を選択します。これにより、長期間にわたる依存関係をより効果的に管理し、複雑なシーケンスデータを扱うことができるようになります。</p>
+<p>具体的には、inputゲートによって重みつけされた情報が新たに追加されることになります。</p>
+<div class="math notranslate nohighlight">
+\[i_t = \sigma(x_tW_x^{(i)}+h_{t-1}W_h^{(i)} + b^{(i)})\]</div>
+<p><img alt="" src="../_images/input_gate.png" /></p>
+</section>
+<section id="id5">
+<h3>新しい記憶セル<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>LSTMではセルの長期記憶を保つための変数<span class="math notranslate nohighlight">\(c_t\)</span>が用意されています。長期記憶<span class="math notranslate nohighlight">\(c_t\)</span>に対して、古くなった記憶を削除したり、新しい情報を新規追加したりすることで、適当な長期記憶を可能にしています。</p>
+<p>具体的には、</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>新しい「情報」を記憶セルに追加することを目的としていますので、「ケード」ではなく<span class="math notranslate nohighlight">\(tanh\)</span>ノードが使われます。</p>
+</aside>
+<ul class="simple">
+<li><p>入力ゲートの計算</p>
+<ul>
+<li><p>現在の入力<span class="math notranslate nohighlight">\(x_t\)</span>と前の時点の隠れ状態<span class="math notranslate nohighlight">\(h_{t-1}\)</span>から、inputゲート<span class="math notranslate nohighlight">\(i_t\)</span>がシグモイド関数を用いて計算されます。</p></li>
+<li><p>同時に、tanh関数を用いて新しい候補セル状態<span class="math notranslate nohighlight">\(\tilde{c}_t\)</span>が生成されます。</p></li>
+</ul>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+g = tanh(x_tW_x^{(g)}+h_{t-1}W_h^{(g)} + b^{(g)})
+\]</div>
+<ul class="simple">
+<li><p>セル状態の更新</p>
+<ul>
+<li><p>inputゲート<span class="math notranslate nohighlight">\(i_t\)</span>と新しい候補セル状態<span class="math notranslate nohighlight">\(\tilde{c}_t\)</span>がアダマール積によって組み合わされます。</p></li>
+<li><p>forgetゲート<span class="math notranslate nohighlight">\(f_t\)</span>を用いて、前のセル状態<span class="math notranslate nohighlight">\(c_{t-1}\)</span>が更新されます。</p></li>
+</ul>
+</li>
+<li><p>最終的なセル状態</p>
+<ul>
+<li><p>更新された前のセル状態と新しく生成されたセル状態が加算され、新しいセル状態<span class="math notranslate nohighlight">\(c_t\)</span>が生成されます。</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="" src="../_images/long_memory.png" /></p>
+</section>
+<section id="output">
+<h3>outputゲート<a class="headerlink" href="#output" title="Permalink to this headline">#</a></h3>
+<p>outputゲートは隠れ状態<span class="math notranslate nohighlight">\(h_t\)</span>の形成に使用されます。</p>
+<p>現在の記憶セル<span class="math notranslate nohighlight">\(c_t\)</span>は、<span class="math notranslate nohighlight">\((c_{t-1},h_{t-1},x_t)\)</span>を入力として求められます。そして、更新された<span class="math notranslate nohighlight">\(c_t\)</span>を使って、隠れ状態の<span class="math notranslate nohighlight">\(h_t\)</span>計算されます。ここで、<span class="math notranslate nohighlight">\(tanh(c_t)\)</span>の各要素に対して、「それらが次時刻の隠れ状態としてどれだけ重要か」ということを調整します。</p>
+<p>なお、outputゲートの開き具合は、入力<span class="math notranslate nohighlight">\(x_t\)</span>と前の状態<span class="math notranslate nohighlight">\(h_{t-1}\)</span>から求めます。</p>
+<div class="math notranslate nohighlight">
+\[o_t = \sigma(x_tW_x^{(o)}+h_{t-1}W_h^{(o)} + b^{(o)})\]</div>
+<p><span class="math notranslate nohighlight">\(sigmoid\)</span>関数による出力と<span class="math notranslate nohighlight">\(tanh\)</span>関数によるセル状態の出力を掛け合わせ、新しい隠れ状態<span class="math notranslate nohighlight">\(h_t\)</span>を生成します。</p>
+<div class="math notranslate nohighlight">
+\[
+h_t = o_t \odot \tanh(c_t)
+\]</div>
+<p><img alt="" src="../_images/output_gate.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>LSTMは、勾配消失問題を軽減するように設計されています。</p>
+<ul class="simple">
+<li><p>ゲート機構</p>
+<ul>
+<li><p>LSTMのゲートは、セル状態に流れる情報を精密に制御します。セル状態のゲート制御された更新は、勾配が長いシーケンスを通じても安定して伝播するのを支援し、勾配消失問題の軽減に貢献します。また、各時点での情報の重要性を評価し、必要な情報を保持しながら不要な情報を取り除くことで、ニューラルネットワークがより効率的に学習し、安定した勾配を維持できるようにします。</p></li>
+<li><p>forgetゲートが「忘れるべき」と判断した記憶セルの要素に対しては、その勾配の要素は小さくなります。その一方で、forgetゲートが「忘れではいけない」と導いた要素に対しては、その勾配の要素は劣化することなく過去方向へ伝わります。そのため、記憶セルの勾配は、勾配消失は起こさずに伝播することが期待できるのです。</p></li>
+</ul>
+</li>
+<li><p>非線形性の制御</p>
+<ul>
+<li><p>RNNの逆伝播で、「行列の積」を繰り返し行っていましたので、勾配消失が起きたのです。</p></li>
+<li><p>LSTMでは、「行列の積」の計算ではなく「要素ごとの積」で逆伝播行います。特に、シグモイドやtanhのような非線形活性化関数は、ゲートの開閉を制御しますが、セル状態自体の更新は加算によって行われるため、勾配が長いシーケンスを通しても安定して伝播し続けることができます。</p></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 </section>
 </section>
