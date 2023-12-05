@@ -529,17 +529,13 @@ title="Print to PDF"
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">input_size=10</span></code>：各入力要素の特徴の数（入力ベクトルの次元数）は10です</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">hidden_size=20</span></code>：隠れ状態とセル状態の各ベクトルのサイズは20です</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">num_layers</span></code>： LSTMの層の数は2です</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_layers=2</span></code>： LSTMの層の数は2です</p>
 <ul>
 <li><p>最初のLSTM層は入力シーケンスを受け取り、それを処理して一連の隠れ状態を生成します。</p></li>
 <li><p>最初の層の出力（隠れ状態）は、次のLSTM層の入力となります。これが複数層にわたって繰り返されます。</p></li>
 </ul>
 </li>
 </ul>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p><img alt="" src="../_images/stacked_lstm.png" /></p>
-</aside>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
@@ -626,6 +622,13 @@ title="Print to PDF"
 </ul>
 </li>
 </ul>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="c63dc252-9945-42c3-8f79-88f714fc57a0" name="a3ddf207-69d0-4799-8702-9d3953d9fc3b" type="radio">
+</input><label class="sd-tab-label" for="c63dc252-9945-42c3-8f79-88f714fc57a0">
+質問1</label><div class="sd-tab-content docutils">
+<p>タスクに応じて、torch.nn.LSTMの出力を扱う必要があります。例えば、テキスト生成、機械通訳、文書分類はそれぞれどの出力を使うべきですか？</p>
+</div>
+</div>
 </section>
 </section>
 
