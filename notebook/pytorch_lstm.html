@@ -54,6 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="LSTM" href="lstm.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -208,7 +209,7 @@ const thebe_selector_output = ".output, .cell_output"
   RNN
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="rnn.html">
    RNNの基礎
@@ -217,6 +218,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="lstm.html">
    LSTM
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   LSTMの実装
   </a>
  </li>
 </ul>
@@ -573,8 +579,8 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 隠れ状態とセル状態の初期化</span>
-<span class="n">h0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="n">c0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">h0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">c0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -590,59 +596,36 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># 順伝播</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">output</span><span class="p">,</span> <span class="p">(</span><span class="n">hn</span><span class="p">,</span> <span class="n">cn</span><span class="p">)</span> <span class="o">=</span> <span class="n">lstm</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="p">(</span><span class="n">h0</span><span class="p">,</span> <span class="n">c0</span><span class="p">))</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1518,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1516</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1517</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1518</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1527,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1522</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
-<span class="g g-Whitespace">   </span><span class="mi">1523</span> <span class="c1"># this function, and just call forward.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1524</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1525</span>         <span class="ow">or</span> <span class="n">_global_backward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1526</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1527</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1529</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1530</span>     <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/rnn.py:875,</span> in <span class="ni">LSTM.forward</span><span class="nt">(self, input, hx)</span>
-<span class="g g-Whitespace">    </span><span class="mi">872</span>             <span class="n">hx</span> <span class="o">=</span> <span class="p">(</span><span class="n">hx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">hx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">873</span>         <span class="c1"># Each batch of the hidden state should match the input sequence that</span>
-<span class="g g-Whitespace">    </span><span class="mi">874</span>         <span class="c1"># the user believes he/she is passing in.</span>
-<span class="ne">--&gt; </span><span class="mi">875</span>         <span class="bp">self</span><span class="o">.</span><span class="n">check_forward_args</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">hx</span><span class="p">,</span> <span class="n">batch_sizes</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">876</span>         <span class="n">hx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permute_hidden</span><span class="p">(</span><span class="n">hx</span><span class="p">,</span> <span class="n">sorted_indices</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">878</span> <span class="k">if</span> <span class="n">batch_sizes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/rnn.py:791,</span> in <span class="ni">LSTM.check_forward_args</span><span class="nt">(self, input, hidden, batch_sizes)</span>
-<span class="g g-Whitespace">    </span><span class="mi">785</span> <span class="k">def</span> <span class="nf">check_forward_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="c1"># type: ignore[override]</span>
-<span class="g g-Whitespace">    </span><span class="mi">786</span>                        <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">787</span>                        <span class="n">hidden</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">788</span>                        <span class="n">batch_sizes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tensor</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">789</span>                        <span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">790</span>     <span class="bp">self</span><span class="o">.</span><span class="n">check_input</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">batch_sizes</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">791</span>     <span class="bp">self</span><span class="o">.</span><span class="n">check_hidden_size</span><span class="p">(</span><span class="n">hidden</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_expected_hidden_size</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">batch_sizes</span><span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">792</span>                            <span class="s1">&#39;Expected hidden[0] size </span><span class="si">{}</span><span class="s1">, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">793</span>     <span class="bp">self</span><span class="o">.</span><span class="n">check_hidden_size</span><span class="p">(</span><span class="n">hidden</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_expected_cell_size</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">batch_sizes</span><span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">794</span>                            <span class="s1">&#39;Expected hidden[1] size </span><span class="si">{}</span><span class="s1">, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/rnn.py:256,</span> in <span class="ni">RNNBase.check_hidden_size</span><span class="nt">(self, hx, expected_hidden_size, msg)</span>
-<span class="g g-Whitespace">    </span><span class="mi">253</span> <span class="k">def</span> <span class="nf">check_hidden_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hx</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">expected_hidden_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">254</span>                       <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Expected hidden size </span><span class="si">{}</span><span class="s1">, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">255</span>     <span class="k">if</span> <span class="n">hx</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">expected_hidden_size</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">256</span>         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expected_hidden_size</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">hx</span><span class="o">.</span><span class="n">size</span><span class="p">())))</span>
-
-<span class="ne">RuntimeError</span>: Expected hidden[0] size (2, 3, 20), got [1, 3, 20]
-</pre></div>
 </div>
+<ul class="simple">
+<li><p>出力テンソル（<code class="docutils literal notranslate"><span class="pre">output</span></code>）</p>
+<ul>
+<li><p>シーケンス内の各時点におけるLSTMの隠れ状態を含んでいます。</p></li>
+<li><p>サイズは <code class="docutils literal notranslate"><span class="pre">(seq_len,</span> <span class="pre">batch,</span> <span class="pre">num_directions</span> <span class="pre">*</span> <span class="pre">hidden_size)</span></code> になります。</p></li>
+</ul>
+</li>
+<li><p>最終隠れ状態(<code class="docutils literal notranslate"><span class="pre">h_n</span></code>)</p>
+<ul>
+<li><p>LSTMの最終的な隠れ状態です。</p></li>
+<li><p>サイズは<code class="docutils literal notranslate"><span class="pre">(num_layers</span> <span class="pre">*</span> <span class="pre">num_directions,</span> <span class="pre">batch,</span> <span class="pre">hidden_size)</span></code> になります。</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>outputの最終時点の隠れ状態（つまり output[-1] ）は、単層、単方向LSTMの場合、hn と同じです。</p></li>
+<li><p>多層LSTMの場合、hnは各層の最終隠れ状態を含むため、outputの最終時点の隠れ状態とは異なることがあります。この場合、outputの最後の要素は最終層の最終隠れ状態に対応し、hn にはそれぞれの層の最終隠れ状態が格納されます。</p></li>
+</ul>
 </div>
-</div>
+<ul class="simple">
+<li><p>最終セル状態(<code class="docutils literal notranslate"><span class="pre">c_n</span></code>)</p>
+<ul>
+<li><p>LSTMの最終的なセル状態です。長期的な依存関係をどのように「記憶」しているかを示します。</p></li>
+<li><p>サイズは <code class="docutils literal notranslate"><span class="pre">(num_layers</span> <span class="pre">*</span> <span class="pre">num_directions,</span> <span class="pre">batch,</span> <span class="pre">hidden_size)</span></code> です</p></li>
+</ul>
+</li>
+</ul>
 </section>
 </section>
 
@@ -673,6 +656,13 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="lstm.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">LSTM</p>
+        </div>
+    </a>
 </div>
             </footer>
         </div>

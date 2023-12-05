@@ -54,6 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LSTMの実装" href="pytorch_lstm.html" />
     <link rel="prev" title="RNNの基礎" href="rnn.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -218,6 +219,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    LSTM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pytorch_lstm.html">
+   LSTMの実装
   </a>
  </li>
 </ul>
@@ -441,6 +447,23 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   発展的なLSTM
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     多層LSTM
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lstm-bidirectional-lstm">
+     双方向LSTM（Bidirectional LSTM）
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
     </nav>
@@ -500,6 +523,23 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#output">
      outputゲート
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   発展的なLSTM
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     多層LSTM
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lstm-bidirectional-lstm">
+     双方向LSTM（Bidirectional LSTM）
     </a>
    </li>
   </ul>
@@ -648,6 +688,33 @@ h_t = o_t \odot \tanh(c_t)
 </div>
 </section>
 </section>
+<section id="id6">
+<h2>発展的なLSTM<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<section id="id7">
+<h3>多層LSTM<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<p>多層LSTM(Multi-layer LSTM, Stacked LSTMとも呼ばれます)は、複数のリカレント層を積み重ねたニューラルネットワークの構造です。各層は独自の隠れ状態を持ち、前の層からの出力を次の層の入力として受け取ります。</p>
+<p>各層が異なるレベルの特徴を学習できるため、多層RNNは単層RNNよりも複雑なパターンを捉えることができます。</p>
+<a class="bg-primary reference internal image-reference" href="../_images/stacked_lstm.png"><img alt="fishy" class="bg-primary" src="../_images/stacked_lstm.png" style="width: 100px;" /></a>
+</section>
+<section id="lstm-bidirectional-lstm">
+<h3>双方向LSTM（Bidirectional LSTM）<a class="headerlink" href="#lstm-bidirectional-lstm" title="Permalink to this headline">#</a></h3>
+<p>通常のLSTMは、時系列データを順方向に学習していますので、後ろにある単語やフレーズの情報を取り込むことができません。そのため、過去の情報を活用して現在の出力を決定するのには有効ですが、「未来」の情報を考慮に入れることができません。</p>
+<p>テキスト処理のタスクでは、文の意味を完全に理解するためには、未来の情報が過去の情報と同じくらい、またはそれ以上に重要な場合があります。</p>
+<p><code class="docutils literal notranslate"><span class="pre">Apple</span> <span class="pre">is</span> <span class="pre">something</span> <span class="pre">that</span> <span class="pre">I</span> <span class="pre">like</span> <span class="pre">to</span> <span class="pre">eat.</span></code></p>
+<p>双方向LSTMはこれらの欠点を補うために設計されており,シーケンスデータの処理において、時間の前後の両方の方向から情報を捉えるために設計されます。</p>
+<p>具体的は、双方向LSTMは、シーケンスデータを順方向（前から後ろへ）と逆方向（後ろから前へ）の両方で処理する二つのLSTM層から構成されます。</p>
+<ul class="simple">
+<li><p>順方向のLSTM: 一方のLSTM層がシーケンスを通常の時間の流れに沿って処理し、各時点での隠れ状態を更新します。</p></li>
+<li><p>逆方向のLSTM: もう一方のLSTM層がシーケンスを逆順に処理し、別の隠れ状態シーケンスを生成します</p></li>
+<li><p>出力の結合: 二つの層の出力（隠れ状態）は、各時点で結合されて最終的な出力を形成します。</p></li>
+</ul>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>入力シーケンス全体にアクセスできる場合、双方向LSTMはより豊かな特徴抽出と精度の高い予測ができるため、デフォルトでの使用が推奨されます。しかし、全てのシナリオで双方向LSTMが最適というわけではなく、タスクの特性に応じて選択する必要があります。</p>
+</aside>
+<p><img alt="" src="../_images/bilstm.png" /></p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -683,6 +750,13 @@ h_t = o_t \odot \tanh(c_t)
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">RNNの基礎</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="pytorch_lstm.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">LSTMの実装</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
