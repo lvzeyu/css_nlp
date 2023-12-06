@@ -259,7 +259,7 @@ class LSTMClassifier(nn.Module):
         self.bidirectional = bidirectional
     
     def forward(self, text):
-        embedded = self.dropout(self.embedding(text))
+        embedded = self.embedding(text)
         output, (hidden, cell) = self.lstm(embedded)
         if self.bidirectional:
             hidden = torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1)
@@ -329,7 +329,61 @@ def train_model(model, train_loader, val_loader, optimizer, criterion, n_epochs)
 # In[24]:
 
 
+from torch.utils.tensorboard import SummaryWriter
+
+def train_model(model, train_loader, val_loader, optimizer, criterion, n_epochs, tensorboard=False, tensorboard_path='./runs'):
+    # Initialize TensorBoard writer if tensorboard logging is enabled
+    writer = SummaryWriter(tensorboard_path) if tensorboard else None
+
+    model.train()
+    for epoch in range(n_epochs):
+        for texts, labels in train_loader:
+            texts, labels = texts.to(device), labels.to(device)
+            optimizer.zero_grad()
+            predictions = model(texts)
+            loss = criterion(predictions, labels)
+            loss.backward()
+            optimizer.step()
+
+        # Validation
+        model.eval()
+        with torch.no_grad():
+            val_labels = []
+            val_preds = []
+            for texts, labels in val_loader:
+                texts, labels = texts.to(device), labels.to(device)
+                predictions = model(texts)
+                val_labels.extend(labels.tolist())
+                val_preds.extend(torch.argmax(predictions, dim=1).tolist())
+
+            accuracy = accuracy_score(val_labels, val_preds)
+            f1 = f1_score(val_labels, val_preds, average='weighted')
+
+            # Log metrics to TensorBoard
+            if tensorboard:
+                writer.add_scalar('Loss/train', loss.item(), epoch)
+                writer.add_scalar('Accuracy/val', accuracy, epoch)
+                writer.add_scalar('F1-Score/val', f1, epoch)
+
+            print(f"Epoch {epoch+1}, Loss: {loss.item()}, Accuracy: {accuracy}, F1 Score: {f1}")
+
+        model.train()
+
+    # Close the TensorBoard writer
+    if tensorboard:
+        writer.close()
+
+
+# In[25]:
+
+
 # Train the model
-n_epochs = 5 
-# train_model(model, train_loader, val_loader, optimizer, criterion, n_epochs)
+n_epochs = 30
+train_model(model, train_loader, val_loader, optimizer, criterion, n_epochs, tensorboard=True, tensorboard_path='./runs/lstm')
+
+
+# In[ ]:
+
+
+
 
