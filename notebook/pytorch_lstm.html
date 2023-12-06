@@ -54,6 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LSTMによる文書分類" href="lstm_classification.html" />
     <link rel="prev" title="LSTM" href="lstm.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -223,6 +224,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    LSTMの実装
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lstm_classification.html">
+   LSTMによる文書分類
   </a>
  </li>
 </ul>
@@ -593,6 +599,22 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;output: </span><span class="si">{</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hn: </span><span class="si">{</span><span class="n">hn</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cn: </span><span class="si">{</span><span class="n">cn</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>output: torch.Size([5, 3, 20])
+hn: torch.Size([2, 3, 20])
+cn: torch.Size([2, 3, 20])
+</pre></div>
+</div>
+</div>
+</div>
 <ul class="simple">
 <li><p>出力テンソル（<code class="docutils literal notranslate"><span class="pre">output</span></code>）</p>
 <ul>
@@ -623,8 +645,8 @@ title="Print to PDF"
 </li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="c63dc252-9945-42c3-8f79-88f714fc57a0" name="a3ddf207-69d0-4799-8702-9d3953d9fc3b" type="radio">
-</input><label class="sd-tab-label" for="c63dc252-9945-42c3-8f79-88f714fc57a0">
+<input checked="checked" id="631e6917-e5f1-4112-891a-fdc0396a232c" name="63b3c5de-17c4-4b73-9b64-6692fa917c83" type="radio">
+</input><label class="sd-tab-label" for="631e6917-e5f1-4112-891a-fdc0396a232c">
 質問1</label><div class="sd-tab-content docutils">
 <p>タスクに応じて、torch.nn.LSTMの出力を扱う必要があります。例えば、テキスト生成、機械通訳、文書分類はそれぞれどの出力を使うべきですか？</p>
 </div>
@@ -665,6 +687,13 @@ title="Print to PDF"
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">LSTM</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="lstm_classification.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">LSTMによる文書分類</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
