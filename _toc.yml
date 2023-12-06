@@ -31,3 +31,5 @@ parts:
   chapters:
   - file: notebook/rnn.ipynb
   - file: notebook/lstm.ipynb
+  - file: notebook/pytorch_lstm.ipynb
+  - file: notebook/lstm_classification.ipynb

@@ -61,7 +61,6 @@ affluence_vec=np.mean(affluence_vec,axis=0)
 # ```{tab-item} 質問2
 # 単語ペアでベクトル減法を行なって、結果の平均を取る方法以外、Dimensionsを測定する方法がありますか？
 # ```
-# 
 # ````
 
 # #### Cultural Dimensionsで概念の「理解」
