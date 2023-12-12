@@ -414,28 +414,6 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id1">
-   機械翻訳の歴史
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     ルールベース
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statistical-machine-translationsmt">
-     統計的機械翻訳（Statistical Machine Translation、SMT）
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#neural-machine-translation-nmt">
-     ニューラル翻訳(Neural Machine Translation, NMT)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
    seq2seqの原理
   </a>
  </li>
@@ -465,28 +443,6 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id1">
-   機械翻訳の歴史
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     ルールベース
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#statistical-machine-translationsmt">
-     統計的機械翻訳（Statistical Machine Translation、SMT）
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#neural-machine-translation-nmt">
-     ニューラル翻訳(Neural Machine Translation, NMT)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
    seq2seqの原理
   </a>
  </li>
@@ -514,41 +470,13 @@ title="Print to PDF"
 </ul>
 <p>このように、自然言語処理の多くのタスクは、時間的に順序付けられたデータを取り扱い、それを新しい形式の順序付けられたデータに変換するプロセスとして捉えることができます。このプロセスは、データの時系列的な性質と言語の構造的な特徴を考慮に入れる必要があります。そのためのモデルは、seq2seqと呼ばれます。</p>
 <section id="id1">
-<h2>機械翻訳の歴史<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
-<p>機械翻訳（Machine Translation：MT）は計算機科学の黎明期から長きにわたって取り組まれてきた伝統的な課題であり，自然言語処理研究の発展を牽引しています。</p>
-<section id="id2">
-<h3>ルールベース<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
-<p>1950年代から本格的な研究が始められました。当時は、翻訳先の言語の文法規則にもとづくルールベース機械翻訳が使われていました。膨大なルールを作り込む必要があり、開発にも新語のアップデートにも手間がかかりました。精度は高くなく、主に定型的な文しか翻訳できませんでした。</p>
-</section>
-<section id="statistical-machine-translationsmt">
-<h3>統計的機械翻訳（Statistical Machine Translation、SMT）<a class="headerlink" href="#statistical-machine-translationsmt" title="Permalink to this headline">#</a></h3>
-<p>1980年代になると、さらに統計的機械翻訳が生み出されました。統計的機械翻訳では、人の代わりにコンピュータがルールを学びます。原文と訳文のペアを大量に読み込み、原文の単語やフレーズが訳文の特定の単語やフレーズに変換される確率を計算することで、特定の言葉や表現がどのように翻訳されるかを学習します。</p>
-<p>ただし、この手法は、文法構造や言語の深い理解に基づく翻訳を生成することが難しいことがあります。そのため、十分な並列コーパスがない場合や、文法構造が大きく異なる言語ペアに対しては性能が低下することがあります。結果として、翻訳されたテキストには文法的な不正確さや不自然さが生じることがあります。</p>
-<ul class="simple">
-<li><p>SMTでは原言語の部分単語列を目的言語の句に翻訳し，それを適当な順序に並べ替えるという構成になっています。そのため、句の翻訳モデル，句の並べ替えモデル，出力文の言語モデルを用いて、膨大な翻訳結果候補の中からスコアが最大になるものを探索することになります</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-argmax_{y} P(y|x) = argmax_{y} \underset{\text{Translation Model  }}{P(x|y)}  \underset{\text{  Language Model}}{P(y)}
-\]</div>
-</section>
-<section id="neural-machine-translation-nmt">
-<h3>ニューラル翻訳(Neural Machine Translation, NMT)<a class="headerlink" href="#neural-machine-translation-nmt" title="Permalink to this headline">#</a></h3>
-<p>機械翻訳が大きな進展を迎えたのは2014年のseq2seqモデルの登場でした。seq2seqでは単語列をRNNに入力した後RNNに単語列を出力させる，という極めて単純な仕組みで機械翻訳が実現できるという可能性を示しました。</p>
-<p>SMTが単語や句の単位で翻訳したものを組み合わせて翻訳文を構成しようとするのに対し，NMT はそのように明示的な要素の組合せを考慮する必要がなく、正しい翻訳結果が出力されるようにニューラルネットワークを学習します。</p>
-<ul class="simple">
-<li><p>NMTにおいては単語や文はベクトルとして多次元連続空間に埋め込まれて処理され，ある出力単語はそれ以前の処理すべての結果を踏まえて選択されるため，具体的にどの入力単語と対応することを考慮する必要がありません。</p></li>
-</ul>
-</section>
-</section>
-<section id="id3">
-<h2>seq2seqの原理<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<h2>seq2seqの原理<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <p>seq2seq(Sequence-to-Sequence)はEncoder-Decoderモデルとも呼ばれます。その名前が示す通り、そこには2つのモジュールー<strong>Encoder</strong>と<strong>Decoder</strong>ーから構成されています。</p>
 <ul class="simple">
 <li><p>エンコードとは、情報をある規則に基づいて変換することを指しています。具体的には、入力シーケンスを取り込み、それを固定長の内部表現（通常はベクトル）に変換することです。この内部表現には、入力シーケンスの重要な情報がコンパクトにまとめられています。</p></li>
 <li><p>デコードは、エンコーダーから受け取った特徴ベクトルを基に、目的の出力シーケンスを生成します。この過程で、デコーダーはエンコーダーが提供した情報を「解釈」し、それに基づいて適切な出力を生成するための処理を行います。</p></li>
 </ul>
-<a class="bg-primary reference internal image-reference" href="../_images/encoder-decoder.png"><img alt="fishy" class="bg-primary" src="../_images/encoder-decoder.png" style="width: 400px;" /></a>
+<a class="bg-white reference internal image-reference" href="../_images/encoder-decoder.png"><img alt="fishy" class="bg-white" src="../_images/encoder-decoder.png" style="width: 400px;" /></a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>機械翻訳の歴史</p>
