@@ -531,6 +531,11 @@ argmax_{y} P(y|x) = argmax_{y} \underset{\text{Translation Model  }}{P(x|y)}  \u
 </ul>
 </li>
 </ul>
+<div class="math notranslate nohighlight">
+\[
+h_t = EncoderRNN(e(x_t),h_{t-1})
+\]</div>
+<p><img alt="" src="../_images/encoder.png" /></p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>固定長のベクトルは、長いシーケンスの情報を効率的に圧縮することで、入力データの重要な特徴を抽出し、無関係または冗長な情報を無視することができます。
@@ -543,9 +548,16 @@ argmax_{y} P(y|x) = argmax_{y} \underset{\text{Translation Model  }}{P(x|y)}  \u
 </ul>
 </li>
 </ul>
+<div class="math notranslate nohighlight">
+\[
+s_t = DecoderRNN(d(y_t),s_{t-1})
+\]</div>
+<p>ただし、<span class="math notranslate nohighlight">\(s_0=h_t\)</span></p>
+<p><img alt="" src="../_images/decoder.png" /></p>
 <p>まとめると、RNNによるseq2seqは二つのRNN ー EncoderのRNNとDecoderのRNN　ー　によって構成されます。この時、RNNレイヤの隠れ状態がEncoderとDecoderの「架け橋」となります。</p>
 <p>seq2seqの革新的な点は、入力と出力系列の長さ<span class="math notranslate nohighlight">\(n_x\)</span>と<span class="math notranslate nohighlight">\(n_y\)</span>について<span class="math notranslate nohighlight">\(n_x=n_y\)</span>という制約に対して、seq2seqにおいて<span class="math notranslate nohighlight">\(n_x\)</span>と<span class="math notranslate nohighlight">\(n_y\)</span>が違っても構わないという点です。</p>
 <p>順伝播では、EncoderからDecoderへンコードされた情報がRNNレイヤの隠れ状態を通じて伝わります。そして、seq2seqの逆伝播では、その「架け橋」を通って、勾配がDecoderからEncoderへ伝わります。</p>
+<p><img alt="" src="../_images/RNN_seq2seq.png" /></p>
 </section>
 <section id="id2">
 <h2>seq2seqの汎用性<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
