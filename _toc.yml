@@ -33,3 +33,4 @@ parts:
   - file: notebook/lstm.ipynb
   - file: notebook/pytorch_lstm.ipynb
   - file: notebook/lstm_classification.ipynb
+  - file: notebook/seq2seq.ipynb
