@@ -286,6 +286,53 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/seq2seq.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/seq2seq.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -427,6 +474,28 @@ title="Print to PDF"
    seq2seqの汎用性
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pytorchseq2seq">
+   Pytorchによるseq2seqの実装
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#encoder">
+     Encoderの実装
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decoder">
+     Decoderの実装
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     seq2seqの実装
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
     </nav>
@@ -460,6 +529,28 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#id2">
    seq2seqの汎用性
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pytorchseq2seq">
+   Pytorchによるseq2seqの実装
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#encoder">
+     Encoderの実装
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decoder">
+     Decoderの実装
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     seq2seqの実装
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -554,6 +645,20 @@ s_t = DecoderRNN(d(y_t),s_{t-1})
 \]</div>
 <p>ただし、<span class="math notranslate nohighlight">\(s_0=h_t\)</span></p>
 <p><img alt="" src="../_images/decoder.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ここで、<eos>という区切り文字(特殊文字)が利用されています。<eos>を用いて、Decoderに文字生成の開始をお知らせる意図で利用します。一方、Decoderが<eos>を出力するまで単語のランプリングを行うようにするため利用されています。</p>
+<p>このような特定の意味を持つために設計された特別な単語またはシンボルは、特殊トークンといいます。これらは通常、モデルがテキストデータを理解し、適切に処理するのを助けるために使用されます。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;PAD&gt;</span></code>: パディングトークン。シーケンスの長さを揃えるために使用されます。一般的には、最も長いシーケンスに合わせて他のシーケンスをパディングします。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;SOS&gt;</span></code> または <code class="docutils literal notranslate"><span class="pre">&lt;BOS&gt;</span></code>: シーケンスの開始トークン。シーケンスの開始を示します。これは、特にシーケンス生成タスク（例：機械翻訳）で重要です。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;EOS&gt;</span></code> または <code class="docutils literal notranslate"><span class="pre">&lt;EOT&gt;</span></code>: シーケンスの終了トークン。シーケンスの終了を示します。これも、シーケンス生成タスクで重要です。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;UNK&gt;</span></code>: 未知トークン。語彙に存在しない単語を表します。これは、モデルが未知の単語に遭遇したときに使用されます。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;CLS&gt;</span></code>: 主に分類タスクで使用され、入力の最初に配置されます。このトークンの隠れ状態は、しばしば文全体の表現として使用されます。</p></li>
+</ul>
+<p>これらの特殊トークンは、モデルがテキストの構造を理解するのを助け、特定のタスク（例えば、シーケンス生成やテキスト分類）を適切に実行するために必要です。</p>
+<p>一般的には、テキストデータを前処理し、トークン化する際にこれらの特殊トークンを適切に挿入または使用します。</p>
+</div>
 <p>まとめると、RNNによるseq2seqは二つのRNN ー EncoderのRNNとDecoderのRNN　ー　によって構成されます。この時、RNNレイヤの隠れ状態がEncoderとDecoderの「架け橋」となります。</p>
 <p>seq2seqの革新的な点は、入力と出力系列の長さ<span class="math notranslate nohighlight">\(n_x\)</span>と<span class="math notranslate nohighlight">\(n_y\)</span>について<span class="math notranslate nohighlight">\(n_x=n_y\)</span>という制約に対して、seq2seqにおいて<span class="math notranslate nohighlight">\(n_x\)</span>と<span class="math notranslate nohighlight">\(n_y\)</span>が違っても構わないという点です。</p>
 <p>順伝播では、EncoderからDecoderへンコードされた情報がRNNレイヤの隠れ状態を通じて伝わります。そして、seq2seqの逆伝播では、その「架け橋」を通って、勾配がDecoderからEncoderへ伝わります。</p>
@@ -568,6 +673,191 @@ s_t = DecoderRNN(d(y_t),s_{t-1})
 <li><p>要約システム: 長いテキスト（入力系列）を短い要約文（出力系列）に変換するために使用されます。</p></li>
 <li><p>画像キャプション: 画像（入力系列）を解説するテキスト（出力系列）に変換します。</p></li>
 </ul>
+</section>
+<section id="pytorchseq2seq">
+<h2>Pytorchによるseq2seqの実装<a class="headerlink" href="#pytorchseq2seq" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="encoder">
+<h3>Encoderの実装<a class="headerlink" href="#encoder" title="Permalink to this headline">#</a></h3>
+<p>seq2seqモデルのEncoder部分を定義します。</p>
+<ul class="simple">
+<li><p>初期化</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.hidden_dim</span></code>と<code class="docutils literal notranslate"><span class="pre">self.n_layers</span></code>は、LSTMレイヤーの隠れ層の次元数とレイヤー数を定義します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.embedding</span></code>は、入力データを埋め込むための埋め込みレイヤーを定義します。このレイヤーは、入力データを低次元の密なベクトルに変換します。この埋め込みレイヤーは、入力次元数と埋め込み次元数を引数に取ります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.rnn</span></code>は、LSTMレイヤーを定義します。このレイヤーは、埋め込みレイヤーからの出力を受け取り、隠れ状態とセル状態を更新します。このLSTMレイヤーは、埋め込み次元数、隠れ層の次元数、レイヤー数、そしてドロップアウト率を引数に取ります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.dropout</span></code>は、ドロップアウトレイヤーを定義します。このレイヤーは、過学習を防ぐために訓練中にランダムにノードを無効にします。</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">forward</span></code></p>
+<ul>
+<li><p>入力テキスト(<code class="docutils literal notranslate"><span class="pre">src</span></code>)は埋め込みレイヤー<code class="docutils literal notranslate"><span class="pre">self.embedding</span></code>を通過し、その結果得られる埋め込みは<code class="docutils literal notranslate"><span class="pre">self.dropout</span></code>で調整されます。</p></li>
+<li><p>Dropoutを適用した埋め込みがLSTMレイヤーを通過し、出力として隠れ状態とセル状態が生成されます。</p></li>
+</ul>
+</li>
+</ul>
+<p>このエンコーダークラスは、ソーステキストを入力として受け取り、それを一連の隠れ状態とセル状態に変換します。これらの状態は、次にデコーダーに渡され、ターゲットテキストの生成に使用されます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Encoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">dropout</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span> <span class="o">=</span> <span class="n">hidden_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_layers</span> <span class="o">=</span> <span class="n">n_layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">):</span>
+        <span class="c1"># src = [src length, batch size]</span>
+        <span class="n">embedded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">src</span><span class="p">))</span>
+        <span class="c1"># embedded = [src length, batch size, embedding dim]</span>
+        <span class="n">outputs</span><span class="p">,</span> <span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span><span class="p">(</span><span class="n">embedded</span><span class="p">)</span>
+        <span class="c1"># outputs = [src length, batch size, hidden dim * n directions]</span>
+        <span class="c1"># hidden = [n layers * n directions, batch size, hidden dim]</span>
+        <span class="c1"># cell = [n layers * n directions, batch size, hidden dim]</span>
+        <span class="c1"># outputs are always from the top hidden layer</span>
+        <span class="k">return</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="decoder">
+<h3>Decoderの実装<a class="headerlink" href="#decoder" title="Permalink to this headline">#</a></h3>
+<p>seq2seqモデルのDecoder部分を定義しています。</p>
+<ul class="simple">
+<li><p>初期化</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.output_dim</span></code>は、出力の次元数を保存します。これは通常、ターゲット語彙のサイズに対応します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.hidden_dim</span></code>と<code class="docutils literal notranslate"><span class="pre">self.n_layers</span></code>は、LSTMレイヤーの隠れ層の次元数とレイヤー数を保存します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.embedding</span></code>は、入力データを埋め込むための埋め込みレイヤーを定義します。このレイヤーは、入力データを低次元の密なベクトルに変換します。この埋め込みレイヤーは、出力次元数と埋め込み次元数を引数に取ります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.rnn</span></code>は、LSTMレイヤーを定義します。このレイヤーは、埋め込みレイヤーからの出力を受け取り、隠れ状態とセル状態を更新します。このLSTMレイヤーは、埋め込み次元数、隠れ層の次元数、レイヤー数、そしてドロップアウト率を引数に取ります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.dropout</span></code>は、ドロップアウトレイヤーを定義します。このレイヤーは、過学習を防ぐために訓練中にランダムにノードを無効にします。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.fc_out</span></code>は、全結合レイヤーを定義します。このレイヤーは、LSTMレイヤーからの出力を受け取り、最終的な出力を生成します。この全結合レイヤーは、隠れ層の次元数と出力次元数を引数に取ります。</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">forward</span></code>：入力トークンのバッチ、前の隠れ状態、前のセル状態を受け入れます。</p>
+<ul>
+<li><p>Decoderは一度に一つのトークンしか処理しないため、入力トークンは、次元を追加するために<code class="docutils literal notranslate"><span class="pre">unsqueeze</span></code>メソッドを使用して変形されます。これにより、入力の形状は[1, バッチサイズ]になります。</p></li>
+<li><p>変形した入力は、埋め込みレイヤーを通過し、その結果得られる埋め込みはドロップアウトレイヤーを通過します。</p></li>
+<li><p>ドロップアウトを適用した埋め込みは、前の隠れ状態とセル状態と共に、LSTMレイヤーを通過し、新しい隠れ状態とセル状態を生成します。その中に、<code class="docutils literal notranslate"><span class="pre">output</span></code>は各タイムステップの隠れ状態になります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>を線形層に通して<code class="docutils literal notranslate"><span class="pre">prediction</span></code>を受け取ります。</p></li>
+</ul>
+</li>
+</ul>
+<p>このデコーダークラスは、入力トークン、隠れ状態、およびセル状態を入力として受け取り、次のトークンの予測、新しい隠れ状態、および新しいセル状態を出力します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Decoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">dropout</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">=</span> <span class="n">output_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span> <span class="o">=</span> <span class="n">hidden_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_layers</span> <span class="o">=</span> <span class="n">n_layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc_out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">):</span>
+        <span class="c1"># input = [batch size]</span>
+        <span class="c1"># hidden = [n layers * n directions, batch size, hidden dim]</span>
+        <span class="c1"># cell = [n layers * n directions, batch size, hidden dim]</span>
+        <span class="c1"># n directions in the decoder will both always be 1, therefore:</span>
+        <span class="c1"># hidden = [n layers, batch size, hidden dim]</span>
+        <span class="c1"># context = [n layers, batch size, hidden dim]</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># input = [1, batch size]</span>
+        <span class="n">embedded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="nb">input</span><span class="p">))</span>
+        <span class="c1"># embedded = [1, batch size, embedding dim]</span>
+        <span class="n">output</span><span class="p">,</span> <span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span><span class="p">(</span><span class="n">embedded</span><span class="p">,</span> <span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">))</span>
+        <span class="c1"># output = [seq length, batch size, hidden dim * n directions]</span>
+        <span class="c1"># hidden = [n layers * n directions, batch size, hidden dim]</span>
+        <span class="c1"># cell = [n layers * n directions, batch size, hidden dim]</span>
+        <span class="c1"># seq length and n directions will always be 1 in this decoder, therefore:</span>
+        <span class="c1"># output = [1, batch size, hidden dim]</span>
+        <span class="c1"># hidden = [n layers, batch size, hidden dim]</span>
+        <span class="c1"># cell = [n layers, batch size, hidden dim]</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc_out</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="c1"># prediction = [batch size, output dim]</span>
+        <span class="k">return</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>seq2seqの実装<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<p>Seq2Seqモデルは、<code class="docutils literal notranslate"><span class="pre">Encoder</span></code>、<code class="docutils literal notranslate"><span class="pre">Decoder</span></code>、および<code class="docutils literal notranslate"><span class="pre">device</span></code>（GPU上でテンソルを配置するために使用）を引数として取ります。</p>
+<ul class="simple">
+<li><p>入力（<code class="docutils literal notranslate"><span class="pre">src</span></code>）とターゲット（<code class="docutils literal notranslate"><span class="pre">trg</span></code>）のシーケンスを引数として受け取ります。</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: 入力シーケンス。これはエンコーダに供給され、情報を抽出し、その情報をデコーダに渡すために使用されます。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trg</span></code>: ターゲットシーケンス。これはデコーダに供給され、訓練中は正解の出力シーケンスとして使用されます。</p></li>
+</ul>
+</li>
+<li><p>デコーダの出力を格納するためのテンソル（<code class="docutils literal notranslate"><span class="pre">outputs</span></code>）を作成します。このテンソルは、ターゲットシーケンスの長さ、バッチサイズ、およびターゲット語彙のサイズ（デコーダの出力次元）と同じ形状を持ちます。</p></li>
+<li><p>エンコーダは入力シーケンスを受け取り、最後の隠れ状態とセル状態を出力します。これらの状態は、デコーダの初期状態として使用されます。</p></li>
+<li><p>デコーダは、最初に<code class="docutils literal notranslate"><span class="pre">&lt;sos&gt;</span></code>（シーケンスの開始）トークンを入力として受け取ります(ここで、前処理の際既に<code class="docutils literal notranslate"><span class="pre">&lt;sos&gt;</span></code>トークンが追加されていると想定しています)。その後、ターゲットシーケンスの各トークンに対して、前の隠れ状態とセル状態を入力として受け取り、新しい出力（予測）、隠れ状態、およびセル状態を生成します。</p></li>
+<li><p>各タイムステップで、モデルは前のタイムステップで予測したトークンを次の入力として使用します。これは、モデルが実際にデプロイされている場合の動作により近いです。</p></li>
+<li><p>最後に、デコーダのすべての出力を含むテンソルが返されます。これは、ターゲットシーケンスの各トークンに対するモデルの予測を表します。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Seq2Seq</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoder</span><span class="p">,</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">encoder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">decoder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+        <span class="k">assert</span> <span class="n">encoder</span><span class="o">.</span><span class="n">hidden_dim</span> <span class="o">==</span> <span class="n">decoder</span><span class="o">.</span><span class="n">hidden_dim</span><span class="p">,</span> \
+            <span class="s2">&quot;Hidden dimensions of encoder and decoder must be equal!&quot;</span>
+        <span class="k">assert</span> <span class="n">encoder</span><span class="o">.</span><span class="n">n_layers</span> <span class="o">==</span> <span class="n">decoder</span><span class="o">.</span><span class="n">n_layers</span><span class="p">,</span> \
+            <span class="s2">&quot;Encoder and decoder must have equal number of layers!&quot;</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">):</span>
+        <span class="c1"># src = [src length, batch size]</span>
+        <span class="c1"># trg = [trg length, batch size]</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">trg</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">trg_length</span> <span class="o">=</span> <span class="n">trg</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">trg_vocab_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">output_dim</span>
+        <span class="c1"># tensor to store decoder outputs</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">trg_length</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">trg_vocab_size</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="c1"># last hidden state of the encoder is used as the initial hidden state of the decoder</span>
+        <span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+        <span class="c1"># hidden = [n layers * n directions, batch size, hidden dim]</span>
+        <span class="c1"># cell = [n layers * n directions, batch size, hidden dim]</span>
+        <span class="c1"># first input to the decoder is the &lt;sos&gt; tokens</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="n">trg</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
+        <span class="c1"># input = [batch size]</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">trg_length</span><span class="p">):</span>
+            <span class="c1"># insert input token embedding, previous hidden and previous cell states</span>
+            <span class="c1"># receive output tensor (predictions) and new hidden and cell states</span>
+            <span class="n">output</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
+            <span class="c1"># output = [batch size, output dim]</span>
+            <span class="c1"># hidden = [n layers, batch size, hidden dim]</span>
+            <span class="c1"># cell = [n layers, batch size, hidden dim]</span>
+            <span class="c1"># place predictions in a tensor holding predictions for each token</span>
+            <span class="n">outputs</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span>
+            <span class="c1"># get the highest predicted token from our predictions</span>
+            <span class="n">top1</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># use predicted token as next input</span>
+            <span class="nb">input</span> <span class="o">=</span> <span class="n">top1</span>
+            <span class="c1"># input = [batch size]</span>
+        <span class="k">return</span> <span class="n">outputs</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 

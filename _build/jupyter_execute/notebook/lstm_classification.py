@@ -379,7 +379,7 @@ def train_model(model, train_loader, val_loader, optimizer, criterion, n_epochs,
 
 # Train the model
 n_epochs = 30
-train_model(model, train_loader, val_loader, optimizer, criterion, n_epochs, tensorboard=True, tensorboard_path='./runs/lstm')
+#train_model(model, train_loader, val_loader, optimizer, criterion, n_epochs, tensorboard=True, tensorboard_path='./runs/lstm')
 
 
 # In[ ]:
