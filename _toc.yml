@@ -34,3 +34,7 @@ parts:
   - file: notebook/pytorch_lstm.ipynb
   - file: notebook/lstm_classification.ipynb
   - file: notebook/seq2seq.ipynb
+- caption: Transformer
+  chapters:
+  - file: notebook/attention.ipynb
+  - file: notebook/self-attention.ipynb
