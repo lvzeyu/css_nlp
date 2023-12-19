@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; 計算社会科学のための自然言語処理</title>
+    <title>Attention &#8212; 計算社会科学のための自然言語処理</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,8 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Self-Attention" href="self-attention.html" />
+    <link rel="prev" title="Seq2seq" href="seq2seq.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -238,9 +242,9 @@ const thebe_selector_output = ".output, .cell_output"
   Transformer
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="attention.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Attention
   </a>
  </li>
@@ -308,7 +312,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/answer.ipynb"
+        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/attention.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -326,7 +330,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/answer.ipynb"
+        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/attention.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -386,7 +390,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/answer.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/attention.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -414,7 +418,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/notebook/answer.ipynb"
+        <a href="../_sources/notebook/attention.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -472,7 +476,39 @@ title="Print to PDF"
         <i class="fas fa-list"></i> Contents
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="simple visible nav section-nav flex-column">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#seq2seq">
+   seq2seqの問題点
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Attentionの仕組み
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Attentionの計算
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attention-weight">
+     Attention Weight
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     コンテキストベクトル
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attentionseq2seq">
+     Attentionレイヤ付きのseq2seq
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
     </nav>
@@ -482,7 +518,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1><no title></h1>
+                <h1>Attention</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -491,7 +527,39 @@ title="Print to PDF"
                             <h2> Contents </h2>
                         </div>
                         <nav aria-label="Page">
-                            <ul class="simple visible nav section-nav flex-column">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#seq2seq">
+   seq2seqの問題点
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Attentionの仕組み
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Attentionの計算
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attention-weight">
+     Attention Weight
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     コンテキストベクトル
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attentionseq2seq">
+     Attentionレイヤ付きのseq2seq
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
                         </nav>
@@ -502,96 +570,127 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">male_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;man&quot;</span><span class="p">,</span><span class="s2">&quot;men&quot;</span><span class="p">,</span><span class="s2">&quot;his&quot;</span><span class="p">,</span><span class="s2">&quot;his&quot;</span><span class="p">,</span><span class="s2">&quot;he&quot;</span><span class="p">,</span><span class="s2">&quot;male&quot;</span><span class="p">,</span><span class="s2">&quot;masculine&quot;</span><span class="p">]</span>
-<span class="n">female_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;woman&quot;</span><span class="p">,</span><span class="s2">&quot;women&quot;</span><span class="p">,</span><span class="s2">&quot;her&quot;</span><span class="p">,</span><span class="s2">&quot;hers&quot;</span><span class="p">,</span><span class="s2">&quot;she&quot;</span><span class="p">,</span><span class="s2">&quot;female&quot;</span><span class="p">,</span><span class="s2">&quot;feminine&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">male_vec</span><span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">male_list</span><span class="p">,</span><span class="n">female_list</span><span class="p">):</span>
-    <span class="n">male_vec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">model</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-<span class="n">male_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">male_vec</span><span class="p">)</span>
-<span class="n">male_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">male_vec</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">male_vec</span><span class="o">=</span><span class="p">[]</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">male_list</span><span class="p">,</span><span class="n">female_list</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">4</span>     <span class="n">male_vec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">model</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">male_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">male_vec</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">male_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">male_vec</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;model&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">sport</span> <span class="ow">in</span> <span class="n">sports</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">sport</span><span class="p">,</span><span class="n">get_angle</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">sport</span><span class="p">],</span><span class="n">male_vec</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employment_pair</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;employer&quot;</span><span class="p">,</span><span class="s2">&quot;employee&quot;</span><span class="p">),(</span><span class="s2">&quot;employers&quot;</span><span class="p">,</span><span class="s2">&quot;employees&quot;</span><span class="p">),(</span><span class="s2">&quot;owner&quot;</span><span class="p">,</span><span class="s2">&quot;worker&quot;</span><span class="p">),</span>
-                    <span class="p">(</span><span class="s2">&quot;owners&quot;</span><span class="p">,</span><span class="s2">&quot;workers&quot;</span><span class="p">),(</span><span class="s2">&quot;manager&quot;</span><span class="p">,</span><span class="s2">&quot;worker&quot;</span><span class="p">),(</span><span class="s2">&quot;managers&quot;</span><span class="p">,</span><span class="s2">&quot;staff&quot;</span><span class="p">),</span>
-                    <span class="p">(</span><span class="s2">&quot;boss&quot;</span><span class="p">,</span><span class="s2">&quot;worker&quot;</span><span class="p">),(</span><span class="s2">&quot;bosses&quot;</span><span class="p">,</span><span class="s2">&quot;workers&quot;</span><span class="p">),(</span><span class="s2">&quot;supervisor&quot;</span><span class="p">,</span><span class="s2">&quot;staff&quot;</span><span class="p">),</span>
-                    <span class="p">(</span><span class="s2">&quot;supervisors&quot;</span><span class="p">,</span><span class="s2">&quot;staff&quot;</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">employment_vec</span><span class="o">=</span><span class="n">create_vector</span><span class="p">(</span><span class="n">employment_pair</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cosine_similarity</span><span class="p">(</span><span class="n">employment_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">affluence_vec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ocuupation</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;engineer&quot;</span><span class="p">,</span><span class="s2">&quot;nurse&quot;</span><span class="p">]</span>
-<span class="n">male_word</span> <span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gender_pair</span><span class="p">]</span>
-<span class="n">female_word</span> <span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gender_pair</span><span class="p">]</span>
-<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;engineer&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;male&quot;</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;engineer&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;female&quot;</span><span class="p">])</span>
-<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;nurse&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;male&quot;</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;nurse&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;female&quot;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="attention">
+<h1>Attention<a class="headerlink" href="#attention" title="Permalink to this headline">#</a></h1>
+<p>近年では、BERT、GPTなど大規模言語モデルが目を見張るような成果を出しています。これらの大規模言語モデルでは、基本的には<strong>Transformer</strong>というというアーキテクチャが応用されています。</p>
+<p>このTransformerアーキテクチャの起源をたどると、2017年にGoogleの研究者たちによって発表された論文「Attention Is All You Need」に行き着きます。このアーキテクチャは、入力された各単語が、他のすべての単語にどの程度「注意」を払うべきかを学習します。これにより、文脈に応じた単語の重要性を柔軟に捉えることができるようになりました。</p>
+<p>論文タイトルの通りで、Transformerを理解するためにはAttention機構を理解しなければなりませんので、今回はAttention機構の仕組みについて説明します。</p>
+<section id="seq2seq">
+<h2>seq2seqの問題点<a class="headerlink" href="#seq2seq" title="Permalink to this headline">#</a></h2>
+<p>今まで説明した通り、seq2seqでは二つのRNNを連結することで、時系列データを別の時系列データに変換させることができました。その変換が、Encoderで「固定長のベクトル」に情報をエンコードし、Decoderに渡すことより実現されています。</p>
+<p>しかし、「固定長のベクトル」というところに大きな問題が潜んでいます。固定長ベクトルというのはベクトルの大きさが決まってしまっているということで、入力の大きさに関係なく、常にある一定のサイズのベクトルに変換されます。場合による、長い入力を無理やり「固定長のベクトル」へと押し込むことにより、必要な情報はベクトルからはみだす可能性があります。</p>
+<p>実に、seq2seqでは長文、特に学習コーパスの文より長い文に対応することが困難になる場合があり、実際に入力文が長くなるにつれて急速に精度が悪化することが示されました。</p>
+</section>
+<section id="id1">
+<h2>Attentionの仕組み<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>seq2seqが抱えていた問題を解決することに向けて、認知科学から注意（Attention）という概念からヒントを得られました。</p>
+<p>人間の認知モデルにおいて、注意とは「特定の対象に感覚や意識を集中させることで、不必要な情報を排除、必要な情報を選択し、限りある知的資源を効果的に配分するもの」という位置付けになっています。人間が情報を処理する際、特定の物事を注視していた、みたいに「注意」は無意識的に調節されるのが一般的です。</p>
+<p>seq2seqは人間と同じように、必要な情報だけ「注意」を向けさせることは、Attention機構の目的になります。</p>
+<p>Attention機構の詳細を説明する前に、まず全体の枠組みを示したいと思います。</p>
+<p><img alt="" src="../_images/attention.png" /></p>
+<ul class="simple">
+<li><p>seq2seqにAttention機構を追加することを考えます。</p></li>
+<li><p>Atention機構では、EncoderのLSTMライヤの各時点の隠れ状態(<span class="math notranslate nohighlight">\(hs\)</span>)を受け取ります。</p></li>
+<li><p>各時点の隠れ状態(<span class="math notranslate nohighlight">\(hs\)</span>)に基づいて、必要な情報を選び出し、それをその先の出力の生成に使います。</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>Attentionの計算<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p><img alt="" src="../_images/attention_example.svg" /></p>
+<section id="attention-weight">
+<h3>Attention Weight<a class="headerlink" href="#attention-weight" title="Permalink to this headline">#</a></h3>
+<p>「注意を向け」という操作を数学的な演算を置き換えると、各単語の重要度を表す「重み」(<span class="math notranslate nohighlight">\(a\)</span>)を利用することが考えられます。ここで、<span class="math notranslate nohighlight">\(a\)</span>の各要素は<span class="math notranslate nohighlight">\(0 ~ 1\)</span>のスカラあり、その総和は<span class="math notranslate nohighlight">\(1\)</span>になります。一般的には、Attention Weightと呼ばれます。</p>
+<p>Attention Weight計算の流れを見ていきましょう。</p>
+<ul class="simple">
+<li><p>QueryとKeyの生成</p>
+<ul>
+<li><p>Key: 注目の対象、ここではエンコーダの各時点の隠れ状態を指す
+$<span class="math notranslate nohighlight">\(
+k_i=W_K \cdot h_i, for \ i=1 \ to \ m
+\)</span>$</p></li>
+<li><p>Query: 注目したいターゲット、ここではデコーダの現在の隠れ状態を指す
+$<span class="math notranslate nohighlight">\(
+q_t = W_Q \cdot s_t
+\)</span>$</p></li>
+<li><p>ここで、<span class="math notranslate nohighlight">\(W_K\)</span>と<span class="math notranslate nohighlight">\(W_Q\)</span>は学習する必要があるのパラメーターになります。</p></li>
+</ul>
+</li>
+<li><p>DecoderのLSTMレイヤの隠れ状態ベクトルとEncoderの各時点の隠れ状態<span class="math notranslate nohighlight">\(h_t\)</span>とどれだけ”似ているか”を数値で表す際、ベクトルの「内積」が使用されています。</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+a_i^t = k_i^T q_t, for \ i=1 \ to \ m
+\]</div>
+<ul class="simple">
+<li><p>ソフトマックス関数を適用し、すべてのウェイトの合計が1になるように正規化します。</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Softmax([a_1, \cdot \cdot \cdot, a_m])
+\]</div>
+</section>
+<section id="id3">
+<h3>コンテキストベクトル<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<p>各単語の重要度を表す<span class="math notranslate nohighlight">\(a\)</span>と各単語のベクトルから、その重み付き和を求めることで、目的とするコンテキストベクトルを求めます。</p>
+<div class="math notranslate nohighlight">
+\[
+c_t=a_1^t h_1+\cdot \cdot \cdot +a_m^th_m
+\]</div>
+<p>ここで、各単語のベクトルはattention機構においてvalueとして定義されています。</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>KeyとValueは、Attention機構において異なる機能を持つものですが、しばしば同じ入力データに基づいて生成されます。Keyはクエリとの関連性を決定するために使用され、Valueはコンテキストベクトルを形成するために使用されます。</p>
+</aside>
+</section>
+<section id="attentionseq2seq">
+<h3>Attentionレイヤ付きのseq2seq<a class="headerlink" href="#attentionseq2seq" title="Permalink to this headline">#</a></h3>
+<p>Attentionレイヤ付きのseq2seqモデルにおいて、Attentionレイヤの出力ーコンテキストベクトルーが次時点のLSTMレイヤの入力へと接続されています。
+つまり、現在の隠れ状態とコンテキストベクトルを組み合わせて、次の出力トークンを生成します。</p>
+<p>そのような構成にすることで、各デコードステップでエンコーダの出力から最も関連する情報が抽出され、それを用いてデコーダが次の出力トークンをより「正確」に生成できます。</p>
+<p><img alt="" src="../_images/attention_translation.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
 
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">sequence_length</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">seed</span><span class="o">=</span><span class="mi">1234</span>
 
 <span class="n">Q</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
 <span class="n">K</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
 <span class="n">V</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
 
-<span class="c1"># Step 1: Compute dot product of Q and K</span>
+<span class="n">attn_output</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">scaled_dot_product_attention</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attn_output</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">scaled_dot_product_attention</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attn_output</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.4720, 0.5122, 0.5284, 0.6352],
+        [0.4150, 0.5368, 0.5189, 0.6844],
+        [0.4447, 0.5623, 0.5291, 0.6585]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1: Compute dot product of Q and K</span>
 <span class="n">dot_product</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">t</span><span class="p">())</span>
 
 <span class="c1"># Step 2: Scale the dot product</span>
@@ -607,6 +706,23 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attn_output</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.4720, 0.5122, 0.5284, 0.6352],
+        [0.4150, 0.5368, 0.5189, 0.6844],
+        [0.4447, 0.5623, 0.5291, 0.6585]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -635,6 +751,20 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="seq2seq.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Seq2seq</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="self-attention.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Self-Attention</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>
