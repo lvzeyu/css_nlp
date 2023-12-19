@@ -649,15 +649,28 @@ o_i^{m}=Attention(\mathbf{Q_m},\mathbf{K_m},\mathbf{V_m})
 <p>Multi-head Attentionの出力は、<span class="math notranslate nohighlight">\(M\)</span>個の出力埋め込みを連結して計算されます。</p>
 <p><img alt="" src="../_images/transformer_multi-headed_self-attention-recap.png" /></p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="1ad62799-8461-4688-bb22-fec651d69cbe" name="7255272e-8163-41b5-b86e-706383106bed" type="radio">
-</input><label class="sd-tab-label" for="1ad62799-8461-4688-bb22-fec651d69cbe">
+<input checked="checked" id="78758fa4-ce1f-4bbd-abfd-7a09cef04096" name="3804d231-2aea-4b89-a087-0c4bcae93e39" type="radio">
+</input><label class="sd-tab-label" for="78758fa4-ce1f-4bbd-abfd-7a09cef04096">
 課題 1</label><div class="sd-tab-content docutils">
-<p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">torch</span> <span class="pre">batch_size</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">sequence_length</span> <span class="pre">=</span> <span class="pre">3</span> <span class="pre">embedding_dim</span> <span class="pre">=</span> <span class="pre">4</span> <span class="pre">seed=1234</span> <span class="pre">Q</span> <span class="pre">=</span> <span class="pre">torch.rand(sequence_length,</span> <span class="pre">embedding_dim)</span> <span class="pre">K</span> <span class="pre">=</span> <span class="pre">torch.rand(sequence_length,</span> <span class="pre">embedding_dim)</span> <span class="pre">V</span> <span class="pre">=</span> <span class="pre">torch.rand(sequence_length,</span> <span class="pre">embedding_dim)</span></code>
-ランダムに初期化された<span class="math notranslate nohighlight">\(Q\)</span>、<span class="math notranslate nohighlight">\(K\)</span>、<span class="math notranslate nohighlight">\(V\)</span>を使って、attention weightを計算しなさい</p>
+<p>ランダムに初期化された<span class="math notranslate nohighlight">\(Q\)</span>、<span class="math notranslate nohighlight">\(K\)</span>、<span class="math notranslate nohighlight">\(V\)</span>を使って、attention weightを計算しなさい</p>
 <ul class="simple">
-<li><p>pytorchが提供しているメソッドを用いて計算</p></li>
-<li><p>pytorch提供しているメソッドを使わず、数式に従って、pytorchの行列計算で計算</p></li>
+<li><p>pytorchが提供しているメソッドを用いてattention weightを計算しなさい</p></li>
+<li><p>pytorch提供しているメソッドを使わず、数式に従って、pytorchの行列計算でattention weightを計算しなさい</p></li>
 </ul>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sequence_length</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">seed</span><span class="o">=</span><span class="mi">1234</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 <section id="id2">
