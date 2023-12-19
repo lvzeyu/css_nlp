@@ -62,3 +62,48 @@ female_word =[i[1] for i in gender_pair]
 np.linalg.norm(model["engineer"] - model["male"]) - np.linalg.norm(model["engineer"] - model["female"])
 np.linalg.norm(model["nurse"] - model["male"]) - np.linalg.norm(model["nurse"] - model["female"])
 
+
+# In[ ]:
+
+
+import torch
+import torch.nn.functional as F
+
+batch_size = 1
+sequence_length = 3
+embedding_dim = 4
+seed=1234
+
+Q = torch.rand(sequence_length, embedding_dim)
+K = torch.rand(sequence_length, embedding_dim)
+V = torch.rand(sequence_length, embedding_dim)
+
+attn_output = F.scaled_dot_product_attention(Q, K, V)
+
+
+# In[ ]:
+
+
+import torch
+import torch.nn.functional as F
+
+sequence_length = 3
+embedding_dim = 4
+
+Q = torch.rand(sequence_length, embedding_dim)
+K = torch.rand(sequence_length, embedding_dim)
+V = torch.rand(sequence_length, embedding_dim)
+
+# Step 1: Compute dot product of Q and K
+dot_product = torch.matmul(Q, K.t())
+
+# Step 2: Scale the dot product
+scale_factor = torch.sqrt(torch.tensor(embedding_dim).float())
+scaled_dot_product = dot_product / scale_factor
+
+# Step 3: Apply softmax to get attention weights
+attention_weights = F.softmax(scaled_dot_product, dim=-1)
+
+# Step 4: Apply the attention weights to V
+attn_output = torch.matmul(attention_weights, V)
+
