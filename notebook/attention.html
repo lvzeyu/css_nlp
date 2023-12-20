@@ -596,11 +596,18 @@ title="Print to PDF"
 </section>
 <section id="id2">
 <h2>Attentionの計算<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p><img alt="" src="../_images/attention_example.svg" /></p>
 <section id="attention-weight">
 <h3>Attention Weight<a class="headerlink" href="#attention-weight" title="Permalink to this headline">#</a></h3>
 <p>「注意を向け」という操作を数学的な演算を置き換えると、各単語の重要度を表す「重み」(<span class="math notranslate nohighlight">\(a\)</span>)を利用することが考えられます。ここで、<span class="math notranslate nohighlight">\(a\)</span>の各要素は<span class="math notranslate nohighlight">\(0 ~ 1\)</span>のスカラあり、その総和は<span class="math notranslate nohighlight">\(1\)</span>になります。一般的には、Attention Weightと呼ばれます。</p>
 <p>Attention Weight計算の流れを見ていきましょう。</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>「Key」と「Query」はプログラミング、およびデータベース管理の文脈で一般的に使用される用語です。</p>
+<ul class="simple">
+<li><p>Keyはデータ構造（特に辞書やマップ）内のデータアイテムを一意に識別するために使用されます。</p></li>
+<li><p>Queryは、データを取得、操作、または更新するためにデータベースや検索エンジンに対して行われるリクエストです。</p></li>
+</ul>
+</aside>
 <ul class="simple">
 <li><p>QueryとKeyの生成</p>
 <ul>
@@ -615,6 +622,9 @@ q_t = W_Q \cdot s_t
 <li><p>ここで、<span class="math notranslate nohighlight">\(W_K\)</span>と<span class="math notranslate nohighlight">\(W_Q\)</span>は学習する必要があるのパラメーターになります。</p></li>
 </ul>
 </li>
+</ul>
+<p><img alt="" src="../_images/attention_example.svg" /></p>
+<ul class="simple">
 <li><p>DecoderのLSTMレイヤの隠れ状態ベクトルとEncoderの各時点の隠れ状態<span class="math notranslate nohighlight">\(h_t\)</span>とどれだけ”似ているか”を数値で表す際、ベクトルの「内積」が使用されています。</p></li>
 </ul>
 <div class="math notranslate nohighlight">
