@@ -617,15 +617,7 @@ x_i=e_{w_i}+p_i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#!pip install sentencepiece</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1">#!pip install protobuf</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">generator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;text-generation&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;abeja/gpt2-large-japanese&quot;</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;transformers&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You are using the default legacy behaviour of the &lt;class &#39;transformers.models.t5.tokenization_t5.T5Tokenizer&#39;&gt;. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thouroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565
 </pre></div>
 </div>
 </div>
@@ -646,9 +638,9 @@ x_i=e_{w_i}+p_i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;generated_text&#39;: &#39;東北大学は7月3日、今年7月に福島県福島市で行われる「第1回日本MRS医学会大会(仮称)」の開催準備に関する協定書に、同大会への運営協力に関する覚書を交わしたと発表した。 参加予定者の名簿は7月1日〜7月3日頃に東北大学多元物質科学研究所で閲覧できる予定。また、参加申請を希望する場合は、7月4日までに、学会事務局から学会事務局宛にE-mailで&#39;}
-{&#39;generated_text&#39;: &#39;東北大学は3月10日に東京・港区の明治記念館で定例会見を行い、2020年度末までに工学部の新規設置を正式に断念することを明らかにした。 東京・港区の明治記念館で定例会見を行い、2020年度末までに工学部の新規設置を正式に断念することを明らかにした。 東北大学は2020年に設立50周年を迎えることから、2023年までに工学部を2つに再編する方針を固めた。 1つ目は「建築デザイン学部」だ。この学部は、建築や都市&#39;}
-{&#39;generated_text&#39;: &#39;東北大学は、文部科学省の「職業実践専門課程(職業実践力育成プログラム)」に認定されており、「ビジネススクール」とも言われています。このビジネススクールは、各企業・団体等と連携を取りながら、職業上の知識や技術のみならず、ビジネスに対する考え方や経営センスを修得して、職業教育を行う教育プログラムです。 東北経済産業局では、本学を希望する学生の皆様の学びをより深めていただくことを目的に、「東北エリア職業実践専門&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;generated_text&#39;: &#39;東北大学は、文部科学省の「大学発新事業創出プログラム(FIRST)」の採択を受けて、地域経済の活性化や人材の育成を支援する新たな研究拠点となる新拠点「東北大学多元物質科学研究所(仮称)」を宮城県内に開設する予定です。 新拠点開設により、本学はより高度な研究や高度な人材の育成が可能となることから、地域経済の活性化や人材の育成に貢献できると考えています。 東北大学多元物質科学研究所(仮称)は、本学の最先端&#39;}
+{&#39;generated_text&#39;: &#39;東北大学は3年連続でトップとなりました。 今回、研究部門はこれまで以上に重点的な研究や学術的展開をはかる必要性をあらためて痛感したことを契機に、研究活動の活性化が求められています。 研究部門の体制や研究体制は、研究業績が社会に貢献するために必要とされる研究の基盤であり、研究成果が社会と一体となって実を結ぶためには、研究活動の活性化が不可欠です。 東北大学は、研究成果の社会還元だけでなく、その成果&#39;}
+{&#39;generated_text&#39;: &#39;東北大学は「グローバル人材育成教育」を学んでいます。これは、国際社会で生き抜くために必要とされる「知力・思考力・判断力」や、「国際問題について広い視野を持つ」力を身につけるよう、国際学類1年次全員を対象に行っている教育プログラムです。「グローバル」とは「世界と自分をつなぐ」という意味であり、世界の現状を理解するとともに、日本という国の国際化戦略を理解すること、またグローバル人材として国際社会の中で自らの役割や価値を発信していく&#39;}
 </pre></div>
 </div>
 </div>
