@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Attention &#8212; 計算社会科学のための自然言語処理</title>
+    <title>GPT &#8212; 計算社会科学のための自然言語処理</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Self-Attention" href="self-attention.html" />
-    <link rel="prev" title="Seq2seq" href="seq2seq.html" />
+    <link rel="prev" title="BERT" href="BERT.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -243,8 +242,8 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="attention.html">
    Attention
   </a>
  </li>
@@ -263,8 +262,8 @@ const thebe_selector_output = ".output, .cell_output"
    BERT
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="GPT.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    GPT
   </a>
  </li>
@@ -327,7 +326,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/attention.ipynb"
+        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/GPT.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -345,7 +344,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/attention.ipynb"
+        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/GPT.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -405,7 +404,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/attention.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/GPT.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -433,7 +432,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/notebook/attention.ipynb"
+        <a href="../_sources/notebook/GPT.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -493,33 +492,23 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#seq2seq">
-   seq2seqの問題点
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id1">
-   Attentionの仕組み
+   入力表現
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   Attentionの計算
+   事前学習
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   ファインチューング
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#attention-weight">
-     Attention Weight
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     コンテキストベクトル
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#attentionseq2seq">
-     Attentionレイヤ付きのseq2seq
+    <a class="reference internal nav-link" href="#huggingface-transformer">
+     Huggingface transformerを使う
     </a>
    </li>
   </ul>
@@ -533,7 +522,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Attention</h1>
+                <h1>GPT</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -544,33 +533,23 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#seq2seq">
-   seq2seqの問題点
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id1">
-   Attentionの仕組み
+   入力表現
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   Attentionの計算
+   事前学習
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   ファインチューング
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#attention-weight">
-     Attention Weight
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     コンテキストベクトル
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#attentionseq2seq">
-     Attentionレイヤ付きのseq2seq
+    <a class="reference internal nav-link" href="#huggingface-transformer">
+     Huggingface transformerを使う
     </a>
    </li>
   </ul>
@@ -585,94 +564,87 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="attention">
-<h1>Attention<a class="headerlink" href="#attention" title="Permalink to this headline">#</a></h1>
-<p>近年では、BERT、GPTなど大規模言語モデルが目を見張るような成果を出しています。これらの大規模言語モデルでは、基本的には<strong>Transformer</strong>というというアーキテクチャが応用されています。</p>
-<p>このTransformerアーキテクチャの起源をたどると、2017年にGoogleの研究者たちによって発表された論文「Attention Is All You Need」に行き着きます。このアーキテクチャは、入力された各単語が、他のすべての単語にどの程度「注意」を払うべきかを学習します。これにより、文脈に応じた単語の重要性を柔軟に捉えることができるようになりました。</p>
-<p>論文タイトルの通りで、Transformerを理解するためにはAttention機構を理解しなければなりませんので、今回はAttention機構の仕組みについて説明します。</p>
-<section id="seq2seq">
-<h2>seq2seqの問題点<a class="headerlink" href="#seq2seq" title="Permalink to this headline">#</a></h2>
-<p>今まで説明した通り、seq2seqでは二つのRNNを連結することで、時系列データを別の時系列データに変換させることができました。その変換が、Encoderで「固定長のベクトル」に情報をエンコードし、Decoderに渡すことより実現されています。</p>
-<p>しかし、「固定長のベクトル」というところに大きな問題が潜んでいます。固定長ベクトルというのはベクトルの大きさが決まってしまっているということで、入力の大きさに関係なく、常にある一定のサイズのベクトルに変換されます。場合による、長い入力を無理やり「固定長のベクトル」へと押し込むことにより、必要な情報はベクトルからはみだす可能性があります。</p>
-<p>実に、seq2seqでは長文、特に学習コーパスの文より長い文に対応することが困難になる場合があり、実際に入力文が長くなるにつれて急速に精度が悪化することが示されました。</p>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="gpt">
+<h1>GPT<a class="headerlink" href="#gpt" title="Permalink to this headline">#</a></h1>
+<p>GPT(Generative Pretrained Transformer)はTransformerベースの言語モデルです。ChatGPT などの生成系 AI アプリケーションの基礎となっている人工知能 (AI) の重要な新技術です。GPT モデルにより、アプリケーションは人間のようにテキストやコンテンツ (画像、音楽など) を作成したり、会話形式で質問に答えたりすることができます。さまざまな業界の組織が、Q&amp;A ボット、テキスト要約、コンテンツ生成、検索に GPT モデルと生成系 AI を使用しています。</p>
+<p>GPTはOpenAIによって定期的に新しいバージョンが公開されていますが、ここではGPT-2について解説します。</p>
+<p><img alt="" src="../_images/gpt_history.png" /></p>
+<p><img alt="" src="../_images/gpt2.png" /></p>
 <section id="id1">
-<h2>Attentionの仕組み<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
-<p>seq2seqが抱えていた問題を解決することに向けて、認知科学から注意（Attention）という概念からヒントを得られました。</p>
-<p>人間の認知モデルにおいて、注意とは「特定の対象に感覚や意識を集中させることで、不必要な情報を排除、必要な情報を選択し、限りある知的資源を効果的に配分するもの」という位置付けになっています。人間が情報を処理する際、特定の物事を注視していた、みたいに「注意」は無意識的に調節されるのが一般的です。</p>
-<p>seq2seqは人間と同じように、必要な情報だけ「注意」を向けさせることは、Attention機構の目的になります。</p>
-<p>Attention機構の詳細を説明する前に、まず全体の枠組みを示したいと思います。</p>
-<p><img alt="" src="../_images/attention.png" /></p>
-<ul class="simple">
-<li><p>seq2seqにAttention機構を追加することを考えます。</p></li>
-<li><p>Atention機構では、EncoderのLSTMライヤの各時点の隠れ状態(<span class="math notranslate nohighlight">\(hs\)</span>)を受け取ります。</p></li>
-<li><p>各時点の隠れ状態(<span class="math notranslate nohighlight">\(hs\)</span>)に基づいて、必要な情報を選び出し、それをその先の出力の生成に使います。</p></li>
-</ul>
+<h2>入力表現<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>GPTの入力は、入力トークン列に対応するトークン埋め込み<span class="math notranslate nohighlight">\(e_{w_i}\)</span>と位置埋め込む<span class="math notranslate nohighlight">\(p_i\)</span>を加算した埋め込み列です。</p>
+<div class="math notranslate nohighlight">
+\[
+x_i=e_{w_i}+p_i
+\]</div>
 </section>
 <section id="id2">
-<h2>Attentionの計算<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<section id="attention-weight">
-<h3>Attention Weight<a class="headerlink" href="#attention-weight" title="Permalink to this headline">#</a></h3>
-<p>「注意を向け」という操作を数学的な演算を置き換えると、各単語の重要度を表す「重み」(<span class="math notranslate nohighlight">\(a\)</span>)を利用することが考えられます。ここで、<span class="math notranslate nohighlight">\(a\)</span>の各要素は<span class="math notranslate nohighlight">\(0 ~ 1\)</span>のスカラあり、その総和は<span class="math notranslate nohighlight">\(1\)</span>になります。一般的には、Attention Weightと呼ばれます。</p>
-<p>Attention Weight計算の流れを見ていきましょう。</p>
+<h2>事前学習<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>GPTの事前学習タスクは、入力されたトークン列の次のトークンを予測することです。ここで、GPTはデコーダ構成のTransformerを用います。</p>
+<p><img alt="" src="../_images/gpt_input_representation.png" /></p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
-<p>「Key」と「Query」はプログラミング、およびデータベース管理の文脈で一般的に使用される用語です。</p>
-<ul class="simple">
-<li><p>Keyはデータ構造（特に辞書やマップ）内のデータアイテムを一意に識別するために使用されます。</p></li>
-<li><p>Queryは、データを取得、操作、または更新するためにデータベースや検索エンジンに対して行われるリクエストです。</p></li>
-</ul>
+<p>GPTはオリジナルのTransformerにいくつかの改装を行いました。</p>
 </aside>
-<ul class="simple">
-<li><p>QueryとKeyの生成</p>
-<ul>
-<li><p>Key: 注目の対象、ここではエンコーダの各時点の隠れ状態を指す
-$<span class="math notranslate nohighlight">\(
-k_i=W_K \cdot h_i, for \ i=1 \ to \ m
-\)</span>$</p></li>
-<li><p>Query: 注目したいターゲット、ここではデコーダの現在の隠れ状態を指す
-$<span class="math notranslate nohighlight">\(
-q_t = W_Q \cdot s_t
-\)</span>$</p></li>
-<li><p>ここで、<span class="math notranslate nohighlight">\(W_K\)</span>と<span class="math notranslate nohighlight">\(W_Q\)</span>は学習する必要があるのパラメーターになります。</p></li>
-</ul>
-</li>
-</ul>
-<p><img alt="" src="../_images/attention_example.svg" /></p>
-<ul class="simple">
-<li><p>DecoderのLSTMレイヤの隠れ状態ベクトルとEncoderの各時点の隠れ状態<span class="math notranslate nohighlight">\(h_t\)</span>とどれだけ”似ているか”を数値で表す際、ベクトルの「内積」が使用されています。</p></li>
-</ul>
+<p>学習に用いるトークン列<span class="math notranslate nohighlight">\(w_1,w_2,...,w_N\)</span>におけるのトークン<span class="math notranslate nohighlight">\(w_i\)</span>を予測することを考えます。GPTでは、予測確率を使った負の対数尤度を損失関数として事前学習を行います。</p>
 <div class="math notranslate nohighlight">
 \[
-a_i^t = k_i^T q_t, for \ i=1 \ to \ m
+\zeta(\theta)=- \sum_i log P(w_i|w_{i-K},....w_{i-1},\theta)
 \]</div>
-<ul class="simple">
-<li><p>ソフトマックス関数を適用し、すべてのウェイトの合計が1になるように正規化します。</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-Softmax([a_1, \cdot \cdot \cdot, a_m])
-\]</div>
+<p>ここで、<span class="math notranslate nohighlight">\(\theta\)</span>はモデルに含まれるすべてのパラメータを表します。</p>
+<p>学習時にはMasked Self-Attention機構が導入され、入力トークン列の各位置において次のトークンを予測して学習が行われます。</p>
+<p><img alt="" src="../_images/gpt_decoder.png" /></p>
+<p>学習時にはMasked Self-Attention機構が導入され、入力トークン列の各位置において次のトークンを予測して学習が行われます。</p>
 </section>
 <section id="id3">
-<h3>コンテキストベクトル<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
-<p>各単語の重要度を表す<span class="math notranslate nohighlight">\(a\)</span>と各単語のベクトルから、その重み付き和を求めることで、目的とするコンテキストベクトルを求めます。</p>
-<div class="math notranslate nohighlight">
-\[
-c_t=a_1^t h_1+\cdot \cdot \cdot +a_m^th_m
-\]</div>
-<p>ここで、各単語のベクトルはattention機構においてvalueとして定義されています。</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>KeyとValueは、Attention機構において異なる機能を持つものですが、しばしば同じ入力データに基づいて生成されます。Keyはクエリとの関連性を決定するために使用され、Valueはコンテキストベクトルを形成するために使用されます。</p>
-</aside>
-</section>
-<section id="attentionseq2seq">
-<h3>Attentionレイヤ付きのseq2seq<a class="headerlink" href="#attentionseq2seq" title="Permalink to this headline">#</a></h3>
-<p>Attentionレイヤ付きのseq2seqモデルにおいて、Attentionレイヤの出力ーコンテキストベクトルーが次時点のLSTMレイヤの入力へと接続されています。
-つまり、現在の隠れ状態とコンテキストベクトルを組み合わせて、次の出力トークンを生成します。</p>
-<p>そのような構成にすることで、各デコードステップでエンコーダの出力から最も関連する情報が抽出され、それを用いてデコーダが次の出力トークンをより「正確」に生成できます。</p>
-<p><img alt="" src="../_images/attention_translation.png" /></p>
+<h2>ファインチューング<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>GPTの事前学習済みモデルに、下流タスクに合わせて変換するためのヘッドを追加し、下流タスクのデータセットを用いてモデル全体を調整します。</p>
+<p>GPTは下流タスクを解く際、特殊トークンを用いて入力テキストを拡張します。</p>
+<ul class="simple">
+<li><p>テキスト分類のタスクにおいては、文書の最初に<code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code>、最後に<code class="docutils literal notranslate"><span class="pre">&lt;e&gt;</span></code>が追加されます。</p></li>
+<li><p>自然言語推論のタスクにおいては、テキストの境界に<code class="docutils literal notranslate"><span class="pre">$</span></code>が挿入されます。</p></li>
+</ul>
+<p><img alt="" src="../_images/gpt-2-autoregression-2.gif" /></p>
+<section id="huggingface-transformer">
+<h3>Huggingface transformerを使う<a class="headerlink" href="#huggingface-transformer" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+<span class="c1">#!pip install sentencepiece</span>
+<span class="c1">#!pip install protobuf</span>
+<span class="n">generator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;text-generation&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;abeja/gpt2-large-japanese&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You are using the default legacy behaviour of the &lt;class &#39;transformers.models.t5.tokenization_t5.T5Tokenizer&#39;&gt;. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thouroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generated</span> <span class="o">=</span> <span class="n">generator</span><span class="p">(</span>
+    <span class="s2">&quot;東北大学は&quot;</span><span class="p">,</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">top_p</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+    <span class="n">top_k</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">pad_token_id</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">generated</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;generated_text&#39;: &#39;東北大学は、文部科学省の「大学発新事業創出プログラム(FIRST)」の採択を受けて、地域経済の活性化や人材の育成を支援する新たな研究拠点となる新拠点「東北大学多元物質科学研究所(仮称)」を宮城県内に開設する予定です。 新拠点開設により、本学はより高度な研究や高度な人材の育成が可能となることから、地域経済の活性化や人材の育成に貢献できると考えています。 東北大学多元物質科学研究所(仮称)は、本学の最先端&#39;}
+{&#39;generated_text&#39;: &#39;東北大学は3年連続でトップとなりました。 今回、研究部門はこれまで以上に重点的な研究や学術的展開をはかる必要性をあらためて痛感したことを契機に、研究活動の活性化が求められています。 研究部門の体制や研究体制は、研究業績が社会に貢献するために必要とされる研究の基盤であり、研究成果が社会と一体となって実を結ぶためには、研究活動の活性化が不可欠です。 東北大学は、研究成果の社会還元だけでなく、その成果&#39;}
+{&#39;generated_text&#39;: &#39;東北大学は「グローバル人材育成教育」を学んでいます。これは、国際社会で生き抜くために必要とされる「知力・思考力・判断力」や、「国際問題について広い視野を持つ」力を身につけるよう、国際学類1年次全員を対象に行っている教育プログラムです。「グローバル」とは「世界と自分をつなぐ」という意味であり、世界の現状を理解するとともに、日本という国の国際化戦略を理解すること、またグローバル人材として国際社会の中で自らの役割や価値を発信していく&#39;}
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
@@ -704,19 +676,12 @@ c_t=a_1^t h_1+\cdot \cdot \cdot +a_m^th_m
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="seq2seq.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="BERT.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Seq2seq</p>
+            <p class="prev-next-title">BERT</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="self-attention.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Self-Attention</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

@@ -38,3 +38,6 @@ parts:
   chapters:
   - file: notebook/attention.ipynb
   - file: notebook/self-attention.ipynb
+  - file: notebook/transformer.ipynb
+  - file: notebook/BERT.ipynb
+  - file: notebook/GPT.ipynb
