@@ -107,3 +107,24 @@ attention_weights = F.softmax(scaled_dot_product, dim=-1)
 # Step 4: Apply the attention weights to V
 attn_output = torch.matmul(attention_weights, V)
 
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+classify_pipeline = pipeline(
+    task="text-classification", model="mr4/bert-base-jp-sentiment-analysis"
+    )
+
+
+# In[ ]:
+
+
+text="世界経済も、米国が12月に続き３月にも追加利上げを実施するなど、先進国を中心に回復の動きとなりました"
+sentiment = classify_pipeline(text)
+
