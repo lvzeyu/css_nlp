@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>BERTによるセンチメント分析 &#8212; 計算社会科学のための自然言語処理</title>
+    <title>大規模言語モデル &#8212; 計算社会科学のための自然言語処理</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="大規模言語モデル" href="llm.html" />
-    <link rel="prev" title="GPT" href="GPT.html" />
+    <link rel="prev" title="BERTによるセンチメント分析" href="bert_sentiment.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -273,13 +272,13 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bert_sentiment.html">
    BERTによるセンチメント分析
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="llm.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    大規模言語モデル
   </a>
  </li>
@@ -334,53 +333,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/bert_sentiment.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/bert_sentiment.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -420,7 +372,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/bert_sentiment.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/llm.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -448,7 +400,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/notebook/bert_sentiment.ipynb"
+        <a href="../_sources/notebook/llm.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -508,28 +460,24 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   転移学習とファインチューニング
+  <a class="reference internal nav-link" href="#id2">
+   モデルの大規模化とその効果
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id2">
-   センチメント分析の実装
+  <a class="reference internal nav-link" href="#id3">
+   文脈内学習
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     データセット
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#hugging-face">
-       Hugging Faceからサンプルデータの取得
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chain-of-thought">
+   chain-of-thought推論
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   プロンプトエンジニアリング
+  </a>
  </li>
 </ul>
 
@@ -540,7 +488,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>BERTによるセンチメント分析</h1>
+                <h1>大規模言語モデル</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -551,28 +499,24 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   転移学習とファインチューニング
+  <a class="reference internal nav-link" href="#id2">
+   モデルの大規模化とその効果
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id2">
-   センチメント分析の実装
+  <a class="reference internal nav-link" href="#id3">
+   文脈内学習
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     データセット
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#hugging-face">
-       Hugging Faceからサンプルデータの取得
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chain-of-thought">
+   chain-of-thought推論
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   プロンプトエンジニアリング
+  </a>
  </li>
 </ul>
 
@@ -584,38 +528,73 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="bert">
-<h1>BERTによるセンチメント分析<a class="headerlink" href="#bert" title="Permalink to this headline">#</a></h1>
-<section id="id1">
-<h2>転移学習とファインチューニング<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
-<p>転移学習は、あるタスクの学習で得られた知識を、他の関連するタスクの学習に適用する手法を指します。一般的には、以下のステップで行われることが多いです：</p>
-<ul class="simple">
-<li><p>事前学習: 事前学習モデル（pre-trained models)とは、大規模なデータセットを用いて訓練した学習済みモデルのことです。一般的に、大量のデータ（例えば、インターネット上のテキストデータ）を使用して、モデルを事前に学習します。この時点でのモデルは、言語の汎用的な特徴や構造を捉えることができます。</p></li>
-<li><p>ファインチューニング(fine-tuning): 事前学習モデルを、特定のタスクのデータ（例えば、感情分析や質問応答）でファインチューニングします。事前学習モデルでは汎用的な特徴をあらかじめ学習しておきますので、手元にある学習データが小規模でも高精度な認識性能を達成することが知られています。</p></li>
-</ul>
-<p><img alt="" src="../_images/fine-tuning_methods.png" /></p>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>大規模言語モデル<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>近年、GPTをはじめとする大規模言語モデルが自然言語処理分野において顕著な成果を挙げ、文章の生成や論理推論など高度な課題においても高い性能を示している。それに伴う、大規模言語モデルを活用することでより効率的に人間の行動や社会現象に関する理論や仮説の検証と発展し、新たな可能性をもたらすと期待されている。</p>
+<p>今まで説明した通り、文脈を考慮した単語埋め込みである文脈化単語埋め込み(contextualized word embedding)を計算するTransformerを大規模コーパスで自己教師あり学習(Masked LMやNext sentence prediction)で事前学習し、そのモデルを下流タスクのテータセットを使って微調整する方法は、自然言語処理でよく用いられる手法です。</p>
+<p>こうした事前学習した大規模なニューラルネットワークは、大規模言語モデルのように呼ばれます。</p>
+<p>特に、2020年以降にパラメータ数およびテキストデータをさらに大規模することで、大規模言語モデルの性能も飛躍的に向上し、人間と自然にやりとりできるような能力を身につけました。これによって、ファインチューニングは行なわずに、事前学習された大規模言語モデルをプロンプト(prompt)と呼ばれるテキストを通じて制御することで下流タスク方法も一般的になりつつあります。</p>
+<p>ここでは、大規模言語モデルの近年(2023年まで)の進展について解説します。進展が激しい分野のため、ここでの解説に基づいて適宜最新の情報も各自調べてほしいです。</p>
 <section id="id2">
-<h2>センチメント分析の実装<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>nvidia-smi
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zsh:1: command not found: nvidia-smi
-</pre></div>
-</div>
-</div>
-</div>
+<h2>モデルの大規模化とその効果<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>大規模言語モデルの開発が進むにつれて、モデルに含まれるパラメータ数が飛躍的に増加してきています。</p>
+<p>2018年に発表されたBERTは3.4億個、2019年のGPT-2では15億個だったパラメータ数が2020年のGPT-3では1750億、そしてGPT-4はは100兆個のパラメータを持つと言われており、加速的に増加していることがわかります。</p>
+<p><img alt="" src="../_images/LLMs_parameter.png" /></p>
+<p><img alt="" src="../_images/gpt_para.png" /></p>
+<p>こうした大規模化が行われている背景には、モデルの規模を大きくすることで性能が比例して改善していくという経験的な法則であるスケール則があります。</p>
+<p>さらに、大規模言語モデルが一定の規模を超えると、タスクの性能が飛躍的に向上する現象も報告されています。こうした大規模化することで性能が改善し獲得される能力を創発的能力(emergent abilities)と呼ぶことがあります。</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>一方、大規模言語モデルが創発的能力を持つことに疑問視している声もあります。</p>
+</aside>
+<p><img alt="" src="../_images/emergent.png" /></p>
+</section>
 <section id="id3">
-<h3>データセット<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
-<section id="hugging-face">
-<h4>Hugging Faceからサンプルデータの取得<a class="headerlink" href="#hugging-face" title="Permalink to this headline">#</a></h4>
-<p>Hugging Faceのには色々なデータセットが用意されております。ここでは、多言語のセンチメントデータセットを例として使用することにします。その中に、英語と日本語のサプセットが含まれます。</p>
+<h2>文脈内学習<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>GPTのようなパラメータが非常に大きいモデルでは、学習時に入力される文章内には、様々なサブタスクが埋め込まれると考えられます。こうした文章の生成を学習することで、内包される様々な言語タスクへの処理能力の獲得が期待できます。
+このアプローチはGPT-2から用いられており、文脈内学習(in-context learning)と呼ばれます。</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>詳細はこちらの<a class="reference external" href="https://arxiv.org/abs/2005.14165">論文:Language Models are Few-Shot Learners</a>を参照してください。</p>
+</aside>
+<p><img alt="" src="../_images/meta_learning.png" /></p>
+<p>モデルは新しいタスクをこなすための追加のトレーニングデータなしに（zero-shot learning）、または非常に少量のデータで（few-shot learning）多様なタスクを達成することが可能になります。</p>
+<ul class="simple">
+<li><p>Few-shot learning: 推論時に少数（10から100）のデモンストレーションを与えます</p></li>
+<li><p>One-shot learning: 推論時に一つのデモンストレーションを与えます</p></li>
+<li><p>Zero-shot learning: 推論時にデモンストレーションは与えられず、自然言語によるタスク指示のみが与えられます</p></li>
+</ul>
+<p><img alt="" src="../_images/shot-learning.png" /></p>
+<p>このように、従来ファインチューニングが必要される多くのタスクは、モデルにプロンプト(prompt)と呼ばれるテキストを入力して後続けするテキストを予測するという形で解かせることが知られています。</p>
+<ul class="simple">
+<li><p>基本的には、タスクの説明と多くのデモンストレーションを与えることでモデルの性能が向上していく傾向が見られます。</p></li>
+<li><p>zero, one-shotでも悪くない性能、few-shotでは一部ファインチューニングを用いたSOTAモデルに匹敵する性能を得ることが確認できました。</p></li>
+</ul>
+<p><img alt="" src="../_images/in-context.png" /></p>
+<p>現在、一般的には、few-shot learningモデルの性能がファインチューニングによる教師あり学習モデルを超えることはまだ少ないが、ラベル付きデータの生成に費やすコストと時間を効率すると、プロンプトはファインチューニングによる教師あり学習の効率的な代替手段と考えられます。</p>
+<p><img alt="" src="../_images/shot-compare.png" /></p>
 </section>
+<section id="chain-of-thought">
+<h2>chain-of-thought推論<a class="headerlink" href="#chain-of-thought" title="Permalink to this headline">#</a></h2>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>詳細はこちらの<a class="reference external" href="https://arxiv.org/abs/2201.11903">論文:Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a>を参照してください。</p>
+</aside>
+<p>大規模言語モデルが苦手とされるタスクの一つに他段階の推論が必要となるマルチステップ推論(multi-step reasoning)があります。</p>
+<p>複数の段階の推論が必要な際に、推論過程の例示を与えるchain-of-thought推論(chain-of-thought reasoning)を用いることで性能が改善することが報告されています。</p>
+<p>具体的言えば、chain-of-thought推論では、回答を加えて推論過程を示す例示を与えて、モデルが回答を行う際に推論過程を含めて出力テキストを生成するようにします。</p>
+<p><img alt="" src="../_images/chains_of_thought.png" /></p>
+<p>さらに、chain-of-thought推論の推論過程を人間が与えるのではなく、推論過程の生成を促す「Let’s think step by step」のような文字列をプロンプトの末尾に追加して、推論過程を生成されてから回答を抽出するzero-shot chain-of-thought reasoningも提案されています。</p>
+<p>この方法を使うと、プロンプトを書き換えるだけで推論の性能を改善することができます。このことから、大規模言語モデルを使うあたってはプロンプトの与え方を工夫することが重要であることがわかります。</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>詳細はこちらの<a class="reference external" href="https://arxiv.org/abs/2205.11916">論文:Large Language Models are Zero-Shot Reasoners</a>を参照してください。</p>
+</aside>
 </section>
+<section id="id4">
+<h2>プロンプトエンジニアリング<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>プロンプトを工夫することで、性能向上を図ったり、新しいタスクを解けるようにすることをプロンプトエンジニアリング(Prompt Engineering)と呼びます。</p>
+<p>プロンプトエンジニアリングは、プロンプトの設計と開発に限らず、LLMsとのインタラクションおよび開発に役立つ幅広いスキルと技術を含みます。これは、LLMsとインタフェースすること、ビルドすること、能力を理解することに重要なスキルであり、LLMsの安全性を向上させたり、ドメイン知識や外部ツールを使用してLLMsの機能を拡張するためにプロンプトエンジニアリングを使用できます。</p>
 </section>
 </section>
 
@@ -646,19 +625,12 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="GPT.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="bert_sentiment.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">GPT</p>
+            <p class="prev-next-title">BERTによるセンチメント分析</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="llm.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">大規模言語モデル</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
