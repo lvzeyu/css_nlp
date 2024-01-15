@@ -37,4 +37,4 @@ parts:
 - caption: Transformer
   chapters:
   - file: notebook/attention.ipynb
-  - file: notebook/self-attention.ipynb
+  - file: notebook/self-attention.ipynb 
