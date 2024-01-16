@@ -33,6 +33,5 @@ The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
 dataset_hidden=dataset_encoded.map(extract_hidden_states, batched=True, batch_size=16)
-
 -------------------
 
