@@ -40,8 +40,9 @@ parts:
   - file: notebook/self-attention.ipynb
   - file: notebook/transformer.ipynb
   - file: notebook/BERT.ipynb
-  - file: notebook/GPT.ipynb
+  - file: notebook/bert_sentiment.ipynb
+  - file: notebook/bert_topic.ipynb
 - caption: 大規模言語モデル
   chapters:
-  - file: notebook/bert_sentiment.ipynb
+  - file: notebook/GPT.ipynb
   - file: notebook/llm.ipynb
