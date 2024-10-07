@@ -1,112 +1,179 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>word2vec &#8212; 計算社会科学のための自然言語処理</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/word2vec_2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
         
       
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      <img src="../_static/tohoku-university-logo-vector.svg" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">計算社会科学のための自然言語処理</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-light" alt="計算社会科学のための自然言語処理 - Home"/>
+    <script>document.write(`<img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-dark" alt="計算社会科学のための自然言語処理 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -115,498 +182,313 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  イントロダクション
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">イントロダクション</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
-   ガイダンス
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">ガイダンス</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  基礎知識
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">基礎知識</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="nlp_basis.html">
-   自然言語処理の基礎
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ml_basis.html">
-   機械学習の基本概念
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="nlp_basis.html">自然言語処理の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_basis.html">機械学習の基本概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math_basis.html">数学基礎</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  ニューラルネットワーク
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ニューラルネットワーク</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="NN.html">
-   ニューラルネットワーク
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="backpropagation.html">
-   誤差逆伝播法
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="NN.html">ニューラルネットワーク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backpropagation.html">誤差逆伝播法</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  PyTorch
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="pytorch.html">
-   Pytorch
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch.html">Pytorch</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  単語分散表現
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">単語分散表現</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_1.html">
-   単語分散表現
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_2_embedding.html">
-   word2vec
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_gensim.html">
-   GensimによるWord2Vecの学習と使用
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_sentiment.html">
-   Word2Vecを用いるセンチメント分析
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_application.html">
-   Word2Vecが人文・社会科学研究における応用
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_1.html">単語分散表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_2_embedding.html">word2vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_gensim.html">GensimによるWord2Vecの学習と使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_sentiment.html">Word2Vecを用いるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_application.html">Word2Vecが人文・社会科学研究における応用</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  RNN
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RNN</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="rnn.html">
-   RNN
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">RNNの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">LSTM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_lstm.html">LSTMの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm_classification.html">LSTMによる文書分類</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seq2seq.html">Seq2seq</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transformer</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="attention.html">Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="self-attention.html">Self-Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformer.html">Transformerアーキテクチャ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BERT.html">BERT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_sentiment.html">BERTによるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_topic.html">BERTopic</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">大規模言語モデル</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="GPT.html">GPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm.html">大規模言語モデル</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/word2vec_2.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
   
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
+  <div id="rtd-footer-container"></div>
 
-      </li>
+
+      </div>
       
-      <li>
-        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/word2vec_2.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tree/master/blob/master/notebook/word2vec_2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/lvzeyu/css_nlp/tree/master" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/word2vec_2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebook/word2vec_2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/lvzeyu/css_nlp/tree/master"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/word2vec_2.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/notebook/word2vec_2.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
-   推論ベース手法とニューラルネットワーク
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     推論ベース手法の設計
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-hot">
-     one-hot表現
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cbow-continuous-bag-of-words">
-     CBOW（continuous bag-of-words）モデル
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id5">
-       入力層から中間層(エンコード)
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id6">
-       中間層から出力層(デコード)
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id7">
-       word2vecの重みと分散表現
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   Word2Vecモデルの実装
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     学習データの準備
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id10">
-       コンテキストとターゲット
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id11">
-       one-hot表現への変換
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cbow">
-     CBOWモデルの実装
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>word2vec</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
-   推論ベース手法とニューラルネットワーク
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     推論ベース手法の設計
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-hot">
-     one-hot表現
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cbow-continuous-bag-of-words">
-     CBOW（continuous bag-of-words）モデル
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id5">
-       入力層から中間層(エンコード)
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id6">
-       中間層から出力層(デコード)
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id7">
-       word2vecの重みと分散表現
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   Word2Vecモデルの実装
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     学習データの準備
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id10">
-       コンテキストとターゲット
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id11">
-       one-hot表現への変換
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cbow">
-     CBOWモデルの実装
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>word2vec</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">推論ベース手法とニューラルネットワーク</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">推論ベース手法の設計</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot">one-hot表現</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cbow-continuous-bag-of-words">CBOW（continuous bag-of-words）モデル</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">入力層から中間層(エンコード)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">中間層から出力層(デコード)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">word2vecの重みと分散表現</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Word2Vecモデルの実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">学習データの準備</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">コンテキストとターゲット</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">one-hot表現への変換</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cbow">CBOWモデルの実装</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="word2vec">
-<h1>word2vec<a class="headerlink" href="#word2vec" title="Permalink to this headline">#</a></h1>
+<h1>word2vec<a class="headerlink" href="#word2vec" title="Link to this heading">#</a></h1>
 <p>前章では、「カウントベースの手法」によって単語分散表現を得ました。具体的には、単語の共起行列を作り、その行列に対してSVDを適用することで、密なベクトくー 単語分散表現ーを獲得したのです。</p>
 <p>しかし、カウントベースの手法にはいくつかの問題点があります。</p>
 <ul class="simple">
@@ -616,29 +498,29 @@ title="Print to PDF"
 <p>「カウントベースの手法」に代わる強力な手法として「推論ベース」の手法が挙げられます。特に、Mikolov et al. <span id="id1">[<a class="reference internal" href="word2vec_application.html#id16" title="Tomas Mikolov, Wen-tau Yih, and Geoffrey Zweig. Linguistic regularities in continuous space word representations. In Lucy Vanderwende, Hal Daumé III, and Katrin Kirchhoff, editors, Proceedings of the 2013 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 746–751. Atlanta, Georgia, June 2013. Association for Computational Linguistics. URL: https://aclanthology.org/N13-1090.">Mikolov <em>et al.</em>, 2013</a>]</span> <span id="id2">[<a class="reference internal" href="word2vec_application.html#id17" title="Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S Corrado, and Jeff Dean. Distributed representations of words and phrases and their compositionality. In C.J. Burges, L. Bottou, M. Welling, Z. Ghahramani, and K.Q. Weinberger, editors, Advances in Neural Information Processing Systems, volume 26. Curran Associates, Inc., 2013. URL: https://proceedings.neurips.cc/paper_files/paper/2013/file/9aa42b31882ec039965f3c4923ce901b-Paper.pdf.">Mikolov <em>et al.</em>, 2013</a>]</span>　によって提案されたword2vecの有用性が多くの自然言語処理タスクにおいて示されてきたのです。</p>
 <p>本章では、word2vecの仕組みについて説明し、それを実装することで理解を深めます。</p>
 <section id="id3">
-<h2>推論ベース手法とニューラルネットワーク<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<h2>推論ベース手法とニューラルネットワーク<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>推論ベースの手法は、ミニバッチで学習する形で、ニューラルネットワークを用いて、重みを繰り返し更新することで単語分散表現を獲得します。</p>
 <p><img alt="" src="../_images/inference.png" /></p>
 <section id="id4">
-<h3>推論ベース手法の設計<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<h3>推論ベース手法の設計<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>推論ベース手法では、<code class="docutils literal notranslate"><span class="pre">you</span> <span class="pre">【？】</span> <span class="pre">goodbye</span> <span class="pre">and</span> <span class="pre">I</span> <span class="pre">say</span> <span class="pre">hello</span> <span class="pre">.</span></code>のような、周囲の単語が与えられたときに、<code class="docutils literal notranslate"><span class="pre">【？】</span></code>にどのような単語が出現するのかを推測する推論問題を繰り返し解くことで、単語の出現バターンを学習します。</p>
 <p>つまり、コンテキスト情報を入力として受け取り、各単語の出現する確率を出力する「モデル」を作成することは目標になります。ここで、正しい推測ができるように、コーパスを使って、ニューラルネットワークモデルの学習を行います。そして、その学習の結果として、単語の分散表現を得られます。</p>
 <p><img alt="" src="../_images/inference2.png" /></p>
 </section>
 <section id="one-hot">
-<h3>one-hot表現<a class="headerlink" href="#one-hot" title="Permalink to this headline">#</a></h3>
+<h3>one-hot表現<a class="headerlink" href="#one-hot" title="Link to this heading">#</a></h3>
 <p>ニューラルネットワークで単語を処理するには、それを「固定長のベクトル」に変換する必要があります。</p>
 <p>そのための方法の一つは、単語をone-hot表現へと変換することです。one-hot表現とは、ベクトルの要素の中で一つだけが<span class="math notranslate nohighlight">\(1\)</span>で、残りは全て<span class="math notranslate nohighlight">\(0\)</span>であるようなベクトルと言います。</p>
 <p>単語をone-hot表現に変換するには、語彙数分の要素を持つベクトルを用意して、単語IDの該当する箇所を<span class="math notranslate nohighlight">\(1\)</span>に、残りは全て<span class="math notranslate nohighlight">\(0\)</span>に設定します。</p>
 <p><img alt="" src="../_images/one-hot.png" /></p>
 </section>
 <section id="cbow-continuous-bag-of-words">
-<h3>CBOW（continuous bag-of-words）モデル<a class="headerlink" href="#cbow-continuous-bag-of-words" title="Permalink to this headline">#</a></h3>
+<h3>CBOW（continuous bag-of-words）モデル<a class="headerlink" href="#cbow-continuous-bag-of-words" title="Link to this heading">#</a></h3>
 <p>CBOWモデルは、コンテキストからターゲットを推測することを目的としたニューラルネットワークです。このCBOWモデルで、できるだけ正確な推測ができるように訓練することで、単語の分散表現を取得することができます。</p>
 <p>ここで、例として、コンテキスト<code class="docutils literal notranslate"><span class="pre">[&quot;you&quot;,&quot;goodbye&quot;]</span></code>からターゲット<code class="docutils literal notranslate"><span class="pre">&quot;say&quot;</span></code>を予測するタスクを考えます。</p>
 <p><img alt="" src="../_images/cbow.png" /></p>
 <section id="id5">
-<h4>入力層から中間層(エンコード)<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h4>
+<h4>入力層から中間層(エンコード)<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
 <p>one-hotエンコーディングで、単語を固定長のベクトルに変換するすることができます。</p>
 <p>単語をベクトルで表すことができれば、そのベクトルはニューラルネットワークを構成する「レイヤ」によって処理することができるようになりました。</p>
 <p>コンテキストを<span class="math notranslate nohighlight">\(\mathbf{c}\)</span>、重みを<span class="math notranslate nohighlight">\(\mathbf{W}\)</span>とし、それぞれ次の形状とします。</p>
@@ -743,15 +625,15 @@ h_1
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>コンテキストの形状：(1, 7)
 重み
-[[ 0.15934263  0.45679331 -0.7596429 ]
- [-1.64469721  0.70711971  1.08730806]
- [-0.24061154 -1.00736781  0.78578819]
- [ 1.17422763  0.87932174  0.49089718]
- [ 0.94867032 -1.64499429 -0.99757142]
- [-0.38434571  1.40087279 -0.35217056]
- [-0.28448281 -0.63479044 -1.56293268]]
+[[ 0.85532074  1.40844018  0.02636045]
+ [-1.26391035 -0.08782695  0.45412673]
+ [-0.61677224 -0.97515058  0.6100783 ]
+ [-0.00249903  1.13228069 -0.16676336]
+ [-2.39489929  0.08169145 -2.41536413]
+ [-1.17462651  0.17227561 -0.55463244]
+ [-0.15832929 -0.81766712  0.49666396]]
 重み付き和
-[[ 0.15934263  0.45679331 -0.7596429 ]]
+[[0.85532074 1.40844018 0.02636045]]
 重み付き和の形状：(1, 3)
 </pre></div>
 </div>
@@ -761,7 +643,7 @@ h_1
 <p>中間層のニューロンの数を入力層よりも減らすことによって、中間層には、単語を予測するために必要な情報が”コンパクト”に収められて、結果としては密なベクトル表現が得られます。このとき、この中間層の情報は、人間には理解できない「ブラックボックス」ような状態になります。この作業は、「エンコード」と言います。</p>
 </section>
 <section id="id6">
-<h4>中間層から出力層(デコード)<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h4>
+<h4>中間層から出力層(デコード)<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
 <p>中間層の情報から目的の結果を得る作業は、「デコード」と言います。ここでは、中間層のニューロンの値<span class="math notranslate nohighlight">\(\mathbf{h}\)</span>を各単語に対応した値になるように、つまり要素(行)数が単語の種類数となるように再度変換したものを、CBOWモデルの出力とします。</p>
 <p>出力層の重みを</p>
 <div class="math notranslate nohighlight">
@@ -862,33 +744,37 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[ 0.2354, -0.4196, -0.5373]]),
- tensor([[ 0.2883,  0.8756, -0.2079]]),
- tensor([[ 0.2618,  0.2280, -0.3726]]),
- tensor([[0.6860, 0.8970, 0.4820, 0.0780, 0.3910, 0.3790, 0.2750]]))
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">torch</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch&#39;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="d89c1f10-7c97-4637-8648-74a9f7ff3775" name="8bb274ef-9cba-48f0-b69a-199843506efd" type="radio">
-</input><label class="sd-tab-label" for="d89c1f10-7c97-4637-8648-74a9f7ff3775">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
 課題</label><div class="sd-tab-content docutils">
 <p>正解は「say」として、Softmax関数によってスコア<code class="docutils literal notranslate"><span class="pre">s</span></code>を確率として扱えるように変換し、そして、正規化した値と教師ラベルを用いて損失を求めなさい。</p>
 </div>
-<input id="b64e6370-bdfb-44d2-926c-f67a1607ed1e" name="8bb274ef-9cba-48f0-b69a-199843506efd" type="radio">
-</input><label class="sd-tab-label" for="b64e6370-bdfb-44d2-926c-f67a1607ed1e">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-1">
 ヒント</label><div class="sd-tab-content docutils">
 <p>正解は「say」の場合、教師ラベルは<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0]</span></code>になります。</p>
 </div>
 </div>
 </section>
 <section id="id7">
-<h4>word2vecの重みと分散表現<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h4>
+<h4>word2vecの重みと分散表現<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
 <p>与えられたコンテキストに対して単語を予測するときに、「良い重み」のネットワークがあれば、「確率」を表すニューロンにおいて、正解に対応するニューロンが高くなっていることが期待できます。そして、大規模コーパスを使って得られる単語の分散表現は、単語の意味や文法のルールにおいて、人間の直感と合致するケースが多く見られます。</p>
 <p>word2vecモデルの学習で行うことが、正しい予測ができるように重みを調整することです。つまり、「コンテキストから出現単語」を予測するという偽タスクをニューラルネットで解いてきましたが、目的はニューラルネットの重みを求めることになります。</p>
 <p>もっと具体的に言えば、word2vecで使用されるネットワークには二つの重みがあります。それは、入力層の重み<span class="math notranslate nohighlight">\(\mathbf{W_{in}}\)</span>と、出力層の重み<span class="math notranslate nohighlight">\(\mathbf{W_{out}}\)</span>です。それでは、どちらの重みを使えば良いでしょうか？</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>入力側の重みを利用する</p></li>
 <li><p>出力側の重みを利用する</p></li>
 <li><p>二つの重みの両方を利用する</p></li>
@@ -898,11 +784,11 @@ s_{\mathrm{you}}
 </section>
 </section>
 <section id="id8">
-<h2>Word2Vecモデルの実装<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<h2>Word2Vecモデルの実装<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <section id="id9">
-<h3>学習データの準備<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<h3>学習データの準備<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <section id="id10">
-<h4>コンテキストとターゲット<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h4>
+<h4>コンテキストとターゲット<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
 <p>Word2Vecモデルためのニューラルネットワークでは、「コンテキスト」を入力した時に、「ターゲット」が出現する確率を高くになるように学習を行います。</p>
 <p>そのため、コーパスから「コンテキスト」と「ターゲット」が対応するデータを作成する必要があります。</p>
 <div class="cell docutils container">
@@ -1075,7 +961,7 @@ s_{\mathrm{you}}
 </div>
 </section>
 <section id="id11">
-<h4>one-hot表現への変換<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h4>
+<h4>one-hot表現への変換<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
 <p>単語IDを要素とするコンテキストとターゲットをone-hot表現のコンテキストとターゲットに変換する関数を実装します。</p>
 <p>基本的な処理は、単語の種類数個の<span class="math notranslate nohighlight">\(0\)</span>を要素とするベクトルを作成し、単語ID番目の要素だけを<span class="math notranslate nohighlight">\(1\)</span>に置き換えます。</p>
 <p>ターゲットは、要素数がターゲット数のベクトルです。変換後は、ターゲット数の行数、単語の種類数の列数の2次元配列になります。つまり、行が各ターゲットの単語、列が各単語IDに対応します。そして行ごとに1つだけ、値が<span class="math notranslate nohighlight">\(1\)</span>の要素を持ちます。</p>
@@ -1250,7 +1136,7 @@ s_{\mathrm{you}}
 </section>
 </section>
 <section id="cbow">
-<h3>CBOWモデルの実装<a class="headerlink" href="#cbow" title="Permalink to this headline">#</a></h3>
+<h3>CBOWモデルの実装<a class="headerlink" href="#cbow" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
@@ -1309,50 +1195,54 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">contexts</span><span class="p">))</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400]],
 
-<span class="nn">Cell In[12], line 26,</span> in <span class="ni">SimpleCBOW.forward</span><span class="nt">(self, contexts)</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contexts</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="c1"># 入力層から中間層への順伝播</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="c1"># contextsは周囲の単語のインデックスのバッチ</span>
-<span class="ne">---&gt; </span><span class="mi">26</span>     <span class="n">embeds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_layer</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>  <span class="c1"># 埋め込みレイヤーを適用</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="n">h</span> <span class="o">=</span> <span class="n">embeds</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 埋め込みの平均を取る</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">middle_layer</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>  <span class="c1"># 中間層に適用</span>
+        [[-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400]],
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1518,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1516</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1517</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1518</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        [[-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400]],
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1527,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1522</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
-<span class="g g-Whitespace">   </span><span class="mi">1523</span> <span class="c1"># this function, and just call forward.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1524</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1525</span>         <span class="ow">or</span> <span class="n">_global_backward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1526</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1527</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1529</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1530</span>     <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+        [[-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400]],
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/sparse.py:162,</span> in <span class="ni">Embedding.forward</span><span class="nt">(self, input)</span>
-<span class="g g-Whitespace">    </span><span class="mi">161</span> <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">162</span>     <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">163</span>         <span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_norm</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">164</span>         <span class="bp">self</span><span class="o">.</span><span class="n">norm_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_grad_by_freq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sparse</span><span class="p">)</span>
+        [[-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
+         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400]],
 
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/functional.py:2233,</span> in <span class="ni">embedding</span><span class="nt">(input, weight, padding_idx, max_norm, norm_type, scale_grad_by_freq, sparse)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2227</span>     <span class="c1"># Note [embedding_renorm set_grad_enabled]</span>
-<span class="g g-Whitespace">   </span><span class="mi">2228</span>     <span class="c1"># XXX: equivalent to</span>
-<span class="g g-Whitespace">   </span><span class="mi">2229</span>     <span class="c1"># with torch.no_grad():</span>
-<span class="g g-Whitespace">   </span><span class="mi">2230</span>     <span class="c1">#   torch.embedding_renorm_</span>
-<span class="g g-Whitespace">   </span><span class="mi">2231</span>     <span class="c1"># remove once script supports set_grad_enabled</span>
-<span class="g g-Whitespace">   </span><span class="mi">2232</span>     <span class="n">_no_grad_embedding_renorm_</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">max_norm</span><span class="p">,</span> <span class="n">norm_type</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2233</span> <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">,</span> <span class="n">scale_grad_by_freq</span><span class="p">,</span> <span class="n">sparse</span><span class="p">)</span>
-
-<span class="ne">IndexError</span>: index out of range in self
+        [[-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
+         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844]]],
+       grad_fn=&lt;ViewBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -1768,36 +1658,104 @@ s_{\mathrm{you}}
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">推論ベース手法とニューラルネットワーク</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">推論ベース手法の設計</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot">one-hot表現</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cbow-continuous-bag-of-words">CBOW（continuous bag-of-words）モデル</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">入力層から中間層(エンコード)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">中間層から出力層(デコード)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">word2vecの重みと分散表現</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Word2Vecモデルの実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">学習データの準備</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">コンテキストとターゲット</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">one-hot表現への変換</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cbow">CBOWモデルの実装</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By 呂　沢宇<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By 呂　沢宇
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

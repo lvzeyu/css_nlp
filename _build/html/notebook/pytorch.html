@@ -1,112 +1,181 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Pytorch &#8212; 計算社会科学のための自然言語処理</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/pytorch';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="単語分散表現" href="word2vec_1.html" />
     <link rel="prev" title="誤差逆伝播法" href="backpropagation.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
         
       
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      <img src="../_static/tohoku-university-logo-vector.svg" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">計算社会科学のための自然言語処理</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-light" alt="計算社会科学のための自然言語処理 - Home"/>
+    <script>document.write(`<img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-dark" alt="計算社会科学のための自然言語処理 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -115,676 +184,325 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  イントロダクション
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">イントロダクション</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
-   ガイダンス
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">ガイダンス</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  基礎知識
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">基礎知識</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="nlp_basis.html">
-   自然言語処理の基礎
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ml_basis.html">
-   機械学習の基本概念
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="nlp_basis.html">自然言語処理の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_basis.html">機械学習の基本概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math_basis.html">数学基礎</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  ニューラルネットワーク
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ニューラルネットワーク</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="NN.html">
-   ニューラルネットワーク
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="backpropagation.html">
-   誤差逆伝播法
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="NN.html">ニューラルネットワーク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backpropagation.html">誤差逆伝播法</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  PyTorch
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Pytorch
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pytorch</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  単語分散表現
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">単語分散表現</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_1.html">
-   単語分散表現
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_2_embedding.html">
-   word2vec
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_gensim.html">
-   GensimによるWord2Vecの学習と使用
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_sentiment.html">
-   Word2Vecを用いるセンチメント分析
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_application.html">
-   Word2Vecが人文・社会科学研究における応用
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_1.html">単語分散表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_2_embedding.html">word2vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_gensim.html">GensimによるWord2Vecの学習と使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_sentiment.html">Word2Vecを用いるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_application.html">Word2Vecが人文・社会科学研究における応用</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  RNN
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RNN</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="rnn.html">
-   RNNの基礎
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="lstm.html">
-   LSTM
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="pytorch_lstm.html">
-   LSTMの実装
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="lstm_classification.html">
-   LSTMによる文書分類
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="seq2seq.html">
-   Seq2seq
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">RNNの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">LSTM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_lstm.html">LSTMの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm_classification.html">LSTMによる文書分類</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seq2seq.html">Seq2seq</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Transformer
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transformer</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="attention.html">
-   Attention
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="self-attention.html">
-   Self-Attention
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="transformer.html">
-   Transformerアーキテクチャ
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="BERT.html">
-   BERT
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bert_sentiment.html">
-   BERTによるセンチメント分析
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bert_topic.html">
-   BERTopic
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="attention.html">Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="self-attention.html">Self-Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformer.html">Transformerアーキテクチャ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BERT.html">BERT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_sentiment.html">BERTによるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_topic.html">BERTopic</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  大規模言語モデル
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">大規模言語モデル</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="GPT.html">
-   GPT
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="llm.html">
-   大規模言語モデル
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="GPT.html">GPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm.html">大規模言語モデル</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/pytorch.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
   
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
+  <div id="rtd-footer-container"></div>
 
-      </li>
+
+      </div>
       
-      <li>
-        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/pytorch.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tree/master/blob/master/notebook/pytorch.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/lvzeyu/css_nlp/tree/master" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/pytorch.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebook/pytorch.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/lvzeyu/css_nlp/tree/master"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/pytorch.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/notebook/pytorch.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   テンソル
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     テンソルの作成
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     テンソル要素の型
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     テンソルの操作（変形・変換等）
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#indexing">
-     テンソルの一部指定や取り出し(Indexing)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cuda-tensors-cuda">
-     CUDA Tensors（CUDA テンソル）
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   モデル構築
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     クラスの定義
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gpu">
-     GPUの利用
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     モデルによる計算
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   自動微分
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     勾配情報の保存
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
-     勾配計算
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
-     最適化関数
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#optimizer">
-       Optimizer
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#iris">
-   実装例(Irisデータ)
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id12">
-     データの読み込み
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id13">
-     学習データの作成
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id14">
-     モデルの作成
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id15">
-     学習の設定
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id16">
-     学習ループの実装
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id17">
-     モデルの検証
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Pytorch</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   テンソル
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     テンソルの作成
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     テンソル要素の型
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     テンソルの操作（変形・変換等）
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#indexing">
-     テンソルの一部指定や取り出し(Indexing)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cuda-tensors-cuda">
-     CUDA Tensors（CUDA テンソル）
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   モデル構築
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     クラスの定義
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gpu">
-     GPUの利用
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     モデルによる計算
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   自動微分
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     勾配情報の保存
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
-     勾配計算
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
-     最適化関数
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#optimizer">
-       Optimizer
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#iris">
-   実装例(Irisデータ)
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id12">
-     データの読み込み
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id13">
-     学習データの作成
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id14">
-     モデルの作成
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id15">
-     学習の設定
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id16">
-     学習ループの実装
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id17">
-     モデルの検証
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Pytorch</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">テンソル</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">テンソルの作成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">テンソル要素の型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">テンソルの操作（変形・変換等）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">テンソルの一部指定や取り出し(Indexing)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuda-tensors-cuda">CUDA Tensors（CUDA テンソル）</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">モデル構築</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">クラスの定義</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu">GPUの利用</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">モデルによる計算</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">自動微分</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">勾配情報の保存</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">勾配計算</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">最適化関数</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizer">Optimizer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iris">実装例(Irisデータ)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">データの読み込み</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">学習データの作成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">モデルの作成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">学習の設定</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">学習ループの実装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">モデルの検証</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="pytorch">
-<h1>Pytorch<a class="headerlink" href="#pytorch" title="Permalink to this headline">#</a></h1>
+<h1>Pytorch<a class="headerlink" href="#pytorch" title="Link to this heading">#</a></h1>
 <p><a class="reference external" href="https://pytorch.org/">PyTorch</a>はPythonのオープンソースの機械学習・深層学習ライブラリです。</p>
 <ul class="simple">
 <li><p>柔軟性を重視した設計であり、さらに、機械学習・深層学習モデルをPythonの慣用的なクラスや関数の取り扱い方で実装できるようになっています。</p></li>
@@ -797,9 +515,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#pip install torch torchvision torchaudio</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <section id="id1">
-<h2>テンソル<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<h2>テンソル<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>深層学習モデルは通常、入力から出力にどのようにマッピングされるのかを対応つけるデータ構造を表します。一般的に、このようなある形式のデータから別の形式への変換は膨大な浮動小数点数の計算を通じて実現されています。</p>
 <p>データを浮動小数点数を扱うためには、Pytorchは基本的なデータ構造として「テンソル」を導入しています。</p>
 <p>深層学習の文脈でのテンソルとは、ベクトルや行列を任意の次元数に一般化したものを指します。つまり、多次元配列を扱います。</p>
@@ -809,7 +538,7 @@ title="Print to PDF"
 </aside>
 <p><img alt="" src="Users/ryozawau/css_nlp/notebook/Figure/tensor.png" /></p>
 <section id="id2">
-<h3>テンソルの作成<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<h3>テンソルの作成<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
@@ -835,11 +564,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[2.9278e-04, 8.4019e-01, 2.2296e-01],
-        [9.8644e-01, 6.0262e-01, 5.7852e-01],
-        [2.0529e-01, 5.6644e-01, 1.4403e-01],
-        [7.6983e-01, 9.2523e-01, 2.2322e-01],
-        [6.6017e-01, 6.7429e-01, 3.7618e-01]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.9221, 0.7333, 0.9617],
+        [0.8257, 0.2856, 0.9672],
+        [0.2827, 0.7079, 0.4231],
+        [0.0125, 0.3788, 0.9885],
+        [0.2020, 0.9347, 0.2664]])
 </pre></div>
 </div>
 </div>
@@ -859,7 +588,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="id3">
-<h3>テンソル要素の型<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<h3>テンソル要素の型<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>テンソル要素の型は、引数に適切な<code class="docutils literal notranslate"><span class="pre">dtype</span></code>を渡すことで指定します。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -871,7 +600,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="id4">
-<h3>テンソルの操作（変形・変換等）<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<h3>テンソルの操作（変形・変換等）<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>PyTorchにはテンソルに対する<a class="reference external" href="https://torch7.readthedocs.io/en/rtd/maths/index.html">操作（変形・演算など）</a>が多く用意されています。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -882,11 +611,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1.2884, 1.2699, 0.8674],
-        [1.5057, 0.8775, 0.3573],
-        [1.1250, 1.0478, 0.5267],
-        [1.7638, 1.2110, 1.3942],
-        [1.2810, 0.7418, 1.1484]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.7368, 0.6806, 1.4453],
+        [1.2112, 0.2728, 0.6987],
+        [1.0402, 0.9166, 0.5188],
+        [1.2672, 0.9774, 1.0408],
+        [0.7926, 1.6902, 1.3857]])
 </pre></div>
 </div>
 </div>
@@ -898,18 +627,18 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1.2884, 1.2699, 0.8674],
-        [1.5057, 0.8775, 0.3573],
-        [1.1250, 1.0478, 0.5267],
-        [1.7638, 1.2110, 1.3942],
-        [1.2810, 0.7418, 1.1484]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.7368, 0.6806, 1.4453],
+        [1.2112, 0.2728, 0.6987],
+        [1.0402, 0.9166, 0.5188],
+        [1.2672, 0.9774, 1.0408],
+        [0.7926, 1.6902, 1.3857]])
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="indexing">
-<h3>テンソルの一部指定や取り出し(Indexing)<a class="headerlink" href="#indexing" title="Permalink to this headline">#</a></h3>
+<h3>テンソルの一部指定や取り出し(Indexing)<a class="headerlink" href="#indexing" title="Link to this heading">#</a></h3>
 <p>Pytorchテンソルは、Numpyや他のPythonの科学計算ライブラリーと同じく、テンソルの次元ごとのレンジインデックス記法で一部指定や取り出しを行えます。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -918,8 +647,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.9102, 0.4464, 0.4578],
-        [0.6753, 0.5961, 0.8606]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.8550, 0.0735, 0.7046],
+        [0.5475, 0.8442, 0.7255]])
 </pre></div>
 </div>
 </div>
@@ -931,14 +660,14 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.6109, 0.4592, 0.9102, 0.6753])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.9599, 0.5510, 0.8550, 0.5475])
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="cuda-tensors-cuda">
-<h3>CUDA Tensors（CUDA テンソル）<a class="headerlink" href="#cuda-tensors-cuda" title="Permalink to this headline">#</a></h3>
+<h3>CUDA Tensors（CUDA テンソル）<a class="headerlink" href="#cuda-tensors-cuda" title="Link to this heading">#</a></h3>
 <p>tensorは <code class="docutils literal notranslate"><span class="pre">.to</span></code> メソッドを使用することであらゆるデバイス上のメモリへと移動させることができます。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -956,13 +685,13 @@ title="Print to PDF"
 </section>
 </section>
 <section id="id5">
-<h2>モデル構築<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<h2>モデル構築<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://pytorch.org/docs/stable/nn.html"><code class="docutils literal notranslate"><span class="pre">torch.nn</span></code></a>で用意されているクラス、関数は、独自のニューラルネットワークを構築するために必要な要素を網羅しています。</p>
 <p>PyTorchの全てのモジュールは、<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html"><code class="docutils literal notranslate"><span class="pre">nn.Module</span></code></a>を継承しています。</p>
 <p>そしてニューラルネットワークは、モジュール自体が他のモジュール（レイヤー）から構成されています。</p>
 <p>この入れ子構造により、複雑なアーキテクチャを容易に構築・管理することができます。</p>
 <section id="id6">
-<h3>クラスの定義<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<h3>クラスの定義<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>を継承し、独自のネットワークモデルを定義し、その後ネットワークのレイヤーを <code class="docutils literal notranslate"><span class="pre">__init__</span></code>で初期化します。</p>
 <p><code class="docutils literal notranslate"><span class="pre">nn.Module</span></code> を継承した全モジュールは、入力データの順伝搬関数である<code class="docutils literal notranslate"><span class="pre">forward</span></code>関数を持ちます。</p>
 <div class="cell docutils container">
@@ -1009,7 +738,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="gpu">
-<h3>GPUの利用<a class="headerlink" href="#gpu" title="Permalink to this headline">#</a></h3>
+<h3>GPUの利用<a class="headerlink" href="#gpu" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code>クラスのインスタンスを作成し、変数<code class="docutils literal notranslate"><span class="pre">device</span></code>上に移動させます。</p>
 <p>以下でネットワークの構造を出力し確認します。</p>
 <div class="cell docutils container">
@@ -1049,7 +778,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="id7">
-<h3>モデルによる計算<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<h3>モデルによる計算<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>ニューラルネットワークの最後のlinear layerは<code class="docutils literal notranslate"><span class="pre">logits</span></code>を出力します。この<code class="docutils literal notranslate"><span class="pre">logits</span></code>は<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Softmax.html"><code class="docutils literal notranslate"><span class="pre">nn.Softmax</span></code></a>モジュールへと渡されます。出力ベクトルの要素の値は<span class="math notranslate nohighlight">\([0, 1]\)</span>の範囲となり、これは各クラスである確率を示します。</p></li>
 </ul>
@@ -1062,9 +791,9 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0100, 0.0000, 0.0352],
-        [0.0208, 0.0000, 0.0044],
-        [0.0000, 0.0000, 0.0000]], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]], grad_fn=&lt;ReluBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -1078,7 +807,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted class: tensor([2, 0, 0])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted class: tensor([0, 0, 0])
 </pre></div>
 </div>
 </div>
@@ -1100,7 +829,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="id8">
-<h2>自動微分<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<h2>自動微分<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>ニューラルネットワークを訓練する際、その学習アルゴリズムとして、<strong>バックプロパゲーション（back propagation）</strong> がよく使用されます。</p>
 <p>バックプロパゲーションでは、モデルの重みなどの各パラメータは、損失関数に対するその変数の微分値（勾配）に応じて調整されます。</p>
 <p>これらの勾配の値を計算するために、PyTorchには<code class="docutils literal notranslate"><span class="pre">torch.autograd</span></code> という微分エンジンが組み込まれています。</p>
@@ -1124,7 +853,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="id9">
-<h3>勾配情報の保存<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<h3>勾配情報の保存<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>こののニューラルネットワークでは、<code class="docutils literal notranslate"><span class="pre">w</span></code>と<code class="docutils literal notranslate"><span class="pre">b</span></code>が最適したいパラメータです。</p>
 <p>そのため、これらの変数に対する損失関数の微分値を計算する必要があります。</p>
 <p>これらのパラメータで微分を可能にするために、<code class="docutils literal notranslate"><span class="pre">requires_grad</span></code>属性をこれらのテンソルに追記します。</p>
@@ -1137,15 +866,15 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient function for z = &lt;AddBackward0 object at 0x1347c42b0&gt;
-Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at 0x1347c69e0&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient function for z = &lt;AddBackward0 object at 0x1df7c2560&gt;
+Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at 0x1df7c2f20&gt;
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="id10">
-<h3>勾配計算<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<h3>勾配計算<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <p>ニューラルネットワークの各パラメータを最適化するために、入力<code class="docutils literal notranslate"><span class="pre">x</span></code>と出力<code class="docutils literal notranslate"><span class="pre">y</span></code>が与えられたもとで、損失関数の各変数の偏微分値、</p>
 <p>すなわち</p>
 <p><span class="math notranslate nohighlight">\(\frac{\partial loss}{\partial w}\)</span> 、<span class="math notranslate nohighlight">\(\frac{\partial loss}{\partial b}\)</span></p>
@@ -1167,12 +896,12 @@ Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0518, 0.0413, 0.0437],
-        [0.1006, 0.0803, 0.0850],
-        [0.2024, 0.1614, 0.1709],
-        [0.1848, 0.1474, 0.1561],
-        [0.0461, 0.0368, 0.0390]])
-tensor([0.3067, 0.2446, 0.2590])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1282, 0.2870, 0.2971],
+        [0.0557, 0.1246, 0.1289],
+        [0.0869, 0.1944, 0.2012],
+        [0.0004, 0.0010, 0.0010],
+        [0.0711, 0.1591, 0.1647]])
+tensor([0.1299, 0.2908, 0.3010])
 </pre></div>
 </div>
 </div>
@@ -1222,17 +951,11 @@ tensor([0.3067, 0.2446, 0.2590])
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6861136555671692
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 200, Loss: 0.6807533502578735
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 300, Loss: 0.675001859664917
-Epoch 400, Loss: 0.6688664555549622
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 500, Loss: 0.6622322201728821
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6846098303794861
+Epoch 200, Loss: 0.6792598962783813
+Epoch 300, Loss: 0.6741815209388733
+Epoch 400, Loss: 0.6694037914276123
+Epoch 500, Loss: 0.6646482348442078
 </pre></div>
 </div>
 </div>
@@ -1244,11 +967,11 @@ Epoch 400, Loss: 0.6688664555549622
 </div>
 </section>
 <section id="id11">
-<h3>最適化関数<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<h3>最適化関数<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <p>最適化は各訓練ステップにおいてモデルの誤差を小さくなるように、モデルパラメータを調整するプロセスです。</p>
 <p>ここまでの説明は、単純な勾配下降法を最適化に使用しました。これは、シンプルなケースでは問題なく機能しますが、モデルが複雑になったときのために、パラメータ学習の収束を助ける最適化の工夫が必要されます。</p>
 <section id="optimizer">
-<h4>Optimizer<a class="headerlink" href="#optimizer" title="Permalink to this headline">#</a></h4>
+<h4>Optimizer<a class="headerlink" href="#optimizer" title="Link to this heading">#</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">optim</span></code>というモジュールには、様々な最適化アルゴリズムが実装されています。</p>
 <p>ここでは、確率的勾配降下法（Stochastic Gradient Descent）を例として使い方を説明します。</p>
 <p>確率的勾配降下法は、ランダムに選んだ１つのデータのみで勾配を計算してパラメータを更新し、データの数だけ繰り返す方法です。</p>
@@ -1308,20 +1031,16 @@ Epoch 400, Loss: 0.6688664555549622
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6924331784248352
-Epoch 200, Loss: 0.6914722323417664
-Epoch 300, Loss: 0.6906877160072327
-Epoch 400, Loss: 0.6899754405021667
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 500, Loss: 0.689291775226593
-Epoch 600, Loss: 0.6886290311813354
-Epoch 700, Loss: 0.6879986524581909
-Epoch 800, Loss: 0.6874132752418518
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 900, Loss: 0.6868129968643188
-Epoch 1000, Loss: 0.6862021684646606
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6926339864730835
+Epoch 200, Loss: 0.6924600005149841
+Epoch 300, Loss: 0.6923116445541382
+Epoch 400, Loss: 0.6921781301498413
+Epoch 500, Loss: 0.6920452117919922
+Epoch 600, Loss: 0.6918710470199585
+Epoch 700, Loss: 0.6916348934173584
+Epoch 800, Loss: 0.6914608478546143
+Epoch 900, Loss: 0.6912966966629028
+Epoch 1000, Loss: 0.6911558508872986
 </pre></div>
 </div>
 </div>
@@ -1330,9 +1049,9 @@ Epoch 1000, Loss: 0.6862021684646606
 </section>
 </section>
 <section id="iris">
-<h2>実装例(Irisデータ)<a class="headerlink" href="#iris" title="Permalink to this headline">#</a></h2>
+<h2>実装例(Irisデータ)<a class="headerlink" href="#iris" title="Link to this heading">#</a></h2>
 <section id="id12">
-<h3>データの読み込み<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
+<h3>データの読み込み<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <p>Irisデータセットは、アイリス花の3つの異なる種類（Setosa、Versicolour、Virginica）の各50サンプルからなるデータセットです。各サンプルには、以下の4つの特徴値（特徴量）があります。</p>
 <ul class="simple">
 <li><p>がく片の長さ (sepal length)：アイリス花のがく（緑色の部分）の長さをセンチメートルで測定したもの。</p></li>
@@ -1391,12 +1110,12 @@ Epoch 1000, Loss: 0.6862021684646606
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1000x800 with 0 Axes&gt;
 </pre></div>
 </div>
-<img alt="../_images/pytorch_52_1.png" src="../_images/pytorch_52_1.png" />
+<img alt="../_images/55e30af1a77363c67c3ca6b11fc4ec9f6ad1859d15c3ad5d4317b90a59f17239.png" src="../_images/55e30af1a77363c67c3ca6b11fc4ec9f6ad1859d15c3ad5d4317b90a59f17239.png" />
 </div>
 </div>
 </section>
 <section id="id13">
-<h3>学習データの作成<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<h3>学習データの作成<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>データセットを訓練データ、検証データ、テストデータに分割します。</p></li>
 </ul>
@@ -1439,7 +1158,7 @@ Epoch 1000, Loss: 0.6862021684646606
 </div>
 </section>
 <section id="id14">
-<h3>モデルの作成<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
+<h3>モデルの作成<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <p>ニューラルネットワークモデルを定義します。</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">NeuralNetwork(nn.Module)</span></code>という新しいクラスを定義しています。このクラスは<code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>を継承しているので、モデル関連の機能（例：重みの管理、GPU対応、保存と読み込みの機能など）を利用できるようになります。</p></li>
@@ -1478,7 +1197,7 @@ Epoch 1000, Loss: 0.6862021684646606
 </div>
 </section>
 <section id="id15">
-<h3>学習の設定<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h3>
+<h3>学習の設定<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
 <p>学習に関連するハイパーパラメータを設定します。</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">NeuralNetwork(n_in,</span> <span class="pre">n_units,</span> <span class="pre">n_out)</span></code>:指定された入力層、隠れ層、出力層のユニット数でモデルのインスタンスを作成しています。</p></li>
@@ -1503,7 +1222,7 @@ Epoch 1000, Loss: 0.6862021684646606
 </div>
 </section>
 <section id="id16">
-<h3>学習ループの実装<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h3>
+<h3>学習ループの実装<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
 <p>ニューラルネットワークモデルの学習と検証のループを実装します。</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">model.train()</span></code>と<code class="docutils literal notranslate"><span class="pre">model.eval()</span></code>:モデルが訓練モードか評価モードかを切り替えます。</p></li>
@@ -1548,23 +1267,23 @@ Epoch 1000, Loss: 0.6862021684646606
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [10/100], Loss: 1.0728, Val Accuracy: 33.33%
-Epoch [20/100], Loss: 0.8631, Val Accuracy: 73.33%
-Epoch [30/100], Loss: 0.7060, Val Accuracy: 66.67%
-Epoch [40/100], Loss: 0.5851, Val Accuracy: 86.67%
-Epoch [50/100], Loss: 0.4890, Val Accuracy: 96.67%
-Epoch [60/100], Loss: 0.4098, Val Accuracy: 96.67%
-Epoch [70/100], Loss: 0.3424, Val Accuracy: 96.67%
-Epoch [80/100], Loss: 0.2849, Val Accuracy: 96.67%
-Epoch [90/100], Loss: 0.2375, Val Accuracy: 96.67%
-Epoch [100/100], Loss: 0.1995, Val Accuracy: 96.67%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [10/100], Loss: 1.1814, Val Accuracy: 3.33%
+Epoch [20/100], Loss: 1.1491, Val Accuracy: 50.00%
+Epoch [30/100], Loss: 1.0824, Val Accuracy: 30.00%
+Epoch [40/100], Loss: 1.0522, Val Accuracy: 23.33%
+Epoch [50/100], Loss: 0.9947, Val Accuracy: 53.33%
+Epoch [60/100], Loss: 0.9210, Val Accuracy: 56.67%
+Epoch [70/100], Loss: 0.8198, Val Accuracy: 50.00%
+Epoch [80/100], Loss: 0.7071, Val Accuracy: 60.00%
+Epoch [90/100], Loss: 0.6053, Val Accuracy: 76.67%
+Epoch [100/100], Loss: 0.5244, Val Accuracy: 96.67%
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="id17">
-<h3>モデルの検証<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h3>
+<h3>モデルの検証<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
 <p>テストデータでモデルの有効性を検証します。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1616,8 +1335,8 @@ Epoch [100/100], Loss: 0.1995, Val Accuracy: 96.67%
 </pre></div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="3db17997-cb2a-4afa-b2b5-a53ab63b20e6" name="94758f04-9037-47e8-a421-21b74ca445c4" type="radio">
-</input><label class="sd-tab-label" for="3db17997-cb2a-4afa-b2b5-a53ab63b20e6">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
 実習問題</label><div class="sd-tab-content docutils">
 <p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">NeuralNetwork(nn.Module)</span></code>を以下のように改装して、改めて学習を行なってください。</p>
 <ul class="simple">
@@ -1628,8 +1347,8 @@ Epoch [100/100], Loss: 0.1995, Val Accuracy: 96.67%
 </div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="dfdf3f01-8967-40ea-9ffa-0d5d4d885651" name="cb5d4ea0-7e31-4878-9f99-be03cccd99e4" type="radio">
-</input><label class="sd-tab-label" for="dfdf3f01-8967-40ea-9ffa-0d5d4d885651">
+<input checked="checked" id="sd-tab-item-1" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-1">
 課題</label><div class="sd-tab-content docutils">
 <p>sepal length, sepal width, petal lengthでpetal widthを予測するニューラルネットワークを構築、学習してください。</p>
 <ul class="simple">
@@ -1641,56 +1360,56 @@ Epoch [100/100], Loss: 0.1995, Val Accuracy: 96.67%
 </div>
 <div class="tip dropdown admonition">
 <p class="admonition-title">ヒント</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>#入力データとターゲットデータの準備
-X = data[:, :-1]  # sepal length, sepal width, petal length
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#入力データとターゲットデータの準備</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># sepal length, sepal width, petal length</span>
 
-y = data[:, -1]   # petal width
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># petal width</span>
 
-データの分割
+<span class="n">データの分割</span>
 
-X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.4, random_state=42)
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_temp</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_temp</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
-#「ここからコードを追加」
+<span class="c1">#「ここからコードを追加」</span>
 
-#データをテンソルに変換
+<span class="c1">#データをテンソルに変換</span>
 
-X_train = torch.tensor(X_train, dtype=torch.float32)
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
-y_train = torch.tensor(y_train, dtype=torch.float32)
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
-#「ここからコードを追加」
+<span class="c1">#「ここからコードを追加」</span>
 
-import torch.nn as nn
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 
-import torch.nn.functional as F
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
 
-class RegressionNN(nn.Module):
-    def __init__(self, input_dim, hidden_dim1, hidden_dim2):
-        super(RegressionNN, self).__init__()
-        self.fc1 = nn.Linear(input_dim, hidden_dim1)
-        「ここからコードを追加」
+<span class="k">class</span> <span class="nc">RegressionNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim1</span><span class="p">,</span> <span class="n">hidden_dim2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RegressionNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim1</span><span class="p">)</span>
+        <span class="err">「</span><span class="n">ここからコードを追加</span><span class="err">」</span>
 
-#ハイパーパラメータ
-learning_rate = 0.01
+<span class="c1">#ハイパーパラメータ</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
 
-epochs = 1000
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">1000</span>
 
-hidden_dim1 = 10
+<span class="n">hidden_dim1</span> <span class="o">=</span> <span class="mi">10</span>
 
-hidden_dim2 = 5
+<span class="n">hidden_dim2</span> <span class="o">=</span> <span class="mi">5</span>
 
-#モデルと最適化のインスタンス化
-model = RegressionNN(input_dim=3, hidden_dim1=hidden_dim1, hidden_dim2=hidden_dim2)
+<span class="c1">#モデルと最適化のインスタンス化</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">RegressionNN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hidden_dim1</span><span class="o">=</span><span class="n">hidden_dim1</span><span class="p">,</span> <span class="n">hidden_dim2</span><span class="o">=</span><span class="n">hidden_dim2</span><span class="p">)</span>
 
-criterion = nn.MSELoss()
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
 
-optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
 
-#学習ループ
+<span class="c1">#学習ループ</span>
 
-for epoch in range(epochs):
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
 
-#「ここからコードを追加」
+<span class="c1">#「ここからコードを追加」</span>
 </pre></div>
 </div>
 </div>
@@ -1721,50 +1440,134 @@ for epoch in range(epochs):
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="backpropagation.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">誤差逆伝播法</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="backpropagation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">誤差逆伝播法</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="word2vec_1.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="word2vec_1.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">単語分散表現</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">テンソル</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">テンソルの作成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">テンソル要素の型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">テンソルの操作（変形・変換等）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">テンソルの一部指定や取り出し(Indexing)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuda-tensors-cuda">CUDA Tensors（CUDA テンソル）</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">モデル構築</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">クラスの定義</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu">GPUの利用</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">モデルによる計算</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">自動微分</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">勾配情報の保存</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">勾配計算</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">最適化関数</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizer">Optimizer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iris">実装例(Irisデータ)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">データの読み込み</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">学習データの作成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">モデルの作成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">学習の設定</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">学習ループの実装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">モデルの検証</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By 呂　沢宇<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By 呂　沢宇
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
