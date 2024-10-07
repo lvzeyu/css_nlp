@@ -1,110 +1,179 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>BERTによるセンチメント分析 &#8212; 計算社会科学のための自然言語処理</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/bert_sentiment';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="BERTopic" href="bert_topic.html" />
     <link rel="prev" title="BERT" href="BERT.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
         
       
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      <img src="../_static/tohoku-university-logo-vector.svg" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">計算社会科学のための自然言語処理</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-light" alt="計算社会科学のための自然言語処理 - Home"/>
+    <script>document.write(`<img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-dark" alt="計算社会科学のための自然言語処理 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -113,638 +182,323 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  イントロダクション
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">イントロダクション</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
-   ガイダンス
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">ガイダンス</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  基礎知識
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">基礎知識</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="nlp_basis.html">
-   自然言語処理の基礎
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ml_basis.html">
-   機械学習の基本概念
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="nlp_basis.html">自然言語処理の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_basis.html">機械学習の基本概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math_basis.html">数学基礎</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  ニューラルネットワーク
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ニューラルネットワーク</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="NN.html">
-   ニューラルネットワーク
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="backpropagation.html">
-   誤差逆伝播法
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="NN.html">ニューラルネットワーク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backpropagation.html">誤差逆伝播法</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  PyTorch
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="pytorch.html">
-   Pytorch
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch.html">Pytorch</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  単語分散表現
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">単語分散表現</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_1.html">
-   単語分散表現
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_2_embedding.html">
-   word2vec
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_gensim.html">
-   GensimによるWord2Vecの学習と使用
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_sentiment.html">
-   Word2Vecを用いるセンチメント分析
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="word2vec_application.html">
-   Word2Vecが人文・社会科学研究における応用
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_1.html">単語分散表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_2_embedding.html">word2vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_gensim.html">GensimによるWord2Vecの学習と使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_sentiment.html">Word2Vecを用いるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_application.html">Word2Vecが人文・社会科学研究における応用</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  RNN
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RNN</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="rnn.html">
-   RNNの基礎
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="lstm.html">
-   LSTM
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="pytorch_lstm.html">
-   LSTMの実装
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="lstm_classification.html">
-   LSTMによる文書分類
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="seq2seq.html">
-   Seq2seq
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">RNNの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">LSTM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_lstm.html">LSTMの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm_classification.html">LSTMによる文書分類</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seq2seq.html">Seq2seq</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Transformer
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transformer</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="attention.html">
-   Attention
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="self-attention.html">
-   Self-Attention
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="transformer.html">
-   Transformerアーキテクチャ
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="BERT.html">
-   BERT
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   BERTによるセンチメント分析
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bert_topic.html">
-   BERTopic
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="attention.html">Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="self-attention.html">Self-Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformer.html">Transformerアーキテクチャ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BERT.html">BERT</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">BERTによるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_topic.html">BERTopic</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  大規模言語モデル
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">大規模言語モデル</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="GPT.html">
-   GPT
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="llm.html">
-   大規模言語モデル
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="GPT.html">GPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm.html">大規模言語モデル</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/lvzeyu/css_nlp/master?urlpath=lab/tree/notebook/bert_sentiment.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
   
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
+  <div id="rtd-footer-container"></div>
 
-      </li>
+
+      </div>
       
-      <li>
-        <a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/bert_sentiment.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tree/master/blob/master/notebook/bert_sentiment.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/lvzeyu/css_nlp/tree/master" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/bert_sentiment.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebook/bert_sentiment.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/lvzeyu/css_nlp/tree/master"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/bert_sentiment.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/notebook/bert_sentiment.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   転移学習とファインチューニング
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id2">
-   センチメント分析の実装
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     データセット
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#hugging-face">
-       Hugging Faceからサンプルデータの取得
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id4">
-       サンプルデータの確認
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id5">
-       テキストの確認
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     トークン化
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id7">
-       トークナイザの動作確認
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id8">
-       データセット全体のトークン化
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     分類器の実装
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id10">
-       事前学習モデルの導入
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id11">
-       分類器の学習
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#automodelforsequenceclassification">
-       AutoModelForSequenceClassificationのファインチューニング
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id12">
-       学習の準備
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id13">
-     学習済みモデルの使用
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id14">
-       モデル精度の検証
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id15">
-       モデル保存
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id16">
-       学習済みモデルの読み込み
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>BERTによるセンチメント分析</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   転移学習とファインチューニング
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id2">
-   センチメント分析の実装
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     データセット
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#hugging-face">
-       Hugging Faceからサンプルデータの取得
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id4">
-       サンプルデータの確認
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id5">
-       テキストの確認
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     トークン化
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id7">
-       トークナイザの動作確認
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id8">
-       データセット全体のトークン化
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     分類器の実装
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id10">
-       事前学習モデルの導入
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id11">
-       分類器の学習
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#automodelforsequenceclassification">
-       AutoModelForSequenceClassificationのファインチューニング
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id12">
-       学習の準備
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id13">
-     学習済みモデルの使用
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id14">
-       モデル精度の検証
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id15">
-       モデル保存
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id16">
-       学習済みモデルの読み込み
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>BERTによるセンチメント分析</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">転移学習とファインチューニング</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">センチメント分析の実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">データセット</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hugging-face">Hugging Faceからサンプルデータの取得</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">サンプルデータの確認</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">テキストの確認</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">トークン化</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">トークナイザの動作確認</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">データセット全体のトークン化</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">分類器の実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">事前学習モデルの導入</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">分類器の学習</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#automodelforsequenceclassification">AutoModelForSequenceClassificationのファインチューニング</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">学習の準備</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">学習済みモデルの使用</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">モデル精度の検証</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">モデル保存</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">学習済みモデルの読み込み</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="bert">
-<h1>BERTによるセンチメント分析<a class="headerlink" href="#bert" title="Permalink to this headline">#</a></h1>
+<h1>BERTによるセンチメント分析<a class="headerlink" href="#bert" title="Link to this heading">#</a></h1>
 <section id="id1">
-<h2>転移学習とファインチューニング<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<h2>転移学習とファインチューニング<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>転移学習は、あるタスクの学習で得られた知識を、他の関連するタスクの学習に適用する手法を指します。一般的には、以下のステップで行われることが多いです：</p>
 <ul class="simple">
 <li><p>事前学習: 事前学習モデル（pre-trained models)とは、大規模なデータセットを用いて訓練した学習済みモデルのことです。一般的に、大量のデータ（例えば、インターネット上のテキストデータ）を使用して、モデルを事前に学習します。この時点でのモデルは、言語の汎用的な特徴や構造を捉えることができます。</p></li>
@@ -753,7 +507,7 @@ title="Print to PDF"
 <p><img alt="" src="../_images/fine-tuning_methods.png" /></p>
 </section>
 <section id="id2">
-<h2>センチメント分析の実装<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<h2>センチメント分析の実装<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>nvidia-smi
@@ -767,9 +521,9 @@ title="Print to PDF"
 </div>
 </div>
 <section id="id3">
-<h3>データセット<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<h3>データセット<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <section id="hugging-face">
-<h4>Hugging Faceからサンプルデータの取得<a class="headerlink" href="#hugging-face" title="Permalink to this headline">#</a></h4>
+<h4>Hugging Faceからサンプルデータの取得<a class="headerlink" href="#hugging-face" title="Link to this heading">#</a></h4>
 <p>Hugging Faceのには色々なデータセットが用意されております。ここでは、多言語のセンチメントデータセットを例として使用することにします。その中に、英語と日本語のサプセットが含まれます。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -779,10 +533,22 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#dataset = load_dataset(&quot;tyqiangz/multilingual-sentiments&quot;, &quot;japanese&quot;)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tyqiangz/multilingual-sentiments&quot;</span><span class="p">,</span> <span class="s2">&quot;english&quot;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;datasets&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="id4">
-<h4>サンプルデータの確認<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h4>
+<h4>サンプルデータの確認<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
 <p>取得したデータセットの中身を確認します。</p>
 <p>データセットはこのようにtrain, validation, testに分かれています。
 [‘text’, ‘source’, ‘label’]といった情報を持っています。</p>
@@ -900,15 +666,15 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Train Dataset&#39;}&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;Train Dataset&#39;}, ylabel=&#39;label&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/bert_sentiment_10_1.png" src="../_images/bert_sentiment_10_1.png" />
+<img alt="../_images/c9fb50b9b31bf3eb5d262ea2bc728f7b219a2f5b86babfd1e09276612343b705.png" src="../_images/c9fb50b9b31bf3eb5d262ea2bc728f7b219a2f5b86babfd1e09276612343b705.png" />
 </div>
 </div>
 </section>
 <section id="id5">
-<h4>テキストの確認<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h4>
+<h4>テキストの確認<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
 <p>Transformerモデルは、最大コンテキストサイズ(maximum context size)と呼ばれる最大入力系列長があります。</p>
 <p>モデルのコンテキストサイズより長いテキストは切り捨てる必要があり、切り捨てたテキストに重要な情報が含まれている場合、性能の低下につながることがあります。</p>
 <div class="cell docutils container">
@@ -925,26 +691,34 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;text_length&#39;}, xlabel=&#39;label&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;text_length&#39;}, xlabel=&#39;label&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/bert_sentiment_13_1.png" src="../_images/bert_sentiment_13_1.png" />
+<img alt="../_images/26a97b82babca095f9130d7dc3987aab0861312ea77acec18968f66122042a03.png" src="../_images/26a97b82babca095f9130d7dc3987aab0861312ea77acec18968f66122042a03.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="id6">
-<h3>トークン化<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<h3>トークン化<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>コンピュータは、入力として生の文字列を受け取ることができません。その代わりに、テキストがトークン化され、数値ベクトルとしてエンコードされていることが想定しています。</p>
 <p>トークン化は、文字列をモデルで使用される最小単位に分解するステップです。</p>
 <p>Transformerライブラリー は便利なAutoTokenizerクラスを提供しており、事前学習済みモデルに関連つけられたトークナイザーを素早く使用することができます。</p>
 <section id="id7">
-<h4>トークナイザの動作確認<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h4>
+<h4>トークナイザの動作確認<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span>
 <span class="n">model_ckpt</span> <span class="o">=</span> <span class="s2">&quot;distilbert-base-uncased&quot;</span>
 <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_ckpt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tokenizer_config.json: 100%|██████████| 28.0/28.0 [00:00&lt;00:00, 72.0kB/s]
+config.json: 100%|██████████| 483/483 [00:00&lt;00:00, 1.26MB/s]
+vocab.txt: 100%|██████████| 232k/232k [00:00&lt;00:00, 1.36MB/s]
+tokenizer.json: 100%|██████████| 466k/466k [00:00&lt;00:00, 938kB/s]
 </pre></div>
 </div>
 </div>
@@ -999,7 +773,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="id8">
-<h4>データセット全体のトークン化<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h4>
+<h4>データセット全体のトークン化<a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
@@ -1022,15 +796,12 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
-To disable this warning, you can either:
-	- Avoid using `tokenizers` before the fork if possible
-	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Map: 100%|██████████| 1839/1839 [00:00&lt;00:00, 32383.76 examples/s]
+Map: 100%|██████████| 324/324 [00:00&lt;00:00, 34130.86 examples/s]
+Map: 100%|██████████| 870/870 [00:00&lt;00:00, 36298.43 examples/s]
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "8c16d5ac5aec4465b748db6d674fe38b"}
-</script></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1144,9 +915,9 @@ To disable this warning, you can either:
 </section>
 </section>
 <section id="id9">
-<h3>分類器の実装<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<h3>分類器の実装<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <section id="id10">
-<h4>事前学習モデルの導入<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h4>
+<h4>事前学習モデルの導入<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
 <p>Transformerライブラリは事前学習モデルの使用ため<code class="docutils literal notranslate"><span class="pre">AutoModel</span></code>クラスを提供します。</p>
 <p><code class="docutils literal notranslate"><span class="pre">AutoModel</span></code>クラスはトークンエンコーディングを埋め込みに変換し、エンコーダスタックを経由して<strong>最後の</strong>隠れ状態を返します。</p>
 <div class="cell docutils container">
@@ -1157,6 +928,11 @@ To disable this warning, you can either:
 <span class="c1"># GPUある場合はGPUを使う</span>
 <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_ckpt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model.safetensors: 100%|██████████| 268M/268M [00:05&lt;00:00, 50.2MB/s] 
 </pre></div>
 </div>
 </div>
@@ -1198,7 +974,8 @@ To disable this warning, you can either:
          [-0.2772, -0.4459,  0.1818,  ..., -0.0948, -0.0076,  0.9958],
          [-0.2841, -0.3917,  0.3753,  ..., -0.2151, -0.1173,  1.0526],
          [ 0.2661, -0.5094, -0.3180,  ..., -0.4203,  0.0144, -0.2149],
-         [ 0.9441,  0.0112, -0.4714,  ...,  0.1439, -0.7288, -0.1619]]]), hidden_states=None, attentions=None)
+         [ 0.9441,  0.0112, -0.4714,  ...,  0.1439, -0.7288, -0.1619]]],
+       device=&#39;cuda:0&#39;), hidden_states=None, attentions=None)
 </pre></div>
 </div>
 </div>
@@ -1260,275 +1037,16 @@ To disable this warning, you can either:
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "6b75d1068a3c42dcb9216d460d4478d5"}
-</script><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">dataset_hidden</span><span class="o">=</span><span class="n">dataset_encoded</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">extract_hidden_states</span><span class="p">,</span> <span class="n">batched</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/datasets/dataset_dict.py:853,</span> in <span class="ni">DatasetDict.map</span><span class="nt">(self, function, with_indices, with_rank, input_columns, batched, batch_size, drop_last_batch, remove_columns, keep_in_memory, load_from_cache_file, cache_file_names, writer_batch_size, features, disable_nullable, fn_kwargs, num_proc, desc)</span>
-<span class="g g-Whitespace">    </span><span class="mi">850</span> <span class="k">if</span> <span class="n">cache_file_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">851</span>     <span class="n">cache_file_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">}</span>
-<span class="g g-Whitespace">    </span><span class="mi">852</span> <span class="k">return</span> <span class="n">DatasetDict</span><span class="p">(</span>
-<span class="ne">--&gt; </span><span class="mi">853</span>     <span class="p">{</span>
-<span class="g g-Whitespace">    </span><span class="mi">854</span>         <span class="n">k</span><span class="p">:</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">855</span>             <span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">856</span>             <span class="n">with_indices</span><span class="o">=</span><span class="n">with_indices</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">857</span>             <span class="n">with_rank</span><span class="o">=</span><span class="n">with_rank</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">858</span>             <span class="n">input_columns</span><span class="o">=</span><span class="n">input_columns</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">859</span>             <span class="n">batched</span><span class="o">=</span><span class="n">batched</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">860</span>             <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">861</span>             <span class="n">drop_last_batch</span><span class="o">=</span><span class="n">drop_last_batch</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">862</span>             <span class="n">remove_columns</span><span class="o">=</span><span class="n">remove_columns</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">863</span>             <span class="n">keep_in_memory</span><span class="o">=</span><span class="n">keep_in_memory</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">864</span>             <span class="n">load_from_cache_file</span><span class="o">=</span><span class="n">load_from_cache_file</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">865</span>             <span class="n">cache_file_name</span><span class="o">=</span><span class="n">cache_file_names</span><span class="p">[</span><span class="n">k</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">866</span>             <span class="n">writer_batch_size</span><span class="o">=</span><span class="n">writer_batch_size</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">867</span>             <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">868</span>             <span class="n">disable_nullable</span><span class="o">=</span><span class="n">disable_nullable</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">869</span>             <span class="n">fn_kwargs</span><span class="o">=</span><span class="n">fn_kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">870</span>             <span class="n">num_proc</span><span class="o">=</span><span class="n">num_proc</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">871</span>             <span class="n">desc</span><span class="o">=</span><span class="n">desc</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="p">)</span>
-<span class="nn">    873         for k, dataset</span> in <span class="ni">self.items</span><span class="nt">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">874</span>     <span class="p">}</span>
-<span class="g g-Whitespace">    </span><span class="mi">875</span> <span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/datasets/dataset_dict.py:854,</span> in <span class="ni">&lt;dictcomp&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">    </span><span class="mi">850</span> <span class="k">if</span> <span class="n">cache_file_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">851</span>     <span class="n">cache_file_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">}</span>
-<span class="g g-Whitespace">    </span><span class="mi">852</span> <span class="k">return</span> <span class="n">DatasetDict</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">853</span>     <span class="p">{</span>
-<span class="ne">--&gt; </span><span class="mi">854</span>         <span class="n">k</span><span class="p">:</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">855</span>             <span class="n">function</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">856</span>             <span class="n">with_indices</span><span class="o">=</span><span class="n">with_indices</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">857</span>             <span class="n">with_rank</span><span class="o">=</span><span class="n">with_rank</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">858</span>             <span class="n">input_columns</span><span class="o">=</span><span class="n">input_columns</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">859</span>             <span class="n">batched</span><span class="o">=</span><span class="n">batched</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">860</span>             <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">861</span>             <span class="n">drop_last_batch</span><span class="o">=</span><span class="n">drop_last_batch</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">862</span>             <span class="n">remove_columns</span><span class="o">=</span><span class="n">remove_columns</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">863</span>             <span class="n">keep_in_memory</span><span class="o">=</span><span class="n">keep_in_memory</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">864</span>             <span class="n">load_from_cache_file</span><span class="o">=</span><span class="n">load_from_cache_file</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">865</span>             <span class="n">cache_file_name</span><span class="o">=</span><span class="n">cache_file_names</span><span class="p">[</span><span class="n">k</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">866</span>             <span class="n">writer_batch_size</span><span class="o">=</span><span class="n">writer_batch_size</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">867</span>             <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">868</span>             <span class="n">disable_nullable</span><span class="o">=</span><span class="n">disable_nullable</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">869</span>             <span class="n">fn_kwargs</span><span class="o">=</span><span class="n">fn_kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">870</span>             <span class="n">num_proc</span><span class="o">=</span><span class="n">num_proc</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">871</span>             <span class="n">desc</span><span class="o">=</span><span class="n">desc</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="p">)</span>
-<span class="nn">    873         for k, dataset</span> in <span class="ni">self.items</span><span class="nt">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">874</span>     <span class="p">}</span>
-<span class="g g-Whitespace">    </span><span class="mi">875</span> <span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/datasets/arrow_dataset.py:592,</span> in <span class="ni">transmit_tasks.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">590</span>     <span class="bp">self</span><span class="p">:</span> <span class="s2">&quot;Dataset&quot;</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;self&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">591</span> <span class="c1"># apply actual function</span>
-<span class="ne">--&gt; </span><span class="mi">592</span> <span class="n">out</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s2">&quot;Dataset&quot;</span><span class="p">,</span> <span class="s2">&quot;DatasetDict&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">593</span> <span class="n">datasets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;Dataset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">out</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">594</span> <span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">595</span>     <span class="c1"># Remove task templates if a column mapping of the template is no longer valid</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/datasets/arrow_dataset.py:557,</span> in <span class="ni">transmit_format.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">550</span> <span class="n">self_format</span> <span class="o">=</span> <span class="p">{</span>
-<span class="g g-Whitespace">    </span><span class="mi">551</span>     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_type</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">552</span>     <span class="s2">&quot;format_kwargs&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">553</span>     <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_columns</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">554</span>     <span class="s2">&quot;output_all_columns&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_all_columns</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">555</span> <span class="p">}</span>
-<span class="g g-Whitespace">    </span><span class="mi">556</span> <span class="c1"># apply actual function</span>
-<span class="ne">--&gt; </span><span class="mi">557</span> <span class="n">out</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s2">&quot;Dataset&quot;</span><span class="p">,</span> <span class="s2">&quot;DatasetDict&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">558</span> <span class="n">datasets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;Dataset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">out</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">559</span> <span class="c1"># re-apply format to the output</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/datasets/arrow_dataset.py:3097,</span> in <span class="ni">Dataset.map</span><span class="nt">(self, function, with_indices, with_rank, input_columns, batched, batch_size, drop_last_batch, remove_columns, keep_in_memory, load_from_cache_file, cache_file_name, writer_batch_size, features, disable_nullable, fn_kwargs, num_proc, suffix_template, new_fingerprint, desc)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3090</span> <span class="k">if</span> <span class="n">transformed_dataset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3091</span>     <span class="k">with</span> <span class="n">logging</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">3092</span>         <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">logging</span><span class="o">.</span><span class="n">is_progress_bar_enabled</span><span class="p">(),</span>
-<span class="g g-Whitespace">   </span><span class="mi">3093</span>         <span class="n">unit</span><span class="o">=</span><span class="s2">&quot; examples&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">3094</span>         <span class="n">total</span><span class="o">=</span><span class="n">pbar_total</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">3095</span>         <span class="n">desc</span><span class="o">=</span><span class="n">desc</span> <span class="ow">or</span> <span class="s2">&quot;Map&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">3096</span>     <span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3097</span>         <span class="k">for</span> <span class="n">rank</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">_map_single</span><span class="p">(</span><span class="o">**</span><span class="n">dataset_kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">3098</span>             <span class="k">if</span> <span class="n">done</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3099</span>                 <span class="n">shards_done</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/datasets/arrow_dataset.py:3474,</span> in <span class="ni">Dataset._map_single</span><span class="nt">(shard, function, with_indices, with_rank, input_columns, batched, batch_size, drop_last_batch, remove_columns, keep_in_memory, cache_file_name, writer_batch_size, features, disable_nullable, fn_kwargs, new_fingerprint, rank, offset)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3470</span> <span class="n">indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">3471</span>     <span class="nb">range</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">)</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="n">shard</span><span class="o">.</span><span class="n">num_rows</span><span class="p">)))</span>
-<span class="g g-Whitespace">   </span><span class="mi">3472</span> <span class="p">)</span>  <span class="c1"># Something simpler?</span>
-<span class="g g-Whitespace">   </span><span class="mi">3473</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3474</span>     <span class="n">batch</span> <span class="o">=</span> <span class="n">apply_function_on_filtered_inputs</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">3475</span>         <span class="n">batch</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">3476</span>         <span class="n">indices</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">3477</span>         <span class="n">check_same_num_examples</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">shard</span><span class="o">.</span><span class="n">list_indexes</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">3478</span>         <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">3479</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3480</span> <span class="k">except</span> <span class="n">NumExamplesMismatchError</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3481</span>     <span class="k">raise</span> <span class="n">DatasetTransformationNotAllowedError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">3482</span>         <span class="s2">&quot;Using `.map` in batched mode on a dataset with attached indexes is allowed only if it doesn&#39;t create or remove existing examples. You can first run `.drop_index() to remove your index and then re-add it.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">3483</span>     <span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/datasets/arrow_dataset.py:3353,</span> in <span class="ni">Dataset._map_single.&lt;locals&gt;.apply_function_on_filtered_inputs</span><span class="nt">(pa_inputs, indices, check_same_num_examples, offset)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3351</span> <span class="k">if</span> <span class="n">with_rank</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3352</span>     <span class="n">additional_args</span> <span class="o">+=</span> <span class="p">(</span><span class="n">rank</span><span class="p">,)</span>
-<span class="ne">-&gt; </span><span class="mi">3353</span> <span class="n">processed_inputs</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">fn_args</span><span class="p">,</span> <span class="o">*</span><span class="n">additional_args</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3354</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">processed_inputs</span><span class="p">,</span> <span class="n">LazyDict</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">3355</span>     <span class="n">processed_inputs</span> <span class="o">=</span> <span class="p">{</span>
-<span class="g g-Whitespace">   </span><span class="mi">3356</span>         <span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">processed_inputs</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">processed_inputs</span><span class="o">.</span><span class="n">keys_to_format</span>
-<span class="g g-Whitespace">   </span><span class="mi">3357</span>     <span class="p">}</span>
-
-<span class="nn">Cell In[22], line 7,</span> in <span class="ni">extract_hidden_states</span><span class="nt">(batch)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Extract last hidden states</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-<span class="ne">----&gt; </span><span class="mi">7</span>     <span class="n">last_hidden_state</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span><span class="o">.</span><span class="n">last_hidden_state</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Return vector for [CLS] token</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;hidden_state&quot;</span><span class="p">:</span> <span class="n">last_hidden_state</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()}</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1518,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1516</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1517</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1518</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1527,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1522</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
-<span class="g g-Whitespace">   </span><span class="mi">1523</span> <span class="c1"># this function, and just call forward.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1524</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1525</span>         <span class="ow">or</span> <span class="n">_global_backward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1526</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1527</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1529</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1530</span>     <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py:820,</span> in <span class="ni">DistilBertModel.forward</span><span class="nt">(self, input_ids, attention_mask, head_mask, inputs_embeds, output_attentions, output_hidden_states, return_dict)</span>
-<span class="g g-Whitespace">    </span><span class="mi">817</span>     <span class="k">if</span> <span class="n">attention_mask</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">818</span>         <span class="n">attention_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">input_shape</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>  <span class="c1"># (bs, seq_length)</span>
-<span class="ne">--&gt; </span><span class="mi">820</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">821</span>     <span class="n">x</span><span class="o">=</span><span class="n">embeddings</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">822</span>     <span class="n">attn_mask</span><span class="o">=</span><span class="n">attention_mask</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">823</span>     <span class="n">head_mask</span><span class="o">=</span><span class="n">head_mask</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">824</span>     <span class="n">output_attentions</span><span class="o">=</span><span class="n">output_attentions</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">825</span>     <span class="n">output_hidden_states</span><span class="o">=</span><span class="n">output_hidden_states</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">826</span>     <span class="n">return_dict</span><span class="o">=</span><span class="n">return_dict</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">827</span> <span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1518,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1516</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1517</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1518</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1527,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1522</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
-<span class="g g-Whitespace">   </span><span class="mi">1523</span> <span class="c1"># this function, and just call forward.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1524</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1525</span>         <span class="ow">or</span> <span class="n">_global_backward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1526</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1527</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1529</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1530</span>     <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py:585,</span> in <span class="ni">Transformer.forward</span><span class="nt">(self, x, attn_mask, head_mask, output_attentions, output_hidden_states, return_dict)</span>
-<span class="g g-Whitespace">    </span><span class="mi">577</span>     <span class="n">layer_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gradient_checkpointing_func</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">578</span>         <span class="n">layer_module</span><span class="o">.</span><span class="fm">__call__</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">579</span>         <span class="n">hidden_state</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">582</span>         <span class="n">output_attentions</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">583</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">584</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">585</span>     <span class="n">layer_outputs</span> <span class="o">=</span> <span class="n">layer_module</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">586</span>         <span class="n">hidden_state</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">587</span>         <span class="n">attn_mask</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">588</span>         <span class="n">head_mask</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">589</span>         <span class="n">output_attentions</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">590</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">592</span> <span class="n">hidden_state</span> <span class="o">=</span> <span class="n">layer_outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">594</span> <span class="k">if</span> <span class="n">output_attentions</span><span class="p">:</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1518,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1516</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1517</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1518</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1527,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1522</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
-<span class="g g-Whitespace">   </span><span class="mi">1523</span> <span class="c1"># this function, and just call forward.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1524</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1525</span>         <span class="ow">or</span> <span class="n">_global_backward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1526</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1527</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1529</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1530</span>     <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py:511,</span> in <span class="ni">TransformerBlock.forward</span><span class="nt">(self, x, attn_mask, head_mask, output_attentions)</span>
-<span class="g g-Whitespace">    </span><span class="mi">501</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">502</span><span class="sd"> Parameters:</span>
-<span class="g g-Whitespace">    </span><span class="mi">503</span><span class="sd">     x: torch.tensor(bs, seq_length, dim)</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">508</span><span class="sd">     torch.tensor(bs, seq_length, dim) The output of the transformer block contextualization.</span>
-<span class="g g-Whitespace">    </span><span class="mi">509</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">510</span> <span class="c1"># Self-Attention</span>
-<span class="ne">--&gt; </span><span class="mi">511</span> <span class="n">sa_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attention</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">512</span>     <span class="n">query</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">513</span>     <span class="n">key</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">514</span>     <span class="n">value</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">515</span>     <span class="n">mask</span><span class="o">=</span><span class="n">attn_mask</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">516</span>     <span class="n">head_mask</span><span class="o">=</span><span class="n">head_mask</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">517</span>     <span class="n">output_attentions</span><span class="o">=</span><span class="n">output_attentions</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">518</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">519</span> <span class="k">if</span> <span class="n">output_attentions</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">520</span>     <span class="n">sa_output</span><span class="p">,</span> <span class="n">sa_weights</span> <span class="o">=</span> <span class="n">sa_output</span>  <span class="c1"># (bs, seq_length, dim), (bs, n_heads, seq_length, seq_length)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1518,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1516</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1517</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1518</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1527,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1522</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
-<span class="g g-Whitespace">   </span><span class="mi">1523</span> <span class="c1"># this function, and just call forward.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1524</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1525</span>         <span class="ow">or</span> <span class="n">_global_backward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1526</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1527</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1529</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1530</span>     <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py:258,</span> in <span class="ni">MultiHeadSelfAttention.forward</span><span class="nt">(self, query, key, value, mask, head_mask, output_attentions)</span>
-<span class="g g-Whitespace">    </span><span class="mi">256</span> <span class="n">context</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>  <span class="c1"># (bs, n_heads, q_length, dim_per_head)</span>
-<span class="g g-Whitespace">    </span><span class="mi">257</span> <span class="n">context</span> <span class="o">=</span> <span class="n">unshape</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>  <span class="c1"># (bs, q_length, dim)</span>
-<span class="ne">--&gt; </span><span class="mi">258</span> <span class="n">context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_lin</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>  <span class="c1"># (bs, q_length, dim)</span>
-<span class="g g-Whitespace">    </span><span class="mi">260</span> <span class="k">if</span> <span class="n">output_attentions</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">261</span>     <span class="k">return</span> <span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1518,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1516</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1517</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1518</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/module.py:1527,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1522</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
-<span class="g g-Whitespace">   </span><span class="mi">1523</span> <span class="c1"># this function, and just call forward.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1524</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1525</span>         <span class="ow">or</span> <span class="n">_global_backward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
-<span class="g g-Whitespace">   </span><span class="mi">1526</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1527</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1529</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1530</span>     <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="nn">File /opt/anaconda3/envs/jupyterbook/lib/python3.10/site-packages/torch/nn/modules/linear.py:114,</span> in <span class="ni">Linear.forward</span><span class="nt">(self, input)</span>
-<span class="g g-Whitespace">    </span><span class="mi">113</span> <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">114</span>     <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Map: 100%|██████████| 1839/1839 [00:01&lt;00:00, 1785.59 examples/s]
+Map: 100%|██████████| 324/324 [00:00&lt;00:00, 2093.79 examples/s]
+Map: 100%|██████████| 870/870 [00:00&lt;00:00, 2275.50 examples/s]
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="id11">
-<h4>分類器の学習<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h4>
+<h4>分類器の学習<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
 <p>前処理されたデータセットには、分類器を学習させるために必要な情報がすべて含まれています。</p>
 <p>具体的には、隠れ状態を入力特徴量として、ラベルをターゲットとして使用すると、様々な分類アルゴリズムに適用できるだろう。</p>
 <p>ここで、ロジスティック回帰モデルを学習します。</p>
@@ -1592,12 +1110,12 @@ To disable this warning, you can either:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bert_sentiment_45_0.png" src="../_images/bert_sentiment_45_0.png" />
+<img alt="../_images/d05c1909c91dfbdb6d512c87132554795c8508252537302d64f066a2f51b72b0.png" src="../_images/d05c1909c91dfbdb6d512c87132554795c8508252537302d64f066a2f51b72b0.png" />
 </div>
 </div>
 </section>
 <section id="automodelforsequenceclassification">
-<h4>AutoModelForSequenceClassificationのファインチューニング<a class="headerlink" href="#automodelforsequenceclassification" title="Permalink to this headline">#</a></h4>
+<h4>AutoModelForSequenceClassificationのファインチューニング<a class="headerlink" href="#automodelforsequenceclassification" title="Link to this heading">#</a></h4>
 <p>transformerライブラリは、ファインチューニングのタスクに応じてAPIを提供しています。</p>
 <p>分類タスクの場合、<code class="docutils literal notranslate"><span class="pre">AutoModel</span></code>の代わりに<code class="docutils literal notranslate"><span class="pre">AutoModelForSequenceClassification</span></code>を使用します。</p>
 <p><code class="docutils literal notranslate"><span class="pre">AutoModelForSequenceClassification</span></code>が事前学習済みモデルの出力の上に分類器ヘッドを持っており、モデルの設定がより簡単になります。</p>
@@ -1684,7 +1202,7 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
 </div>
 </section>
 <section id="id12">
-<h4>学習の準備<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h4>
+<h4>学習の準備<a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
 <p>学習時に性能指標を与える必要があるため、それを関数化して定義しておきます。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1748,7 +1266,7 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
 <div class="cell_output docutils container">
 <div class="output text_html">
     <div>
-
+      
       <progress value='230' max='230' style='width:300px; height:20px; vertical-align: middle;'></progress>
       [230/230 00:07, Epoch 2/2]
     </div>
@@ -1786,9 +1304,9 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
 </section>
 </section>
 <section id="id13">
-<h3>学習済みモデルの使用<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<h3>学習済みモデルの使用<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <section id="id14">
-<h4>モデル精度の検証<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h4>
+<h4>モデル精度の検証<a class="headerlink" href="#id14" title="Link to this heading">#</a></h4>
 <p>学習済みのモデルを他のデータセットに適用します。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1822,12 +1340,12 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bert_sentiment_58_0.png" src="../_images/bert_sentiment_58_0.png" />
+<img alt="../_images/1d83e6438a47b3fa124e1937a2374dda486655a12d3bb29c73e8ee21c49dc64e.png" src="../_images/1d83e6438a47b3fa124e1937a2374dda486655a12d3bb29c73e8ee21c49dc64e.png" />
 </div>
 </div>
 </section>
 <section id="id15">
-<h4>モデル保存<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h4>
+<h4>モデル保存<a class="headerlink" href="#id15" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">id2label</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1853,7 +1371,7 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
 </div>
 </section>
 <section id="id16">
-<h4>学習済みモデルの読み込み<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h4>
+<h4>学習済みモデルの読み込み<a class="headerlink" href="#id16" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span>\
@@ -1959,50 +1477,130 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="BERT.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">BERT</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="BERT.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">BERT</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="bert_topic.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="bert_topic.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">BERTopic</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">転移学習とファインチューニング</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">センチメント分析の実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">データセット</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hugging-face">Hugging Faceからサンプルデータの取得</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">サンプルデータの確認</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">テキストの確認</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">トークン化</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">トークナイザの動作確認</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">データセット全体のトークン化</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">分類器の実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">事前学習モデルの導入</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">分類器の学習</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#automodelforsequenceclassification">AutoModelForSequenceClassificationのファインチューニング</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">学習の準備</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">学習済みモデルの使用</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">モデル精度の検証</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">モデル保存</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">学習済みモデルの読み込み</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By 呂　沢宇<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By 呂　沢宇
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
