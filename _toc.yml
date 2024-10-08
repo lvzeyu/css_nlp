@@ -11,7 +11,7 @@ parts:
 - caption: 基礎知識
   chapters:
   - file: notebook/nlp_basis2.ipynb
-  - file: notebook/ml_basis.ipynb
+  - file: notebook/ml_basis2.ipynb
   - file: notebook/math_basis2.ipynb
 - caption: ニューラルネットワーク
   chapters:
