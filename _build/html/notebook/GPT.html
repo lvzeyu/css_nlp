@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -190,9 +190,9 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">基礎知識</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="nlp_basis.html">自然言語処理の基礎</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ml_basis.html">機械学習の基本概念</a></li>
-<li class="toctree-l1"><a class="reference internal" href="math_basis.html">数学基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nlp_basis2.html">自然言語処理の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_basis2.html">機械学習の基本概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math_basis2.html">数学基礎</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ニューラルネットワーク</span></p>
 <ul class="nav bd-sidenav">
@@ -532,49 +532,106 @@ x_i=e_{w_i}+p_i
   from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None of PyTorch, TensorFlow &gt;= 2.0, or Flax have been found. Models won&#39;t be available and only tokenizers, configuration and file/data utilities can be used.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/utils/generic.py:441: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  _torch_pytree._register_pytree_node(
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/utils/generic.py:309: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  _torch_pytree._register_pytree_node(
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/modeling_utils.py:519: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don&#39;t have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  return torch.load(checkpoint_file, map_location=map_location)
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#!pip install sentencepiece</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1">#!pip install protobuf</span>
 <span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">generator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;text-generation&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;abeja/gpt2-large-japanese&quot;</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/pipelines/__init__.py:870,</span> in <span class="ni">pipeline</span><span class="nt">(task, model, config, tokenizer, feature_extractor, image_processor, framework, revision, use_fast, token, device, device_map, torch_dtype, trust_remote_code, model_kwargs, pipeline_class, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="n">framework</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="n">model_classes</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tf&quot;</span><span class="p">:</span> <span class="n">targeted_task</span><span class="p">[</span><span class="s2">&quot;tf&quot;</span><span class="p">],</span> <span class="s2">&quot;pt&quot;</span><span class="p">:</span> <span class="n">targeted_task</span><span class="p">[</span><span class="s2">&quot;pt&quot;</span><span class="p">]}</span>
-<span class="ne">--&gt; </span><span class="mi">870</span>     <span class="n">framework</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="n">infer_framework_load_model</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">871</span>         <span class="n">model</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="n">model_classes</span><span class="o">=</span><span class="n">model_classes</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">873</span>         <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">874</span>         <span class="n">framework</span><span class="o">=</span><span class="n">framework</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">875</span>         <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">876</span>         <span class="o">**</span><span class="n">hub_kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">877</span>         <span class="o">**</span><span class="n">model_kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">878</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">880</span> <span class="n">model_config</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span>
-<span class="g g-Whitespace">    </span><span class="mi">881</span> <span class="n">hub_kwargs</span><span class="p">[</span><span class="s2">&quot;_commit_hash&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">_commit_hash</span>
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/pipelines/__init__.py:967,</span> in <span class="ni">pipeline</span><span class="nt">(task, model, config, tokenizer, feature_extractor, image_processor, framework, revision, use_fast, token, device, device_map, torch_dtype, trust_remote_code, model_kwargs, pipeline_class, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">964</span>             <span class="n">tokenizer_kwargs</span> <span class="o">=</span> <span class="n">model_kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">965</span>             <span class="n">tokenizer_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;torch_dtype&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">967</span>         <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">968</span>             <span class="n">tokenizer_identifier</span><span class="p">,</span> <span class="n">use_fast</span><span class="o">=</span><span class="n">use_fast</span><span class="p">,</span> <span class="n">_from_pipeline</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="o">**</span><span class="n">hub_kwargs</span><span class="p">,</span> <span class="o">**</span><span class="n">tokenizer_kwargs</span>
+<span class="g g-Whitespace">    </span><span class="mi">969</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">971</span> <span class="k">if</span> <span class="n">load_image_processor</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">972</span>     <span class="c1"># Try to infer image processor from model or config name (if provided as str)</span>
+<span class="g g-Whitespace">    </span><span class="mi">973</span>     <span class="k">if</span> <span class="n">image_processor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/pipelines/base.py:220,</span> in <span class="ni">infer_framework_load_model</span><span class="nt">(model, config, model_classes, task, framework, **model_kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">194</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">195</span><span class="sd"> Select framework (TensorFlow or PyTorch) to use from the `model` passed. Returns a tuple (framework, model).</span>
-<span class="g g-Whitespace">    </span><span class="mi">196</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">217</span><span class="sd">     `Tuple`: A tuple framework, model.</span>
-<span class="g g-Whitespace">    </span><span class="mi">218</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">219</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_tf_available</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_torch_available</span><span class="p">():</span>
-<span class="ne">--&gt; </span><span class="mi">220</span>     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span>         <span class="s2">&quot;At least one of TensorFlow 2.0 or PyTorch should be installed. &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span>         <span class="s2">&quot;To install TensorFlow 2.0, read the instructions at https://www.tensorflow.org/install/ &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">223</span>         <span class="s2">&quot;To install PyTorch, read the instructions at https://pytorch.org/.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">224</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">226</span>     <span class="n">model_kwargs</span><span class="p">[</span><span class="s2">&quot;_from_pipeline&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">task</span>
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/models/auto/tokenization_auto.py:787,</span> in <span class="ni">AutoTokenizer.from_pretrained</span><span class="nt">(cls, pretrained_model_name_or_path, *inputs, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">783</span>     <span class="k">if</span> <span class="n">tokenizer_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">784</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">785</span>             <span class="sa">f</span><span class="s2">&quot;Tokenizer class </span><span class="si">{</span><span class="n">tokenizer_class_candidate</span><span class="si">}</span><span class="s2"> does not exist or is not currently imported.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">786</span>         <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">787</span>     <span class="k">return</span> <span class="n">tokenizer_class</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="o">*</span><span class="n">inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">789</span> <span class="c1"># Otherwise we have to be creative.</span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span> <span class="c1"># if model is an encoder decoder, the encoder tokenizer class is used by default</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">EncoderDecoderConfig</span><span class="p">):</span>
 
-<span class="ne">RuntimeError</span>: At least one of TensorFlow 2.0 or PyTorch should be installed. To install TensorFlow 2.0, read the instructions at https://www.tensorflow.org/install/ To install PyTorch, read the instructions at https://pytorch.org/.
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:2028,</span> in <span class="ni">PreTrainedTokenizerBase.from_pretrained</span><span class="nt">(cls, pretrained_model_name_or_path, cache_dir, force_download, local_files_only, token, revision, *init_inputs, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2025</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2026</span>         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;loading file </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2"> from cache at </span><span class="si">{</span><span class="n">resolved_vocab_files</span><span class="p">[</span><span class="n">file_id</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2028</span> <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_pretrained</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2029</span>     <span class="n">resolved_vocab_files</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2030</span>     <span class="n">pretrained_model_name_or_path</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2031</span>     <span class="n">init_configuration</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2032</span>     <span class="o">*</span><span class="n">init_inputs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2033</span>     <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2034</span>     <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2035</span>     <span class="n">local_files_only</span><span class="o">=</span><span class="n">local_files_only</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2036</span>     <span class="n">_commit_hash</span><span class="o">=</span><span class="n">commit_hash</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2037</span>     <span class="n">_is_local</span><span class="o">=</span><span class="n">is_local</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2038</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2039</span> <span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:2260,</span> in <span class="ni">PreTrainedTokenizerBase._from_pretrained</span><span class="nt">(cls, resolved_vocab_files, pretrained_model_name_or_path, init_configuration, token, cache_dir, local_files_only, _commit_hash, _is_local, *init_inputs, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2258</span> <span class="c1"># Instantiate the tokenizer.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2259</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2260</span>     <span class="n">tokenizer</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">init_inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">init_kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2261</span> <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2262</span>     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2263</span>         <span class="s2">&quot;Unable to load vocabulary from file. &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">2264</span>         <span class="s2">&quot;Please check that the provided vocabulary is accessible and not corrupted.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">2265</span>     <span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/models/t5/tokenization_t5_fast.py:135,</span> in <span class="ni">T5TokenizerFast.__init__</span><span class="nt">(self, vocab_file, tokenizer_file, eos_token, unk_token, pad_token, extra_ids, additional_special_tokens, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>     <span class="n">extra_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;&lt;extra_id_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&gt;&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">extra_ids</span><span class="p">)]</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="n">additional_special_tokens</span> <span class="o">=</span> <span class="n">extra_tokens</span>
+<span class="ne">--&gt; </span><span class="mi">135</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>     <span class="n">vocab_file</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span>     <span class="n">tokenizer_file</span><span class="o">=</span><span class="n">tokenizer_file</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>     <span class="n">eos_token</span><span class="o">=</span><span class="n">eos_token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>     <span class="n">unk_token</span><span class="o">=</span><span class="n">unk_token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span>     <span class="n">pad_token</span><span class="o">=</span><span class="n">pad_token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span>     <span class="n">extra_ids</span><span class="o">=</span><span class="n">extra_ids</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span>     <span class="n">additional_special_tokens</span><span class="o">=</span><span class="n">additional_special_tokens</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">146</span> <span class="bp">self</span><span class="o">.</span><span class="n">vocab_file</span> <span class="o">=</span> <span class="n">vocab_file</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extra_ids</span> <span class="o">=</span> <span class="n">extra_ids</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/tokenization_utils_fast.py:120,</span> in <span class="ni">PreTrainedTokenizerFast.__init__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span>     <span class="n">fast_tokenizer</span> <span class="o">=</span> <span class="n">convert_slow_tokenizer</span><span class="p">(</span><span class="n">slow_tokenizer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">120</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span>         <span class="s2">&quot;Couldn&#39;t instantiate the backend tokenizer from one of: </span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span>         <span class="s2">&quot;(1) a `tokenizers` library serialization file, </span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span>         <span class="s2">&quot;(2) a slow tokenizer instance to convert or </span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>         <span class="s2">&quot;(3) an equivalent slow tokenizer class to instantiate and convert. </span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>         <span class="s2">&quot;You need to have sentencepiece installed to convert a slow tokenizer to a fast one.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">fast_tokenizer</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span> <span class="k">if</span> <span class="n">slow_tokenizer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: Couldn&#39;t instantiate the backend tokenizer from one of: 
+<span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">a</span> <span class="err">`</span><span class="n">tokenizers</span><span class="err">`</span> <span class="n">library</span> <span class="n">serialization</span> <span class="n">file</span><span class="p">,</span> 
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="n">a</span> <span class="n">slow</span> <span class="n">tokenizer</span> <span class="n">instance</span> <span class="n">to</span> <span class="n">convert</span> <span class="ow">or</span> 
+<span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="n">an</span> <span class="n">equivalent</span> <span class="n">slow</span> <span class="n">tokenizer</span> <span class="k">class</span> <span class="nc">to</span> <span class="n">instantiate</span> <span class="ow">and</span> <span class="n">convert</span><span class="o">.</span> 
+<span class="n">You</span> <span class="n">need</span> <span class="n">to</span> <span class="n">have</span> <span class="n">sentencepiece</span> <span class="n">installed</span> <span class="n">to</span> <span class="n">convert</span> <span class="n">a</span> <span class="n">slow</span> <span class="n">tokenizer</span> <span class="n">to</span> <span class="n">a</span> <span class="n">fast</span> <span class="n">one</span><span class="o">.</span>
 </pre></div>
 </div>
 </div>

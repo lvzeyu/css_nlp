@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -188,9 +188,9 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">基礎知識</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="nlp_basis.html">自然言語処理の基礎</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ml_basis.html">機械学習の基本概念</a></li>
-<li class="toctree-l1"><a class="reference internal" href="math_basis.html">数学基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nlp_basis2.html">自然言語処理の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_basis2.html">機械学習の基本概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math_basis2.html">数学基礎</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ニューラルネットワーク</span></p>
 <ul class="nav bd-sidenav">
@@ -625,15 +625,15 @@ h_1
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>コンテキストの形状：(1, 7)
 重み
-[[ 0.85532074  1.40844018  0.02636045]
- [-1.26391035 -0.08782695  0.45412673]
- [-0.61677224 -0.97515058  0.6100783 ]
- [-0.00249903  1.13228069 -0.16676336]
- [-2.39489929  0.08169145 -2.41536413]
- [-1.17462651  0.17227561 -0.55463244]
- [-0.15832929 -0.81766712  0.49666396]]
+[[-1.20934449  0.1922577  -1.19751833]
+ [ 0.93374936 -0.07976744 -0.72805286]
+ [-1.21721955 -0.12004265  0.44151424]
+ [ 1.39186234 -0.33875393  1.26226364]
+ [-0.8053003   0.98539309  0.3265213 ]
+ [ 0.0785922   2.08232311  0.93487884]
+ [-1.41465322  1.0710103   1.29700865]]
 重み付き和
-[[0.85532074 1.40844018 0.02636045]]
+[[-1.20934449  0.1922577  -1.19751833]]
 重み付き和の形状：(1, 3)
 </pre></div>
 </div>
@@ -744,14 +744,10 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">torch</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[ 1.9211,  0.3769, -0.3665]]),
+ tensor([[ 1.9872,  1.6872, -1.0933]]),
+ tensor([[ 1.9542,  1.0321, -0.7299]]),
+ tensor([[-0.0800,  2.1350,  0.8560,  2.7460, -2.4290,  5.4950, -2.1790]]))
 </pre></div>
 </div>
 </div>
@@ -1195,54 +1191,50 @@ s_{\mathrm{you}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400]],
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">contexts</span><span class="p">))</span>
 
-        [[-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400]],
+<span class="nn">Cell In[12], line 26,</span> in <span class="ni">SimpleCBOW.forward</span><span class="nt">(self, contexts)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contexts</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="c1"># 入力層から中間層への順伝播</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="c1"># contextsは周囲の単語のインデックスのバッチ</span>
+<span class="ne">---&gt; </span><span class="mi">26</span>     <span class="n">embeds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_layer</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>  <span class="c1"># 埋め込みレイヤーを適用</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="n">h</span> <span class="o">=</span> <span class="n">embeds</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 埋め込みの平均を取る</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">middle_layer</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>  <span class="c1"># 中間層に適用</span>
 
-        [[-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400]],
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/torch/nn/modules/module.py:1553,</span> in <span class="ni">Module._wrapped_call_impl</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1551</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compiled_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1552</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1553</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        [[-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400]],
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/torch/nn/modules/module.py:1562,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1557</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
+<span class="g g-Whitespace">   </span><span class="mi">1558</span> <span class="c1"># this function, and just call forward.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1559</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backward_pre_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1560</span>         <span class="ow">or</span> <span class="n">_global_backward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1561</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1562</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1564</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1565</span>     <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
 
-        [[-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
-         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400]],
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/torch/nn/modules/sparse.py:164,</span> in <span class="ni">Embedding.forward</span><span class="nt">(self, input)</span>
+<span class="g g-Whitespace">    </span><span class="mi">163</span> <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">164</span>     <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">165</span>         <span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_norm</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">166</span>         <span class="bp">self</span><span class="o">.</span><span class="n">norm_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_grad_by_freq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sparse</span><span class="p">)</span>
 
-        [[-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [-0.2198,  0.3583,  0.3574, -1.3417, -1.7221, -0.0400],
-         [ 1.6963,  4.0685, -1.4509, -1.8220,  2.3745,  0.9844]]],
-       grad_fn=&lt;ViewBackward0&gt;)
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/torch/nn/functional.py:2267,</span> in <span class="ni">embedding</span><span class="nt">(input, weight, padding_idx, max_norm, norm_type, scale_grad_by_freq, sparse)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2261</span>     <span class="c1"># Note [embedding_renorm set_grad_enabled]</span>
+<span class="g g-Whitespace">   </span><span class="mi">2262</span>     <span class="c1"># XXX: equivalent to</span>
+<span class="g g-Whitespace">   </span><span class="mi">2263</span>     <span class="c1"># with torch.no_grad():</span>
+<span class="g g-Whitespace">   </span><span class="mi">2264</span>     <span class="c1">#   torch.embedding_renorm_</span>
+<span class="g g-Whitespace">   </span><span class="mi">2265</span>     <span class="c1"># remove once script supports set_grad_enabled</span>
+<span class="g g-Whitespace">   </span><span class="mi">2266</span>     <span class="n">_no_grad_embedding_renorm_</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">max_norm</span><span class="p">,</span> <span class="n">norm_type</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2267</span> <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">,</span> <span class="n">scale_grad_by_freq</span><span class="p">,</span> <span class="n">sparse</span><span class="p">)</span>
+
+<span class="ne">IndexError</span>: index out of range in self
 </pre></div>
 </div>
 </div>

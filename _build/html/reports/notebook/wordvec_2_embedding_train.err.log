@@ -41,12 +41,19 @@ with open("./Data/dokujo-tsushin.txt", mode="r",encoding="utf-8") as f:
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[1], line 6[0m
-[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[1;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[0;32m----> 6[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m
-[1;32m      7[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01moptim[39;00m [38;5;28;01mas[39;00m [38;5;21;01moptim[39;00m
-[1;32m      8[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01mnn[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnn[39;00m
+Cell [0;32mIn[1], line 11[0m
+[1;32m      9[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01mnn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mfunctional[39;00m [38;5;28;01mas[39;00m [38;5;21;01mF[39;00m
+[1;32m     10[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdata[39;00m [38;5;28;01mimport[39;00m DataLoader, Dataset
+[0;32m---> 11[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtensorboard[39;00m [38;5;28;01mimport[39;00m SummaryWriter
+[1;32m     13[0m [38;5;28;01mwith[39;00m [38;5;28mopen[39m([38;5;124m"[39m[38;5;124m./Data/dokujo-tsushin.txt[39m[38;5;124m"[39m, mode[38;5;241m=[39m[38;5;124m"[39m[38;5;124mr[39m[38;5;124m"[39m,encoding[38;5;241m=[39m[38;5;124m"[39m[38;5;124mutf-8[39m[38;5;124m"[39m) [38;5;28;01mas[39;00m f:
+[1;32m     14[0m     corpus [38;5;241m=[39m []
 
-[0;31mModuleNotFoundError[0m: No module named 'torch'
+File [0;32m~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/torch/utils/tensorboard/__init__.py:1[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mtensorboard[39;00m
+[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_vendor[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpackaging[39;00m[38;5;21;01m.[39;00m[38;5;21;01mversion[39;00m [38;5;28;01mimport[39;00m Version
+[1;32m      4[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mhasattr[39m(tensorboard, [38;5;124m"[39m[38;5;124m__version__[39m[38;5;124m"[39m) [38;5;129;01mor[39;00m Version(
+[1;32m      5[0m     tensorboard[38;5;241m.[39m__version__
+[1;32m      6[0m ) [38;5;241m<[39m Version([38;5;124m"[39m[38;5;124m1.15[39m[38;5;124m"[39m):
+
+[0;31mModuleNotFoundError[0m: No module named 'tensorboard'
 
