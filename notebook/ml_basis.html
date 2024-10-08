@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/ml_basis';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="数学基礎" href="math_basis.html" />
-    <link rel="prev" title="自然言語処理の基礎" href="nlp_basis.html" />
+    <link rel="next" title="数学基礎" href="math_basis2.html" />
+    <link rel="prev" title="自然言語処理の基礎" href="nlp_basis2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -481,12 +481,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate">学習率(Learning Rate)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">特徴量表現</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-gram">n-gramベクトル</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot">one-hotエンコーディング</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf">tf-idf</a></li>
-</ul>
-</li>
 </ul>
             </nav>
         </div>
@@ -644,53 +638,6 @@ RMSE = \sqrt{\frac{1}{N} \cdot \sum_{i=1}^{N} (y_i - p_i)^2}
 <p><strong><u>学習率とは、機械学習の最適化において、重みパラメータを一度にどの程度変化させるかを表すハイパーパラメータのことです。</strong></u></p>
 <p>機械学習とは、反復的に重みパラメータを変更していきますが、学習率の値が高いほど一度に変更する重みパラメータの大きさが大きくなるので学習のスピードは上がり、反対に低ければ学習のスピードは下がります。</p>
 <p><img alt="" src="../_images/learning_rate.png" /></p>
-</section>
-</section>
-<section id="id12">
-<h2>特徴量表現<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
-<p>機械学習では、実数値を要素とするベクトルで入力を表現することが多いです。適切な特徴(feature)を生データから作成すること、機械学習モデル性能も向上につながります。</p>
-<p>テキストデータもベクトク化する必要があります。</p>
-<section id="n-gram">
-<h3>n-gramベクトル<a class="headerlink" href="#n-gram" title="Link to this heading">#</a></h3>
-<p>n-gramは、テキストデータやシーケンスデータの連続するN個のアイテム（文字、単語など）を指す言葉です。特に<span class="math notranslate nohighlight">\(n=1\)</span>の場合をuni-gram, <span class="math notranslate nohighlight">\(n=2\)</span>の場合をbi-gramと呼びます。</p>
-<p>例えば、<code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">love</span> <span class="pre">machine</span> <span class="pre">learning</span></code>という文をn-gramで表現してみます。<span class="math notranslate nohighlight">\(n=1\)</span>の場合は<code class="docutils literal notranslate"><span class="pre">[&quot;I&quot;,</span> <span class="pre">&quot;love&quot;,</span> <span class="pre">&quot;machine&quot;,</span> <span class="pre">&quot;learning&quot;]</span></code>、<span class="math notranslate nohighlight">\(n=2\)</span>の場合は<code class="docutils literal notranslate"><span class="pre">[&quot;I</span> <span class="pre">love&quot;,</span> <span class="pre">&quot;love</span> <span class="pre">machine&quot;,</span> <span class="pre">&quot;machine</span> <span class="pre">learning&quot;]</span></code>、<span class="math notranslate nohighlight">\(n=3\)</span>の場合は<code class="docutils literal notranslate"><span class="pre">[&quot;I</span> <span class="pre">love</span> <span class="pre">machine&quot;,</span> <span class="pre">&quot;love</span> <span class="pre">machine</span> <span class="pre">learning&quot;]</span></code>のようにテキストを表現できます。</p>
-<p>抽出されたN-gramを一意なものとしてリストアップし、各n-gramに対して重複のないように数値を割り当てます。これを語彙(vocabulary)と呼びます。</p>
-<p>次に、 テキストごとに、語彙に含まれるN-gramの出現頻度や存在をベクトルとして表現します。</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>n-gramでは、ある程度にローカルな情報、文の構造や単語の順序を考慮することができます。一方、語彙のサイズが大きくなると、スパースなベクトルが生成され、計算コストが高くになるなどの欠点もあります。そのため、N-gramベクトルはある意味で「古典的な」特徴量表現になります。現在のNLPの分野では、埋め込みベクトルや事前学習済みモデルを使用する手法が主流になっています。</p>
-</div>
-</section>
-<section id="one-hot">
-<h3>one-hotエンコーディング<a class="headerlink" href="#one-hot" title="Link to this heading">#</a></h3>
-<p>one-hotエンコーディングでは、ある単語がテキストに存在するかどうかでベクトルを作成します。具体的には、</p>
-<ul class="simple">
-<li><p>語彙（ユニークな単語のリスト）を作成する。</p></li>
-<li><p>この語彙のサイズをベクトルの長さとし、各単語が語彙のどの位置に存在するかに応じて1の値を持つベクトルを生成する。</p></li>
-</ul>
-<p>例えば、以下の語彙に基づいて、“like a banana”のone-hotエンコーディング結果は<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">1]</span></code></p>
-<p><img alt="" src="../_images/one_hot.png" /></p>
-</section>
-<section id="tf-idf">
-<h3>tf-idf<a class="headerlink" href="#tf-idf" title="Link to this heading">#</a></h3>
-<p>tf-idfとは、「ある文書内」で「ある単語」が「どれくらい多い頻度で出現するか」を表すtf（term frequency：単語頻度）値と、「全文書中」で「ある単語を含む文書」が「（逆に）どれくらい少ない頻度で存在するか」を表すidf（inverse document frequency：逆文書頻度）値を掛け合わせた値のことです。</p>
-<ul class="simple">
-<li><p>Term Frequency (TF): 特定の文書内の単語の出現頻度を表します。</p></li>
-<li><p>Inverse Document Frequency (IDF): コーパス全体において、特定の単語がどれほど珍しいかを評価する指標です。</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-td-idf(t,d)=tf(t,d) \times idf(t)
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-idf(t)=log (\frac{全文書の数}{単語が含まれる文書の数})
-\]</div>
-<p>要するには、tf-idfの基本的な考え方は、ある単語が多くの文書に出現するなら、その単語は一般的に重要でないと考えられます。例えば、ある文書で「の」の出現頻度は高いが、同時に多くの文書に出現すると重要性が小さくなります。</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>ここまでテキストベクトル化の手法を説明しましたが、実に、これらの手法では単語の意味や関係をうまく捉えない、大規模のテキストデータに対応できない、汎用性は低いなどの欠点が挙げられます。これらの制約を克服するため、現在のNLPの分野では、埋め込みベクトルや事前学習済みモデルを使用する手法が主流になっています。</p>
-</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
@@ -734,7 +681,7 @@ idf(t)=log (\frac{全文書の数}{単語が含まれる文書の数})
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="nlp_basis.html"
+       href="nlp_basis2.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -743,7 +690,7 @@ idf(t)=log (\frac{全文書の数}{単語が含まれる文書の数})
       </div>
     </a>
     <a class="right-next"
-       href="math_basis.html"
+       href="math_basis2.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
@@ -788,12 +735,6 @@ idf(t)=log (\frac{全文書の数}{単語が含まれる文書の数})
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#epoch">エポック(epoch)数</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration">イテレーション (Iteration)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate">学習率(Learning Rate)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">特徴量表現</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-gram">n-gramベクトル</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot">one-hotエンコーディング</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf">tf-idf</a></li>
 </ul>
 </li>
 </ul>

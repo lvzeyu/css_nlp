@@ -59,9 +59,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/nlp_basis';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/nlp_basis2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="機械学習の基本概念" href="ml_basis.html" />
+    <link rel="prev" title="ガイダンス" href="introduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -187,8 +189,8 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">ガイダンス</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">基礎知識</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">自然言語処理の基礎</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="nlp_basis.html">自然言語処理の基礎</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ml_basis.html">機械学習の基本概念</a></li>
 <li class="toctree-l1"><a class="reference internal" href="math_basis.html">数学基礎</a></li>
 </ul>
@@ -284,7 +286,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/tree/master/blob/master/notebook/nlp_basis.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/tree/master/blob/master/notebook/nlp_basis2.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -332,7 +334,7 @@
       
       
       
-      <li><a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/nlp_basis.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/lvzeyu/css_nlp/tree/master/issues/new?title=Issue%20on%20page%20%2Fnotebook/nlp_basis2.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -362,7 +364,7 @@
       
       
       
-      <li><a href="../_sources/notebook/nlp_basis.ipynb" target="_blank"
+      <li><a href="../_sources/notebook/nlp_basis2.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -456,22 +458,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">コーパス</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">コーパスとは</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">コーパスの読み込み</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">ファイル読み込みの基礎</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#csvtsv">csvファイルとtsvファイルの読み込み</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#json">jsonファイルの読み込み</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">テキストの前処理</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">正規表現によるノイズの除去</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">トークン化</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">ストップワードの除去</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id">単語のID化</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">パディング</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">テキストの前処理</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">正規表現によるノイズの除去</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">トークン化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">ストップワードの除去</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">テキストの特徴量表現</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-gram">n-gramベクトル</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot">one-hotエンコーディング</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf">tf-idf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">埋め込みベクトル</a></li>
 </ul>
 </li>
 </ul>
@@ -488,154 +483,11 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>自然言語処理の基礎<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2>コーパス<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>テキストの前処理<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>テキストは文字の羅列であり構造化されていないため、そのままでは処理するのが難しいです。そこで、前処理を通じてテキストを整理し、分析やモデルに適した形式に変換する必要があります。</p>
+<p><img alt="" src="../_images/pre-processing.png" /></p>
 <section id="id3">
-<h3>コーパスとは<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
-<p>「コーパス（Corpus）」とは、ひとことで言うと言語データの集まりのです。</p>
-<p>コーパスが大きく「ラベル付きコーパス」と「ラベルなしコーパス」に分けられます。</p>
-<ul class="simple">
-<li><p>ラベルなしコーパス: 注釈付けを行わずにテキストを集めただけのコーパス。例えば、スクリーンスクレイピングによる取得するウェブベージの生テキストデータ。</p></li>
-<li><p>ラベル付きコーパス: ラベル付きコーパスとは、テキストに付加情報（ラベルや注釈）が付与されているコーパスのことを指します。このラベルは、特定のタスクや研究の目的に応じてデータに追加されます。</p>
-<ul>
-<li><p><u><strong>品詞</strong></u>タグ付きコーパス: 各単語に品詞（名詞、動詞、形容詞など, part of speech）のタグが付けられています。これは、文法的構造の理解や、品詞タガーの訓練データとして使用されます。</p></li>
-<li><p>固有名詞抽出のためのコーパス: テキスト内の固有名詞（人名、地名、組織名など）に対して、該当するラベルが付けられています。</p></li>
-</ul>
-</li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;sentence&gt;
-　&lt;LUW B=&quot;B&quot; SL=&quot;v&quot; l_lemma=&quot;公共工事請け負い金額&quot; l_lForm=&quot;コウキョウコウジウケオイキンガク&quot; l_wType=&quot;混&quot; l_pos=&quot;名詞-普通名詞-一般&quot; &gt;
-　　&lt;SUW lemma=&quot;公共&quot; lForm=&quot;コウキョウ&quot; wType=&quot;漢&quot; pos=&quot;名詞-普通名詞-一般&quot; pron=&quot;コーキョー&quot;&gt;
-　　　公共
-　　&lt;/SUW&gt;
-　　&lt;SUW lemma=&quot;工事&quot; lForm=&quot;コウジ&quot; wType=&quot;漢&quot; pos=&quot;名詞-普通名詞-サ変可能&quot; pron=&quot;コージ&quot;&gt;
-　　　工事
-　　&lt;/SUW&gt;
-　　&lt;SUW lemma=&quot;請け負い&quot; lForm=&quot;ウケオイ&quot; wType=&quot;和&quot; pos=&quot;名詞-普通名詞-一般&quot; pron=&quot;ウケオイ&quot;&gt;
-　　　請負
-　　&lt;/SUW&gt;
-　　&lt;SUW lemma=&quot;金額&quot; lForm=&quot;キンガク&quot; wType=&quot;漢&quot; pos=&quot;名詞-普通名詞-一般&quot; pron=&quot;キンガク&quot;&gt;
-　　　金額
-　　&lt;/SUW&gt;
-　&lt;/LUW&gt;
-　&lt;LUW SL=&quot;v&quot; l_lemma=&quot;の&quot; l_lForm=&quot;ノ&quot; l_wType=&quot;和&quot; l_pos=&quot;助詞-格助詞&quot; &gt;
-　　&lt;SUW lemma=&quot;の&quot; lForm=&quot;ノ&quot; wType=&quot;和&quot; pos=&quot;助詞-格助詞&quot; pron=&quot;ノ&quot;&gt;の&lt;/SUW&gt;
-　&lt;/LUW&gt;
-　&lt;LUW B=&quot;B&quot; SL=&quot;v&quot; l_lemma=&quot;動き&quot; l_lForm=&quot;ウゴキ&quot; l_wType=&quot;和&quot; l_pos=&quot;名詞-普通名詞-一般&quot; &gt;
-　　&lt;SUW lemma=&quot;動き&quot; lForm=&quot;ウゴキ&quot; wType=&quot;和&quot; pos=&quot;名詞-普通名詞-一般&quot; pron=&quot;ウゴキ&quot;&gt;
-　　　動き
-　　&lt;/SUW&gt;
-　&lt;/LUW&gt;
-（略）
-&lt;/sentence&gt;
-</pre></div>
-</div>
-</section>
-<section id="id4">
-<h3>コーパスの読み込み<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
-<p>多くのコーパスは、<em>txt</em>,<em>csv</em>,<em>tsv</em>, <em>json</em>フォーマットで格納されていますので、pythonでこれらのファイルを読み込む方法について紹介します。</p>
-<section id="id5">
-<h4>ファイル読み込みの基礎<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
-<p>読み込み・書き込みいずれの場合も組み込み関数<code class="docutils literal notranslate"><span class="pre">open()</span></code>でファイルを開きます。</p>
-<ul class="simple">
-<li><p>第一引数に指定したパスからコーパスファイルが開かれます。</p></li>
-<li><p>引数<code class="docutils literal notranslate"><span class="pre">mode</span></code>を<code class="docutils literal notranslate"><span class="pre">r</span></code>とすると読み込みモードでファイルが開かれます。デフォルト値は<code class="docutils literal notranslate"><span class="pre">r</span></code>なので省略してもよい。</p></li>
-<li><p>テキストファイル読み込み時のデコード、書き込み時のエンコードで使われるエンコーディングは引数<code class="docutils literal notranslate"><span class="pre">encoding</span></code>で指定する。日本語環境で使われるものとしては<code class="docutils literal notranslate"><span class="pre">cp932</span></code>, <code class="docutils literal notranslate"><span class="pre">euc_jp</span></code>, <code class="docutils literal notranslate"><span class="pre">shift_jis</span></code>, <code class="docutils literal notranslate"><span class="pre">utf_8</span></code>などがあります。</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./Data/corpus.txt&quot;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>この商品はとても素晴らしい。
-残念ながら、私の期待を下回る製品でした。
-非常に使いやすく、価格も手頃。おすすめです！
-この商品には全く魅力を感じませんでした。
-</pre></div>
-</div>
-</div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">readlines()</span></code>メソッドで、ファイル全体を行ごとに分割したリストとして取得できます。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./Data/corpus.txt&quot;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>この商品はとても素晴らしい。
-
------------
-残念ながら、私の期待を下回る製品でした。
-
------------
-非常に使いやすく、価格も手頃。おすすめです！
-
------------
-この商品には全く魅力を感じませんでした。
-
------------
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="csvtsv">
-<h4>csvファイルとtsvファイルの読み込み<a class="headerlink" href="#csvtsv" title="Link to this heading">#</a></h4>
-<p>csvは、値がカンマで区切られたファイル形式です。</p>
-<p>tsvは、値がタブで区切られたファイル形式です。</p>
-<p>ファイルの読み込みは、<code class="docutils literal notranslate"><span class="pre">Pandas</span></code>を使って行うことがでします。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;example.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span><span class="s2">&quot;uft-8&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="json">
-<h4>jsonファイルの読み込み<a class="headerlink" href="#json" title="Link to this heading">#</a></h4>
-<p><u><strong>JSONは、構造化されたデータをテキスト形式で表現するためのフォーマットです。</strong></u></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Taro Yamada&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
-        <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Tokyo&quot;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Hanako Tanaka&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-        <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Osaka&quot;</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Jiro Suzuki&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
-        <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Kyoto&quot;</span>
-    <span class="p">}</span>
-<span class="p">]</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">Pandas</span></code>の<code class="docutils literal notranslate"><span class="pre">read_json</span></code>メソッドを使って読み込めます。</p>
-<p>特に、改行で区切られたJSONファイルはjsonlで呼ばれます。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Taro Yamada&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Tokyo&quot;</span><span class="p">}</span>
-<span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Hanako Tanaka&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Osaka&quot;</span><span class="p">}</span>
-<span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Jiro Suzuki&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Kyoto&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>jsonl形式のファイルを読み込むには、<code class="docutils literal notranslate"><span class="pre">read_json</span></code>メソッドの<code class="docutils literal notranslate"><span class="pre">lines</span></code>引数に<code class="docutils literal notranslate"><span class="pre">lines=True</span></code>を設定する必要があります。</p>
-</section>
-</section>
-</section>
-<section id="id6">
-<h2>テキストの前処理<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
-<section id="id7">
-<h3>正規表現によるノイズの除去<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3>正規表現によるノイズの除去<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>テキスト分析における、テキストから不要な情報やノイズを取り除き、解析や処理を行いやすくするための前処理が不可欠になります。</p>
 <p>テキストクリーニングを行う際に、<strong><u>正規表現</strong></u>を利用すると非常に柔軟にノイズの除去が可能です。以下、いくつかの一般的なケースを例に、テキストからノイズを除去する方法を紹介します。</p>
 <aside class="margin sidebar">
@@ -649,14 +501,14 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
 
 <span class="c1">#ウェブページやSNSのテキストからURLを取り除く場合:</span>
-<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;この記事はhttp://example.com に投稿されました。&quot;</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;この店は美味しいですhttp://example.com &quot;</span>
 <span class="n">cleaned_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http\S+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cleaned_text</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>この記事は に投稿されました。
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>この店は美味しいです 
 </pre></div>
 </div>
 </div>
@@ -704,8 +556,8 @@ document.write(`
 <p><code class="docutils literal notranslate"><span class="pre">[a-zA-Z]</span></code> は、英字の大文字と小文字にマッチする文字クラスです。</p>
 </aside>
 </section>
-<section id="id8">
-<h3>トークン化<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h3>トークン化<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>トークン化は、文字列をモデルで使用される最小単位に分解するステップです。トークンは通常、言語の基本的な構成要素である単語や部分文字列を指します。</p>
 <p>日本語は英語などとは異なり、単語の間に（スペースなどの）区切りをつけないので、文から単語を取り出すこと自体が一つのタスクとなります。文から単語（正確には形態素と呼ばれる意味の最小単位）を取り出す解析を形態素解析といいます。</p>
 <p>イメージとしては以下のように分割します。</p>
@@ -873,42 +725,79 @@ EOS
 </div>
 </div>
 </section>
-<section id="id9">
-<h3>ストップワードの除去<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h3>ストップワードの除去<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>ストップワードとは、助詞など単独で用いられなかったり、一般的に使用されすぎていて文の意味の分析に寄与しない、あるいや逆に使用頻度が少ないため、含めると分析結果が歪んでしまうなどの理由で分析からあらかじめ除外しておく語のことをいいます。</p>
 <p>一般的には、あらかじめストップワードを辞書に定義しておき、辞書内に含まれる単語をテキスとから除外します。</p>
 <p>一般的な用語のストップリストは例えばSlothLibプロジェクトから取得することができます。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib</span>
-<span class="n">slothlib_path</span> <span class="o">=</span> <span class="s1">&#39;http://svn.sourceforge.jp/svnroot/slothlib/CSharp/Version1/SlothLib/NLP/Filter/StopWord/word/Japanese.txt&#39;</span>
-<span class="n">slothlib_file</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">slothlib_path</span><span class="p">)</span>
-<span class="n">slothlib_stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">slothlib_file</span><span class="p">]</span>
-<span class="n">slothlib_stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="n">ss</span> <span class="k">for</span> <span class="n">ss</span> <span class="ow">in</span> <span class="n">slothlib_stopwords</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">ss</span><span class="o">==</span><span class="sa">u</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import urllib</span>
+<span class="c1">#slothlib_path = &#39;http://svn.sourceforge.jp/svnroot/slothlib/CSharp/Version1/SlothLib/NLP/Filter/StopWord/word/Japanese.txt&#39;</span>
+<span class="c1">#slothlib_file = urllib.request.urlopen(slothlib_path)</span>
+<span class="c1">#slothlib_stopwords = [line.decode(&quot;utf-8&quot;).strip() for line in slothlib_file]</span>
+<span class="c1">#slothlib_stopwords = [ss for ss in slothlib_stopwords if not ss==u&#39;&#39;]</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="id">
-<h3>単語のID化<a class="headerlink" href="#id" title="Link to this heading">#</a></h3>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>先取りですが、ここからは機械学習・深層学習の適用するための前処理について解説します。</p>
-</aside>
-<p>ほとんどの機械学習・深層学習モデルは数値データを入力として受け取りますので、テキストデータを数値形式に変換する必要があります。</p>
-<p>単語のID化とは、テキストデータを機械学習モデルなどで処理する際に、単語を一意の整数値（ID）に変換するプロセスを指します。これは、テキストデータをベクトルや行列の形でモデルに入力するための前処理として行われます。</p>
+<section id="id6">
+<h3>テキストの特徴量表現<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>機械学習では、実数値を要素とするベクトルで入力を表現することが多いです。適切な特徴(feature)を生データから作成すること、機械学習モデル性能も向上につながります。</p>
+<p>テキストデータもベクトク化する必要があります。</p>
 </section>
-<section id="id10">
-<h3>パディング<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
-<p>パディング(Padding)とは、データの一定の長さや形状を持つように調整するためのテクニックです。</p>
-<p>多くの機械学習・深層学習モデルでは、固定サイズの入力を要求しています。しかし、異なる文書や文はさまざまな長さを持っていますので、テキストデータは可変長である場合が多いです。したがって、すべての文書や文を同じ長さにするためにパディングを使用します。主な手順としては、</p>
+<section id="n-gram">
+<h3>n-gramベクトル<a class="headerlink" href="#n-gram" title="Link to this heading">#</a></h3>
+<p>n-gramは、テキストデータやシーケンスデータの連続するN個のアイテム（文字、単語など）を指す言葉です。特に<span class="math notranslate nohighlight">\(n=1\)</span>の場合をuni-gram, <span class="math notranslate nohighlight">\(n=2\)</span>の場合をbi-gramと呼びます。</p>
+<p>例えば、<code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">love</span> <span class="pre">machine</span> <span class="pre">learning</span></code>という文をn-gramで表現してみます。<span class="math notranslate nohighlight">\(n=1\)</span>の場合は<code class="docutils literal notranslate"><span class="pre">[&quot;I&quot;,</span> <span class="pre">&quot;love&quot;,</span> <span class="pre">&quot;machine&quot;,</span> <span class="pre">&quot;learning&quot;]</span></code>、<span class="math notranslate nohighlight">\(n=2\)</span>の場合は<code class="docutils literal notranslate"><span class="pre">[&quot;I</span> <span class="pre">love&quot;,</span> <span class="pre">&quot;love</span> <span class="pre">machine&quot;,</span> <span class="pre">&quot;machine</span> <span class="pre">learning&quot;]</span></code>、<span class="math notranslate nohighlight">\(n=3\)</span>の場合は<code class="docutils literal notranslate"><span class="pre">[&quot;I</span> <span class="pre">love</span> <span class="pre">machine&quot;,</span> <span class="pre">&quot;love</span> <span class="pre">machine</span> <span class="pre">learning&quot;]</span></code>のようにテキストを表現できます。</p>
+<p>抽出されたN-gramを一意なものとしてリストアップし、各n-gramに対して重複のないように数値を割り当てます。これを語彙(vocabulary)と呼びます。</p>
+<p>次に、 テキストごとに、語彙に含まれるN-gramの出現頻度や存在をベクトルとして表現します。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>n-gramでは、ある程度にローカルな情報、文の構造や単語の順序を考慮することができます。一方、語彙のサイズが大きくなると、スパースなベクトルが生成され、計算コストが高くになるなどの欠点もあります。そのため、N-gramベクトルはある意味で「古典的な」特徴量表現になります。現在のNLPの分野では、埋め込みベクトルや事前学習済みモデルを使用する手法が主流になっています。</p>
+</div>
+</section>
+<section id="one-hot">
+<h3>one-hotエンコーディング<a class="headerlink" href="#one-hot" title="Link to this heading">#</a></h3>
+<p>one-hotエンコーディングでは、ある単語がテキストに存在するかどうかでベクトルを作成します。具体的には、</p>
 <ul class="simple">
-<li><p>最大長を決定</p></li>
-<li><p>最大長に達するまで、各文の末尾または先頭に特定の「パッドトークン」を追加します。パディングに使用するトークンは、モデルが誤って意味を学習しないように、他の実際の単語やトークンとは異なるものである必要があります。</p></li>
-<li><p>長すぎる文は、最大長に合わせるために切り捨て</p></li>
+<li><p>語彙（ユニークな単語のリスト）を作成する。</p></li>
+<li><p>この語彙のサイズをベクトルの長さとし、各単語が語彙のどの位置に存在するかに応じて1の値を持つベクトルを生成する。</p></li>
 </ul>
-<p><img alt="" src="../_images/attention_id.png" /></p>
+<p>例えば、以下の語彙に基づいて、“like a banana”のone-hotエンコーディング結果は<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">1]</span></code></p>
+<p><img alt="" src="../_images/one_hot.png" /></p>
+</section>
+<section id="tf-idf">
+<h3>tf-idf<a class="headerlink" href="#tf-idf" title="Link to this heading">#</a></h3>
+<p>tf-idfとは、「ある文書内」で「ある単語」が「どれくらい多い頻度で出現するか」を表すtf（term frequency：単語頻度）値と、「全文書中」で「ある単語を含む文書」が「（逆に）どれくらい少ない頻度で存在するか」を表すidf（inverse document frequency：逆文書頻度）値を掛け合わせた値のことです。</p>
+<ul class="simple">
+<li><p>Term Frequency (TF): 特定の文書内の単語の出現頻度を表します。</p></li>
+<li><p>Inverse Document Frequency (IDF): コーパス全体において、特定の単語がどれほど珍しいかを評価する指標です。</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+td-idf(t,d)=tf(t,d) \times idf(t)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+idf(t)=log (\frac{全文書の数}{単語が含まれる文書の数})
+\]</div>
+<p>要するには、tf-idfの基本的な考え方は、ある単語が多くの文書に出現するなら、その単語は一般的に重要でないと考えられます。例えば、ある文書で「の」の出現頻度は高いが、同時に多くの文書に出現すると重要性が小さくなります。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ここまでテキストベクトル化の手法を説明しましたが、実に、これらの手法では単語の意味や関係をうまく捉えない、大規模のテキストデータに対応できない、汎用性は低いなどの欠点が挙げられます。これらの制約を克服するため、現在のNLPの分野では、埋め込みベクトルや事前学習済みモデルを使用する手法が主流になっています。</p>
+</div>
+</section>
+<section id="id7">
+<h3>埋め込みベクトル<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>単語埋め込みベクトル（Word Embedding Vector）とは、単語を数値ベクトルの形で表現したものです。</p>
+<p>この表現は、単語の意味や文脈情報を数値で表現することにより、機械学習モデルがテキストデータを効果的に処理できるようにするために使用されます。</p>
+<ul class="simple">
+<li><p>類似性: ある概念を表現する際に、ほかの概念との共通点や類似性と紐づけながら、ベクトル空間上に表現します。</p></li>
+<li><p>単語類推: 分散表現では異なる概念を表現するベクトル同士での計算が可能です</p></li>
+</ul>
+<p><img alt="" src="../_images/word2vec.png" /></p>
 </section>
 </section>
 </section>
@@ -943,6 +832,24 @@ EOS
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ガイダンス</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ml_basis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">機械学習の基本概念</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -959,22 +866,15 @@ EOS
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">コーパス</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">コーパスとは</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">コーパスの読み込み</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">ファイル読み込みの基礎</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#csvtsv">csvファイルとtsvファイルの読み込み</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#json">jsonファイルの読み込み</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">テキストの前処理</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">正規表現によるノイズの除去</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">トークン化</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">ストップワードの除去</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id">単語のID化</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">パディング</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">テキストの前処理</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">正規表現によるノイズの除去</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">トークン化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">ストップワードの除去</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">テキストの特徴量表現</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-gram">n-gramベクトル</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot">one-hotエンコーディング</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf">tf-idf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">埋め込みベクトル</a></li>
 </ul>
 </li>
 </ul>
