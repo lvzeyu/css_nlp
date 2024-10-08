@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -62,8 +62,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/nlp_basis';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="機械学習の基本概念" href="ml_basis.html" />
-    <link rel="prev" title="ガイダンス" href="introduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -739,17 +737,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># !pip install mecab-python3 # mecab-python3のインストール</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># !pip install unidic</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># !python -m unidic download # 辞書のダウンロード</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">MeCab</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">unidic</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">tagger</span> <span class="o">=</span> <span class="n">MeCab</span><span class="o">.</span><span class="n">Tagger</span><span class="p">()</span> 
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;MeCab&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>友	名詞,普通名詞,一般,,,,トモ,友,友,トモ,友,トモ,和,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,体,トモ,トモ,トモ,トモ,&quot;1&quot;,&quot;C3&quot;,&quot;&quot;,7324130487706112,26645
+たち	接尾辞,名詞的,一般,,,,タチ,達,たち,タチ,たち,タチ,和,&quot;タ濁&quot;,&quot;基本形&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,接尾体,タチ,タチ,タチ,タチ,&quot;&quot;,&quot;C3&quot;,&quot;&quot;,6149852035686912,22373
+と	助詞,格助詞,,,,,ト,と,と,ト,と,ト,和,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,格助,ト,ト,ト,ト,&quot;&quot;,&quot;名詞%F1,動詞%F1,形容詞%F2@-1&quot;,&quot;&quot;,7099014038299136,25826
+国立	名詞,普通名詞,一般,,,,コクリツ,国立,国立,コクリツ,国立,コクリツ,漢,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,体,コクリツ,コクリツ,コクリツ,コクリツ,&quot;0&quot;,&quot;C2&quot;,&quot;&quot;,3460171716239872,12588
+新	接頭辞,,,,,,シン,新,新,シン,新,シン,漢,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,接頭,シン,シン,シン,シン,&quot;&quot;,&quot;P2&quot;,&quot;&quot;,4736429838180864,17231
+美術	名詞,普通名詞,一般,,,,ビジュツ,美術,美術,ビジュツ,美術,ビジュツ,漢,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,体,ビジュツ,ビジュツ,ビジュツ,ビジュツ,&quot;1&quot;,&quot;C1&quot;,&quot;&quot;,8801049481716224,32018
+館	接尾辞,名詞的,一般,,,,カン,館,館,カン,館,カン,漢,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,接尾体,カン,カン,カン,カン,&quot;&quot;,&quot;C3&quot;,&quot;&quot;,2056095367569920,7480
+に	助詞,格助詞,,,,,ニ,に,に,ニ,に,ニ,和,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,格助,ニ,ニ,ニ,ニ,&quot;&quot;,&quot;名詞%F1&quot;,&quot;&quot;,7745518285496832,28178
+行っ	動詞,非自立可能,,,五段-カ行,連用形-促音便,イク,行く,行っ,イッ,行く,イク,和,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,用,イッ,イク,イッ,イク,&quot;0&quot;,&quot;C2&quot;,&quot;&quot;,470874511778436,1713
+た	助動詞,,,,助動詞-タ,終止形-一般,タ,た,た,タ,た,タ,和,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,助動,タ,タ,タ,タ,&quot;&quot;,&quot;動詞%F2@1,形容詞%F4@-2&quot;,&quot;&quot;,5948916285711019,21642
+。	補助記号,句点,,,,,,。,。,,。,,記号,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,補助,,,,,&quot;&quot;,&quot;&quot;,&quot;&quot;,6880571302400,25
+EOS
 </pre></div>
 </div>
 </div>
@@ -771,15 +770,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">ryotakusakai</span><span class="o">/</span><span class="n">css_nlp</span><span class="o">/</span><span class="n">notebook</span><span class="o">/</span><span class="n">nlp_basis</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">セル</span> <span class="mi">24</span> <span class="n">line</span> <span class="mi">3</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X33sZmlsZQ%3D%3D?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">sample_txt</span> <span class="o">=</span> <span class="s2">&quot;友たちと国立新美術館に行った。&quot;</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X33sZmlsZQ%3D%3D?line=1&#39;</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;-d /opt/homebrew/lib/mecab/dic/mecab-ipadic-neologd&quot;</span>
-<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X33sZmlsZQ%3D%3D?line=2&#39;</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">MeCab</span><span class="o">.</span><span class="n">Tagger</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X33sZmlsZQ%3D%3D?line=3&#39;</span><span class="o">&gt;</span><span class="mi">4</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mecab ipadic NEologd:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">m</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">sample_txt</span><span class="p">))</span>
-
-<span class="ne">NameError</span>: name &#39;MeCab&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mecab ipadic NEologd:
+ 友	名詞,一般,*,*,*,*,友,トモ,トモ
+たち	名詞,接尾,一般,*,*,*,たち,タチ,タチ
+と	助詞,並立助詞,*,*,*,*,と,ト,ト
+国立新美術館	名詞,固有名詞,一般,*,*,*,国立新美術館,コクリツシンビジュツカン,コクリツシンビジュツカン
+に	助詞,格助詞,一般,*,*,*,に,ニ,ニ
+行っ	動詞,自立,*,*,五段・カ行促音便,連用タ接続,行く,イッ,イッ
+た	助動詞,*,*,*,特殊・タ,基本形,た,タ,タ
+。	記号,句点,*,*,*,*,。,。,。
+EOS
 </pre></div>
 </div>
 </div>
@@ -800,16 +800,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">ryotakusakai</span><span class="o">/</span><span class="n">css_nlp</span><span class="o">/</span><span class="n">notebook</span><span class="o">/</span><span class="n">nlp_basis</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">セル</span> <span class="mi">28</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X40sZmlsZQ%3D%3D?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">n</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">parseToNode</span><span class="p">(</span><span class="n">sample_txt</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;m&#39; is not defined
-</pre></div>
-</div>
-</div>
 </div>
 <p>最初は、BOS/EOS(文頭／文末)を示す符号となります。</p>
 <div class="cell docutils container">
@@ -819,12 +809,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">ryotakusakai</span><span class="o">/</span><span class="n">css_nlp</span><span class="o">/</span><span class="n">notebook</span><span class="o">/</span><span class="n">nlp_basis</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">セル</span> <span class="mi">30</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X42sZmlsZQ%3D%3D?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">n</span><span class="o">.</span><span class="n">feature</span>
-
-<span class="ne">NameError</span>: name &#39;n&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;BOS/EOS,*,*,*,*,*,*,*,*&#39;
 </pre></div>
 </div>
 </div>
@@ -836,16 +821,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">ryotakusakai</span><span class="o">/</span><span class="n">css_nlp</span><span class="o">/</span><span class="n">notebook</span><span class="o">/</span><span class="n">nlp_basis</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">セル</span> <span class="mi">32</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X44sZmlsZQ%3D%3D?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">next</span>
-
-<span class="ne">NameError</span>: name &#39;n&#39; is not defined
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -854,12 +829,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">ryotakusakai</span><span class="o">/</span><span class="n">css_nlp</span><span class="o">/</span><span class="n">notebook</span><span class="o">/</span><span class="n">nlp_basis</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">セル</span> <span class="mi">33</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X45sZmlsZQ%3D%3D?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">n</span><span class="o">.</span><span class="n">feature</span>
-
-<span class="ne">NameError</span>: name &#39;n&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;名詞,一般,*,*,*,*,友,トモ,トモ&#39;
 </pre></div>
 </div>
 </div>
@@ -876,13 +846,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">ryotakusakai</span><span class="o">/</span><span class="n">css_nlp</span><span class="o">/</span><span class="n">notebook</span><span class="o">/</span><span class="n">nlp_basis</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">セル</span> <span class="mi">35</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X50sZmlsZQ%3D%3D?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;品詞: &quot;</span><span class="o">+</span><span class="n">n</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X50sZmlsZQ%3D%3D?line=1&#39;</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;基本形: &quot;</span><span class="o">+</span><span class="n">n</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">6</span><span class="p">])</span>
-
-<span class="ne">NameError</span>: name &#39;n&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>品詞: 名詞
+基本形: 友
 </pre></div>
 </div>
 </div>
@@ -899,14 +864,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">ryotakusakai</span><span class="o">/</span><span class="n">css_nlp</span><span class="o">/</span><span class="n">notebook</span><span class="o">/</span><span class="n">nlp_basis</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">セル</span> <span class="mi">37</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X52sZmlsZQ%3D%3D?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">n</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">parseToNode</span><span class="p">(</span><span class="n">sample_txt</span><span class="p">)</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X52sZmlsZQ%3D%3D?line=1&#39;</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/ryotakusakai/css_nlp/notebook/nlp_basis.ipynb#X52sZmlsZQ%3D%3D?line=2&#39;</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>   <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;名詞&quot;</span><span class="p">,</span><span class="s2">&quot;形容詞&quot;</span><span class="p">,</span><span class="s2">&quot;動詞&quot;</span><span class="p">]:</span>
-
-<span class="ne">NameError</span>: name &#39;m&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>友
+たち
+国立新美術館
+行く
 </pre></div>
 </div>
 </div>
@@ -982,24 +943,6 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="introduction.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ガイダンス</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="ml_basis.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">機械学習の基本概念</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
