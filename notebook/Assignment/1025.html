@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -188,9 +188,9 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">基礎知識</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../nlp_basis.html">自然言語処理の基礎</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ml_basis.html">機械学習の基本概念</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../math_basis.html">数学基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp_basis2.html">自然言語処理の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml_basis2.html">機械学習の基本概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math_basis2.html">数学基礎</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ニューラルネットワーク</span></p>
 <ul class="nav bd-sidenav">
@@ -488,20 +488,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">torch</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># Load dataset and create splits</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">iris_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -732,46 +718,50 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [50/2000], Train Loss: 0.1057, Val Loss: 0.0445
-Epoch [100/2000], Train Loss: 0.0517, Val Loss: 0.0478
-Epoch [150/2000], Train Loss: 0.0453, Val Loss: 0.0462
-Epoch [200/2000], Train Loss: 0.0431, Val Loss: 0.0449
-Epoch [250/2000], Train Loss: 0.0413, Val Loss: 0.0427
-Epoch [300/2000], Train Loss: 0.0401, Val Loss: 0.0411
-Epoch [350/2000], Train Loss: 0.0387, Val Loss: 0.0411
-Epoch [400/2000], Train Loss: 0.0375, Val Loss: 0.0401
-Epoch [450/2000], Train Loss: 0.0364, Val Loss: 0.0378
-Epoch [500/2000], Train Loss: 0.0349, Val Loss: 0.0375
-Epoch [550/2000], Train Loss: 0.0334, Val Loss: 0.0383
-Epoch [600/2000], Train Loss: 0.0321, Val Loss: 0.0386
-Epoch [650/2000], Train Loss: 0.0312, Val Loss: 0.0407
-Epoch [700/2000], Train Loss: 0.0303, Val Loss: 0.0383
-Epoch [750/2000], Train Loss: 0.0293, Val Loss: 0.0402
-Epoch [800/2000], Train Loss: 0.0282, Val Loss: 0.0425
-Epoch [850/2000], Train Loss: 0.0275, Val Loss: 0.0431
-Epoch [900/2000], Train Loss: 0.0270, Val Loss: 0.0424
-Epoch [950/2000], Train Loss: 0.0266, Val Loss: 0.0447
-Epoch [1000/2000], Train Loss: 0.0260, Val Loss: 0.0472
-Epoch [1050/2000], Train Loss: 0.0252, Val Loss: 0.0452
-Epoch [1100/2000], Train Loss: 0.0248, Val Loss: 0.0482
-Epoch [1150/2000], Train Loss: 0.0245, Val Loss: 0.0468
-Epoch [1200/2000], Train Loss: 0.0269, Val Loss: 0.0532
-Epoch [1250/2000], Train Loss: 0.0239, Val Loss: 0.0487
-Epoch [1300/2000], Train Loss: 0.0237, Val Loss: 0.0491
-Epoch [1350/2000], Train Loss: 0.0236, Val Loss: 0.0505
-Epoch [1400/2000], Train Loss: 0.0235, Val Loss: 0.0494
-Epoch [1450/2000], Train Loss: 0.0233, Val Loss: 0.0514
-Epoch [1500/2000], Train Loss: 0.0232, Val Loss: 0.0527
-Epoch [1550/2000], Train Loss: 0.0229, Val Loss: 0.0506
-Epoch [1600/2000], Train Loss: 0.0230, Val Loss: 0.0543
-Epoch [1650/2000], Train Loss: 0.0226, Val Loss: 0.0520
-Epoch [1700/2000], Train Loss: 0.0235, Val Loss: 0.0570
-Epoch [1750/2000], Train Loss: 0.0226, Val Loss: 0.0535
-Epoch [1800/2000], Train Loss: 0.0231, Val Loss: 0.0607
-Epoch [1850/2000], Train Loss: 0.0220, Val Loss: 0.0546
-Epoch [1900/2000], Train Loss: 0.0223, Val Loss: 0.0549
-Epoch [1950/2000], Train Loss: 0.0220, Val Loss: 0.0560
-Epoch [2000/2000], Train Loss: 0.0228, Val Loss: 0.0538
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [50/2000], Train Loss: 0.0830, Val Loss: 0.0882
+Epoch [100/2000], Train Loss: 0.0492, Val Loss: 0.0840
+Epoch [150/2000], Train Loss: 0.0453, Val Loss: 0.0848
+Epoch [200/2000], Train Loss: 0.0436, Val Loss: 0.0855
+Epoch [250/2000], Train Loss: 0.0424, Val Loss: 0.0865
+Epoch [300/2000], Train Loss: 0.0412, Val Loss: 0.0878
+Epoch [350/2000], Train Loss: 0.0403, Val Loss: 0.0889
+Epoch [400/2000], Train Loss: 0.0393, Val Loss: 0.0928
+Epoch [450/2000], Train Loss: 0.0383, Val Loss: 0.0957
+Epoch [500/2000], Train Loss: 0.0373, Val Loss: 0.0990
+Epoch [550/2000], Train Loss: 0.0365, Val Loss: 0.1007
+Epoch [600/2000], Train Loss: 0.0359, Val Loss: 0.1035
+Epoch [650/2000], Train Loss: 0.0354, Val Loss: 0.1058
+Epoch [700/2000], Train Loss: 0.0350, Val Loss: 0.1118
+Epoch [750/2000], Train Loss: 0.0317, Val Loss: 0.1183
+Epoch [800/2000], Train Loss: 0.0299, Val Loss: 0.1129
+Epoch [850/2000], Train Loss: 0.0291, Val Loss: 0.1143
+Epoch [900/2000], Train Loss: 0.0293, Val Loss: 0.1137
+Epoch [950/2000], Train Loss: 0.0273, Val Loss: 0.1186
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [1000/2000], Train Loss: 0.0267, Val Loss: 0.1218
+Epoch [1050/2000], Train Loss: 0.0260, Val Loss: 0.1200
+Epoch [1100/2000], Train Loss: 0.0254, Val Loss: 0.1170
+Epoch [1150/2000], Train Loss: 0.0249, Val Loss: 0.1204
+Epoch [1200/2000], Train Loss: 0.0246, Val Loss: 0.1198
+Epoch [1250/2000], Train Loss: 0.0233, Val Loss: 0.1177
+Epoch [1300/2000], Train Loss: 0.0229, Val Loss: 0.1178
+Epoch [1350/2000], Train Loss: 0.0245, Val Loss: 0.1229
+Epoch [1400/2000], Train Loss: 0.0222, Val Loss: 0.1154
+Epoch [1450/2000], Train Loss: 0.0236, Val Loss: 0.1136
+Epoch [1500/2000], Train Loss: 0.0212, Val Loss: 0.1159
+Epoch [1550/2000], Train Loss: 0.0210, Val Loss: 0.1186
+Epoch [1600/2000], Train Loss: 0.0206, Val Loss: 0.1128
+Epoch [1650/2000], Train Loss: 0.0207, Val Loss: 0.1178
+Epoch [1700/2000], Train Loss: 0.0201, Val Loss: 0.1158
+Epoch [1750/2000], Train Loss: 0.0202, Val Loss: 0.1144
+Epoch [1800/2000], Train Loss: 0.0197, Val Loss: 0.1216
+Epoch [1850/2000], Train Loss: 0.0194, Val Loss: 0.1208
+Epoch [1900/2000], Train Loss: 0.0191, Val Loss: 0.1224
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [1950/2000], Train Loss: 0.0190, Val Loss: 0.1249
+Epoch [2000/2000], Train Loss: 0.0187, Val Loss: 0.1262
 </pre></div>
 </div>
 </div>
@@ -801,7 +791,7 @@ Epoch [2000/2000], Train Loss: 0.0228, Val Loss: 0.0538
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/eade5efc76f5f4e634322cffa546b903ca9c0773a3d8d0f3c7add223df4430fb.png" src="../../_images/eade5efc76f5f4e634322cffa546b903ca9c0773a3d8d0f3c7add223df4430fb.png" />
+<img alt="../../_images/f0000f8d848f7f9b633313e8107f61db7e7795a13ba06f7b7ed55453f435c951.png" src="../../_images/f0000f8d848f7f9b633313e8107f61db7e7795a13ba06f7b7ed55453f435c951.png" />
 </div>
 </div>
 
