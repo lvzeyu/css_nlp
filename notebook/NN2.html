@@ -1249,7 +1249,7 @@ Iteration 90: x = 7.588550360298902e-09, f(x) = 5.75860965707926e-17
 <h2>2層ニューラルネットワークの実装<a class="headerlink" href="#id20" title="Link to this heading">#</a></h2>
 <p>これまでに勉強した、「損失関数」、「ミニバッチ」、「勾配」、「勾配下降法」をまとめて、ニューラルネットワークの学習手順を確認します。</p>
 <ul class="simple">
-<li><p>ミニバッチ: データセットからミニバッチをランダムに取り出す。ここでは、そのミニバッチの損失関数の値を減らすkとを目的とする。</p></li>
+<li><p>ミニバッチ: データセットからミニバッチをランダムに取り出す。ここでは、そのミニバッチの損失関数の値を減らすことを目的とする。</p></li>
 <li><p>勾配の算出：各重みパラメータの勾配を求める。</p></li>
 <li><p>パラメーターの更新：重みパラメータを勾配方向に微少量だけ更新する。</p></li>
 <li><p>収束するまで繰り返す</p></li>
@@ -1283,7 +1283,7 @@ Iteration 90: x = 7.588550360298902e-09, f(x) = 5.75860965707926e-17
           b_0 &amp; b_1 &amp; \cdots &amp; b_{H-1}
       \end{pmatrix}
 \end{split}\]</div>
-<p>ここで、<span class="math notranslate nohighlight">\(\mathbf{N}\)</span>はバッチサイズ、<span class="math notranslate nohighlight">\(\mathbf{D}\)</span>は各データ<span class="math notranslate nohighlight">\(\mathbf{x}_n = (x_{n,0}, \cdots, x_{n,D-1})\)</span>の要素数、、<span class="math notranslate nohighlight">\(\mathbf{H}\)</span>は中間層のニューロン数です。</p>
+<p>ここで、<span class="math notranslate nohighlight">\(\mathbf{N}\)</span>はバッチサイズ、<span class="math notranslate nohighlight">\(\mathbf{D}\)</span>は各データ<span class="math notranslate nohighlight">\(\mathbf{x}_n = (x_{n,0}, \cdots, x_{n,D-1})\)</span>の要素数、<span class="math notranslate nohighlight">\(\mathbf{H}\)</span>は中間層のニューロン数です。</p>
 </section>
 <section id="id23">
 <h4>隠れ層<a class="headerlink" href="#id23" title="Link to this heading">#</a></h4>
