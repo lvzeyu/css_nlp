@@ -15,7 +15,7 @@ parts:
   - file: notebook/math_basis2.ipynb
 - caption: ニューラルネットワーク
   chapters:
-  - file: notebook/NN.ipynb
+  - file: notebook/NN2.ipynb
   - file: notebook/backpropagation.ipynb
 - caption: PyTorch
   chapters:
