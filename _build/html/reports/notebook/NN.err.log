@@ -1,17 +1,4 @@
 Traceback (most recent call last):
-  File "/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/nbclient/client.py", line 778, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 198, in ensure_async
-    result = await obj
-             ^^^^^^^^^
-  File "/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/jupyter_client/channels.py", line 315, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
   File "/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
   File "/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/nbclient/client.py", line 1305, in execute
@@ -25,20 +12,26 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^
   File "/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/nbclient/client.py", line 705, in async_execute
     await self.async_execute_cell(
-  File "/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/nbclient/client.py", line 1001, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/nbclient/client.py", line 802, in _async_poll_for_reply
-    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
-                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/nbclient/client.py", line 852, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-['# 第1層の重みの勾配を計算', "dW1 = numerical_gradient(f, params['W1'])", 'print(dW1[:5, :5])', 'print(dW1.shape)', '']
-...
-['', '# 第2層のバイアスの勾配を計算', "db2 = numerical_gradient(f, params['b2'])", 'print(db2[:5])', 'print(db2.shape)']
--------------------
+  File "/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+net.loss(x, t)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[22], line 1[0m
+[0;32m----> 1[0m [43mnet[49m[38;5;241;43m.[39;49m[43mloss[49m[43m([49m[43mx[49m[43m,[49m[43m [49m[43mt[49m[43m)[49m
+
+Cell [0;32mIn[20], line 10[0m, in [0;36msimplenet.loss[0;34m(self, x, t)[0m
+[1;32m      8[0m z [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mpredict(x)
+[1;32m      9[0m y [38;5;241m=[39m softmax(z) [38;5;66;03m# ソフトマックス関数による正規化[39;00m
+[0;32m---> 10[0m loss [38;5;241m=[39m [43mcross_entropy_error[49m(y, t) [38;5;66;03m# 交差エントロピー誤差を計算[39;00m
+[1;32m     11[0m [38;5;28;01mreturn[39;00m loss
+
+[0;31mNameError[0m: name 'cross_entropy_error' is not defined
 
