@@ -18,20 +18,16 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-net.loss(x, t)
+t = np.array([0, 0, 1])
+y = np.array([0.1, 0.2, 0.5])
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[22], line 1[0m
-[0;32m----> 1[0m [43mnet[49m[38;5;241;43m.[39;49m[43mloss[49m[43m([49m[43mx[49m[43m,[49m[43m [49m[43mt[49m[43m)[49m
+Cell [0;32mIn[1], line 1[0m
+[0;32m----> 1[0m t [38;5;241m=[39m [43mnp[49m[38;5;241m.[39marray([[38;5;241m0[39m, [38;5;241m0[39m, [38;5;241m1[39m])
+[1;32m      2[0m y [38;5;241m=[39m np[38;5;241m.[39marray([[38;5;241m0.1[39m, [38;5;241m0.2[39m, [38;5;241m0.5[39m])
 
-Cell [0;32mIn[20], line 10[0m, in [0;36msimplenet.loss[0;34m(self, x, t)[0m
-[1;32m      8[0m z [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mpredict(x)
-[1;32m      9[0m y [38;5;241m=[39m softmax(z) [38;5;66;03m# ソフトマックス関数による正規化[39;00m
-[0;32m---> 10[0m loss [38;5;241m=[39m [43mcross_entropy_error[49m(y, t) [38;5;66;03m# 交差エントロピー誤差を計算[39;00m
-[1;32m     11[0m [38;5;28;01mreturn[39;00m loss
-
-[0;31mNameError[0m: name 'cross_entropy_error' is not defined
+[0;31mNameError[0m: name 'np' is not defined
 
