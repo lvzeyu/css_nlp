@@ -17,6 +17,7 @@ parts:
   chapters:
   - file: notebook/NN2.ipynb
   - file: notebook/backpropagation.ipynb
+  - file: notebook/SGD.ipynb
 - caption: PyTorch
   chapters:
   - file: notebook/pytorch.ipynb
