@@ -53,8 +53,3 @@ parse:
 launch_buttons:
   notebook_interface: "jupyterlab"  # or "classic"
   colab_url: "https://colab.research.google.com"
-
-repository:
-  url                       : https://github.com/lvzeyu/css_nlp/blob/  # Online location of your book
-  path_to_book              : notebook  # Optional path to your book, relative to the repository root
-  branch                    : master             
