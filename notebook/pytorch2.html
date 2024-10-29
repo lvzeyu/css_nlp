@@ -59,9 +59,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/pytorch';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/pytorch2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="単語分散表現" href="word2vec_1.html" />
+    <link rel="prev" title="学習に関するテクニック" href="SGD.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -198,8 +200,8 @@
 <li class="toctree-l1"><a class="reference internal" href="backpropagation.html">誤差逆伝播法</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pytorch</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pytorch.html">Pytorch</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">単語分散表現</span></p>
 <ul class="nav bd-sidenav">
@@ -284,7 +286,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/pytorch.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/pytorch2.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -332,7 +334,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp/issues/new?title=Issue%20on%20page%20%2Fnotebook/pytorch.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp/issues/new?title=Issue%20on%20page%20%2Fnotebook/pytorch2.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -362,7 +364,7 @@
       
       
       
-      <li><a href="../_sources/notebook/pytorch.ipynb" target="_blank"
+      <li><a href="../_sources/notebook/pytorch2.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -488,13 +490,13 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iris">実装例(Irisデータ)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">データの読み込み</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">学習データの作成</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">モデルの作成</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">学習の設定</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">学習ループの実装</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">モデルの検証</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Pytorchによる深層学習の実装例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">データの読み込み</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">データの前処理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">データセットの作成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">モデルの定義</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">モデルの学習</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">モデルの評価</a></li>
 </ul>
 </li>
 </ul>
@@ -519,6 +521,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install torch torchvision torchaudio</span>
 <span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -562,11 +565,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.2056, 0.9541, 0.1412],
-        [0.6619, 0.7876, 0.9758],
-        [0.2102, 0.5327, 0.4855],
-        [0.0646, 0.9266, 0.0768],
-        [0.9203, 0.6807, 0.6348]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.9186, 0.4974, 0.1438],
+        [0.4943, 0.7878, 0.8598],
+        [0.6089, 0.7856, 0.4201],
+        [0.8040, 0.9498, 0.2788],
+        [0.7109, 0.2580, 0.0611]])
 </pre></div>
 </div>
 </div>
@@ -609,11 +612,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1.4989, 1.0075, 0.1337],
-        [1.7471, 0.7167, 0.4430],
-        [1.0171, 0.5138, 1.0057],
-        [1.3353, 1.9583, 1.5862],
-        [0.5493, 1.2937, 0.5116]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.5131, 1.2864, 0.6265],
+        [0.7813, 0.9908, 0.8021],
+        [0.8662, 0.5399, 1.7219],
+        [0.6846, 1.4398, 0.4977],
+        [1.5205, 0.9978, 0.7141]])
 </pre></div>
 </div>
 </div>
@@ -625,11 +628,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1.4989, 1.0075, 0.1337],
-        [1.7471, 0.7167, 0.4430],
-        [1.0171, 0.5138, 1.0057],
-        [1.3353, 1.9583, 1.5862],
-        [0.5493, 1.2937, 0.5116]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.5131, 1.2864, 0.6265],
+        [0.7813, 0.9908, 0.8021],
+        [0.8662, 0.5399, 1.7219],
+        [0.6846, 1.4398, 0.4977],
+        [1.5205, 0.9978, 0.7141]])
 </pre></div>
 </div>
 </div>
@@ -645,8 +648,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.7818, 0.9635, 0.8251],
-        [0.4514, 0.7275, 0.3323]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1318, 0.8542, 0.2914],
+        [0.6731, 0.8417, 0.5142]])
 </pre></div>
 </div>
 </div>
@@ -658,7 +661,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.8958, 0.1313, 0.7818, 0.4514])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.5221, 0.8602, 0.1318, 0.6731])
 </pre></div>
 </div>
 </div>
@@ -801,7 +804,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;torch.utils.data.dataloader.DataLoader at 0x12ffa3e30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;torch.utils.data.dataloader.DataLoader at 0x1142eb800&gt;
 </pre></div>
 </div>
 </div>
@@ -852,7 +855,7 @@ Batch labels shape: torch.Size([10])
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample data: tensor([0.6726, 0.1258, 0.9352])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample data: tensor([0.0068, 0.5325, 0.4687])
 Sample label: tensor(1)
 </pre></div>
 </div>
@@ -973,9 +976,9 @@ Sample label: tensor(1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0000, 0.0000, 0.0958],
-        [0.0000, 0.0000, 0.1296],
-        [0.0000, 0.0000, 0.0914]], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0000, 0.0000, 0.0000],
+        [0.0186, 0.0084, 0.0000],
+        [0.0000, 0.0116, 0.0000]], grad_fn=&lt;ReluBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -989,7 +992,7 @@ Sample label: tensor(1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted class: tensor([2, 2, 2])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted class: tensor([0, 0, 1])
 </pre></div>
 </div>
 </div>
@@ -1048,8 +1051,8 @@ Sample label: tensor(1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient function for z = &lt;AddBackward0 object at 0x15014c130&gt;
-Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at 0x15014c130&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient function for z = &lt;AddBackward0 object at 0x123ba3df0&gt;
+Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at 0x123ba3df0&gt;
 </pre></div>
 </div>
 </div>
@@ -1078,12 +1081,12 @@ Gradient function for loss = &lt;BinaryCrossEntropyWithLogitsBackward0 object at
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1.6133e-02, 7.6723e-02, 1.2867e-02],
-        [2.5201e-02, 1.1985e-01, 2.0099e-02],
-        [3.4777e-02, 1.6539e-01, 2.7737e-02],
-        [1.8844e-04, 8.9613e-04, 1.5029e-04],
-        [2.2242e-02, 1.0577e-01, 1.7739e-02]])
-tensor([0.0419, 0.1993, 0.0334])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0458, 0.0365, 0.0126],
+        [0.0556, 0.0443, 0.0153],
+        [0.0516, 0.0411, 0.0142],
+        [0.1107, 0.0882, 0.0304],
+        [0.0713, 0.0568, 0.0196]])
+tensor([0.1654, 0.1318, 0.0455])
 </pre></div>
 </div>
 </div>
@@ -1133,13 +1136,11 @@ tensor([0.0419, 0.1993, 0.0334])
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.691699743270874
-Epoch 200, Loss: 0.6894336342811584
-Epoch 300, Loss: 0.6866341829299927
-Epoch 400, Loss: 0.6830463409423828
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 500, Loss: 0.6781793236732483
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6918010115623474
+Epoch 200, Loss: 0.6858350038528442
+Epoch 300, Loss: 0.6814623475074768
+Epoch 400, Loss: 0.6780976057052612
+Epoch 500, Loss: 0.6750501394271851
 </pre></div>
 </div>
 </div>
@@ -1215,16 +1216,16 @@ Epoch 400, Loss: 0.6830463409423828
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.6977193355560303
-Epoch 200, Loss: 0.6967999935150146
-Epoch 300, Loss: 0.6959949135780334
-Epoch 400, Loss: 0.6952608227729797
-Epoch 500, Loss: 0.694610059261322
-Epoch 600, Loss: 0.6939795017242432
-Epoch 700, Loss: 0.6933830380439758
-Epoch 800, Loss: 0.6928122639656067
-Epoch 900, Loss: 0.692192792892456
-Epoch 1000, Loss: 0.6915659308433533
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 100, Loss: 0.691555380821228
+Epoch 200, Loss: 0.6909157037734985
+Epoch 300, Loss: 0.6899585723876953
+Epoch 400, Loss: 0.6890186071395874
+Epoch 500, Loss: 0.6881237626075745
+Epoch 600, Loss: 0.6872187852859497
+Epoch 700, Loss: 0.6863307952880859
+Epoch 800, Loss: 0.6854456663131714
+Epoch 900, Loss: 0.6846212148666382
+Epoch 1000, Loss: 0.683826744556427
 </pre></div>
 </div>
 </div>
@@ -1232,385 +1233,829 @@ Epoch 1000, Loss: 0.6915659308433533
 </section>
 </section>
 </section>
-<section id="iris">
-<h2>実装例(Irisデータ)<a class="headerlink" href="#iris" title="Link to this heading">#</a></h2>
 <section id="id15">
-<h3>データの読み込み<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
-<p>Irisデータセットは、アイリス花の3つの異なる種類（Setosa、Versicolour、Virginica）の各50サンプルからなるデータセットです。各サンプルには、以下の4つの特徴値（特徴量）があります。</p>
-<ul class="simple">
-<li><p>がく片の長さ (sepal length)：アイリス花のがく（緑色の部分）の長さをセンチメートルで測定したもの。</p></li>
-<li><p>がく片の幅 (sepal width)：がくの幅をセンチメートルで測定したもの。</p></li>
-<li><p>花びらの長さ (petal length)：アイリス花の花びらの長さをセンチメートルで測定したもの。</p></li>
-<li><p>花びらの幅 (petal width)：花びらの幅をセンチメートルで測定したもの。</p></li>
-</ul>
-<p>これらの特徴値を使用して、アイリス花の3つの異なる種類を分類することが目標となっています。つまり、目標値（またはラベル）は以下の3つのクラスのいずれかです：</p>
-<ul class="simple">
-<li><p>Setosa</p></li>
-<li><p>Versicolour</p></li>
-<li><p>Virginica
-このデータセットは、分類アルゴリズムを評価するための基準としてよく使用されます。</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorboardX</span> <span class="kn">import</span> <span class="n">SummaryWriter</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="c1"># Load dataset and create splits</span>
-<span class="n">iris_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">34</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">tensorboardX</span> <span class="kn">import</span> <span class="n">SummaryWriter</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;tensorboardX&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the iris dataset</span>
-<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
-<span class="n">target</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
-<span class="n">feature_names</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span>
-<span class="n">target_names</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span>
-
-<span class="c1"># Create a DataFrame for easier plotting</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">target_names</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">target</span><span class="p">]</span>
-
-<span class="c1"># Set a publication-ready theme and increase font scale for better readability</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
-
-<span class="c1"># Pair plot to visualize relationships</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;muted&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">plot_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">})</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Iris Dataset Feature Relationships&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1000x800 with 0 Axes&gt;
-</pre></div>
-</div>
-<img alt="../_images/55e30af1a77363c67c3ca6b11fc4ec9f6ad1859d15c3ad5d4317b90a59f17239.png" src="../_images/55e30af1a77363c67c3ca6b11fc4ec9f6ad1859d15c3ad5d4317b90a59f17239.png" />
-</div>
-</div>
-</section>
+<h2>Pytorchによる深層学習の実装例<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
 <section id="id16">
-<h3>学習データの作成<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>データセットを訓練データ、検証データ、テストデータに分割します。</p></li>
-</ul>
+<h3>データの読み込み<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_tmp</span><span class="p">,</span> <span class="n">xtest</span><span class="p">,</span> <span class="n">y_tmp</span><span class="p">,</span> <span class="n">ytest</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">iris_dataset</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris_dataset</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">xtrain</span><span class="p">,</span> <span class="n">xval</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">,</span> <span class="n">yval</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x_tmp</span><span class="p">,</span> <span class="n">y_tmp</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>  <span class="c1"># 0.25 x 0.8 = 0.2 -&gt; 20% validation</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./Data/Titanic/train.csv&#39;</span><span class="p">)</span>
+<span class="n">train_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C85</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>C123</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">torch.from_numpy</span></code>関数で、NumPy配列をPyTorchのテンソルに変換します。</p>
-<ul>
-<li><p>ニューラルネットワークに入力される特徴量やパラメータは浮動小数点数型である必要があるため、<code class="docutils literal notranslate"><span class="pre">.float()</span></code>メソッドは、テンソルのデータ型を浮動小数点数型に変換します。</p></li>
-<li><p>分類タスクのラベル（目的変数）は通常整数型で表されるため、<code class="docutils literal notranslate"><span class="pre">.long()</span></code>メソッドでテンソルのデータ型を長整数型に変換します。</p></li>
-</ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.to(device)</span></code>: データをGPUに移行します。</p></li>
-</ul>
-<p>これにより、データをPyTorchでのモデル訓練や評価に使用する準備が整います。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./Data/Titanic/test.csv&#39;</span><span class="p">)</span>
+<span class="n">test_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>892</td>
+      <td>3</td>
+      <td>Kelly, Mr. James</td>
+      <td>male</td>
+      <td>34.5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>330911</td>
+      <td>7.8292</td>
+      <td>NaN</td>
+      <td>Q</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>893</td>
+      <td>3</td>
+      <td>Wilkes, Mrs. James (Ellen Needs)</td>
+      <td>female</td>
+      <td>47.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>363272</td>
+      <td>7.0000</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>894</td>
+      <td>2</td>
+      <td>Myles, Mr. Thomas Francis</td>
+      <td>male</td>
+      <td>62.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>240276</td>
+      <td>9.6875</td>
+      <td>NaN</td>
+      <td>Q</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>895</td>
+      <td>3</td>
+      <td>Wirz, Mr. Albert</td>
+      <td>male</td>
+      <td>27.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>315154</td>
+      <td>8.6625</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>896</td>
+      <td>3</td>
+      <td>Hirvonen, Mrs. Alexander (Helga E Lindqvist)</td>
+      <td>female</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3101298</td>
+      <td>12.2875</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xtrain</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">xtrain</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="n">ytrain</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">ytrain</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="n">xval</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">xval</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="n">yval</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">yval</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="n">xtest</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">xtest</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="n">ytest</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">ytest</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">train_df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PassengerId      int64
+Survived         int64
+Pclass           int64
+Name            object
+Sex             object
+Age            float64
+SibSp            int64
+Parch            int64
+Ticket          object
+Fare           float64
+Cabin           object
+Embarked        object
+dtype: object
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="id17">
-<h3>モデルの作成<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
-<p>ニューラルネットワークモデルを定義します。</p>
+<h3>データの前処理<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">NeuralNetwork(nn.Module)</span></code>という新しいクラスを定義しています。このクラスは<code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>を継承しているので、モデル関連の機能（例：重みの管理、GPU対応、保存と読み込みの機能など）を利用できるようになります。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">n_in,</span> <span class="pre">n_units,</span> <span class="pre">n_out)</span></code>: ネットワークをインスタンス化するときに呼び出され、初期値をモデルに渡します。</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">n_in</span></code>: 入力層のユニット（ニューロン）の数</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">n_units</span></code>: 隠れ層のユニットの数</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">n_out</span></code>: 出力層のユニットの数</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">super(NeuralNetwork,</span> <span class="pre">self).__init__()</span></code>: 親クラスである<code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>のコンストラクタを呼び出すことで、モデル関連の機能を初期化しています。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">self.l1</span> <span class="pre">=</span> <span class="pre">nn.Linear(n_in,</span> <span class="pre">n_units)</span></code>: 入力層から隠れ層への線形変換（全結合層）を定義しています。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">self.l2</span> <span class="pre">=</span> <span class="pre">nn.Linear(n_units,</span> <span class="pre">n_out)</span></code>: 隠れ層から出力層への線形変換を定義しています。</p></li>
-</ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">forward(self,</span> <span class="pre">x)</span></code>:モデルが入力データを受け取ったときの順伝播を定義するメソッドです。</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">F.relu(self.l1(x))</span></code>: 入力<span class="math notranslate nohighlight">\(x\)</span>を<code class="docutils literal notranslate"><span class="pre">self.l1</span></code>レイヤー（全結合層）で変換した後、ReLU活性化関数を適用しています。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">self.l2(h)</span></code>: <span class="math notranslate nohighlight">\(h\)</span>（隠れ層の出力）を<code class="docutils literal notranslate"><span class="pre">self.l2</span></code>レイヤーで変換して、ネットワークの最終出力yを生成しています。</p></li>
-</ul>
-</li>
+<li><p>列の削除: 要らない列を消していきます．乗客IDや名前，チケット，港(Embarked)や部屋番号(Cabin)はは生死にあまり関係がなさそうので、削除します。</p></li>
+<li><p>欠損の補完: 平均値で欠損しているデータを補完します。</p></li>
+<li><p>文字列を数字に置換</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NeuralNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_in</span><span class="p">,</span> <span class="n">n_units</span><span class="p">,</span> <span class="n">n_out</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">NeuralNetwork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">l1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_units</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">l2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">n_units</span><span class="p">,</span> <span class="n">n_out</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process_df</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;PassengerId&quot;</span><span class="p">,</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Ticket&quot;</span><span class="p">,</span> <span class="s2">&quot;Cabin&quot;</span><span class="p">,</span> <span class="s2">&quot;Embarked&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;male&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;female&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">l1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">y</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">process_df</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">process_df</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+<span class="n">train_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Fare</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>7.2500</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>71.2833</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7.9250</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>53.1000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>8.0500</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id18">
+<h3>データセットの作成<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+<p>データセットとデータローダーでミニバッチ学習ためのデータセットを作成します。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Pclass&quot;</span><span class="p">,</span> <span class="s2">&quot;Sex&quot;</span><span class="p">,</span> <span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="s2">&quot;SibSp&quot;</span><span class="p">,</span> <span class="s2">&quot;Parch&quot;</span><span class="p">,</span> <span class="s2">&quot;Fare&quot;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s2">&quot;Survived&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="id18">
-<h3>学習の設定<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
-<p>学習に関連するハイパーパラメータを設定します。</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">NeuralNetwork(n_in,</span> <span class="pre">n_units,</span> <span class="pre">n_out)</span></code>:指定された入力層、隠れ層、出力層のユニット数でモデルのインスタンスを作成しています。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">loss_function</span> <span class="pre">=</span> <span class="pre">nn.CrossEntropyLoss()</span></code>: 損失関数を定義します。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">optimizer</span> <span class="pre">=</span> <span class="pre">torch.optim.Adam(model.parameters(),</span> <span class="pre">lr=0.01)</span></code>: オプティマイザを指定します。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">model.to(device)</span></code>: モデルをGPUに移行します。データとモデルは必ず同じdeviceに置く必要があります。</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_in</span> <span class="o">=</span> <span class="n">xtrain</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># number of input features (4 for Iris dataset)</span>
-<span class="n">n_units</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of units in the hidden layer</span>
-<span class="n">n_out</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># number of classes in the Iris dataset</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_units</span><span class="p">,</span> <span class="n">n_out</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>  <span class="c1"># Move the model to GPU</span>
-<span class="n">loss_function</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span> <span class="c1"># 分類問題のため交差エントロピー誤差を使用</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span> <span class="c1"># optimizer</span>
-<span class="c1"># Training loop</span>
-<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TitanicDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="c1"># DataFrameをNumPy配列に変換</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>  <span class="c1"># XをNumPy配列に変換してからテンソル化</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>  <span class="c1"># yも同様にテンソル化</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># データローダーの作成</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">TitanicDataset</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">val_dataset</span> <span class="o">=</span> <span class="n">TitanicDataset</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">val_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">val_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([ 1.0000,  0.0000, 45.5000,  0.0000,  0.0000, 28.5000]), tensor(0.))
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="id19">
-<h3>学習ループの実装<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
-<p>ニューラルネットワークモデルの学習と検証のループを実装します。</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">model.train()</span></code>と<code class="docutils literal notranslate"><span class="pre">model.eval()</span></code>:モデルが訓練モードか評価モードかを切り替えます。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">outputs</span> <span class="pre">=</span> <span class="pre">model(xtrain)</span></code>: 訓練データxtrainをモデルに渡し、出力を取得します。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">loss</span> <span class="pre">=</span> <span class="pre">loss_function(outputs,</span> <span class="pre">ytrain)</span></code>: モデルの出力と実際のラベルytrainとの間の損失を計算します。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">optimizer.zero_grad()</span></code>: 新しいエポックの勾配計算の前に、最適化器の勾配を初期化します。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code>: 損失に基づいて、モデルのすべてのパラメータの勾配を計算します。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">optimizer.step()</span></code>: 計算された勾配を使用して、モデルのパラメータを更新します。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">torch.no_grad()</span></code>: 勾配の計算を無効化します。これは、評価フェーズでは勾配を計算する必要がないため、計算の効率を向上させるためです。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">val_outputs</span> <span class="pre">=</span> <span class="pre">model(xval)</span></code>: 検証データxvalをモデルに渡し、出力を取得します。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">_,</span> <span class="pre">val_predicted</span> <span class="pre">=</span> <span class="pre">torch.max(val_outputs,</span> <span class="pre">1)</span></code>: モデルの出力から、最も高い確率を持つクラスのインデックスを取得します。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">val_accuracy</span> <span class="pre">=</span> <span class="pre">(val_predicted</span> <span class="pre">==</span> <span class="pre">yval).float().mean().item()</span></code>: 検証データに対する正解率を計算します。</p></li>
-</ul>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p><code class="docutils literal notranslate"><span class="pre">params</span></code>の値は関数<code class="docutils literal notranslate"><span class="pre">step</span></code>の呼び出し時に自動で更新されます。中身は、optimizerが<code class="docutils literal notranslate"><span class="pre">params.grad</span></code>の値を調べて、<code class="docutils literal notranslate"><span class="pre">params</span></code>の値に対して、学習率を掛け算した<code class="docutils literal notranslate"><span class="pre">grad</span></code>の値を引き算して更新しています。</p>
-</aside>
+<h3>モデルの定義<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">__init__</span></code>で行列の掛け算の定義をして，<code class="docutils literal notranslate"><span class="pre">forward</span></code>でそれをどの順番で行うかを指定する感じです．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
-    <span class="c1"># Training phase</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">xtrain</span><span class="p">)</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">)</span>
-    
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-    
-    
-    <span class="c1"># Validation phase</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-        <span class="n">val_outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">xval</span><span class="p">)</span>
-        <span class="n">_</span><span class="p">,</span> <span class="n">val_predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">val_outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">val_accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">val_predicted</span> <span class="o">==</span> <span class="n">yval</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TitanicModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TitanicModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="c1"># Print losses and accuracies every 10 epochs</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch [</span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">n_epochs</span><span class="si">}</span><span class="s1">], Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">, Val Accuracy: </span><span class="si">{</span><span class="n">val_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [10/100], Loss: 1.1814, Val Accuracy: 3.33%
-Epoch [20/100], Loss: 1.1491, Val Accuracy: 50.00%
-Epoch [30/100], Loss: 1.0824, Val Accuracy: 30.00%
-Epoch [40/100], Loss: 1.0522, Val Accuracy: 23.33%
-Epoch [50/100], Loss: 0.9947, Val Accuracy: 53.33%
-Epoch [60/100], Loss: 0.9210, Val Accuracy: 56.67%
-Epoch [70/100], Loss: 0.8198, Val Accuracy: 50.00%
-Epoch [80/100], Loss: 0.7071, Val Accuracy: 60.00%
-Epoch [90/100], Loss: 0.6053, Val Accuracy: 76.67%
-Epoch [100/100], Loss: 0.5244, Val Accuracy: 96.67%
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">x</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="id20">
-<h3>モデルの検証<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
-<p>テストデータでモデルの有効性を検証します。</p>
+<h3>モデルの学習<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<p>損失関数は2乗誤差、最適化関数はAdamを使用します．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-    <span class="n">test_outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">xtest</span><span class="p">)</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">test_predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">test_outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">test_accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">test_predicted</span> <span class="o">==</span> <span class="n">ytest</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Test Accuracy: </span><span class="si">{</span><span class="n">test_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+
+
+<span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">):</span>
+    <span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCELoss</span><span class="p">()</span>  <span class="c1"># 分類の損失関数</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+        <span class="n">train_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">X_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X_batch</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">)</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="n">train_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">*</span> <span class="n">X_batch</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># 検証データでの評価</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="n">val_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">X_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="ow">in</span> <span class="n">val_loader</span><span class="p">:</span>
+                <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X_batch</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">)</span>
+                <span class="n">val_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">*</span> <span class="n">X_batch</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">train_loss</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="n">val_loss</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">val_loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_epochs</span><span class="si">}</span><span class="s2">, Train Loss: </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Val Loss: </span><span class="si">{</span><span class="n">val_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">TitanicModel</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test Accuracy: 100.00%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/500, Train Loss: 0.6438, Val Loss: 0.5527
+Epoch 11/500, Train Loss: 0.5779, Val Loss: 0.5857
+Epoch 21/500, Train Loss: 0.4927, Val Loss: 0.5453
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 31/500, Train Loss: 0.5069, Val Loss: 0.4458
+Epoch 41/500, Train Loss: 0.4244, Val Loss: 0.4283
+Epoch 51/500, Train Loss: 0.4218, Val Loss: 0.4530
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 61/500, Train Loss: 0.4160, Val Loss: 0.4228
+Epoch 71/500, Train Loss: 0.4244, Val Loss: 0.4145
+Epoch 81/500, Train Loss: 0.4155, Val Loss: 0.4166
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 91/500, Train Loss: 0.4141, Val Loss: 0.4460
+Epoch 101/500, Train Loss: 0.4211, Val Loss: 0.4243
+Epoch 111/500, Train Loss: 0.4042, Val Loss: 0.4517
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 121/500, Train Loss: 0.4138, Val Loss: 0.4175
+Epoch 131/500, Train Loss: 0.3983, Val Loss: 0.4684
+Epoch 141/500, Train Loss: 0.3937, Val Loss: 0.4561
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 151/500, Train Loss: 0.4145, Val Loss: 0.4440
+Epoch 161/500, Train Loss: 0.3973, Val Loss: 0.4541
+Epoch 171/500, Train Loss: 0.3925, Val Loss: 0.4353
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 181/500, Train Loss: 0.3868, Val Loss: 0.4296
+Epoch 191/500, Train Loss: 0.3955, Val Loss: 0.4297
+Epoch 201/500, Train Loss: 0.3888, Val Loss: 0.4296
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 211/500, Train Loss: 0.3799, Val Loss: 0.4276
+Epoch 221/500, Train Loss: 0.3911, Val Loss: 0.4279
+Epoch 231/500, Train Loss: 0.3948, Val Loss: 0.4414
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 241/500, Train Loss: 0.3945, Val Loss: 0.4208
+Epoch 251/500, Train Loss: 0.3922, Val Loss: 0.4350
+Epoch 261/500, Train Loss: 0.3824, Val Loss: 0.4325
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 271/500, Train Loss: 0.3754, Val Loss: 0.4445
+Epoch 281/500, Train Loss: 0.3777, Val Loss: 0.4382
+Epoch 291/500, Train Loss: 0.3783, Val Loss: 0.4338
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 301/500, Train Loss: 0.3737, Val Loss: 0.4534
+Epoch 311/500, Train Loss: 0.3743, Val Loss: 0.4747
+Epoch 321/500, Train Loss: 0.3702, Val Loss: 0.4346
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 331/500, Train Loss: 0.3655, Val Loss: 0.4322
+Epoch 341/500, Train Loss: 0.3690, Val Loss: 0.4508
+Epoch 351/500, Train Loss: 0.3615, Val Loss: 0.4521
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 361/500, Train Loss: 0.3582, Val Loss: 0.4394
+Epoch 371/500, Train Loss: 0.3592, Val Loss: 0.4394
+Epoch 381/500, Train Loss: 0.3631, Val Loss: 0.4527
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 391/500, Train Loss: 0.3544, Val Loss: 0.4381
+Epoch 401/500, Train Loss: 0.3638, Val Loss: 0.4461
+Epoch 411/500, Train Loss: 0.3553, Val Loss: 0.4507
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 421/500, Train Loss: 0.3527, Val Loss: 0.4536
+Epoch 431/500, Train Loss: 0.3493, Val Loss: 0.4438
+Epoch 441/500, Train Loss: 0.3497, Val Loss: 0.4557
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 451/500, Train Loss: 0.3666, Val Loss: 0.4371
+Epoch 461/500, Train Loss: 0.3633, Val Loss: 0.4847
+Epoch 471/500, Train Loss: 0.3489, Val Loss: 0.4607
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 481/500, Train Loss: 0.3390, Val Loss: 0.4871
+Epoch 491/500, Train Loss: 0.3563, Val Loss: 0.4487
 </pre></div>
 </div>
 </div>
 </div>
-<div class="tip dropdown admonition">
-<p class="admonition-title">おまけ：SummaryWriterでtensorboardを使うためのデータを用意する</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">writer</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="s1">&#39;runs/iris_experiment_1&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
-    <span class="c1"># Training phase</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">xtrain</span><span class="p">)</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">)</span>
-    
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-    
-    <span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Training Loss&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">epoch</span><span class="p">)</span>
-    
-    <span class="c1"># Validation phase</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-        <span class="n">val_outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">xval</span><span class="p">)</span>
-        <span class="n">_</span><span class="p">,</span> <span class="n">val_predicted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">val_outputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">val_accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">val_predicted</span> <span class="o">==</span> <span class="n">yval</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-        <span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Validation Accuracy&#39;</span><span class="p">,</span> <span class="n">val_accuracy</span><span class="p">,</span> <span class="n">epoch</span><span class="p">)</span>
+</section>
+<section id="id21">
+<h3>モデルの評価<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
 
-    <span class="c1"># Print losses and accuracies every 10 epochs</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch [</span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">n_epochs</span><span class="si">}</span><span class="s1">], Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">, Val Accuracy: </span><span class="si">{</span><span class="n">val_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">true_labels</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">X_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X_batch</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+            <span class="c1"># 出力を0または1に丸める</span>
+            <span class="n">predicted_classes</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">round</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+            <span class="n">predictions</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">predicted_classes</span><span class="p">)</span>
+            <span class="n">true_labels</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">y_batch</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+
+    <span class="c1"># レポートの表示</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Did not survive&quot;</span><span class="p">,</span> <span class="s2">&quot;Survived&quot;</span><span class="p">],</span><span class="n">digits</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># モデルの評価を実行</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                 precision    recall  f1-score   support
+
+Did not survive     0.8018    0.8476    0.8241       105
+       Survived     0.7647    0.7027    0.7324        74
+
+       accuracy                         0.7877       179
+      macro avg     0.7833    0.7752    0.7782       179
+   weighted avg     0.7865    0.7877    0.7862       179
+</pre></div>
+</div>
+</div>
 </div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-0">
 実習問題</label><div class="sd-tab-content docutils">
-<p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">NeuralNetwork(nn.Module)</span></code>を以下のように改装して、改めて学習を行なってください。</p>
+<p>深層学習の実装を以下の指示に従って、改めて学習を行なってください。</p>
 <ul class="simple">
-<li><p>一つ隠れ層を追加し、<code class="docutils literal notranslate"><span class="pre">n_units_2</span></code>という引数でユニットの数を指定できるように設定しなさい。</p></li>
-<li><p>すべての隠れ層に<code class="docutils literal notranslate"><span class="pre">F.relu</span></code>で活性化関数を追加しなさい。</p></li>
-<li><p>出力層に<code class="docutils literal notranslate"><span class="pre">F.log_softmax</span></code>で出力の正規化を行きなさい。</p></li>
+<li><p>バッチサイズを64に変更しなさい</p></li>
+<li><p>モデルに一つ隠れ層を追加しなさい</p></li>
+<li><p>ドロップアウト層を追加しなさい</p></li>
+<li><p>オプティマイザはAdamWを設定しなさい</p></li>
+<li><p>epochを増やしんさい</p></li>
 </ul>
 </div>
 </div>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-1" name="sd-tab-set-1" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-1">
-課題</label><div class="sd-tab-content docutils">
-<p>sepal length, sepal width, petal lengthでpetal widthを予測するニューラルネットワークを構築、学習してください。</p>
-<ul class="simple">
-<li><p>二つ以上の隠れ層を設定する。</p></li>
-<li><p>学習の際、検証データで損失を計算し、20 epochごとに示す。</p></li>
-<li><p>学習済みのモデルを用いて、テストデータに対する予測を行う。</p></li>
-</ul>
-</div>
-</div>
-<div class="tip dropdown admonition">
-<p class="admonition-title">ヒント</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#入力データとターゲットデータの準備</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># sepal length, sepal width, petal length</span>
-
-<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># petal width</span>
-
-<span class="n">データの分割</span>
-
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_temp</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_temp</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-
-<span class="c1">#「ここからコードを追加」</span>
-
-<span class="c1">#データをテンソルに変換</span>
-
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-
-<span class="c1">#「ここからコードを追加」</span>
-
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">DataLoader</span>
 
-<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="c1"># データセットクラスの定義</span>
+<span class="k">class</span> <span class="nc">TitanicDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>  <span class="c1"># NumPy配列に変換</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>  <span class="c1"># NumPy配列に変換</span>
 
-<span class="k">class</span> <span class="nc">RegressionNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim1</span><span class="p">,</span> <span class="n">hidden_dim2</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">RegressionNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim1</span><span class="p">)</span>
-        <span class="err">「</span><span class="n">ここからコードを追加</span><span class="err">」</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
 
-<span class="c1">#ハイパーパラメータ</span>
-<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
 
-<span class="n">epochs</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="c1"># ネットワークの定義</span>
+<span class="k">class</span> <span class="nc">TitanicModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TitanicModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="n">hidden_dim1</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">x</span>
 
-<span class="n">hidden_dim2</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="c1"># 訓練関数</span>
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">dataloader</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">epochs</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_func</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 
-<span class="c1">#モデルと最適化のインスタンス化</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">RegressionNN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hidden_dim1</span><span class="o">=</span><span class="n">hidden_dim1</span><span class="p">,</span> <span class="n">hidden_dim2</span><span class="o">=</span><span class="n">hidden_dim2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s1">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+<span class="c1"># モデル評価関数</span>
+<span class="k">def</span> <span class="nf">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">true_labels</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">X_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X_batch</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+            <span class="n">predicted_classes</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">round</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>  <span class="c1"># 0または1に丸める</span>
+            <span class="n">predictions</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">predicted_classes</span><span class="p">)</span>
+            <span class="n">true_labels</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">y_batch</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
 
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Did not survive&quot;</span><span class="p">,</span> <span class="s2">&quot;Survived&quot;</span><span class="p">]))</span>
 
-<span class="c1">#学習ループ</span>
+<span class="c1"># メインの実行部分</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># ここでX_trainとy_trainを定義または読み込む</span>
+    <span class="c1"># 例えば、pandasを用いてCSVから読み込むなど</span>
 
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="c1"># ダミーデータの生成</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="c1">#「ここからコードを追加」</span>
+    <span class="c1"># 仮のデータ</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>  <span class="c1"># 100サンプル、5特徴量</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span>  <span class="c1"># 0または1のラベル</span>
+
+    <span class="c1"># データセットとデータローダーの作成</span>
+    <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">TitanicDataset</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">train_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># モデル、損失関数、オプティマイザの定義</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">TitanicModel</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">loss_func</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCELoss</span><span class="p">()</span>  <span class="c1"># Binary Cross Entropy Loss</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># AdamWオプティマイザ</span>
+
+    <span class="c1"># 訓練の実行</span>
+    <span class="n">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_dataloader</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+    <span class="c1"># モデル評価</span>
+    <span class="n">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_dataloader</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 0, Loss: 0.6807486414909363
+Epoch 10, Loss: 0.6003378629684448
+Epoch 20, Loss: 0.7132664322853088
 </pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 30, Loss: 0.5769815444946289
+Epoch 40, Loss: 0.8270360231399536
+Epoch 50, Loss: 0.6575011014938354
+Epoch 60, Loss: 0.5275065302848816
+Epoch 70, Loss: 0.86725252866745
+Epoch 80, Loss: 0.5505028963088989
+Epoch 90, Loss: 0.48545610904693604
+Epoch 100, Loss: 0.39317965507507324
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 110, Loss: 0.3084574043750763
+Epoch 120, Loss: 0.6937412619590759
+Epoch 130, Loss: 0.4816243648529053
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 140, Loss: 0.5364492535591125
+Epoch 150, Loss: 0.3022448420524597
+Epoch 160, Loss: 0.4723098576068878
+Epoch 170, Loss: 0.37676286697387695
+Epoch 180, Loss: 0.2221253663301468
+Epoch 190, Loss: 0.31530845165252686
+Epoch 200, Loss: 0.40424978733062744
+Epoch 210, Loss: 0.20380719006061554
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 220, Loss: 0.2792705297470093
+Epoch 230, Loss: 0.815310537815094
+Epoch 240, Loss: 0.41553622484207153
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 250, Loss: 0.16266357898712158
+Epoch 260, Loss: 0.36101487278938293
+Epoch 270, Loss: 0.2824075222015381
+Epoch 280, Loss: 0.208953857421875
+Epoch 290, Loss: 0.08536730706691742
+Epoch 300, Loss: 0.430352121591568
+Epoch 310, Loss: 0.2431938350200653
+Epoch 320, Loss: 0.20173096656799316
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 330, Loss: 0.39463478326797485
+Epoch 340, Loss: 0.3811678886413574
+Epoch 350, Loss: 0.11393007636070251
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 360, Loss: 0.6583065390586853
+Epoch 370, Loss: 0.06275615841150284
+Epoch 380, Loss: 0.15494781732559204
+Epoch 390, Loss: 0.2849709391593933
+Epoch 400, Loss: 0.1375131756067276
+Epoch 410, Loss: 0.2634059190750122
+Epoch 420, Loss: 0.21073541045188904
+Epoch 430, Loss: 0.1363854557275772
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 440, Loss: 0.3814316987991333
+Epoch 450, Loss: 0.4219069480895996
+Epoch 460, Loss: 0.11401289701461792
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 470, Loss: 0.27621111273765564
+Epoch 480, Loss: 0.16188931465148926
+Epoch 490, Loss: 0.23518818616867065
+                 precision    recall  f1-score   support
+
+Did not survive       0.97      0.98      0.98        60
+       Survived       0.97      0.95      0.96        40
+
+       accuracy                           0.97       100
+      macro avg       0.97      0.97      0.97       100
+   weighted avg       0.97      0.97      0.97       100
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1646,6 +2091,24 @@ Epoch [100/100], Loss: 0.5244, Val Accuracy: 96.67%
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="SGD.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">学習に関するテクニック</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="word2vec_1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">単語分散表現</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1694,13 +2157,13 @@ Epoch [100/100], Loss: 0.5244, Val Accuracy: 96.67%
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iris">実装例(Irisデータ)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">データの読み込み</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">学習データの作成</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">モデルの作成</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">学習の設定</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">学習ループの実装</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">モデルの検証</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Pytorchによる深層学習の実装例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">データの読み込み</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">データの前処理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">データセットの作成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">モデルの定義</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">モデルの学習</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">モデルの評価</a></li>
 </ul>
 </li>
 </ul>
