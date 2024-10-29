@@ -20,7 +20,7 @@ parts:
   - file: notebook/SGD.ipynb
 - caption: PyTorch
   chapters:
-  - file: notebook/pytorch.ipynb
+  - file: notebook/pytorch2.ipynb
 - caption: 単語分散表現
   chapters:
   - file: notebook/word2vec_1.ipynb
