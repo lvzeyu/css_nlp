@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="RNNの基礎" href="rnn.html" />
-    <link rel="prev" title="Word2Vecを用いるセンチメント分析" href="word2vec_sentiment.html" />
+    <link rel="prev" title="GensimによるWord2Vecの学習と使用" href="word2vec_gensim.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -473,7 +473,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018">Word embeddings quantify 100 years of gender and ethnic stereotypes <span class="xref cite">Garg2018</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">参考文献</a></li>
 </ul>
             </nav>
         </div>
@@ -488,7 +487,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="word2vec">
 <h1>Word2Vecが人文・社会科学研究における応用<a class="headerlink" href="#word2vec" title="Link to this heading">#</a></h1>
 <section id="the-geometry-of-culture-analyzing-the-meanings-of-class-through-word-embeddings-kozlowski2019">
-<h2>The Geometry of Culture: Analyzing the Meanings of Class through Word Embeddings  <span id="id1">[<a class="reference internal" href="#id13" title="Austin C. Kozlowski, Matt Taddy, and James A. Evans. The geometry of culture: analyzing the meanings of class through word embeddings. American Sociological Review, 84(5):905-949, 2019. doi:10.1177/0003122419877135.">Kozlowski <em>et al.</em>, 2019</a>]</span><a class="headerlink" href="#the-geometry-of-culture-analyzing-the-meanings-of-class-through-word-embeddings-kozlowski2019" title="Link to this heading">#</a></h2>
+<h2>The Geometry of Culture: Analyzing the Meanings of Class through Word Embeddings  <span id="id1">[<a class="reference internal" href="introduction.html#id17" title="Austin C. Kozlowski, Matt Taddy, and James A. Evans. The geometry of culture: analyzing the meanings of class through word embeddings. American Sociological Review, 84(5):905-949, 2019. doi:10.1177/0003122419877135.">Kozlowski <em>et al.</em>, 2019</a>]</span><a class="headerlink" href="#the-geometry-of-culture-analyzing-the-meanings-of-class-through-word-embeddings-kozlowski2019" title="Link to this heading">#</a></h2>
 <section id="id2">
 <h3>問題関心<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -515,29 +514,12 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(\vec{rich}-\vec{poor}\)</span>、<span class="math notranslate nohighlight">\(\vec{affluence}-\vec{poverty}\)</span>のような単語のペアは<span class="math notranslate nohighlight">\(Affluence\)</span>という概念を反映できると考えられます。</p></li>
 </ul>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gensim.downloader</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">downloader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;word2vec-google-news-300&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">gensim.downloader</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">model</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">downloader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;word2vec-google-news-300&#39;</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;gensim&#39;
-</pre></div>
-</div>
-</div>
-</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -613,7 +595,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.10311404]], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.10311405]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -649,16 +631,16 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tennis 84.08148088988168
-soccer 86.44827814928067
-basketball 87.4947624687713
+soccer 86.44827879084316
+basketball 87.49476268241891
 boxing 96.19771983578752
-golf 81.23038078574373
+golf 81.23037992187086
 swimming 87.66950350249786
 volleyball 84.87990835557244
-camping 92.64046862065912
-weightlifting 92.84652198285549
-hiking 89.06679342925825
-hockey 88.2316913132707
+camping 92.64046883432938
+weightlifting 92.84652219656257
+hiking 89.06679353599412
+hockey 88.23169120649816
 </pre></div>
 </div>
 </div>
@@ -676,49 +658,6 @@ hockey 88.2316913132707
 <li><p>性別に関するDimensionを作成しなさい</p></li>
 <li><p>性別Dimensionで運動の位置付けを確認し、その結果を解釈しなさい</p></li>
 </ul>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">male_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;man&quot;</span><span class="p">,</span><span class="s2">&quot;men&quot;</span><span class="p">,</span><span class="s2">&quot;his&quot;</span><span class="p">,</span><span class="s2">&quot;his&quot;</span><span class="p">,</span><span class="s2">&quot;he&quot;</span><span class="p">,</span><span class="s2">&quot;male&quot;</span><span class="p">,</span><span class="s2">&quot;masculine&quot;</span><span class="p">]</span>
-<span class="n">female_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;woman&quot;</span><span class="p">,</span><span class="s2">&quot;women&quot;</span><span class="p">,</span><span class="s2">&quot;her&quot;</span><span class="p">,</span><span class="s2">&quot;hers&quot;</span><span class="p">,</span><span class="s2">&quot;she&quot;</span><span class="p">,</span><span class="s2">&quot;female&quot;</span><span class="p">,</span><span class="s2">&quot;feminine&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">male_vec</span><span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">male_list</span><span class="p">,</span><span class="n">female_list</span><span class="p">):</span>
-    <span class="n">male_vec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">model</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-<span class="n">male_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">male_vec</span><span class="p">)</span>
-<span class="n">male_vec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">male_vec</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">sport</span> <span class="ow">in</span> <span class="n">sports</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">sport</span><span class="p">,</span><span class="n">get_angle</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">sport</span><span class="p">],</span><span class="n">male_vec</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tennis 97.40878931781465
-soccer 91.80367294960222
-basketball 92.62550110826957
-boxing 88.10336004089726
-golf 89.92069959744806
-swimming 95.5663930896144
-volleyball 102.37309292835671
-camping 90.67382084420579
-weightlifting 90.39126375746197
-hiking 93.58319273998538
-hockey 89.98937662535967
-</pre></div>
-</div>
 </div>
 </div>
 </section>
@@ -780,7 +719,7 @@ hockey 89.98937662535967
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.04156308]], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.04156307]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -792,7 +731,7 @@ hockey 89.98937662535967
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.20604998]], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.20605]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -808,8 +747,7 @@ hockey 89.98937662535967
 <li><p>言語モデルは学習コーパスに含まれている「バイアス」をそのまま反映しています。例えば、言語モデルでは、エンジニア、トラック運転手は男性、モデル、看護師は女性というような、職業と性別の関係についての典型的なステレオタイプを学習していることがわかります。</p></li>
 <li><p>同様に、異なる時期のコーパスには、特定な時期の考え方や認識に関する情報が含められますので、そのコーパスで学習した言語モデルも特定な時期の考え方や認識を反映できると考えられます。</p></li>
 </ul>
-<p><img alt="" src="../_images/sim_dynamics.jpeg" />
-<img alt="" src="../_images/OLS_dynamic.jpeg" /></p>
+<p><img alt="" src="../_images/sim_dynamics.jpeg" /></p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-5" name="sd-tab-set-3" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-5">
@@ -823,7 +761,7 @@ hockey 89.98937662535967
 <section id="id5">
 <h2>Word2Vecを応用する研究<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <section id="semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings-grand2022">
-<h3>Semantic projection recovers rich human knowledge of multiple object features from word embeddings <span id="id6">[<a class="reference internal" href="#id18" title="Gabriel Grand, Idan Asher Blank, Francisco Pereira, and Evelina Fedorenko. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. Nature Human Behaviour, 6(7):975–987, 2022. doi:10.1038/s41562-022-01316-8.">Grand <em>et al.</em>, 2022</a>]</span><a class="headerlink" href="#semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings-grand2022" title="Link to this heading">#</a></h3>
+<h3>Semantic projection recovers rich human knowledge of multiple object features from word embeddings <span id="id6">[<a class="reference internal" href="introduction.html#id22" title="Gabriel Grand, Idan Asher Blank, Francisco Pereira, and Evelina Fedorenko. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. Nature Human Behaviour, 6(7):975–987, 2022. doi:10.1038/s41562-022-01316-8.">Grand <em>et al.</em>, 2022</a>]</span><a class="headerlink" href="#semantic-projection-recovers-rich-human-knowledge-of-multiple-object-features-from-word-embeddings-grand2022" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>単語分散表現は表出する意味的特徴が人間の評価を近似することができることを体系的に説明しました。</p></li>
 </ul>
@@ -831,7 +769,7 @@ hockey 89.98937662535967
 <p><img alt="" src="../_images/projection_example2.jpeg" /></p>
 </section>
 <section id="word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018">
-<h3>Word embeddings quantify 100 years of gender and ethnic stereotypes <span id="id7">[<a class="reference internal" href="#id12" title="Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16):E3635-E3644, 2018. URL: https://www.pnas.org/doi/abs/10.1073/pnas.1720347115, arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115, doi:10.1073/pnas.1720347115.">Garg <em>et al.</em>, 2018</a>]</span><a class="headerlink" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018" title="Link to this heading">#</a></h3>
+<h3>Word embeddings quantify 100 years of gender and ethnic stereotypes <span id="id7">[<a class="reference internal" href="introduction.html#id16" title="Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16):E3635-E3644, 2018. URL: https://www.pnas.org/doi/abs/10.1073/pnas.1720347115, arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115, doi:10.1073/pnas.1720347115.">Garg <em>et al.</em>, 2018</a>]</span><a class="headerlink" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>単語分散表現が、性別ステレオタイプと民族マイノリティに対する態度の変化を定量化するのにどのように役立つかを示しています。</p></li>
 <li><p>性別と民族に関する単語で、形容詞や職業などの中立的な単語(neutral words )と比較する手法</p>
@@ -863,42 +801,7 @@ hockey 89.98937662535967
 <p><span class="math notranslate nohighlight">\(Ethnic Bias\)</span>はどのように計算すべきのかを考えなさい。Ethnicのグループでは<span class="math notranslate nohighlight">\(2\)</span>以上であることを注意してください。</p>
 </div>
 </div>
-<p>同じ手法を使用した研究 <span id="id8">[]</span></p>
 </section>
-</section>
-<section id="id9">
-<h2>参考文献<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
-<div class="docutils container" id="id10">
-<div class="citation" id="id14" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>DCLT19<span class="fn-bracket">]</span></span>
-<p>Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. \BERT\: Pre-training of Deep Bidirectional Transformers for Language Understanding. In <em>Proceedings of the 2019 Conference of the North \A\merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)</em>, Proceedings of the 2019 Conference of the North, 4171–4186. Minneapolis, Minnesota, 2019. Association for Computational Linguistics. URL: <a class="reference external" href="https://www.aclweb.org/anthology/N19-1423">https://www.aclweb.org/anthology/N19-1423</a>, <a class="reference external" href="https://doi.org/10.18653/v1/n19-1423">doi:10.18653/v1/n19-1423</a>.</p>
-</div>
-<div class="citation" id="id12" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">GSJZ18</a><span class="fn-bracket">]</span></span>
-<p>Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and James Zou. Word embeddings quantify 100 years of gender and ethnic stereotypes. <em>Proceedings of the National Academy of Sciences</em>, 115(16):E3635–E3644, 2018. URL: <a class="reference external" href="https://www.pnas.org/doi/abs/10.1073/pnas.1720347115">https://www.pnas.org/doi/abs/10.1073/pnas.1720347115</a>, <a class="reference external" href="https://arxiv.org/abs/https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115">arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1720347115</a>, <a class="reference external" href="https://doi.org/10.1073/pnas.1720347115">doi:10.1073/pnas.1720347115</a>.</p>
-</div>
-<div class="citation" id="id18" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">GBPF22</a><span class="fn-bracket">]</span></span>
-<p>Gabriel Grand, Idan Asher Blank, Francisco Pereira, and Evelina Fedorenko. Semantic projection recovers rich human knowledge of multiple object features from word embeddings. <em>Nature Human Behaviour</em>, 6(7):975–987, 2022. <a class="reference external" href="https://doi.org/10.1038/s41562-022-01316-8">doi:10.1038/s41562-022-01316-8</a>.</p>
-</div>
-<div class="citation" id="id13" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">KTE19</a><span class="fn-bracket">]</span></span>
-<p>Austin C. Kozlowski, Matt Taddy, and James A. Evans. The geometry of culture: analyzing the meanings of class through word embeddings. <em>American Sociological Review</em>, 84(5):905–949, 2019. <a class="reference external" href="https://doi.org/10.1177/0003122419877135">doi:10.1177/0003122419877135</a>.</p>
-</div>
-<div class="citation" id="id15" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>LvACW23<span class="fn-bracket">]</span></span>
-<p>Moritz Laurer, Wouter van Atteveldt, Andreu Casas, and Kasper Welbers. Less annotating, more classifying: addressing the data scarcity issue of supervised machine learning with deep transfer learning and bert-nli. <em>Political Analysis</em>, pages 1–17, 2023. <a class="reference external" href="https://doi.org/10.1017/pan.2023.20">doi:10.1017/pan.2023.20</a>.</p>
-</div>
-<div class="citation" id="id17" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>MSC+13<span class="fn-bracket">]</span></span>
-<p>Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S Corrado, and Jeff Dean. Distributed representations of words and phrases and their compositionality. In C.J. Burges, L. Bottou, M. Welling, Z. Ghahramani, and K.Q. Weinberger, editors, <em>Advances in Neural Information Processing Systems</em>, volume 26. Curran Associates, Inc., 2013. URL: <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2013/file/9aa42b31882ec039965f3c4923ce901b-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2013/file/9aa42b31882ec039965f3c4923ce901b-Paper.pdf</a>.</p>
-</div>
-<div class="citation" id="id16" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>MYZ13<span class="fn-bracket">]</span></span>
-<p>Tomas Mikolov, Wen-tau Yih, and Geoffrey Zweig. Linguistic regularities in continuous space word representations. In Lucy Vanderwende, Hal Daumé III, and Katrin Kirchhoff, editors, <em>Proceedings of the 2013 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies</em>, 746–751. Atlanta, Georgia, June 2013. Association for Computational Linguistics. URL: <a class="reference external" href="https://aclanthology.org/N13-1090">https://aclanthology.org/N13-1090</a>.</p>
-</div>
-</div>
-</div>
 </section>
 </section>
 
@@ -933,12 +836,12 @@ hockey 89.98937662535967
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="word2vec_sentiment.html"
+       href="word2vec_gensim.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Word2Vecを用いるセンチメント分析</p>
+        <p class="prev-next-title">GensimによるWord2Vecの学習と使用</p>
       </div>
     </a>
     <a class="right-next"
@@ -981,7 +884,6 @@ hockey 89.98937662535967
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embeddings-quantify-100-years-of-gender-and-ethnic-stereotypes-garg2018">Word embeddings quantify 100 years of gender and ethnic stereotypes <span class="xref cite">Garg2018</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">参考文献</a></li>
 </ul>
   </nav></div>
 
