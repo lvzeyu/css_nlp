@@ -472,9 +472,11 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-attention">交差注意機構(Cross Attention)</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">最終線形層とソフトマックス層</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">まとめ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Transformerの学習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">まとめ</a></li>
 </ul>
             </nav>
         </div>
@@ -513,16 +515,16 @@ x'_i=\sum_{j=1}^n w_{ji}x_j
 <h3>位置埋め込み(Positional Encoding)<a class="headerlink" href="#positional-encoding" title="Link to this heading">#</a></h3>
 <p>同じ単語でも、文中の位置によって意味が変わることがあります。位置埋め込み(Positional Encoding)は名前通り、入力トークンの順序や位置情報をモデルに提供する役割を果たします。位置埋め込みにより、モデルは各単語の文中での相対的な位置を理解し、より正確な文脈解析が可能になります。</p>
 <p>RNNようなモデルは、、入力データを順序付けて処理しますので、入力トークンの順序情報が自然に考慮されます。しかし、Transformerは入力を並列に処理し、基本的には単語の順序情報を無視します。そのため、文の意味を正確に理解するためには、単語の位置情報が別途必要となります。</p>
+<p>埋め込み層は各トークンに対して1つの位置埋め込みが追加され、トークンの相対位置が反映された新しい表現が生成されています。</p>
+<p><img alt="" src="../_images/transformer_positional_encoding_example.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>位置埋め込みを実現する方法はいくつかあります。</p>
 <ul class="simple">
 <li><p>絶対位置表現:事前に定義された関数を用いて、各位置に対してユニークな埋め込みを生成します。オリジナルのTransformerモデルは、変調されたサインとコサイン信号から静的なパターンを使用します。</p></li>
 <li><p>相対位置表現:Transformerベースの後続モデル（例えば、BERTやGPTなど）では、位置埋め込みがモデルのトレーニングプロセスの一部として学習され、より文脈に適応した表現を提供します。</p></li>
 </ul>
-<p>このように、埋め込み層は各トークンに対して1つの位置埋め込みを作成します。</p>
-<p><img alt="" src="../_images/transformer_positional_encoding_example.png" /></p>
-<p>位置埋め込みを可視化してみると、トークンの位置ごとに異なる位置符号のベクトルが割り当てられていることがわかります。しかも、隣接する符号の類似度が高いことも確認できます。</p>
-<p>こうした位置符号の特徴は、近いトークン同士の方が遠いトークン同士よりも意味的・文法的関連度が高くなりやすい言語の特性を学習するにも役にたつと考えられます。</p>
-<p><img alt="" src="../_images/transformer_positional_encoding_large_example.png" /></p>
+</div>
 </section>
 <section id="add-norm">
 <h3>Add&amp;Norm<a class="headerlink" href="#add-norm" title="Link to this heading">#</a></h3>
@@ -531,7 +533,6 @@ x'_i=\sum_{j=1}^n w_{ji}x_j
 <li><p>残差結合: ある層の出力にその層の入力を加算し、最終的な出力にします。</p></li>
 <li><p>レイヤー正規化: 過剰に大きい値によって学習が不安定になることを防ぐために、残差接続の結果を正規化します。</p></li>
 </ul>
-<p><img alt="" src="../_images/transformer_resideual_layer_norm_2.png" /></p>
 </section>
 <section id="feed-forward">
 <h3>Feed-forward層<a class="headerlink" href="#feed-forward" title="Link to this heading">#</a></h3>
@@ -542,6 +543,7 @@ x'_i=\sum_{j=1}^n w_{ji}x_j
 z_i=W_2f(W_1 u_i+b_1)+b_2
 \]</div>
 <p>Feed-forward層は、文脈に関連する情報をその大規模なパラメータの中に記憶しており、入力された文脈に対して関連する情報を付加する役割を果たしてると考えられています。</p>
+<p><img alt="" src="../_images/transformer_resideual_layer_norm_2.png" /></p>
 </section>
 </section>
 <section id="id2">
@@ -574,11 +576,32 @@ z_i=W_2f(W_1 u_i+b_1)+b_2
 <h4>交差注意機構(Cross Attention)<a class="headerlink" href="#cross-attention" title="Link to this heading">#</a></h4>
 <p>デコーダには、交差注意機構が使われています。具体的には、注意機構において、queryはデコーダの埋め込み列、keyとvalueにはエンコーダの出力埋め込み列が使われます。</p>
 <p>このようにして、デコーダが次のトークンを生成する際に、入力シーケンス全体を考慮できるようにします。</p>
-</section>
+<p><img alt="" src="../_images/transformer_decoding_2.gif" /></p>
 </section>
 </section>
 <section id="id5">
-<h2>まとめ<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h3>最終線形層とソフトマックス層<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p><img alt="" src="../_images/transformer_decoder_output_softmax.png" /></p>
+<p>デコーダスタックで出力されるベクトルは最終線形層とソフトマックス層で単語に変換します。</p>
+<ul class="simple">
+<li><p>線形層は、完全結合型ニューラルネットワークで、デコーダのスタックが出力したベクトルをより大きなベクトル、すなわち「ロジットベクトル（logits vector）」に変換します。</p>
+<ul>
+<li><p>例えば、モデルが10,000語の英単語を学習していると仮定すると、このロジットベクトルは10,000個のセルから成り立っています。それぞれのセルは、モデルが予測する単語のスコアを表しています。この時点では、ロジットベクトル内の各セルは、単語に関連する「スコア」になります。</p></li>
+</ul>
+</li>
+<li><p>ソフトマックス層がこのロジットベクトルに適用されます。ソフトマックス層は、各スコアを確率に変換します。この確率はすべてが正の値となり、すべての確率の合計が1.0になります。これにより、各単語が選ばれる確率を得ることができます。最終的に、確率が最も高いセルに対応する単語が選ばれ、その単語が出力として生成されます。このようにして、モデルは次に出力すべき単語を予測することができます。</p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h2>Transformerの学習<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p><img alt="" src="../_images/transformer_logits_output_and_label.png" /></p>
+<p>モデルから得られた単語の確率分布と「正解」の確率分布と比較することで、損失関数を算出します。損失関数の値が算出された後、バックプロパゲーションを使って損失を最小化する方向でモデルのパラメータを更新します。このプロセスを繰り返すことで、モデルは学習を進め、次第に予測精度が向上します。</p>
+<p><img alt="" src="../_images/output_target_probability_distributions.png" /></p>
+<p><img alt="" src="../_images/output_trained_model_probability_distributions.png" /></p>
+</section>
+<section id="id7">
+<h2>まとめ<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>Transformerは、主にエンコーダ、デコーダ、エンコーダ・デコーダーというアーキテクチャに大別されます。Transformerの成功は、Transformerベースの後続モデルの開発を引き起こしました。BERT、GPT、T5（Text-to-Text Transfer Transformer）などは代表的なバリエーションにであり、NLPの分野において画期的な進歩をもたらしました。</p>
 </section>
 </section>
@@ -661,9 +684,11 @@ z_i=W_2f(W_1 u_i+b_1)+b_2
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-attention">交差注意機構(Cross Attention)</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">最終線形層とソフトマックス層</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">まとめ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Transformerの学習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">まとめ</a></li>
 </ul>
   </nav></div>
 

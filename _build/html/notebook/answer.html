@@ -601,8 +601,28 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;世界経済も、米国が12月に続き３月にも追加利上げを実施するなど、先進国を中心に回復の動きとなりました&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;あの政治家に向けられているのは、政策への批判じゃなくて誹謗中傷だろ&quot;</span>
 <span class="n">sentiment</span> <span class="o">=</span> <span class="n">classify_pipeline</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sentiment</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;label&#39;: &#39;negative&#39;, &#39;score&#39;: 0.995851993560791}]
 </pre></div>
 </div>
 </div>
