@@ -459,9 +459,11 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">BERTの事前学習</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">入力表現</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">マスク言語モデリング</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">次文予測</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">BERTの構造</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">入力表現</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">BERTの出力</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">マスク言語モデリング</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">次文予測</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning">ファインチューング(Fine-Tuning)</a><ul class="nav section-nav flex-column">
@@ -495,21 +497,36 @@ document.write(`
 <section id="id1">
 <h2>BERTの事前学習<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <section id="id2">
-<h3>入力表現<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3>BERTの構造<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p><img alt="" src="../_images/bert-base-bert-large-encoders.png" /></p>
+<p>BERTは、Transformerのエンコーダ部分をベースにしたモデルになります。</p>
+<p>複数のエンコーダ層を積み重ねることで、より複雑で長い文脈を処理できるようになり、幅広い自然言語処理タスクで高い性能を発揮しています。</p>
+</section>
+<section id="id3">
+<h3>入力表現<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p><img alt="" src="../_images/bert_input.png" /></p>
 <p>BERTで入力を作成する際、入力の開始を表す<code class="docutils literal notranslate"><span class="pre">[CLS]</span></code>トークンと、入力の区切りを表す<code class="docutils literal notranslate"><span class="pre">[SEP]</span></code>トークンという二つの特殊トークンが使われます。</p>
 <p>またよく使われる特殊トークンとして、マスクタスクための<code class="docutils literal notranslate"><span class="pre">[MASK]</span></code>トークン、vocabularyに含まれていないことを示す<code class="docutils literal notranslate"><span class="pre">[UNK]</span></code>トークンがあります。</p>
 <p>入力トークン埋め込みと位置埋め込み以外、それぞれのテキストの範囲を区別しやくするためにsegment embeddingという埋め込みが導入されています。</p>
 <p>まとめると、BERTの入力埋め込み<span class="math notranslate nohighlight">\(x_i\)</span>は、トークン埋め込み、位置埋め込み、segment埋め込みより加算されます。</p>
 </section>
-<section id="id3">
-<h3>マスク言語モデリング<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h3>BERTの出力<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p><img alt="" src="../_images/bert-output-vector.png" /></p>
+<p>BERTの出力は、入力文の各トークンに対応する文脈化された埋め込みベクトル（contextual embeddings）です。これらの埋め込みは、モデルが入力文全体の文脈を考慮しながら、各トークンの意味を表現したものです。</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>BERTの出力の中で、入力文の最初に挿入される特殊トークン <code class="docutils literal notranslate"><span class="pre">[CLS]</span></code> に対応する埋め込みは、文全体の情報を要約するように設計されています。</p>
+</aside>
+</section>
+<section id="id5">
+<h3>マスク言語モデリング<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>マスク言語モデリングは、トークンの穴埋め問題を解けるタスクです。具体的には、ランダムにトークン列中のトークンを隠して、その周辺の単語からマスクされた単語を予測することが求められます。</p>
 <p>ここで、先行するトークンと後続トークンの双方の情報が使われていますので、全体の文脈を捉える学習を実現しています。</p>
 <p><img alt="" src="../_images/BERT-language-modeling-masked-lm.png" /></p>
 </section>
-<section id="id4">
-<h3>次文予測<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<section id="id6">
+<h3>次文予測<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>次文予測タスクでは、2つの文が与えられ、一方が他方の直後に来るかどうかを判定することが求められます。</p>
 <p><img alt="" src="../_images/bert-next-sentence-prediction.png" /></p>
 </section>
@@ -519,10 +536,10 @@ document.write(`
 <p>様々なタスクにおいて、事前学習モデルをもとにしてそれぞれのタスクに特化したモデルを作るためのステップはファインチューングです。</p>
 <p>事前学習タスクから下流タスクに切り替える時、モデルの最後のレイヤーをタスクに適したものに置き換える必要があります。この最後の層はヘッドと呼ばれ、タスクに固有な部分です。</p>
 <p>残りの部分はボディと呼ばれ、タスクに依存しない事前学習された部分であり(トークン埋め込み層やTransformer層が含まれ)、一般的な言語の理解を行うための基本的な情報を含んでいます。</p>
-<p>例えば、テキスト分類の場合、追加層としては、BERTの最後の隠れ層からの出力に冒頭のSpecial token[CLS]を全結合層（Dense Layer）に経由し、各カテゴリーに属する確率を出力します。それは、[CLS]トークンは入力テキスト全体の文脈情報を集約すると考えるためです。</p>
+<p>例えば、テキスト分類の場合、追加層としては、BERTの最後の隠れ層からの出力に冒頭のSpecial token<code class="docutils literal notranslate"><span class="pre">[CLS]</span></code>を全結合層（Dense Layer）に経由し、各カテゴリーに属する確率を出力します。それは、[CLS]トークンは入力テキスト全体の文脈情報を集約すると考えるためです。</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
-<p>テキスト分類タスクにおいて、[CLS]トークンと全結合層（Dense Layer）を使用するのが一般的ですが、他の追加層の設計を用いることももちろん可能です。例えば、複数の全結合層を積み重ねるや、畳み込みニューラルネットワーク（CNN）を適用するなどの方法も提案されています。</p>
+<p>テキスト分類タスクにおいて、[CLS]トークンと全結合層（Dense Layer）を使用するのが一般的ですが、他の追加層の設計を用いることももちろん可能です。</p>
 </aside>
 <p><img alt="" src="../_images/bert_based_model.png" /></p>
 <section id="huggingface-transformer">
@@ -542,10 +559,17 @@ document.write(`
 <p><a class="reference external" href="https://huggingface.co/docs/transformers/main_classes/pipelines"><code class="docutils literal notranslate"><span class="pre">pipeline</span></code></a>というクラスで、特定のタスクを実行するために事前学習されたモデルとトークンナイザーを統合し、簡単に使用することができます。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install fugashi</span>
+<span class="c1">#!pip install unidic-lite</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
-<span class="c1">#!pip install unidic-lite</span>
-<span class="c1">#!pip install fugashi </span>
+
 <span class="n">fill_mask</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
     <span class="s2">&quot;fill-mask&quot;</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="s2">&quot;cl-tohoku/bert-base-japanese-v3&quot;</span>
@@ -554,10 +578,6 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-</pre></div>
-</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/utils/generic.py:441: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
   _torch_pytree._register_pytree_node(
 </pre></div>
@@ -568,99 +588,6 @@ document.write(`
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/modeling_utils.py:519: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don&#39;t have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
   return torch.load(checkpoint_file, map_location=map_location)
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/models/bert_japanese/tokenization_bert_japanese.py:457,</span> in <span class="ni">MecabTokenizer.__init__</span><span class="nt">(self, do_lower_case, never_split, normalize_text, mecab_dic, mecab_option)</span>
-<span class="g g-Whitespace">    </span><span class="mi">456</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">457</span>     <span class="kn">import</span> <span class="nn">fugashi</span>
-<span class="g g-Whitespace">    </span><span class="mi">458</span> <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;fugashi&#39;
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1">#!pip install unidic-lite</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1">#!pip install fugashi </span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">fill_mask</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="s2">&quot;fill-mask&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">model</span><span class="o">=</span><span class="s2">&quot;cl-tohoku/bert-base-japanese-v3&quot;</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="p">)</span>
-
-<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/pipelines/__init__.py:967,</span> in <span class="ni">pipeline</span><span class="nt">(task, model, config, tokenizer, feature_extractor, image_processor, framework, revision, use_fast, token, device, device_map, torch_dtype, trust_remote_code, model_kwargs, pipeline_class, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">964</span>             <span class="n">tokenizer_kwargs</span> <span class="o">=</span> <span class="n">model_kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">965</span>             <span class="n">tokenizer_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;torch_dtype&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">967</span>         <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">968</span>             <span class="n">tokenizer_identifier</span><span class="p">,</span> <span class="n">use_fast</span><span class="o">=</span><span class="n">use_fast</span><span class="p">,</span> <span class="n">_from_pipeline</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="o">**</span><span class="n">hub_kwargs</span><span class="p">,</span> <span class="o">**</span><span class="n">tokenizer_kwargs</span>
-<span class="g g-Whitespace">    </span><span class="mi">969</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">971</span> <span class="k">if</span> <span class="n">load_image_processor</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">972</span>     <span class="c1"># Try to infer image processor from model or config name (if provided as str)</span>
-<span class="g g-Whitespace">    </span><span class="mi">973</span>     <span class="k">if</span> <span class="n">image_processor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/models/auto/tokenization_auto.py:787,</span> in <span class="ni">AutoTokenizer.from_pretrained</span><span class="nt">(cls, pretrained_model_name_or_path, *inputs, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">783</span>     <span class="k">if</span> <span class="n">tokenizer_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">784</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">785</span>             <span class="sa">f</span><span class="s2">&quot;Tokenizer class </span><span class="si">{</span><span class="n">tokenizer_class_candidate</span><span class="si">}</span><span class="s2"> does not exist or is not currently imported.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">786</span>         <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">787</span>     <span class="k">return</span> <span class="n">tokenizer_class</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="o">*</span><span class="n">inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">789</span> <span class="c1"># Otherwise we have to be creative.</span>
-<span class="g g-Whitespace">    </span><span class="mi">790</span> <span class="c1"># if model is an encoder decoder, the encoder tokenizer class is used by default</span>
-<span class="g g-Whitespace">    </span><span class="mi">791</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">EncoderDecoderConfig</span><span class="p">):</span>
-
-<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:2028,</span> in <span class="ni">PreTrainedTokenizerBase.from_pretrained</span><span class="nt">(cls, pretrained_model_name_or_path, cache_dir, force_download, local_files_only, token, revision, *init_inputs, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2025</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2026</span>         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;loading file </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2"> from cache at </span><span class="si">{</span><span class="n">resolved_vocab_files</span><span class="p">[</span><span class="n">file_id</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2028</span> <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_pretrained</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2029</span>     <span class="n">resolved_vocab_files</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2030</span>     <span class="n">pretrained_model_name_or_path</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2031</span>     <span class="n">init_configuration</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2032</span>     <span class="o">*</span><span class="n">init_inputs</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2033</span>     <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2034</span>     <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2035</span>     <span class="n">local_files_only</span><span class="o">=</span><span class="n">local_files_only</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2036</span>     <span class="n">_commit_hash</span><span class="o">=</span><span class="n">commit_hash</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2037</span>     <span class="n">_is_local</span><span class="o">=</span><span class="n">is_local</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2038</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2039</span> <span class="p">)</span>
-
-<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:2260,</span> in <span class="ni">PreTrainedTokenizerBase._from_pretrained</span><span class="nt">(cls, resolved_vocab_files, pretrained_model_name_or_path, init_configuration, token, cache_dir, local_files_only, _commit_hash, _is_local, *init_inputs, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2258</span> <span class="c1"># Instantiate the tokenizer.</span>
-<span class="g g-Whitespace">   </span><span class="mi">2259</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2260</span>     <span class="n">tokenizer</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">init_inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">init_kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2261</span> <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2262</span>     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2263</span>         <span class="s2">&quot;Unable to load vocabulary from file. &quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">2264</span>         <span class="s2">&quot;Please check that the provided vocabulary is accessible and not corrupted.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">2265</span>     <span class="p">)</span>
-
-<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/models/bert_japanese/tokenization_bert_japanese.py:192,</span> in <span class="ni">BertJapaneseTokenizer.__init__</span><span class="nt">(self, vocab_file, spm_file, do_lower_case, do_word_tokenize, do_subword_tokenize, word_tokenizer_type, subword_tokenizer_type, never_split, unk_token, sep_token, pad_token, cls_token, mask_token, mecab_kwargs, sudachi_kwargs, jumanpp_kwargs, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">188</span>     <span class="bp">self</span><span class="o">.</span><span class="n">word_tokenizer</span> <span class="o">=</span> <span class="n">BasicTokenizer</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">189</span>         <span class="n">do_lower_case</span><span class="o">=</span><span class="n">do_lower_case</span><span class="p">,</span> <span class="n">never_split</span><span class="o">=</span><span class="n">never_split</span><span class="p">,</span> <span class="n">tokenize_chinese_chars</span><span class="o">=</span><span class="kc">False</span>
-<span class="g g-Whitespace">    </span><span class="mi">190</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">191</span> <span class="k">elif</span> <span class="n">word_tokenizer_type</span> <span class="o">==</span> <span class="s2">&quot;mecab&quot;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">192</span>     <span class="bp">self</span><span class="o">.</span><span class="n">word_tokenizer</span> <span class="o">=</span> <span class="n">MecabTokenizer</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">193</span>         <span class="n">do_lower_case</span><span class="o">=</span><span class="n">do_lower_case</span><span class="p">,</span> <span class="n">never_split</span><span class="o">=</span><span class="n">never_split</span><span class="p">,</span> <span class="o">**</span><span class="p">(</span><span class="n">mecab_kwargs</span> <span class="ow">or</span> <span class="p">{})</span>
-<span class="g g-Whitespace">    </span><span class="mi">194</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">195</span> <span class="k">elif</span> <span class="n">word_tokenizer_type</span> <span class="o">==</span> <span class="s2">&quot;sudachi&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">196</span>     <span class="bp">self</span><span class="o">.</span><span class="n">word_tokenizer</span> <span class="o">=</span> <span class="n">SudachiTokenizer</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">197</span>         <span class="n">do_lower_case</span><span class="o">=</span><span class="n">do_lower_case</span><span class="p">,</span> <span class="n">never_split</span><span class="o">=</span><span class="n">never_split</span><span class="p">,</span> <span class="o">**</span><span class="p">(</span><span class="n">sudachi_kwargs</span> <span class="ow">or</span> <span class="p">{})</span>
-<span class="g g-Whitespace">    </span><span class="mi">198</span>     <span class="p">)</span>
-
-<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/models/bert_japanese/tokenization_bert_japanese.py:459,</span> in <span class="ni">MecabTokenizer.__init__</span><span class="nt">(self, do_lower_case, never_split, normalize_text, mecab_dic, mecab_option)</span>
-<span class="g g-Whitespace">    </span><span class="mi">457</span>     <span class="kn">import</span> <span class="nn">fugashi</span>
-<span class="g g-Whitespace">    </span><span class="mi">458</span> <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">459</span>     <span class="k">raise</span> <span class="n">error</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">460</span>         <span class="s2">&quot;You need to install fugashi to use MecabTokenizer. &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">461</span>         <span class="s2">&quot;See https://pypi.org/project/fugashi/ for installation.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">462</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">464</span> <span class="n">mecab_option</span> <span class="o">=</span> <span class="n">mecab_option</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">466</span> <span class="k">if</span> <span class="n">mecab_dic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="ne">ModuleNotFoundError</span>: You need to install fugashi to use MecabTokenizer. See https://pypi.org/project/fugashi/ for installation.
 </pre></div>
 </div>
 </div>
@@ -707,7 +634,7 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.600762</td>
+      <td>0.600761</td>
       <td>14424</td>
       <td>仙台</td>
       <td>東北 大学 は 仙台 市 に 位置 し て い ます 。</td>
@@ -750,8 +677,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "e942b723ad934e818c4e5ab3cb9e4a5f", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "a6cb46820c5d416080cc896214a81f5d", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "1fe625ff9ed54636b847eb508284955b", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "4742612e1a9645f696829e5899a08777", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "7d07a5b8e24f43908149bdd9ccbc0d38", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "fe8c1121b264407fba67f2ba4689aa23", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -790,11 +715,9 @@ document.write(`
 <p>Huggingface Hubで日本語のセンチメント分類ためのモデルを探し、piplineでセンチメント分類器を実装しなさい。
 以下のテキストに対する分類結果を確認しよう。</p>
 <ul class="simple">
-<li><p>この製品は全く役に立ちませんでした</p></li>
-<li><p>今日はいい天気ですね</p></li>
-<li><p>世界経済も、米国が12月に続き３月にも追加利上げを実施するなど、先進国を中心に回復の動きとなりました</p></li>
-<li><p>一度は訪れてみたいけど、たぶんもう行かない</p></li>
-<li><p>あの政治家に向けられているのは、政策への批判じゃなくて誹謗中傷だろ</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">この製品は全く役に立ちませんでした</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">今日はいい天気ですね</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">世界経済も、米国が12月に続き３月にも追加利上げを実施するなど、先進国を中心に回復の動きとなりました</span></code></p></li>
 </ul>
 </div>
 </div>
@@ -894,9 +817,11 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">BERTの事前学習</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">入力表現</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">マスク言語モデリング</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">次文予測</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">BERTの構造</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">入力表現</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">BERTの出力</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">マスク言語モデリング</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">次文予測</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning">ファインチューング(Fine-Tuning)</a><ul class="nav section-nav flex-column">
