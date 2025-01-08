@@ -1,3 +1,5 @@
 /notebook/Data/*
 /notebook/runs/cbow_embeddings/*
 /notebook/Model/*
+/notebook/sample-text-classification-bert/*
+/notebook/wrime-text-classification-bert/*
