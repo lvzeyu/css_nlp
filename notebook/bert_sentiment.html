@@ -229,7 +229,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">大規模言語モデル</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="GPT.html">GPT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="llm.html">大規模言語モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm.html">大規模言語モデルの基本</a></li>
 </ul>
 
     </div>
@@ -527,21 +527,122 @@ document.write(`
 <p>Hugging Faceのには色々なデータセットが用意されております。ここでは、多言語のセンチメントデータセットを例として使用することにします。その中に、英語と日本語のサプセットが含まれます。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
-<span class="c1">#dataset = load_dataset(&quot;tyqiangz/multilingual-sentiments&quot;, &quot;japanese&quot;)</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tyqiangz/multilingual-sentiments&quot;</span><span class="p">,</span> <span class="s2">&quot;english&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>datasets
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#dataset = load_dataset(&quot;tyqiangz/multilingual-sentiments&quot;, &quot;japanese&quot;)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tyqiangz/multilingual-sentiments&quot;</span><span class="p">,</span> <span class="s2">&quot;english&quot;</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;datasets&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: datasets in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (3.2.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: filelock in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (3.13.1)
+Requirement already satisfied: numpy&gt;=1.17 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (1.26.3)
+Requirement already satisfied: pyarrow&gt;=15.0.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (18.1.0)
+Requirement already satisfied: dill&lt;0.3.9,&gt;=0.3.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (0.3.8)
+Requirement already satisfied: pandas in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (2.1.4)
+Requirement already satisfied: requests&gt;=2.32.2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (2.32.3)
+Requirement already satisfied: tqdm&gt;=4.66.3 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (4.67.1)
+Requirement already satisfied: xxhash in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (3.5.0)
+Requirement already satisfied: multiprocess&lt;0.70.17 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (0.70.16)
+Requirement already satisfied: fsspec&lt;=2024.9.0,&gt;=2023.1.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from fsspec[http]&lt;=2024.9.0,&gt;=2023.1.0-&gt;datasets) (2023.12.2)
+Requirement already satisfied: aiohttp in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (3.9.3)
+Requirement already satisfied: huggingface-hub&gt;=0.23.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (0.27.0)
+Requirement already satisfied: packaging in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (23.2)
+Requirement already satisfied: pyyaml&gt;=5.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from datasets) (6.0.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: aiosignal&gt;=1.1.2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp-&gt;datasets) (1.3.1)
+Requirement already satisfied: attrs&gt;=17.3.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp-&gt;datasets) (23.2.0)
+Requirement already satisfied: frozenlist&gt;=1.1.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp-&gt;datasets) (1.4.1)
+Requirement already satisfied: multidict&lt;7.0,&gt;=4.5 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp-&gt;datasets) (6.0.4)
+Requirement already satisfied: yarl&lt;2.0,&gt;=1.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp-&gt;datasets) (1.9.4)
+Requirement already satisfied: typing-extensions&gt;=3.7.4.3 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from huggingface-hub&gt;=0.23.0-&gt;datasets) (4.9.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&gt;=2.32.2-&gt;datasets) (3.3.2)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&gt;=2.32.2-&gt;datasets) (3.6)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&gt;=2.32.2-&gt;datasets) (2.1.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&gt;=2.32.2-&gt;datasets) (2023.11.17)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pandas-&gt;datasets) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pandas-&gt;datasets) (2023.3.post1)
+Requirement already satisfied: tzdata&gt;=2022.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pandas-&gt;datasets) (2023.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas-&gt;datasets) (1.16.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.0</span> -&gt; <span class=" -Color -Color-Green">24.3.1</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>wandb
+<span class="kn">import</span> <span class="nn">wandb</span>
+<span class="n">wandb</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: wandb in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (0.19.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: click!=8.0.0,&gt;=7.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wandb) (8.1.7)
+Requirement already satisfied: docker-pycreds&gt;=0.4.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wandb) (0.4.0)
+Requirement already satisfied: gitpython!=3.1.29,&gt;=1.0.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wandb) (3.1.43)
+Requirement already satisfied: platformdirs in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wandb) (4.1.0)
+Requirement already satisfied: protobuf!=4.21.0,!=5.28.0,&lt;6,&gt;=3.19.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wandb) (4.25.5)
+Requirement already satisfied: psutil&gt;=5.0.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wandb) (5.9.7)
+Requirement already satisfied: pydantic&lt;3,&gt;=2.6 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wandb) (2.6.0)
+Requirement already satisfied: pyyaml in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wandb) (6.0.1)
+Requirement already satisfied: requests&lt;3,&gt;=2.0.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wandb) (2.32.3)
+Requirement already satisfied: sentry-sdk&gt;=2.0.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wandb) (2.19.2)
+Requirement already satisfied: setproctitle in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wandb) (1.3.4)
+Requirement already satisfied: setuptools in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wandb) (69.0.3)
+Requirement already satisfied: six&gt;=1.4.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from docker-pycreds&gt;=0.4.0-&gt;wandb) (1.16.0)
+Requirement already satisfied: gitdb&lt;5,&gt;=4.0.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from gitpython!=3.1.29,&gt;=1.0.0-&gt;wandb) (4.0.11)
+Requirement already satisfied: annotated-types&gt;=0.4.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=2.6-&gt;wandb) (0.6.0)
+Requirement already satisfied: pydantic-core==2.16.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=2.6-&gt;wandb) (2.16.1)
+Requirement already satisfied: typing-extensions&gt;=4.6.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=2.6-&gt;wandb) (4.9.0)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3,&gt;=2.0.0-&gt;wandb) (3.3.2)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3,&gt;=2.0.0-&gt;wandb) (3.6)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3,&gt;=2.0.0-&gt;wandb) (2.1.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3,&gt;=2.0.0-&gt;wandb) (2023.11.17)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: smmap&lt;6,&gt;=3.0.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from gitdb&lt;5,&gt;=4.0.1-&gt;gitpython!=3.1.29,&gt;=1.0.0-&gt;wandb) (5.0.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.0</span> -&gt; <span class=" -Color -Color-Green">24.3.1</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">wandb</span>: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">wandb</span>: Currently logged in as: <span class=" -Color -Color-Yellow">lvzeyu1995</span> (<span class=" -Color -Color-Yellow">lvzeyu1995-tohoku-university</span>). Use <span class=" -Color -Color-Bold">`wandb login --relogin`</span> to force relogin
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;WANDB_PROJECT&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;sentiment_analysis&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="c1">#dataset = load_dataset(&quot;tyqiangz/multilingual-sentiments&quot;, &quot;japanese&quot;)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tyqiangz/multilingual-sentiments&quot;</span><span class="p">,</span> <span class="s2">&quot;english&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -669,7 +770,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;Train Dataset&#39;}, ylabel=&#39;label&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/c9fb50b9b31bf3eb5d262ea2bc728f7b219a2f5b86babfd1e09276612343b705.png" src="../_images/c9fb50b9b31bf3eb5d262ea2bc728f7b219a2f5b86babfd1e09276612343b705.png" />
+<img alt="../_images/db93e0c2f8322cac461f862e4091878aa4c2957429f77b4ba2740f4e6a792b0b.png" src="../_images/db93e0c2f8322cac461f862e4091878aa4c2957429f77b4ba2740f4e6a792b0b.png" />
 </div>
 </div>
 </section>
@@ -694,7 +795,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;text_length&#39;}, xlabel=&#39;label&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/26a97b82babca095f9130d7dc3987aab0861312ea77acec18968f66122042a03.png" src="../_images/26a97b82babca095f9130d7dc3987aab0861312ea77acec18968f66122042a03.png" />
+<img alt="../_images/14223c66941ef0a5352a1405dcf4cdae9149b20c3bf9b55920cea40f2f0ac397.png" src="../_images/14223c66941ef0a5352a1405dcf4cdae9149b20c3bf9b55920cea40f2f0ac397.png" />
 </div>
 </div>
 </section>
@@ -706,6 +807,12 @@ document.write(`
 <p>Transformerライブラリー は便利なAutoTokenizerクラスを提供しており、事前学習済みモデルに関連つけられたトークナイザーを素早く使用することができます。</p>
 <section id="id7">
 <h4>トークナイザの動作確認<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<p>tokenizerテキストを数値形式（トークン）に変換します。</p>
+<ul class="simple">
+<li><p>入力テキストをトークンに分割します</p></li>
+<li><p>特殊トークンが自動的に付加されます</p></li>
+<li><p>トークンをトークンIDに変換します</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span>
@@ -715,13 +822,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tokenizer_config.json: 100%|██████████| 28.0/28.0 [00:00&lt;00:00, 72.0kB/s]
-config.json: 100%|██████████| 483/483 [00:00&lt;00:00, 1.26MB/s]
-vocab.txt: 100%|██████████| 232k/232k [00:00&lt;00:00, 1.36MB/s]
-tokenizer.json: 100%|██████████| 466k/466k [00:00&lt;00:00, 938kB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/utils/generic.py:441: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  _torch_pytree._register_pytree_node(
+/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/huggingface_hub/file_download.py:795: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
 </pre></div>
 </div>
-</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "324032a6b1c14fcc858cde835ab7a1e5"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "ef2a35b592bb4a729d39d78c1090f9e4"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "1f7b44f20bb442b393f81f924a49cb8f"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "2f6af663ba3b4b25bf82c8608761ce7f"}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -796,12 +903,7 @@ tokenizer.json: 100%|██████████| 466k/466k [00:00&lt;00:00, 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Map: 100%|██████████| 1839/1839 [00:00&lt;00:00, 32383.76 examples/s]
-Map: 100%|██████████| 324/324 [00:00&lt;00:00, 34130.86 examples/s]
-Map: 100%|██████████| 870/870 [00:00&lt;00:00, 36298.43 examples/s]
-</pre></div>
-</div>
-</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "12ee2bcbc5744d67850e4eae2ae67848"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "5da5c4fdebed49e89715b8130445a518"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "86a9e966f1b342a89bcfd1c537449e35"}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -932,10 +1034,21 @@ Map: 100%|██████████| 870/870 [00:00&lt;00:00, 36298.43 exam
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model.safetensors: 100%|██████████| 268M/268M [00:05&lt;00:00, 50.2MB/s] 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/huggingface_hub/file_download.py:795: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/utils/generic.py:309: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  _torch_pytree._register_pytree_node(
+</pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/utils/generic.py:309: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  _torch_pytree._register_pytree_node(
+/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/huggingface_hub/file_download.py:795: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "b2aeca1615d147aa9c26a98df1d1e183"}</script></div>
 </div>
 <p>最初に、文字列をエンコーダしてトークンをPyTorchのテンソルに変換する必要があります。</p>
 <p>結果として得られるテンソルは<code class="docutils literal notranslate"><span class="pre">[batch_size,n_tokens]</span></code>という形状です。</p>
@@ -974,8 +1087,7 @@ Map: 100%|██████████| 870/870 [00:00&lt;00:00, 36298.43 exam
          [-0.2772, -0.4459,  0.1818,  ..., -0.0948, -0.0076,  0.9958],
          [-0.2841, -0.3917,  0.3753,  ..., -0.2151, -0.1173,  1.0526],
          [ 0.2661, -0.5094, -0.3180,  ..., -0.4203,  0.0144, -0.2149],
-         [ 0.9441,  0.0112, -0.4714,  ...,  0.1439, -0.7288, -0.1619]]],
-       device=&#39;cuda:0&#39;), hidden_states=None, attentions=None)
+         [ 0.9441,  0.0112, -0.4714,  ...,  0.1439, -0.7288, -0.1620]]]), hidden_states=None, attentions=None)
 </pre></div>
 </div>
 </div>
@@ -1037,12 +1149,7 @@ Map: 100%|██████████| 870/870 [00:00&lt;00:00, 36298.43 exam
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Map: 100%|██████████| 1839/1839 [00:01&lt;00:00, 1785.59 examples/s]
-Map: 100%|██████████| 324/324 [00:00&lt;00:00, 2093.79 examples/s]
-Map: 100%|██████████| 870/870 [00:00&lt;00:00, 2275.50 examples/s]
-</pre></div>
-</div>
-</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "cee9168b216e467ab31bfd5ee86f86d2"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "417a917e230c4232b530d7821c29768b"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "89a1ac0776eb4e59a950652de35fbc0b"}</script></div>
 </div>
 </section>
 <section id="id11">
@@ -1078,7 +1185,411 @@ Map: 100%|██████████| 870/870 [00:00&lt;00:00, 2275.50 examp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression(max_iter=3000)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">LogisticRegression</label><div class="sk-toggleable__content"><pre>LogisticRegression(max_iter=3000)</pre></div></div></div></div></div></div></div>
+<div class="output text_html"><style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: black;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 1ex;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression(max_iter=3000)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;LogisticRegression<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression(max_iter=3000)</pre></div> </div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1110,7 +1621,7 @@ Map: 100%|██████████| 870/870 [00:00&lt;00:00, 2275.50 examp
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d05c1909c91dfbdb6d512c87132554795c8508252537302d64f066a2f51b72b0.png" src="../_images/d05c1909c91dfbdb6d512c87132554795c8508252537302d64f066a2f51b72b0.png" />
+<img alt="../_images/1fa8025c8e2638cdf15dcb7ef26351e7dff7465517a8bf3bda4e69254c95728d.png" src="../_images/1fa8025c8e2638cdf15dcb7ef26351e7dff7465517a8bf3bda4e69254c95728d.png" />
 </div>
 </div>
 </section>
@@ -1133,7 +1644,11 @@ Map: 100%|██████████| 870/870 [00:00&lt;00:00, 2275.50 examp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: [&#39;pre_classifier.weight&#39;, &#39;pre_classifier.bias&#39;, &#39;classifier.bias&#39;, &#39;classifier.weight&#39;]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/huggingface_hub/file_download.py:795: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: [&#39;pre_classifier.bias&#39;, &#39;classifier.bias&#39;, &#39;classifier.weight&#39;, &#39;pre_classifier.weight&#39;]
 You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
 </pre></div>
 </div>
@@ -1186,7 +1701,7 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="s2">&quot;普段使いとバイクに乗るときのブーツ兼用として購入しました&quot;</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span> <span class="c1"># pytorch tensorに変換するためにreturn_tensors=&quot;pt&quot;を指定</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="s2">&quot;I purchased these boots to use both for everyday wear and when riding my motorcycle.&quot;</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span> <span class="c1"># pytorch tensorに変換するためにreturn_tensors=&quot;pt&quot;を指定</span>
 <span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">inputs</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
     <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
@@ -1195,7 +1710,7 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SequenceClassifierOutput(loss=None, logits=tensor([[ 0.1149,  0.0521, -0.2036]], device=&#39;cuda:0&#39;), hidden_states=None, attentions=None)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SequenceClassifierOutput(loss=None, logits=tensor([[ 0.0818,  0.0182, -0.0875]]), hidden_states=None, attentions=None)
 </pre></div>
 </div>
 </div>
@@ -1241,6 +1756,78 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
     <span class="n">push_to_hub</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">log_level</span><span class="o">=</span><span class="s2">&quot;error&quot;</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">36</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">logging_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset_encoded</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">])</span> <span class="o">//</span> <span class="n">batch_size</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;sample-text-classification-bert&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">training_args</span> <span class="o">=</span> <span class="n">TrainingArguments</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">output_dir</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">num_train_epochs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">learning_rate</span><span class="o">=</span><span class="mf">2e-5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">per_device_eval_batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">evaluation_strategy</span><span class="o">=</span><span class="s2">&quot;epoch&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="n">disable_tqdm</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">logging_steps</span><span class="o">=</span><span class="n">logging_steps</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">push_to_hub</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">log_level</span><span class="o">=</span><span class="s2">&quot;error&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="p">)</span>
+
+<span class="nn">File &lt;string&gt;:121,</span> in <span class="ni">__init__</span><span class="nt">(self, output_dir, overwrite_output_dir, do_train, do_eval, do_predict, evaluation_strategy, prediction_loss_only, per_device_train_batch_size, per_device_eval_batch_size, per_gpu_train_batch_size, per_gpu_eval_batch_size, gradient_accumulation_steps, eval_accumulation_steps, eval_delay, learning_rate, weight_decay, adam_beta1, adam_beta2, adam_epsilon, max_grad_norm, num_train_epochs, max_steps, lr_scheduler_type, lr_scheduler_kwargs, warmup_ratio, warmup_steps, log_level, log_level_replica, log_on_each_node, logging_dir, logging_strategy, logging_first_step, logging_steps, logging_nan_inf_filter, save_strategy, save_steps, save_total_limit, save_safetensors, save_on_each_node, save_only_model, no_cuda, use_cpu, use_mps_device, seed, data_seed, jit_mode_eval, use_ipex, bf16, fp16, fp16_opt_level, half_precision_backend, bf16_full_eval, fp16_full_eval, tf32, local_rank, ddp_backend, tpu_num_cores, tpu_metrics_debug, debug, dataloader_drop_last, eval_steps, dataloader_num_workers, past_index, run_name, disable_tqdm, remove_unused_columns, label_names, load_best_model_at_end, metric_for_best_model, greater_is_better, ignore_data_skip, fsdp, fsdp_min_num_params, fsdp_config, fsdp_transformer_layer_cls_to_wrap, deepspeed, label_smoothing_factor, optim, optim_args, adafactor, group_by_length, length_column_name, report_to, ddp_find_unused_parameters, ddp_bucket_cap_mb, ddp_broadcast_buffers, dataloader_pin_memory, dataloader_persistent_workers, skip_memory_metrics, use_legacy_prediction_loop, push_to_hub, resume_from_checkpoint, hub_model_id, hub_strategy, hub_token, hub_private_repo, hub_always_push, gradient_checkpointing, gradient_checkpointing_kwargs, include_inputs_for_metrics, fp16_backend, push_to_hub_model_id, push_to_hub_organization, push_to_hub_token, mp_parameters, auto_find_batch_size, full_determinism, torchdynamo, ray_scope, ddp_timeout, torch_compile, torch_compile_backend, torch_compile_mode, dispatch_batches, split_batches, include_tokens_per_second, include_num_input_tokens_seen, neftune_noise_alpha)</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/training_args.py:1493,</span> in <span class="ni">TrainingArguments.__post_init__</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1487</span>     <span class="k">if</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span><span class="o">.</span><span class="n">base_version</span><span class="p">)</span> <span class="o">==</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;2.0.0&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp16</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1488</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;--optim adamw_torch_fused with --fp16 requires PyTorch&gt;2.0&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1490</span> <span class="k">if</span> <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1491</span>     <span class="bp">self</span><span class="o">.</span><span class="n">framework</span> <span class="o">==</span> <span class="s2">&quot;pt&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1492</span>     <span class="ow">and</span> <span class="n">is_torch_available</span><span class="p">()</span>
+<span class="ne">-&gt; </span><span class="mi">1493</span>     <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1494</span>     <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s2">&quot;npu&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1495</span>     <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s2">&quot;xpu&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1496</span>     <span class="ow">and</span> <span class="p">(</span><span class="n">get_xla_device_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;GPU&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1497</span>     <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp16</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp16_full_eval</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1498</span> <span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1499</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1500</span>         <span class="s2">&quot;FP16 Mixed precision training with AMP or APEX (`--fp16`) and FP16 half precision evaluation&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1501</span>         <span class="s2">&quot; (`--fp16_full_eval`) can only be used on CUDA or NPU devices or certain XPU devices (with IPEX).&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1502</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1504</span> <span class="k">if</span> <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1505</span>     <span class="bp">self</span><span class="o">.</span><span class="n">framework</span> <span class="o">==</span> <span class="s2">&quot;pt&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1506</span>     <span class="ow">and</span> <span class="n">is_torch_available</span><span class="p">()</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1513</span>     <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bf16</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">bf16_full_eval</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1514</span> <span class="p">):</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/training_args.py:1941,</span> in <span class="ni">TrainingArguments.device</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1937</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1938</span><span class="sd"> The device used by this process.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1939</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1940</span> <span class="n">requires_backends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;torch&quot;</span><span class="p">])</span>
+<span class="ne">-&gt; </span><span class="mi">1941</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_setup_devices</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/utils/generic.py:54,</span> in <span class="ni">cached_property.__get__</span><span class="nt">(self, obj, objtype)</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span> <span class="n">cached</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="k">if</span> <span class="n">cached</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">54</span>     <span class="n">cached</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fget</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span>     <span class="nb">setattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">cached</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="k">return</span> <span class="n">cached</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/training_args.py:1841,</span> in <span class="ni">TrainingArguments._setup_devices</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1839</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_sagemaker_mp_enabled</span><span class="p">():</span>
+<span class="g g-Whitespace">   </span><span class="mi">1840</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_accelerate_available</span><span class="p">(</span><span class="n">min_version</span><span class="o">=</span><span class="s2">&quot;0.20.1&quot;</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1841</span>         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1842</span>             <span class="s2">&quot;Using the `Trainer` with `PyTorch` requires `accelerate&gt;=0.20.1`: Please run `pip install transformers[torch]` or `pip install accelerate -U`&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1843</span>         <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1844</span>     <span class="n">AcceleratorState</span><span class="o">.</span><span class="n">_reset_state</span><span class="p">(</span><span class="n">reset_partial_state</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1845</span> <span class="bp">self</span><span class="o">.</span><span class="n">distributed_state</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="ne">ImportError</span>: Using the `Trainer` with `PyTorch` requires `accelerate&gt;=0.20.1`: Please run `pip install transformers[torch]` or `pip install accelerate -U`
 </pre></div>
 </div>
 </div>

@@ -18,18 +18,95 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from datasets import load_dataset
-#dataset = load_dataset("tyqiangz/multilingual-sentiments", "japanese")
-dataset = load_dataset("tyqiangz/multilingual-sentiments", "english")
+
+from transformers import TrainingArguments
+
+batch_size = 16
+logging_steps = len(dataset_encoded["train"]) // batch_size
+model_name = "sample-text-classification-bert"
+
+training_args = TrainingArguments(
+    output_dir=model_name,
+    num_train_epochs=2,
+    learning_rate=2e-5,
+    per_device_train_batch_size=batch_size,
+    per_device_eval_batch_size=batch_size,
+    weight_decay=0.01,
+    evaluation_strategy="epoch",
+    disable_tqdm=False,
+    logging_steps=logging_steps,
+    push_to_hub=False,
+    log_level="error"
+)
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[2], line 1[0m
-[0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mdatasets[39;00m [38;5;28;01mimport[39;00m load_dataset
-[1;32m      2[0m [38;5;66;03m#dataset = load_dataset("tyqiangz/multilingual-sentiments", "japanese")[39;00m
-[1;32m      3[0m dataset [38;5;241m=[39m load_dataset([38;5;124m"[39m[38;5;124mtyqiangz/multilingual-sentiments[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124menglish[39m[38;5;124m"[39m)
+[0;31mImportError[0m                               Traceback (most recent call last)
+Cell [0;32mIn[36], line 7[0m
+[1;32m      4[0m logging_steps [38;5;241m=[39m [38;5;28mlen[39m(dataset_encoded[[38;5;124m"[39m[38;5;124mtrain[39m[38;5;124m"[39m]) [38;5;241m/[39m[38;5;241m/[39m batch_size
+[1;32m      5[0m model_name [38;5;241m=[39m [38;5;124m"[39m[38;5;124msample-text-classification-bert[39m[38;5;124m"[39m
+[0;32m----> 7[0m training_args [38;5;241m=[39m [43mTrainingArguments[49m[43m([49m
+[1;32m      8[0m [43m    [49m[43moutput_dir[49m[38;5;241;43m=[39;49m[43mmodel_name[49m[43m,[49m
+[1;32m      9[0m [43m    [49m[43mnum_train_epochs[49m[38;5;241;43m=[39;49m[38;5;241;43m2[39;49m[43m,[49m
+[1;32m     10[0m [43m    [49m[43mlearning_rate[49m[38;5;241;43m=[39;49m[38;5;241;43m2e-5[39;49m[43m,[49m
+[1;32m     11[0m [43m    [49m[43mper_device_train_batch_size[49m[38;5;241;43m=[39;49m[43mbatch_size[49m[43m,[49m
+[1;32m     12[0m [43m    [49m[43mper_device_eval_batch_size[49m[38;5;241;43m=[39;49m[43mbatch_size[49m[43m,[49m
+[1;32m     13[0m [43m    [49m[43mweight_decay[49m[38;5;241;43m=[39;49m[38;5;241;43m0.01[39;49m[43m,[49m
+[1;32m     14[0m [43m    [49m[43mevaluation_strategy[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mepoch[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     15[0m [43m    [49m[43mdisable_tqdm[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[1;32m     16[0m [43m    [49m[43mlogging_steps[49m[38;5;241;43m=[39;49m[43mlogging_steps[49m[43m,[49m
+[1;32m     17[0m [43m    [49m[43mpush_to_hub[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[1;32m     18[0m [43m    [49m[43mlog_level[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43merror[39;49m[38;5;124;43m"[39;49m
+[1;32m     19[0m [43m)[49m
 
-[0;31mModuleNotFoundError[0m: No module named 'datasets'
+File [0;32m<string>:121[0m, in [0;36m__init__[0;34m(self, output_dir, overwrite_output_dir, do_train, do_eval, do_predict, evaluation_strategy, prediction_loss_only, per_device_train_batch_size, per_device_eval_batch_size, per_gpu_train_batch_size, per_gpu_eval_batch_size, gradient_accumulation_steps, eval_accumulation_steps, eval_delay, learning_rate, weight_decay, adam_beta1, adam_beta2, adam_epsilon, max_grad_norm, num_train_epochs, max_steps, lr_scheduler_type, lr_scheduler_kwargs, warmup_ratio, warmup_steps, log_level, log_level_replica, log_on_each_node, logging_dir, logging_strategy, logging_first_step, logging_steps, logging_nan_inf_filter, save_strategy, save_steps, save_total_limit, save_safetensors, save_on_each_node, save_only_model, no_cuda, use_cpu, use_mps_device, seed, data_seed, jit_mode_eval, use_ipex, bf16, fp16, fp16_opt_level, half_precision_backend, bf16_full_eval, fp16_full_eval, tf32, local_rank, ddp_backend, tpu_num_cores, tpu_metrics_debug, debug, dataloader_drop_last, eval_steps, dataloader_num_workers, past_index, run_name, disable_tqdm, remove_unused_columns, label_names, load_best_model_at_end, metric_for_best_model, greater_is_better, ignore_data_skip, fsdp, fsdp_min_num_params, fsdp_config, fsdp_transformer_layer_cls_to_wrap, deepspeed, label_smoothing_factor, optim, optim_args, adafactor, group_by_length, length_column_name, report_to, ddp_find_unused_parameters, ddp_bucket_cap_mb, ddp_broadcast_buffers, dataloader_pin_memory, dataloader_persistent_workers, skip_memory_metrics, use_legacy_prediction_loop, push_to_hub, resume_from_checkpoint, hub_model_id, hub_strategy, hub_token, hub_private_repo, hub_always_push, gradient_checkpointing, gradient_checkpointing_kwargs, include_inputs_for_metrics, fp16_backend, push_to_hub_model_id, push_to_hub_organization, push_to_hub_token, mp_parameters, auto_find_batch_size, full_determinism, torchdynamo, ray_scope, ddp_timeout, torch_compile, torch_compile_backend, torch_compile_mode, dispatch_batches, split_batches, include_tokens_per_second, include_num_input_tokens_seen, neftune_noise_alpha)[0m
+
+File [0;32m~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/training_args.py:1493[0m, in [0;36mTrainingArguments.__post_init__[0;34m(self)[0m
+[1;32m   1487[0m     [38;5;28;01mif[39;00m version[38;5;241m.[39mparse(version[38;5;241m.[39mparse(torch[38;5;241m.[39m__version__)[38;5;241m.[39mbase_version) [38;5;241m==[39m version[38;5;241m.[39mparse([38;5;124m"[39m[38;5;124m2.0.0[39m[38;5;124m"[39m) [38;5;129;01mand[39;00m [38;5;28mself[39m[38;5;241m.[39mfp16:
+[1;32m   1488[0m         [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([38;5;124m"[39m[38;5;124m--optim adamw_torch_fused with --fp16 requires PyTorch>2.0[39m[38;5;124m"[39m)
+[1;32m   1490[0m [38;5;28;01mif[39;00m (
+[1;32m   1491[0m     [38;5;28mself[39m[38;5;241m.[39mframework [38;5;241m==[39m [38;5;124m"[39m[38;5;124mpt[39m[38;5;124m"[39m
+[1;32m   1492[0m     [38;5;129;01mand[39;00m is_torch_available()
+[0;32m-> 1493[0m     [38;5;129;01mand[39;00m ([38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mdevice[49m[38;5;241m.[39mtype [38;5;241m!=[39m [38;5;124m"[39m[38;5;124mcuda[39m[38;5;124m"[39m)
+[1;32m   1494[0m     [38;5;129;01mand[39;00m ([38;5;28mself[39m[38;5;241m.[39mdevice[38;5;241m.[39mtype [38;5;241m!=[39m [38;5;124m"[39m[38;5;124mnpu[39m[38;5;124m"[39m)
+[1;32m   1495[0m     [38;5;129;01mand[39;00m ([38;5;28mself[39m[38;5;241m.[39mdevice[38;5;241m.[39mtype [38;5;241m!=[39m [38;5;124m"[39m[38;5;124mxpu[39m[38;5;124m"[39m)
+[1;32m   1496[0m     [38;5;129;01mand[39;00m (get_xla_device_type([38;5;28mself[39m[38;5;241m.[39mdevice) [38;5;241m!=[39m [38;5;124m"[39m[38;5;124mGPU[39m[38;5;124m"[39m)
+[1;32m   1497[0m     [38;5;129;01mand[39;00m ([38;5;28mself[39m[38;5;241m.[39mfp16 [38;5;129;01mor[39;00m [38;5;28mself[39m[38;5;241m.[39mfp16_full_eval)
+[1;32m   1498[0m ):
+[1;32m   1499[0m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[1;32m   1500[0m         [38;5;124m"[39m[38;5;124mFP16 Mixed precision training with AMP or APEX (`--fp16`) and FP16 half precision evaluation[39m[38;5;124m"[39m
+[1;32m   1501[0m         [38;5;124m"[39m[38;5;124m (`--fp16_full_eval`) can only be used on CUDA or NPU devices or certain XPU devices (with IPEX).[39m[38;5;124m"[39m
+[1;32m   1502[0m     )
+[1;32m   1504[0m [38;5;28;01mif[39;00m (
+[1;32m   1505[0m     [38;5;28mself[39m[38;5;241m.[39mframework [38;5;241m==[39m [38;5;124m"[39m[38;5;124mpt[39m[38;5;124m"[39m
+[1;32m   1506[0m     [38;5;129;01mand[39;00m is_torch_available()
+[0;32m   (...)[0m
+[1;32m   1513[0m     [38;5;129;01mand[39;00m ([38;5;28mself[39m[38;5;241m.[39mbf16 [38;5;129;01mor[39;00m [38;5;28mself[39m[38;5;241m.[39mbf16_full_eval)
+[1;32m   1514[0m ):
+
+File [0;32m~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/training_args.py:1941[0m, in [0;36mTrainingArguments.device[0;34m(self)[0m
+[1;32m   1937[0m [38;5;250m[39m[38;5;124;03m"""[39;00m
+[1;32m   1938[0m [38;5;124;03mThe device used by this process.[39;00m
+[1;32m   1939[0m [38;5;124;03m"""[39;00m
+[1;32m   1940[0m requires_backends([38;5;28mself[39m, [[38;5;124m"[39m[38;5;124mtorch[39m[38;5;124m"[39m])
+[0;32m-> 1941[0m [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_setup_devices[49m
+
+File [0;32m~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/utils/generic.py:54[0m, in [0;36mcached_property.__get__[0;34m(self, obj, objtype)[0m
+[1;32m     52[0m cached [38;5;241m=[39m [38;5;28mgetattr[39m(obj, attr, [38;5;28;01mNone[39;00m)
+[1;32m     53[0m [38;5;28;01mif[39;00m cached [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[0;32m---> 54[0m     cached [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mfget[49m[43m([49m[43mobj[49m[43m)[49m
+[1;32m     55[0m     [38;5;28msetattr[39m(obj, attr, cached)
+[1;32m     56[0m [38;5;28;01mreturn[39;00m cached
+
+File [0;32m~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/training_args.py:1841[0m, in [0;36mTrainingArguments._setup_devices[0;34m(self)[0m
+[1;32m   1839[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m is_sagemaker_mp_enabled():
+[1;32m   1840[0m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m is_accelerate_available(min_version[38;5;241m=[39m[38;5;124m"[39m[38;5;124m0.20.1[39m[38;5;124m"[39m):
+[0;32m-> 1841[0m         [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(
+[1;32m   1842[0m             [38;5;124m"[39m[38;5;124mUsing the `Trainer` with `PyTorch` requires `accelerate>=0.20.1`: Please run `pip install transformers[torch]` or `pip install accelerate -U`[39m[38;5;124m"[39m
+[1;32m   1843[0m         )
+[1;32m   1844[0m     AcceleratorState[38;5;241m.[39m_reset_state(reset_partial_state[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[1;32m   1845[0m [38;5;28mself[39m[38;5;241m.[39mdistributed_state [38;5;241m=[39m [38;5;28;01mNone[39;00m
+
+[0;31mImportError[0m: Using the `Trainer` with `PyTorch` requires `accelerate>=0.20.1`: Please run `pip install transformers[torch]` or `pip install accelerate -U`
 
