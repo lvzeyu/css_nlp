@@ -229,7 +229,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">大規模言語モデル</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="GPT.html">GPT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="llm.html">大規模言語モデル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm.html">大規模言語モデルの基本</a></li>
 </ul>
 
     </div>
@@ -538,7 +538,7 @@ Requirement already satisfied: langchain-core&lt;0.2,&gt;=0.1.16 in /Users/ryoza
 Requirement already satisfied: langsmith&lt;0.1,&gt;=0.0.83 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (0.0.84)
 Requirement already satisfied: numpy&lt;2,&gt;=1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (1.26.3)
 Requirement already satisfied: pydantic&lt;3,&gt;=1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (2.6.0)
-Requirement already satisfied: requests&lt;3,&gt;=2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (2.31.0)
+Requirement already satisfied: requests&lt;3,&gt;=2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (2.32.3)
 Requirement already satisfied: tenacity&lt;9.0.0,&gt;=8.1.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (8.2.3)
 Requirement already satisfied: aiosignal&gt;=1.1.2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain) (1.3.1)
 Requirement already satisfied: attrs&gt;=17.3.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain) (23.2.0)
@@ -565,7 +565,7 @@ Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/ryozawau/anaconda
 Requirement already satisfied: mypy-extensions&gt;=0.3.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from typing-inspect&lt;1,&gt;=0.4.0-&gt;dataclasses-json&lt;0.7,&gt;=0.5.7-&gt;langchain) (1.0.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.0</span> -&gt; <span class=" -Color -Color-Green">24.2</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.0</span> -&gt; <span class=" -Color -Color-Green">24.3.1</span>
 <span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
 </pre></div>
 </div>
@@ -575,19 +575,19 @@ Requirement already satisfied: distro&lt;2,&gt;=1.7.0 in /Users/ryozawau/anacond
 Requirement already satisfied: httpx&lt;1,&gt;=0.23.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (0.27.2)
 Requirement already satisfied: pydantic&lt;3,&gt;=1.9.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (2.6.0)
 Requirement already satisfied: sniffio in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (1.3.0)
-Requirement already satisfied: tqdm&gt;4 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (4.66.1)
+Requirement already satisfied: tqdm&gt;4 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (4.67.1)
 Requirement already satisfied: typing-extensions&lt;5,&gt;=4.7 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (4.9.0)
-Requirement already satisfied: idna&gt;=2.8 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from anyio&lt;5,&gt;=3.5.0-&gt;openai) (3.6)
-Requirement already satisfied: certifi in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from httpx&lt;1,&gt;=0.23.0-&gt;openai) (2023.11.17)
-Requirement already satisfied: httpcore==1.* in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from httpx&lt;1,&gt;=0.23.0-&gt;openai) (1.0.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: h11&lt;0.15,&gt;=0.13 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from httpcore==1.*-&gt;httpx&lt;1,&gt;=0.23.0-&gt;openai) (0.14.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: idna&gt;=2.8 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from anyio&lt;5,&gt;=3.5.0-&gt;openai) (3.6)
+Requirement already satisfied: certifi in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from httpx&lt;1,&gt;=0.23.0-&gt;openai) (2023.11.17)
+Requirement already satisfied: httpcore==1.* in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from httpx&lt;1,&gt;=0.23.0-&gt;openai) (1.0.2)
+Requirement already satisfied: h11&lt;0.15,&gt;=0.13 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from httpcore==1.*-&gt;httpx&lt;1,&gt;=0.23.0-&gt;openai) (0.14.0)
 Requirement already satisfied: annotated-types&gt;=0.4.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=1.9.0-&gt;openai) (0.6.0)
 Requirement already satisfied: pydantic-core==2.16.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=1.9.0-&gt;openai) (2.16.1)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.0</span> -&gt; <span class=" -Color -Color-Green">24.2</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.0</span> -&gt; <span class=" -Color -Color-Green">24.3.1</span>
 <span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
 </pre></div>
 </div>
@@ -1161,23 +1161,6 @@ Prompt after formatting:
     <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">,</span> <span class="s2">&quot;antonym&quot;</span><span class="p">],</span>
     <span class="n">template</span><span class="o">=</span><span class="n">example_formatter_template</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">example_formatter_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="s2"> Word: </span><span class="si">{word}</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="s2"> Antonym: </span><span class="si">{antonym}</span><span class="se">\n</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="s2"> &quot;&quot;&quot;</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">example_prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">,</span> <span class="s2">&quot;antonym&quot;</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">template</span><span class="o">=</span><span class="n">example_formatter_template</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;PromptTemplate&#39; is not defined
 </pre></div>
 </div>
 </div>
