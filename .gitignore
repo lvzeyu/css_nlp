@@ -4,3 +4,6 @@
 /notebook/sample-text-classification-bert/*
 /notebook/wrime-text-classification-bert/*
 _build/
+
+# MyST build outputs
+_build
