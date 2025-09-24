@@ -1,0 +1,19 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: 356ed62a-cf04-49ae-b7bc-d9f79f2ef8bb
+  title: 計算社会科学と自然言語処理
+  # description:
+  # keywords: []
+  #authors: 呂沢宇　ZEYU LYU
+  github: https://github.com/lvzeyu/css_nlp
+  # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
+  plugins:
+    - src/admonition.mjs
+site:
+  template: book-theme
+  options:
+      logo: tohoku-university-logo.svg
+  #   favicon: favicon.ico
+bibliography: references.bib
+  #/en/latest/
