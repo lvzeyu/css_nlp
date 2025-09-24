@@ -1,0 +1,746 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Transformerアーキテクチャ &#8212; 計算社会科学のための自然言語処理</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/transformer';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="BERT" href="BERT.html" />
+    <link rel="prev" title="Self-Attention" href="self-attention.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-light" alt="計算社会科学のための自然言語処理 - Home"/>
+    <script>document.write(`<img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-dark" alt="計算社会科学のための自然言語処理 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    計算社会科学と自然言語処理
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">イントロダクション</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">ガイダンス</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">基礎知識</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="nlp_basis2.html">自然言語処理の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_basis2.html">機械学習の基本概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math_basis2.html">数学基礎</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ニューラルネットワーク</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="NN.html">ニューラルネットワーク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backpropagation.html">誤差逆伝播法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pytorch.html">Pytorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">単語分散表現</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="word2vec_1.html">単語分散表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_2_embedding.html">word2vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_gensim.html">GensimによるWord2Vecの学習と使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_sentiment.html">Word2Vecを用いるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_application.html">Word2Vecが人文・社会科学研究における応用</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RNN</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">RNNの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">LSTM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_lstm.html">LSTMの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm_classification.html">LSTMによる文書分類</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seq2seq.html">Seq2seq</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transformer</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="attention.html">Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="self-attention.html">Self-Attention</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Transformerアーキテクチャ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BERT.html">BERT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_sentiment.html">BERTによるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_topic.html">BERTopic</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">大規模言語モデル</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="GPT.html">GPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm.html">大規模言語モデル</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/transformer.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp/issues/new?title=Issue%20on%20page%20%2Fnotebook/transformer.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebook/transformer.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Transformerアーキテクチャ</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Transformerの構成要素</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-attention">Multi-Head Attention</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#positional-encoding">位置埋め込み(Positional Encoding)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-norm">Add&amp;Norm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feed-forward">Feed-forward層</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">エンコーダ・デコーダ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">エンコーダ</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">デコーダ</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#masked-multi-head-attention">Masked Multi-Head Attention</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-attention">交差注意機構(Cross Attention)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">最終線形層とソフトマックス層</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Transformerの学習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">まとめ</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="transformer">
+<h1>Transformerアーキテクチャ<a class="headerlink" href="#transformer" title="Link to this heading">#</a></h1>
+<p>OpenAIのGPTなど、現在主流となっている言語モデルには、基本的にTransformerというアーキテクチャが使われています。</p>
+<p>Transformerは、自然言語処理の分野で大きな進歩をもたらした重要な技術です。このアーキテクチャは、特に大量のテキストデータからパターンを学習し、文脈に基づいた情報を処理するのに非常に効果的です。</p>
+<p>(オリジナルの)Transformerはエンコーダ・デコーダーアーキテクチャをベースにしています。</p>
+<ul class="simple">
+<li><p>エンコーダ：入力されたトークン列を、埋め込みベクトル(隠れ状態)に変換します。</p></li>
+<li><p>デコーダ：エンコーダの隠れ状態を利用して、トークンの出力系列を生成します。</p></li>
+</ul>
+<p><img alt="" src="../_images/transformer.png" /></p>
+<section id="id1">
+<h2>Transformerの構成要素<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="multi-head-attention">
+<h3>Multi-Head Attention<a class="headerlink" href="#multi-head-attention" title="Link to this heading">#</a></h3>
+<p>Attentionは、各トークンに対して固定的な埋め込みを使う代わりに、系列全体を使って各埋め込みの加重平均を計算しています。</p>
+<p>つまり、トークン埋め込みの系列<span class="math notranslate nohighlight">\(x_1,...,x_n\)</span>が与えるとき、Self-Attentionは新しい埋め込みの系列<span class="math notranslate nohighlight">\(x'_1,...x'_n\)</span>を生成します。ここで、<span class="math notranslate nohighlight">\(x'_i\)</span>はすべでの<span class="math notranslate nohighlight">\(x_j\)</span>の線形結合になります。</p>
+<div class="math notranslate nohighlight">
+\[
+x'_i=\sum_{j=1}^n w_{ji}x_j
+\]</div>
+<p>係数<span class="math notranslate nohighlight">\(w_{ji}\)</span>はAteention weightと呼ばれます。各要素をクエリ（Query）、キー（Key）、バリュー（Value）として表現し、これらを用いて他の要素との関連を計算することでAteention weightを求めます。</p>
+<p>Attention機構の表現力をさらに高めるために、Attention機構を同時に複数適用するのはMulti-Head Attentionになります。</p>
+</section>
+<section id="positional-encoding">
+<h3>位置埋め込み(Positional Encoding)<a class="headerlink" href="#positional-encoding" title="Link to this heading">#</a></h3>
+<p>同じ単語でも、文中の位置によって意味が変わることがあります。位置埋め込み(Positional Encoding)は名前通り、入力トークンの順序や位置情報をモデルに提供する役割を果たします。位置埋め込みにより、モデルは各単語の文中での相対的な位置を理解し、より正確な文脈解析が可能になります。</p>
+<p>RNNようなモデルは、、入力データを順序付けて処理しますので、入力トークンの順序情報が自然に考慮されます。しかし、Transformerは入力を並列に処理し、基本的には単語の順序情報を無視します。そのため、文の意味を正確に理解するためには、単語の位置情報が別途必要となります。</p>
+<p>埋め込み層は各トークンに対して1つの位置埋め込みが追加され、トークンの相対位置が反映された新しい表現が生成されています。</p>
+<p><img alt="" src="../_images/transformer_positional_encoding_example.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>位置埋め込みを実現する方法はいくつかあります。</p>
+<ul class="simple">
+<li><p>絶対位置表現:事前に定義された関数を用いて、各位置に対してユニークな埋め込みを生成します。オリジナルのTransformerモデルは、変調されたサインとコサイン信号から静的なパターンを使用します。</p></li>
+<li><p>相対位置表現:Transformerベースの後続モデル（例えば、BERTやGPTなど）では、位置埋め込みがモデルのトレーニングプロセスの一部として学習され、より文脈に適応した表現を提供します。</p></li>
+</ul>
+</div>
+</section>
+<section id="add-norm">
+<h3>Add&amp;Norm<a class="headerlink" href="#add-norm" title="Link to this heading">#</a></h3>
+<p>Add&amp;Normは、Self-AttentionやFeed-Forwardネットワーク出力に対して適用されます。具体的には、「残差結合（Residual Connection）」と「レイヤー正規化（Layer Normalization）」の組み合わせから成り立っています。</p>
+<ul class="simple">
+<li><p>残差結合: ある層の出力にその層の入力を加算し、最終的な出力にします。</p></li>
+<li><p>レイヤー正規化: 過剰に大きい値によって学習が不安定になることを防ぐために、残差接続の結果を正規化します。</p></li>
+</ul>
+</section>
+<section id="feed-forward">
+<h3>Feed-forward層<a class="headerlink" href="#feed-forward" title="Link to this heading">#</a></h3>
+<p>線形層と中間の非線形活性化関数で構成されています。ただ、注意してほしいのは、ここでは一連の埋め込み全体を一つのベクトルとして処理するのではなく、各埋め込みを独立に処理するように工夫しています。</p>
+<p>このため、この層はposition-wise feed forward netwrokと呼ばれることもあります。</p>
+<div class="math notranslate nohighlight">
+\[
+z_i=W_2f(W_1 u_i+b_1)+b_2
+\]</div>
+<p>Feed-forward層は、文脈に関連する情報をその大規模なパラメータの中に記憶しており、入力された文脈に対して関連する情報を付加する役割を果たしてると考えられています。</p>
+<p><img alt="" src="../_images/transformer_resideual_layer_norm_2.png" /></p>
+</section>
+</section>
+<section id="id2">
+<h2>エンコーダ・デコーダ<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>エンコーダ<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>入力テキストをトークン化し、トークン埋め込むに変換します。特に、トークンの位置に関する情報を含む位置埋め込みも生成します。</p></li>
+<li><p>複数のエンコード層を積み重ねることでエンコーダを構成します。各エンコード層の出力埋め込みと入力とは同じサイズはずです。エンコード層の主な役割は、<strong>入力埋め込みを「更新」して、系列中の何らかの文脈情報をエンコード表現を生成することになります。</strong></p>
+<ul>
+<li><p>Multi-Head Attention</p></li>
+<li><p>各入力埋め込みに適用される全結合の順伝播層</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h3>デコーダ<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>エンコーダの出力はデコーダに送られ、デコーダは系列中に最も可能性の高いトークンとして次のトークンを予測します。</p>
+<p>一般的には、デコーダは、<code class="docutils literal notranslate"><span class="pre">&lt;BOS&gt;</span></code>のようなテキストの先頭であることを表すトークンを入力として受け取り、文章の生成を開始し、最大長に達するまでか、系列の終了を表す<code class="docutils literal notranslate"><span class="pre">&lt;EOS&gt;</span></code>のような特別トークンに到達するまで続けられます(shifted right)。</p>
+<p>エンコーダも複数のエンコード層より構成されています。</p>
+<section id="masked-multi-head-attention">
+<h4>Masked Multi-Head Attention<a class="headerlink" href="#masked-multi-head-attention" title="Link to this heading">#</a></h4>
+<p>デコーダ側にMulti-Head Attentionには、マスク処理(masking)が行われます。</p>
+<p>エンコーダ・デコーダでは、エンコーダに入力されるトークン列<span class="math notranslate nohighlight">\(u_1,u_2,...,u_M\)</span>から<span class="math notranslate nohighlight">\(w_1,w_2,...w_i\)</span>を順に予測されるように学習します。ここで、<span class="math notranslate nohighlight">\(w_i\)</span>までを予測した状態のとき、学習は<span class="math notranslate nohighlight">\(u_1,u_2,...,u_M\)</span>と<span class="math notranslate nohighlight">\(w_1,w_2,...w_i\)</span>からトークン<span class="math notranslate nohighlight">\(w_{i+1}\)</span>を予測できるようにモデルを更新していくことで行われます。</p>
+<p>しかし、Self-attentionはトークン全体から情報を取得するため、モデルは<span class="math notranslate nohighlight">\(w_{i+1}\)</span>を予測際は<span class="math notranslate nohighlight">\(w_{i+1},...w_N\)</span>の情報も利用できることになります。</p>
+<p>マスク処理は、注意機構において位置<span class="math notranslate nohighlight">\(i\)</span>のトークンについて処理する際<span class="math notranslate nohighlight">\(i+1\)</span>以降のトークンのAttnetionスコアを<span class="math notranslate nohighlight">\(-\infty\)</span>に設定することで、各時点で生成するトークンが、過去の出力と現在予測されているトークンだけに基づいていることを保証します。</p>
+</section>
+<section id="cross-attention">
+<h4>交差注意機構(Cross Attention)<a class="headerlink" href="#cross-attention" title="Link to this heading">#</a></h4>
+<p>デコーダには、交差注意機構が使われています。具体的には、注意機構において、queryはデコーダの埋め込み列、keyとvalueにはエンコーダの出力埋め込み列が使われます。</p>
+<p>このようにして、デコーダが次のトークンを生成する際に、入力シーケンス全体を考慮できるようにします。</p>
+<p><img alt="" src="../_images/transformer_decoding_2.gif" /></p>
+</section>
+</section>
+<section id="id5">
+<h3>最終線形層とソフトマックス層<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p><img alt="" src="../_images/transformer_decoder_output_softmax.png" /></p>
+<p>デコーダスタックで出力されるベクトルは最終線形層とソフトマックス層で単語に変換します。</p>
+<ul class="simple">
+<li><p>線形層は、完全結合型ニューラルネットワークで、デコーダのスタックが出力したベクトルをより大きなベクトル、すなわち「ロジットベクトル（logits vector）」に変換します。</p>
+<ul>
+<li><p>例えば、モデルが10,000語の英単語を学習していると仮定すると、このロジットベクトルは10,000個のセルから成り立っています。それぞれのセルは、モデルが予測する単語のスコアを表しています。この時点では、ロジットベクトル内の各セルは、単語に関連する「スコア」になります。</p></li>
+</ul>
+</li>
+<li><p>ソフトマックス層がこのロジットベクトルに適用されます。ソフトマックス層は、各スコアを確率に変換します。この確率はすべてが正の値となり、すべての確率の合計が1.0になります。これにより、各単語が選ばれる確率を得ることができます。最終的に、確率が最も高いセルに対応する単語が選ばれ、その単語が出力として生成されます。このようにして、モデルは次に出力すべき単語を予測することができます。</p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h2>Transformerの学習<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p><img alt="" src="../_images/transformer_logits_output_and_label.png" /></p>
+<p>モデルから得られた単語の確率分布と「正解」の確率分布と比較することで、損失関数を算出します。損失関数の値が算出された後、バックプロパゲーションを使って損失を最小化する方向でモデルのパラメータを更新します。このプロセスを繰り返すことで、モデルは学習を進め、次第に予測精度が向上します。</p>
+<p><img alt="" src="../_images/output_target_probability_distributions.png" /></p>
+<p><img alt="" src="../_images/output_trained_model_probability_distributions.png" /></p>
+</section>
+<section id="id7">
+<h2>まとめ<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p>Transformerは、主にエンコーダ、デコーダ、エンコーダ・デコーダーというアーキテクチャに大別されます。Transformerの成功は、Transformerベースの後続モデルの開発を引き起こしました。BERT、GPT、T5（Text-to-Text Transfer Transformer）などは代表的なバリエーションにであり、NLPの分野において画期的な進歩をもたらしました。</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="self-attention.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Self-Attention</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="BERT.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">BERT</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Transformerの構成要素</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-attention">Multi-Head Attention</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#positional-encoding">位置埋め込み(Positional Encoding)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-norm">Add&amp;Norm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feed-forward">Feed-forward層</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">エンコーダ・デコーダ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">エンコーダ</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">デコーダ</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#masked-multi-head-attention">Masked Multi-Head Attention</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-attention">交差注意機構(Cross Attention)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">最終線形層とソフトマックス層</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Transformerの学習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">まとめ</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 呂　沢宇
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

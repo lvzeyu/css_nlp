@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>GPT &#8212; 計算社会科学のための自然言語処理</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/GPT';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="大規模言語モデル" href="llm.html" />
+    <link rel="prev" title="BERTopic" href="bert_topic.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-light" alt="計算社会科学のための自然言語処理 - Home"/>
+    <script>document.write(`<img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-dark" alt="計算社会科学のための自然言語処理 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    計算社会科学と自然言語処理
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">イントロダクション</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">ガイダンス</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">基礎知識</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="nlp_basis2.html">自然言語処理の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_basis2.html">機械学習の基本概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math_basis2.html">数学基礎</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ニューラルネットワーク</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="NN.html">ニューラルネットワーク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backpropagation.html">誤差逆伝播法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pytorch.html">Pytorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">単語分散表現</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="word2vec_1.html">単語分散表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_2_embedding.html">word2vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_gensim.html">GensimによるWord2Vecの学習と使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_sentiment.html">Word2Vecを用いるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_application.html">Word2Vecが人文・社会科学研究における応用</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RNN</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">RNNの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">LSTM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_lstm.html">LSTMの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm_classification.html">LSTMによる文書分類</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seq2seq.html">Seq2seq</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transformer</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="attention.html">Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="self-attention.html">Self-Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformer.html">Transformerアーキテクチャ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BERT.html">BERT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_sentiment.html">BERTによるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_topic.html">BERTopic</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">大規模言語モデル</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">GPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm.html">大規模言語モデル</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/GPT.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp/issues/new?title=Issue%20on%20page%20%2Fnotebook/GPT.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebook/GPT.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>GPT</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">入力表現</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">事前学習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">ファインチューング</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#huggingface-transformer">Huggingface transformerを使う</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="gpt">
+<h1>GPT<a class="headerlink" href="#gpt" title="Link to this heading">#</a></h1>
+<p>GPT(Generative Pretrained Transformer)はTransformerベースの言語モデルです。ChatGPT などの生成系 AI アプリケーションの基礎となっている人工知能 (AI) の重要な新技術です。GPT モデルにより、アプリケーションは人間のようにテキストやコンテンツ (画像、音楽など) を作成したり、会話形式で質問に答えたりすることができます。さまざまな業界の組織が、Q&amp;A ボット、テキスト要約、コンテンツ生成、検索に GPT モデルと生成系 AI を使用しています。</p>
+<p>GPTはOpenAIによって定期的に新しいバージョンが公開されていますが、ここではGPT-2について解説します。</p>
+<p><img alt="" src="../_images/gpt_history.png" /></p>
+<p><img alt="" src="../_images/gpt2.png" /></p>
+<section id="id1">
+<h2>入力表現<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>GPTの入力は、入力トークン列に対応するトークン埋め込み<span class="math notranslate nohighlight">\(e_{w_i}\)</span>と位置埋め込む<span class="math notranslate nohighlight">\(p_i\)</span>を加算した埋め込み列です。</p>
+<div class="math notranslate nohighlight">
+\[
+x_i=e_{w_i}+p_i
+\]</div>
+</section>
+<section id="id2">
+<h2>事前学習<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>GPTの事前学習タスクは、入力されたトークン列の次のトークンを予測することです。ここで、GPTはデコーダ構成のTransformerを用います。</p>
+<p><img alt="" src="../_images/gpt_input_representation.png" /></p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>GPTはオリジナルのTransformerにいくつかの改装を行いました。</p>
+</aside>
+<p>学習に用いるトークン列<span class="math notranslate nohighlight">\(w_1,w_2,...,w_N\)</span>におけるのトークン<span class="math notranslate nohighlight">\(w_i\)</span>を予測することを考えます。GPTでは、予測確率を使った負の対数尤度を損失関数として事前学習を行います。</p>
+<div class="math notranslate nohighlight">
+\[
+\zeta(\theta)=- \sum_i log P(w_i|w_{i-K},....w_{i-1},\theta)
+\]</div>
+<p>ここで、<span class="math notranslate nohighlight">\(\theta\)</span>はモデルに含まれるすべてのパラメータを表します。</p>
+<p>学習時にはMasked Self-Attention機構が導入され、入力トークン列の各位置において次のトークンを予測して学習が行われます。</p>
+<p><img alt="" src="../_images/gpt_decoder.png" /></p>
+<p>学習時にはMasked Self-Attention機構が導入され、入力トークン列の各位置において次のトークンを予測して学習が行われます。</p>
+</section>
+<section id="id3">
+<h2>ファインチューング<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>GPTの事前学習済みモデルに、下流タスクに合わせて変換するためのヘッドを追加し、下流タスクのデータセットを用いてモデル全体を調整します。</p>
+<p>GPTは下流タスクを解く際、特殊トークンを用いて入力テキストを拡張します。</p>
+<ul class="simple">
+<li><p>テキスト分類のタスクにおいては、文書の最初に<code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code>、最後に<code class="docutils literal notranslate"><span class="pre">&lt;e&gt;</span></code>が追加されます。</p></li>
+<li><p>自然言語推論のタスクにおいては、テキストの境界に<code class="docutils literal notranslate"><span class="pre">$</span></code>が挿入されます。</p></li>
+</ul>
+<p><img alt="" src="../_images/gpt-2-autoregression-2.gif" /></p>
+<section id="huggingface-transformer">
+<h3>Huggingface transformerを使う<a class="headerlink" href="#huggingface-transformer" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+<span class="c1">#!pip install sentencepiece</span>
+<span class="c1">#!pip install protobuf</span>
+<span class="n">generator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;text-generation&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;abeja/gpt2-large-japanese&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/utils/generic.py:441: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  _torch_pytree._register_pytree_node(
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/utils/generic.py:309: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  _torch_pytree._register_pytree_node(
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/modeling_utils.py:519: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don&#39;t have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  return torch.load(checkpoint_file, map_location=map_location)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#!pip install sentencepiece</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1">#!pip install protobuf</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">generator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;text-generation&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;abeja/gpt2-large-japanese&quot;</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/pipelines/__init__.py:967,</span> in <span class="ni">pipeline</span><span class="nt">(task, model, config, tokenizer, feature_extractor, image_processor, framework, revision, use_fast, token, device, device_map, torch_dtype, trust_remote_code, model_kwargs, pipeline_class, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">964</span>             <span class="n">tokenizer_kwargs</span> <span class="o">=</span> <span class="n">model_kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">965</span>             <span class="n">tokenizer_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;torch_dtype&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">967</span>         <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">968</span>             <span class="n">tokenizer_identifier</span><span class="p">,</span> <span class="n">use_fast</span><span class="o">=</span><span class="n">use_fast</span><span class="p">,</span> <span class="n">_from_pipeline</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="o">**</span><span class="n">hub_kwargs</span><span class="p">,</span> <span class="o">**</span><span class="n">tokenizer_kwargs</span>
+<span class="g g-Whitespace">    </span><span class="mi">969</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">971</span> <span class="k">if</span> <span class="n">load_image_processor</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">972</span>     <span class="c1"># Try to infer image processor from model or config name (if provided as str)</span>
+<span class="g g-Whitespace">    </span><span class="mi">973</span>     <span class="k">if</span> <span class="n">image_processor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/models/auto/tokenization_auto.py:787,</span> in <span class="ni">AutoTokenizer.from_pretrained</span><span class="nt">(cls, pretrained_model_name_or_path, *inputs, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">783</span>     <span class="k">if</span> <span class="n">tokenizer_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">784</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">785</span>             <span class="sa">f</span><span class="s2">&quot;Tokenizer class </span><span class="si">{</span><span class="n">tokenizer_class_candidate</span><span class="si">}</span><span class="s2"> does not exist or is not currently imported.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">786</span>         <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">787</span>     <span class="k">return</span> <span class="n">tokenizer_class</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="o">*</span><span class="n">inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">789</span> <span class="c1"># Otherwise we have to be creative.</span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span> <span class="c1"># if model is an encoder decoder, the encoder tokenizer class is used by default</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">EncoderDecoderConfig</span><span class="p">):</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:2028,</span> in <span class="ni">PreTrainedTokenizerBase.from_pretrained</span><span class="nt">(cls, pretrained_model_name_or_path, cache_dir, force_download, local_files_only, token, revision, *init_inputs, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2025</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2026</span>         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;loading file </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2"> from cache at </span><span class="si">{</span><span class="n">resolved_vocab_files</span><span class="p">[</span><span class="n">file_id</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2028</span> <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_pretrained</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2029</span>     <span class="n">resolved_vocab_files</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2030</span>     <span class="n">pretrained_model_name_or_path</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2031</span>     <span class="n">init_configuration</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2032</span>     <span class="o">*</span><span class="n">init_inputs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2033</span>     <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2034</span>     <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2035</span>     <span class="n">local_files_only</span><span class="o">=</span><span class="n">local_files_only</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2036</span>     <span class="n">_commit_hash</span><span class="o">=</span><span class="n">commit_hash</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2037</span>     <span class="n">_is_local</span><span class="o">=</span><span class="n">is_local</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2038</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2039</span> <span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:2260,</span> in <span class="ni">PreTrainedTokenizerBase._from_pretrained</span><span class="nt">(cls, resolved_vocab_files, pretrained_model_name_or_path, init_configuration, token, cache_dir, local_files_only, _commit_hash, _is_local, *init_inputs, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2258</span> <span class="c1"># Instantiate the tokenizer.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2259</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2260</span>     <span class="n">tokenizer</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">init_inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">init_kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2261</span> <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2262</span>     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2263</span>         <span class="s2">&quot;Unable to load vocabulary from file. &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">2264</span>         <span class="s2">&quot;Please check that the provided vocabulary is accessible and not corrupted.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">2265</span>     <span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/models/t5/tokenization_t5_fast.py:135,</span> in <span class="ni">T5TokenizerFast.__init__</span><span class="nt">(self, vocab_file, tokenizer_file, eos_token, unk_token, pad_token, extra_ids, additional_special_tokens, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>     <span class="n">extra_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;&lt;extra_id_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&gt;&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">extra_ids</span><span class="p">)]</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="n">additional_special_tokens</span> <span class="o">=</span> <span class="n">extra_tokens</span>
+<span class="ne">--&gt; </span><span class="mi">135</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>     <span class="n">vocab_file</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span>     <span class="n">tokenizer_file</span><span class="o">=</span><span class="n">tokenizer_file</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>     <span class="n">eos_token</span><span class="o">=</span><span class="n">eos_token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>     <span class="n">unk_token</span><span class="o">=</span><span class="n">unk_token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span>     <span class="n">pad_token</span><span class="o">=</span><span class="n">pad_token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span>     <span class="n">extra_ids</span><span class="o">=</span><span class="n">extra_ids</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span>     <span class="n">additional_special_tokens</span><span class="o">=</span><span class="n">additional_special_tokens</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">146</span> <span class="bp">self</span><span class="o">.</span><span class="n">vocab_file</span> <span class="o">=</span> <span class="n">vocab_file</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extra_ids</span> <span class="o">=</span> <span class="n">extra_ids</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/transformers/tokenization_utils_fast.py:120,</span> in <span class="ni">PreTrainedTokenizerFast.__init__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span>     <span class="n">fast_tokenizer</span> <span class="o">=</span> <span class="n">convert_slow_tokenizer</span><span class="p">(</span><span class="n">slow_tokenizer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">120</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span>         <span class="s2">&quot;Couldn&#39;t instantiate the backend tokenizer from one of: </span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span>         <span class="s2">&quot;(1) a `tokenizers` library serialization file, </span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span>         <span class="s2">&quot;(2) a slow tokenizer instance to convert or </span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>         <span class="s2">&quot;(3) an equivalent slow tokenizer class to instantiate and convert. </span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>         <span class="s2">&quot;You need to have sentencepiece installed to convert a slow tokenizer to a fast one.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">fast_tokenizer</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span> <span class="k">if</span> <span class="n">slow_tokenizer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: Couldn&#39;t instantiate the backend tokenizer from one of: 
+<span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">a</span> <span class="err">`</span><span class="n">tokenizers</span><span class="err">`</span> <span class="n">library</span> <span class="n">serialization</span> <span class="n">file</span><span class="p">,</span> 
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="n">a</span> <span class="n">slow</span> <span class="n">tokenizer</span> <span class="n">instance</span> <span class="n">to</span> <span class="n">convert</span> <span class="ow">or</span> 
+<span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="n">an</span> <span class="n">equivalent</span> <span class="n">slow</span> <span class="n">tokenizer</span> <span class="k">class</span> <span class="nc">to</span> <span class="n">instantiate</span> <span class="ow">and</span> <span class="n">convert</span><span class="o">.</span> 
+<span class="n">You</span> <span class="n">need</span> <span class="n">to</span> <span class="n">have</span> <span class="n">sentencepiece</span> <span class="n">installed</span> <span class="n">to</span> <span class="n">convert</span> <span class="n">a</span> <span class="n">slow</span> <span class="n">tokenizer</span> <span class="n">to</span> <span class="n">a</span> <span class="n">fast</span> <span class="n">one</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generated</span> <span class="o">=</span> <span class="n">generator</span><span class="p">(</span>
+    <span class="s2">&quot;東北大学は&quot;</span><span class="p">,</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">top_p</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+    <span class="n">top_k</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">pad_token_id</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">generated</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;generated_text&#39;: &#39;東北大学は、学術的な情報や、学生・院生に関する情報などを掲載した学生・院生情報誌の発行や、留学生および外国人研究者向けの日本語学習教材の開発を予定しています。 文部科学省は、平成25年度から3年間を計画期間とする、大学国際化推進プログラムの実施に向けた具体的な検討を始めた。 平成25年度と平成26年度の2年間にわたる大学国際化推進プログラムは、大学発の産学連携や国際交流への取り組みを促進させるとともに、大学&#39;}
+{&#39;generated_text&#39;: &#39;東北大学は「学生の本分は学業」であることは勿論であるが、学問と研究は同時に行わなければ達成できない。研究は単なる自己満足ではなく、社会に有益な研究が不可欠である。このような基本姿勢をもって、各年次における教育活動が行われており、本学の教職員は大学教育の責務と自覚をもって、大学教育の改善に積極的に努めることを学則で定めております。 本学は、社会の要請及び大学の存在意義に応えるために&#39;}
+{&#39;generated_text&#39;: &#39;東北大学は、東日本大震災での教訓を踏まえ、地震による建物被害を防ぐため、建築確認等の制度を抜本的に改正して、平成28年10月に新建築基準法が施行されました。新建築基準法に基づく確認調査・評価制度では、建築物の耐震性や設計・施工等のあり方を客観的な手法で調査・評価し、その結果として必要な対策を講ずることを定めています。 宮城県建築士事務所協会では、建築士事務所協会の会員の皆さまの自主的な建築基準&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="bert_topic.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">BERTopic</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="llm.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">大規模言語モデル</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">入力表現</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">事前学習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">ファインチューング</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#huggingface-transformer">Huggingface transformerを使う</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 呂　沢宇
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

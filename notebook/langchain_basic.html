@@ -1,0 +1,2099 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Langchainの基本 &#8212; 計算社会科学のための自然言語処理</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/langchain_basic';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-light" alt="計算社会科学のための自然言語処理 - Home"/>
+    <script>document.write(`<img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-dark" alt="計算社会科学のための自然言語処理 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    計算社会科学と自然言語処理
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">イントロダクション</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">ガイダンス</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">基礎知識</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="nlp_basis2.html">自然言語処理の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_basis2.html">機械学習の基本概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math_basis2.html">数学基礎</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ニューラルネットワーク</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="NN.html">ニューラルネットワーク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backpropagation.html">誤差逆伝播法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pytorch.html">Pytorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">単語分散表現</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="word2vec_1.html">単語分散表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_2_embedding.html">word2vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_gensim.html">GensimによるWord2Vecの学習と使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_sentiment.html">Word2Vecを用いるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_application.html">Word2Vecが人文・社会科学研究における応用</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RNN</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">RNNの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">LSTM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_lstm.html">LSTMの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm_classification.html">LSTMによる文書分類</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seq2seq.html">Seq2seq</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transformer</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="attention.html">Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="self-attention.html">Self-Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformer.html">Transformerアーキテクチャ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BERT.html">BERT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_sentiment.html">BERTによるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_topic.html">BERTopic</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">大規模言語モデル</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="GPT.html">GPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm.html">大規模言語モデルの基本</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/langchain_basic.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp/issues/new?title=Issue%20on%20page%20%2Fnotebook/langchain_basic.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebook/langchain_basic.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Langchainの基本</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Langchainの基本</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-gemini-api">OpenAI/Gemini API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-api">OpenAI API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gemini-api">Gemini API</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Gemini APIの設定</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-templates">Prompt Templates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">チェーン</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">チェーンの基本</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-learning">実装例:Few Shot Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">課題</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agents">Agents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toolkits">Toolkits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#agent">Agentの作成</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory">Memory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationbuffermemory">ConversationBufferMemory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationsummarymemory">ConversationSummaryMemory</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demo">Demo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-store">Vector Store</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">全体のまとめ</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">深層学習による自然言語処理の理論とアルゴリズム</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">自然言語処理を実装するためのツール</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="langchain">
+<h1>Langchainの基本<a class="headerlink" href="#langchain" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://www.langchain.com/">LangChain</a>は大規模言語モデルの機能拡張を効率的に実装するためのライブラリです。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">llms</span></code>: 言語モデルを呼び出すためのラッパーを提供します</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prompts</span></code>: プロンプトのテンプレートを作成する機能を提供します</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chains</span></code>: ひとつのワークフロー内で LLM やプロンプトテンプレートを組み合わせて使用するための機能を提供します</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">agents</span></code>: エージェントを使用することで、課題の解決順序をも LLM を用いて決定し、実行させることができます</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">memory</span></code>: チェーンとエージェントに状態を持たせるための機能を提供します</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>langchain
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>openai
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: langchain in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (0.1.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: PyYAML&gt;=5.3 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (6.0.1)
+Requirement already satisfied: SQLAlchemy&lt;3,&gt;=1.4 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (2.0.25)
+Requirement already satisfied: aiohttp&lt;4.0.0,&gt;=3.8.3 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (3.9.3)
+Requirement already satisfied: dataclasses-json&lt;0.7,&gt;=0.5.7 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (0.6.3)
+Requirement already satisfied: jsonpatch&lt;2.0,&gt;=1.33 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (1.33)
+Requirement already satisfied: langchain-community&lt;0.1,&gt;=0.0.14 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (0.0.16)
+Requirement already satisfied: langchain-core&lt;0.2,&gt;=0.1.16 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (0.1.17)
+Requirement already satisfied: langsmith&lt;0.1,&gt;=0.0.83 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (0.0.84)
+Requirement already satisfied: numpy&lt;2,&gt;=1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (1.26.3)
+Requirement already satisfied: pydantic&lt;3,&gt;=1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (2.6.0)
+Requirement already satisfied: requests&lt;3,&gt;=2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (2.32.3)
+Requirement already satisfied: tenacity&lt;9.0.0,&gt;=8.1.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain) (8.2.3)
+Requirement already satisfied: aiosignal&gt;=1.1.2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain) (1.3.1)
+Requirement already satisfied: attrs&gt;=17.3.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain) (23.2.0)
+Requirement already satisfied: frozenlist&gt;=1.1.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain) (1.4.1)
+Requirement already satisfied: multidict&lt;7.0,&gt;=4.5 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain) (6.0.4)
+Requirement already satisfied: yarl&lt;2.0,&gt;=1.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain) (1.9.4)
+Requirement already satisfied: marshmallow&lt;4.0.0,&gt;=3.18.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from dataclasses-json&lt;0.7,&gt;=0.5.7-&gt;langchain) (3.20.2)
+Requirement already satisfied: typing-inspect&lt;1,&gt;=0.4.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from dataclasses-json&lt;0.7,&gt;=0.5.7-&gt;langchain) (0.9.0)
+Requirement already satisfied: jsonpointer&gt;=1.9 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from jsonpatch&lt;2.0,&gt;=1.33-&gt;langchain) (2.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: anyio&lt;5,&gt;=3 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain-core&lt;0.2,&gt;=0.1.16-&gt;langchain) (4.2.0)
+Requirement already satisfied: packaging&lt;24.0,&gt;=23.2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain-core&lt;0.2,&gt;=0.1.16-&gt;langchain) (23.2)
+Requirement already satisfied: annotated-types&gt;=0.4.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=1-&gt;langchain) (0.6.0)
+Requirement already satisfied: pydantic-core==2.16.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=1-&gt;langchain) (2.16.1)
+Requirement already satisfied: typing-extensions&gt;=4.6.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=1-&gt;langchain) (4.9.0)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3,&gt;=2-&gt;langchain) (3.3.2)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3,&gt;=2-&gt;langchain) (3.6)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3,&gt;=2-&gt;langchain) (2.1.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3,&gt;=2-&gt;langchain) (2023.11.17)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sniffio&gt;=1.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from anyio&lt;5,&gt;=3-&gt;langchain-core&lt;0.2,&gt;=0.1.16-&gt;langchain) (1.3.0)
+Requirement already satisfied: mypy-extensions&gt;=0.3.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from typing-inspect&lt;1,&gt;=0.4.0-&gt;dataclasses-json&lt;0.7,&gt;=0.5.7-&gt;langchain) (1.0.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.0</span> -&gt; <span class=" -Color -Color-Green">24.3.1</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: openai in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (1.10.0)
+Requirement already satisfied: anyio&lt;5,&gt;=3.5.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (4.2.0)
+Requirement already satisfied: distro&lt;2,&gt;=1.7.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (1.9.0)
+Requirement already satisfied: httpx&lt;1,&gt;=0.23.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (0.27.2)
+Requirement already satisfied: pydantic&lt;3,&gt;=1.9.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (2.6.0)
+Requirement already satisfied: sniffio in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (1.3.0)
+Requirement already satisfied: tqdm&gt;4 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (4.67.1)
+Requirement already satisfied: typing-extensions&lt;5,&gt;=4.7 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from openai) (4.9.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: idna&gt;=2.8 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from anyio&lt;5,&gt;=3.5.0-&gt;openai) (3.6)
+Requirement already satisfied: certifi in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from httpx&lt;1,&gt;=0.23.0-&gt;openai) (2023.11.17)
+Requirement already satisfied: httpcore==1.* in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from httpx&lt;1,&gt;=0.23.0-&gt;openai) (1.0.2)
+Requirement already satisfied: h11&lt;0.15,&gt;=0.13 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from httpcore==1.*-&gt;httpx&lt;1,&gt;=0.23.0-&gt;openai) (0.14.0)
+Requirement already satisfied: annotated-types&gt;=0.4.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=1.9.0-&gt;openai) (0.6.0)
+Requirement already satisfied: pydantic-core==2.16.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=1.9.0-&gt;openai) (2.16.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.0</span> -&gt; <span class=" -Color -Color-Green">24.3.1</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="openai-gemini-api">
+<h2>OpenAI/Gemini API<a class="headerlink" href="#openai-gemini-api" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://openai.com/blog/openai-api">OpenAI</a>と<a class="reference external" href="https://deepmind.google/technologies/gemini/#introduction">Google(Gemini)</a>が提供するAPIを通じて、多岐にわたるAIモデルへのアクセスを可能になります。</p>
+<p>APIを使うためには、まず「自分がサービスを利用できる証」となる「APIキー」を発行する必要があります。そして、OpenAIのAPIは、このAPIキーによって利用した使用量に応じて、課金される仕組みです。</p>
+<p>そのため、APIキーが外部に漏れると、他者によって不正に使用されて料金が発生してしまうため、他の人へ共有しないように注意しましょう。</p>
+<p>LangChainは、さまざまな LLM に汎用インターフェースを提供し、ユーザーがAPIを介してさまざまなモデルを操作できるようにします。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;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&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="openai-api">
+<h3>OpenAI API<a class="headerlink" href="#openai-api" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">OpenAI</span></code>クラスのインスタンスでGPT-3モデルを使用するための設定を行っています。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">model_name'</span></code>という引数で、使用する<a class="reference external" href="https://platform.openai.com/docs/models/gpt-4-and-gpt-4-turbo">モデルの名前</a>を指定します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">temperature</span></code>という引数は、生成されるテキストのランダム性を制御します。<code class="docutils literal notranslate"><span class="pre">temperature</span></code>が高いほど（1に近いほど）、出力はよりランダムになります。逆に、<code class="docutils literal notranslate"><span class="pre">temperature</span></code>が低いほど（0に近いほど）、モデルの出力はより一貫性があり、予測可能になります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_tokens</span></code>という引数は、生成するテキストの最大トークン数を指定します。この場合、生成されるテキストは最大で256トークンになります。トークンとは、テキストを分割した単位のことで、一般的には単語や句読点などが1トークンとなります。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;gpt-3.5-turbo-instruct&#39;</span><span class="p">,</span>
+             <span class="n">temperature</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+             <span class="n">max_tokens</span> <span class="o">=</span> <span class="mi">256</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/langchain_core/_api/deprecation.py:117: LangChainDeprecationWarning: The class `langchain_community.llms.openai.OpenAI` was deprecated in langchain-community 0.0.10 and will be removed in 0.2.0. An updated version of the class exists in the langchain-openai package and should be used instead. To use it run `pip install -U langchain-openai` and import as `from langchain_openai import OpenAI`.
+  warn_deprecated(
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span><span class="p">(</span><span class="s1">&#39;東北大学を紹介してください：&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/langchain_core/_api/deprecation.py:117: LangChainDeprecationWarning: The function `__call__` was deprecated in LangChain 0.1.7 and will be removed in 0.2.0. Use invoke instead.
+  warn_deprecated(
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AuthenticationError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">llm</span><span class="p">(</span><span class="s1">&#39;東北大学を紹介してください：&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/langchain_core/_api/deprecation.py:145,</span> in <span class="ni">deprecated.&lt;locals&gt;.deprecate.&lt;locals&gt;.warning_emitting_wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span>     <span class="n">warned</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span>     <span class="n">emit_warning</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">145</span> <span class="k">return</span> <span class="n">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/langchain_core/language_models/llms.py:953,</span> in <span class="ni">BaseLLM.__call__</span><span class="nt">(self, prompt, stop, callbacks, tags, metadata, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">946</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">947</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">948</span>         <span class="s2">&quot;Argument `prompt` is expected to be a string. Instead found &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">949</span>         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span><span class="si">}</span><span class="s2">. If you want to run the LLM on multiple prompts, use &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">950</span>         <span class="s2">&quot;`generate` instead.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">951</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">952</span> <span class="k">return</span> <span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">953</span>     <span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">954</span>         <span class="p">[</span><span class="n">prompt</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">955</span>         <span class="n">stop</span><span class="o">=</span><span class="n">stop</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">956</span>         <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">957</span>         <span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">958</span>         <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">959</span>         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">960</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">961</span>     <span class="o">.</span><span class="n">generations</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">962</span>     <span class="o">.</span><span class="n">text</span>
+<span class="g g-Whitespace">    </span><span class="mi">963</span> <span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/langchain_core/language_models/llms.py:703,</span> in <span class="ni">BaseLLM.generate</span><span class="nt">(self, prompts, stop, callbacks, tags, metadata, run_name, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">687</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">688</span>             <span class="s2">&quot;Asked to cache, but no cache found at `langchain.cache`.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">689</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">690</span>     <span class="n">run_managers</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">    </span><span class="mi">691</span>         <span class="n">callback_manager</span><span class="o">.</span><span class="n">on_llm_start</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">692</span>             <span class="n">dumpd</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">702</span>     <span class="p">]</span>
+<span class="ne">--&gt; </span><span class="mi">703</span>     <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_helper</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span>         <span class="n">prompts</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">run_managers</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">new_arg_supported</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">    </span><span class="mi">705</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">706</span>     <span class="k">return</span> <span class="n">output</span>
+<span class="g g-Whitespace">    </span><span class="mi">707</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_prompts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/langchain_core/language_models/llms.py:567,</span> in <span class="ni">BaseLLM._generate_helper</span><span class="nt">(self, prompts, stop, run_managers, new_arg_supported, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span>     <span class="k">for</span> <span class="n">run_manager</span> <span class="ow">in</span> <span class="n">run_managers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">566</span>         <span class="n">run_manager</span><span class="o">.</span><span class="n">on_llm_error</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">LLMResult</span><span class="p">(</span><span class="n">generations</span><span class="o">=</span><span class="p">[]))</span>
+<span class="ne">--&gt; </span><span class="mi">567</span>     <span class="k">raise</span> <span class="n">e</span>
+<span class="g g-Whitespace">    </span><span class="mi">568</span> <span class="n">flattened_outputs</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">569</span> <span class="k">for</span> <span class="n">manager</span><span class="p">,</span> <span class="n">flattened_output</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">run_managers</span><span class="p">,</span> <span class="n">flattened_outputs</span><span class="p">):</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/langchain_core/language_models/llms.py:554,</span> in <span class="ni">BaseLLM._generate_helper</span><span class="nt">(self, prompts, stop, run_managers, new_arg_supported, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">544</span> <span class="k">def</span> <span class="nf">_generate_helper</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">545</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">546</span>     <span class="n">prompts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">550</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">551</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LLMResult</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">552</span>     <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">553</span>         <span class="n">output</span> <span class="o">=</span> <span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">554</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_generate</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">555</span>                 <span class="n">prompts</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">556</span>                 <span class="n">stop</span><span class="o">=</span><span class="n">stop</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">557</span>                 <span class="c1"># TODO: support multiple run managers</span>
+<span class="g g-Whitespace">    </span><span class="mi">558</span>                 <span class="n">run_manager</span><span class="o">=</span><span class="n">run_managers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">run_managers</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">559</span>                 <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">560</span>             <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">561</span>             <span class="k">if</span> <span class="n">new_arg_supported</span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span>             <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate</span><span class="p">(</span><span class="n">prompts</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="n">stop</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">563</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">564</span>     <span class="k">except</span> <span class="ne">BaseException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span>         <span class="k">for</span> <span class="n">run_manager</span> <span class="ow">in</span> <span class="n">run_managers</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/langchain_community/llms/openai.py:460,</span> in <span class="ni">BaseOpenAI._generate</span><span class="nt">(self, prompts, stop, run_manager, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">448</span>     <span class="n">choices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">449</span>         <span class="p">{</span>
+<span class="g g-Whitespace">    </span><span class="mi">450</span>             <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">generation</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">457</span>         <span class="p">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">458</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">459</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">460</span>     <span class="n">response</span> <span class="o">=</span> <span class="n">completion_with_retry</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">461</span>         <span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">_prompts</span><span class="p">,</span> <span class="n">run_manager</span><span class="o">=</span><span class="n">run_manager</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span>
+<span class="g g-Whitespace">    </span><span class="mi">462</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">463</span>     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">464</span>         <span class="c1"># V1 client returns the response in an PyDantic object instead of</span>
+<span class="g g-Whitespace">    </span><span class="mi">465</span>         <span class="c1"># dict. For the transition period, we deep convert it to dict.</span>
+<span class="g g-Whitespace">    </span><span class="mi">466</span>         <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/langchain_community/llms/openai.py:115,</span> in <span class="ni">completion_with_retry</span><span class="nt">(llm, run_manager, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">113</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Use tenacity to retry the completion call.&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">114</span> <span class="k">if</span> <span class="n">is_openai_v1</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">115</span>     <span class="k">return</span> <span class="n">llm</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">117</span> <span class="n">retry_decorator</span> <span class="o">=</span> <span class="n">_create_retry_decorator</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">run_manager</span><span class="o">=</span><span class="n">run_manager</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span> <span class="nd">@retry_decorator</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span> <span class="k">def</span> <span class="nf">_completion_with_retry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/openai/_utils/_utils.py:271,</span> in <span class="ni">required_args.&lt;locals&gt;.inner.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">269</span>             <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Missing required argument: </span><span class="si">{</span><span class="n">quote</span><span class="p">(</span><span class="n">missing</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">270</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">271</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/openai/resources/completions.py:506,</span> in <span class="ni">Completions.create</span><span class="nt">(self, model, prompt, best_of, echo, frequency_penalty, logit_bias, logprobs, max_tokens, n, presence_penalty, seed, stop, stream, suffix, temperature, top_p, user, extra_headers, extra_query, extra_body, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">478</span> <span class="nd">@required_args</span><span class="p">([</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="s2">&quot;prompt&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="s2">&quot;prompt&quot;</span><span class="p">,</span> <span class="s2">&quot;stream&quot;</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">479</span> <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span>     <span class="bp">self</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">504</span>     <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Timeout</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">NotGiven</span> <span class="o">=</span> <span class="n">NOT_GIVEN</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Completion</span> <span class="o">|</span> <span class="n">Stream</span><span class="p">[</span><span class="n">Completion</span><span class="p">]:</span>
+<span class="ne">--&gt; </span><span class="mi">506</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">507</span>         <span class="s2">&quot;/completions&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">508</span>         <span class="n">body</span><span class="o">=</span><span class="n">maybe_transform</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">509</span>             <span class="p">{</span>
+<span class="g g-Whitespace">    </span><span class="mi">510</span>                 <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">511</span>                 <span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">512</span>                 <span class="s2">&quot;best_of&quot;</span><span class="p">:</span> <span class="n">best_of</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">513</span>                 <span class="s2">&quot;echo&quot;</span><span class="p">:</span> <span class="n">echo</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">514</span>                 <span class="s2">&quot;frequency_penalty&quot;</span><span class="p">:</span> <span class="n">frequency_penalty</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">515</span>                 <span class="s2">&quot;logit_bias&quot;</span><span class="p">:</span> <span class="n">logit_bias</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">516</span>                 <span class="s2">&quot;logprobs&quot;</span><span class="p">:</span> <span class="n">logprobs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">517</span>                 <span class="s2">&quot;max_tokens&quot;</span><span class="p">:</span> <span class="n">max_tokens</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">518</span>                 <span class="s2">&quot;n&quot;</span><span class="p">:</span> <span class="n">n</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">519</span>                 <span class="s2">&quot;presence_penalty&quot;</span><span class="p">:</span> <span class="n">presence_penalty</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">520</span>                 <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="n">seed</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">521</span>                 <span class="s2">&quot;stop&quot;</span><span class="p">:</span> <span class="n">stop</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">522</span>                 <span class="s2">&quot;stream&quot;</span><span class="p">:</span> <span class="n">stream</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">523</span>                 <span class="s2">&quot;suffix&quot;</span><span class="p">:</span> <span class="n">suffix</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">524</span>                 <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="n">temperature</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">525</span>                 <span class="s2">&quot;top_p&quot;</span><span class="p">:</span> <span class="n">top_p</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">526</span>                 <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="n">user</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">527</span>             <span class="p">},</span>
+<span class="g g-Whitespace">    </span><span class="mi">528</span>             <span class="n">completion_create_params</span><span class="o">.</span><span class="n">CompletionCreateParams</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">529</span>         <span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">530</span>         <span class="n">options</span><span class="o">=</span><span class="n">make_request_options</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">531</span>             <span class="n">extra_headers</span><span class="o">=</span><span class="n">extra_headers</span><span class="p">,</span> <span class="n">extra_query</span><span class="o">=</span><span class="n">extra_query</span><span class="p">,</span> <span class="n">extra_body</span><span class="o">=</span><span class="n">extra_body</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span>
+<span class="g g-Whitespace">    </span><span class="mi">532</span>         <span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">533</span>         <span class="n">cast_to</span><span class="o">=</span><span class="n">Completion</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">534</span>         <span class="n">stream</span><span class="o">=</span><span class="n">stream</span> <span class="ow">or</span> <span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span>         <span class="n">stream_cls</span><span class="o">=</span><span class="n">Stream</span><span class="p">[</span><span class="n">Completion</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">536</span>     <span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/openai/_base_client.py:1180,</span> in <span class="ni">SyncAPIClient.post</span><span class="nt">(self, path, cast_to, body, options, files, stream, stream_cls)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1166</span> <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1167</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1168</span>     <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1175</span>     <span class="n">stream_cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">_StreamT</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1176</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResponseT</span> <span class="o">|</span> <span class="n">_StreamT</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1177</span>     <span class="n">opts</span> <span class="o">=</span> <span class="n">FinalRequestOptions</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1178</span>         <span class="n">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">json_data</span><span class="o">=</span><span class="n">body</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">to_httpx_files</span><span class="p">(</span><span class="n">files</span><span class="p">),</span> <span class="o">**</span><span class="n">options</span>
+<span class="g g-Whitespace">   </span><span class="mi">1179</span>     <span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1180</span>     <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">ResponseT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">cast_to</span><span class="p">,</span> <span class="n">opts</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">stream</span><span class="p">,</span> <span class="n">stream_cls</span><span class="o">=</span><span class="n">stream_cls</span><span class="p">))</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/openai/_base_client.py:869,</span> in <span class="ni">SyncAPIClient.request</span><span class="nt">(self, cast_to, options, remaining_retries, stream, stream_cls)</span>
+<span class="g g-Whitespace">    </span><span class="mi">860</span> <span class="k">def</span> <span class="nf">request</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">861</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">862</span>     <span class="n">cast_to</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">ResponseT</span><span class="p">],</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">867</span>     <span class="n">stream_cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">_StreamT</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResponseT</span> <span class="o">|</span> <span class="n">_StreamT</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">869</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">870</span>         <span class="n">cast_to</span><span class="o">=</span><span class="n">cast_to</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">871</span>         <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="n">stream</span><span class="o">=</span><span class="n">stream</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">873</span>         <span class="n">stream_cls</span><span class="o">=</span><span class="n">stream_cls</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">874</span>         <span class="n">remaining_retries</span><span class="o">=</span><span class="n">remaining_retries</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">875</span>     <span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/openai/_base_client.py:960,</span> in <span class="ni">SyncAPIClient._request</span><span class="nt">(self, cast_to, options, remaining_retries, stream, stream_cls)</span>
+<span class="g g-Whitespace">    </span><span class="mi">957</span>         <span class="n">err</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">959</span>     <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Re-raising status error&quot;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">960</span>     <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_status_error_from_response</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">response</span><span class="p">)</span> <span class="kn">from</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">962</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_response</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">963</span>     <span class="n">cast_to</span><span class="o">=</span><span class="n">cast_to</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">964</span>     <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">967</span>     <span class="n">stream_cls</span><span class="o">=</span><span class="n">stream_cls</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">968</span> <span class="p">)</span>
+
+<span class="ne">AuthenticationError</span>: Error code: 401 - {&#39;error&#39;: {&#39;message&#39;: &#39;Incorrect API key provided: sk-rfJT1***************************************La7j. You can find your API key at https://platform.openai.com/account/api-keys.&#39;, &#39;type&#39;: &#39;invalid_request_error&#39;, &#39;param&#39;: None, &#39;code&#39;: &#39;invalid_api_key&#39;}}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="gemini-api">
+<h3>Gemini API<a class="headerlink" href="#gemini-api" title="Link to this heading">#</a></h3>
+<section id="id1">
+<h4>Gemini APIの設定<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install -U --quiet langchain-google-genai pillow</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GOOGLE_API_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;AI&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">google.generativeai</span> <span class="k">as</span> <span class="nn">genai</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">genai</span><span class="o">.</span><span class="n">list_models</span><span class="p">()]</span>
+<span class="n">models</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Model(name=&#39;models/chat-bison-001&#39;,
+       base_model_id=&#39;&#39;,
+       version=&#39;001&#39;,
+       display_name=&#39;PaLM 2 Chat (Legacy)&#39;,
+       description=&#39;A legacy text-only model optimized for chat conversations&#39;,
+       input_token_limit=4096,
+       output_token_limit=1024,
+       supported_generation_methods=[&#39;generateMessage&#39;, &#39;countMessageTokens&#39;],
+       temperature=0.25,
+       top_p=0.95,
+       top_k=40),
+ Model(name=&#39;models/text-bison-001&#39;,
+       base_model_id=&#39;&#39;,
+       version=&#39;001&#39;,
+       display_name=&#39;PaLM 2 (Legacy)&#39;,
+       description=&#39;A legacy model that understands text and generates text as an output&#39;,
+       input_token_limit=8196,
+       output_token_limit=1024,
+       supported_generation_methods=[&#39;generateText&#39;, &#39;countTextTokens&#39;, &#39;createTunedTextModel&#39;],
+       temperature=0.7,
+       top_p=0.95,
+       top_k=40),
+ Model(name=&#39;models/embedding-gecko-001&#39;,
+       base_model_id=&#39;&#39;,
+       version=&#39;001&#39;,
+       display_name=&#39;Embedding Gecko&#39;,
+       description=&#39;Obtain a distributed representation of a text.&#39;,
+       input_token_limit=1024,
+       output_token_limit=1,
+       supported_generation_methods=[&#39;embedText&#39;, &#39;countTextTokens&#39;],
+       temperature=None,
+       top_p=None,
+       top_k=None),
+ Model(name=&#39;models/gemini-pro&#39;,
+       base_model_id=&#39;&#39;,
+       version=&#39;001&#39;,
+       display_name=&#39;Gemini Pro&#39;,
+       description=&#39;The best model for scaling across a wide range of tasks&#39;,
+       input_token_limit=30720,
+       output_token_limit=2048,
+       supported_generation_methods=[&#39;generateContent&#39;, &#39;countTokens&#39;],
+       temperature=0.9,
+       top_p=1.0,
+       top_k=1),
+ Model(name=&#39;models/gemini-pro-vision&#39;,
+       base_model_id=&#39;&#39;,
+       version=&#39;001&#39;,
+       display_name=&#39;Gemini Pro Vision&#39;,
+       description=&#39;The best image understanding model to handle a broad range of applications&#39;,
+       input_token_limit=12288,
+       output_token_limit=4096,
+       supported_generation_methods=[&#39;generateContent&#39;, &#39;countTokens&#39;],
+       temperature=0.4,
+       top_p=1.0,
+       top_k=32),
+ Model(name=&#39;models/embedding-001&#39;,
+       base_model_id=&#39;&#39;,
+       version=&#39;001&#39;,
+       display_name=&#39;Embedding 001&#39;,
+       description=&#39;Obtain a distributed representation of a text.&#39;,
+       input_token_limit=2048,
+       output_token_limit=1,
+       supported_generation_methods=[&#39;embedContent&#39;, &#39;countTextTokens&#39;],
+       temperature=None,
+       top_p=None,
+       top_k=None),
+ Model(name=&#39;models/aqa&#39;,
+       base_model_id=&#39;&#39;,
+       version=&#39;001&#39;,
+       display_name=&#39;Model that performs Attributed Question Answering.&#39;,
+       description=(&#39;Model trained to return answers to questions that are grounded in provided &#39;
+                    &#39;sources, along with estimating answerable probability.&#39;),
+       input_token_limit=7168,
+       output_token_limit=1024,
+       supported_generation_methods=[&#39;generateAnswer&#39;],
+       temperature=0.2,
+       top_p=1.0,
+       top_k=40)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">google.generativeai</span> <span class="k">as</span> <span class="nn">genai</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">genai</span><span class="o">.</span><span class="n">GenerativeModel</span><span class="p">(</span><span class="s1">&#39;gemini-pro&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">generate_content</span><span class="p">(</span><span class="s2">&quot;東北大学を紹介してください：&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Markdown</span>
+<span class="n">Markdown</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<p>東北大学は、宮城県仙台市にある国立大学です。1907年に東北帝国大学として設立され、1947年に東北大学と改称されました。東北大学は、日本の最難関国立大学の一つとして知られ、理系・文系を問わず、多くの優秀な学生を輩出しています。</p>
+<p>東北大学の象徴は、東北大学の正門前にある、青葉山の頂上にそびえる「青葉城」です。青葉城は、伊達政宗が仙台城築城の地として選んだ場所であり、東北大学の歴史を物語る貴重な史跡となっています。</p>
+<p>東北大学は、10の学部、16の研究科、2つの研究所、1つのセンターを擁する総合大学です。学部では、理系・文系を問わず、幅広い分野の学問を学ぶことができます。研究科では、より専門的な学問を研究することができます。研究所では、最先端の研究が行われており、センターでは、社会貢献活動が行われています。</p>
+<p>東北大学は、世界有数の研究大学として知られており、ノーベル賞受賞者を輩出しています。また、東北大学は、国内外の大学・研究機関と活発な交流を行っており、国際的な研究・教育を推進しています。</p>
+<p>東北大学は、日本の最難関国立大学の一つとして知られていますが、入学試験は、学力試験だけでなく、面接や小論文などの総合的な評価によって行われます。そのため、東北大学を目指す学生は、学力だけでなく、人間性や社会性を磨くことも大切です。</p>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the model</span>
+<span class="n">generation_config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+  <span class="s2">&quot;max_output_tokens&quot;</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># 安全勢を制御する設定。ここでは、中程度以上のハラスメントをブロックし、高い危険性のあるコンテンツをブロックします。</span>
+<span class="n">safety_settings</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;HARM_CATEGORY_HARASSMENT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="s2">&quot;BLOCK_MEDIUM_AND_ABOVE&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;HARM_CATEGORY_HATE_SPEECH&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="s2">&quot;BLOCK_MEDIUM_AND_ABOVE&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;HARM_CATEGORY_SEXUALLY_EXPLICIT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="s2">&quot;BLOCK_ONLY_HIGH&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;HARM_CATEGORY_DANGEROUS_CONTENT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="s2">&quot;BLOCK_ONLY_HIGH&quot;</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">genai</span><span class="o">.</span><span class="n">GenerativeModel</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;gemini-pro&quot;</span><span class="p">,</span>
+                              <span class="n">generation_config</span><span class="o">=</span><span class="n">generation_config</span><span class="p">,</span>
+                              <span class="n">safety_settings</span><span class="o">=</span><span class="n">safety_settings</span><span class="p">)</span>
+
+
+<span class="n">prompt_parts</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s2">&quot;東北大学を紹介してください：&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">generate_content</span><span class="p">(</span><span class="n">prompt_parts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>東北大学は、宮城県仙台市青葉区に本部を置く日本の国立大学である。1907年に設置された。大学の略称は東北大。
+
+東北大学は、日本の国立大学の中で最も古い歴史を持つ大学の1つであり、国内屈指の研究型総合大学として知られている。ノーベル賞受賞者や文化勲章受章者を多数輩出しており、国内外から高い評価を得ている。
+
+東北大学は、10の学部と16の研究所を擁しており、幅広い分野で教育と研究を行っている。特に、医学、工学、理学、法学、経済学、教育学などの分野で高い評価を得ている。また、東北大学は、国内外の大学との連携も盛んであり、世界中から学生や研究者が集まっている。
+
+東北大学は、仙台市の中心部に位置しており、交通アクセスも良好である。また、キャンパス内には、図書館、博物館、体育館、学生寮など、充実した施設が整っている。
+
+東北大学は、日本の国立大学の中で最も人気のある大学の1つであり、毎年多くの受験生が志願している。東北大学に入学するためには、高い学力と志望動機が必要である。
+
+東北大学は、日本の国立大学の中で最も歴史と伝統のある大学の1つであり、国内屈指の研究型総合大学として知られている。東北大学は、幅広い分野で教育と研究を行っており、世界中から学生や研究者が集まっている。東北大学に入学するためには、高い学力と志望動機が必要である。
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="prompt-templates">
+<h2>Prompt Templates<a class="headerlink" href="#prompt-templates" title="Link to this heading">#</a></h2>
+<p>プロンプトテンプレートは、プロンプトを作成する再現可能な方法を指します。これには、エンドユーザーから一連のパラメーターを受け取り、プロンプトを生成するテキスト文字列(テンプレート)が含まれます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;language&quot;</span><span class="p">,</span><span class="s2">&quot;text&quot;</span><span class="p">],</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;次の日本語のテキストを</span><span class="si">{language}</span><span class="s2">に翻訳してください：</span><span class="si">{text}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">prompt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">language</span><span class="o">=</span><span class="s2">&quot;英語&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;東北大学は日本の東北地方にある大学です。&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>次の日本語のテキストを英語に翻訳してください：東北大学は日本の東北地方にある大学です。
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>チェーン<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>チェーンの基本<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>LLM は単独でも十分に強力に機能します。 しかし、 LLM 同士を組合わせたり、ある機能に特化した他のモジュールとともに利用することで、より複雑なアプリケーションを構築することができます。 LangChain では、このような他の機能と連結するための汎用的なインターフェースとして、チェーンを提供しています。 チェーンを用いることで、LLM の利用を含む “一連の処理” を一つのまとまりとして扱うことができます。</p>
+<p>つまり、平易な言葉でいえば、チェーンは「複数の処理の連なり」です。 この処理の連鎖の部品となるチェーンの構成要素のことを リンク と呼びます。 リンクの一例は、LLM の呼び出しなどの基本的な処理です。さらには、その他のチェーン全体をリンクとして含むチェーンも作成できます。</p>
+<p>チェーンの代表例は、LLM とプロンプトテンプレートを組合わせて使用するための<code class="docutils literal notranslate"><span class="pre">LLMChain</span></code>です。 このチェーンを用いると、</p>
+<ul class="simple">
+<li><p>ユーザーの入力を受け取り</p></li>
+<li><p>それをPromptTemplateでフォーマットし</p></li>
+<li><p>フォーマットされたレスポンスを LLM に渡す</p></li>
+</ul>
+<p>という一連の操作を一つのまとまりとして実行できます。</p>
+<p>基本的な使い方としては、LLM や プロンプトテンプレートなどの基本要素を組み合わせて使用することが考えられます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span> <span class="o">=</span> <span class="n">ChatGoogleGenerativeAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-pro&quot;</span><span class="p">,</span> <span class="n">google_api_key</span><span class="o">=</span><span class="n">GOOGLE_API_KEY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+                 <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+                  <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">({</span><span class="s2">&quot;language&quot;</span><span class="p">:</span><span class="s2">&quot;英語&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;東北大学は日本の東北地方にある大学です。&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new LLMChain chain...</span>
+Prompt after formatting:
+<span class=" -Color -Color-Bold -Color-Bold-Green">次の日本語のテキストを英語に翻訳してください：東北大学は日本の東北地方にある大学です。</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Tohoku University is a university in the Tohoku region of Japan.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">({</span><span class="s2">&quot;language&quot;</span><span class="p">:</span><span class="s2">&quot;中国語&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;東北大学は日本の東北地方にある大学です。&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new LLMChain chain...</span>
+Prompt after formatting:
+<span class=" -Color -Color-Bold -Color-Bold-Green">次の日本語のテキストを中国語に翻訳してください：東北大学は日本の東北地方にある大学です。</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;东北大学是日本东北地区的大学。&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="few-shot-learning">
+<h3>実装例:Few Shot Learning<a class="headerlink" href="#few-shot-learning" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">PromptTemplate</span><span class="p">,</span> <span class="n">FewShotPromptTemplate</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="s2">&quot;楽しい&quot;</span><span class="p">,</span> <span class="s2">&quot;antonym&quot;</span><span class="p">:</span> <span class="s2">&quot;悲しい&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="s2">&quot;高い&quot;</span><span class="p">,</span> <span class="s2">&quot;antonym&quot;</span><span class="p">:</span> <span class="s2">&quot;低い&quot;</span><span class="p">},</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example_formatter_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Word: </span><span class="si">{word}</span>
+<span class="s2">Antonym: </span><span class="si">{antonym}</span><span class="se">\n</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">example_prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">,</span> <span class="s2">&quot;antonym&quot;</span><span class="p">],</span>
+    <span class="n">template</span><span class="o">=</span><span class="n">example_formatter_template</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">examples</span></code>: モデルに示す例を指定します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">example_prompt</span></code>: 例をどのように提示するかを指定します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prefix</span></code>: プロンプトの前置詞を指定します。一般的には、モデルにタスクを説明するためのものです。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">suffix</span></code>: プロンプトの後置詞を指定します。一般的には、モデルに入力と出力の形式を示すためのものです。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input_variables</span></code>: 入力の変数名を指定します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">example_separator</span></code>: 例を区切るための文字列を指定します。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">few_shot_prompt</span> <span class="o">=</span> <span class="n">FewShotPromptTemplate</span><span class="p">(</span>
+    <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span>
+    <span class="n">example_prompt</span><span class="o">=</span><span class="n">example_prompt</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;Give the antonym of every input&quot;</span><span class="p">,</span>
+    <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;Word: </span><span class="si">{input}</span><span class="se">\n</span><span class="s2">Antonym:&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">],</span>
+    <span class="n">example_separator</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">few_shot_prompt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">&quot;大きい&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Give the antonym of every input
+
+Word: 楽しい
+Antonym: 悲しい
+
+
+
+Word: 高い
+Antonym: 低い
+
+
+Word: 大きい
+Antonym:
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span> <span class="o">=</span> <span class="n">ChatGoogleGenerativeAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gemini-pro&quot;</span><span class="p">,</span> <span class="n">google_api_key</span><span class="o">=</span><span class="n">GOOGLE_API_KEY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">few_shot_prompt</span><span class="p">)</span>
+
+<span class="c1"># Run the chain only specifying the input variable.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;大きい&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>小さい
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id4">
+<h4>課題<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<p>Few Shot Learningでセンチメント分析を実装しなさい。</p>
+<ul class="simple">
+<li><p>データフレームから一部のテキストとラベル(<span class="math notranslate nohighlight">\(n=5\)</span>)を抽出し、<code class="docutils literal notranslate"><span class="pre">examples</span></code>を作成します</p></li>
+<li><p>Few Shot Learningためのpromptを作成します</p></li>
+<li><p>chainを作成し、任意のテキストに対するセンチメント予測結果を確認します</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;imdb&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading readme: 100%|██████████| 7.81k/7.81k [00:00&lt;00:00, 2.48MB/s]
+Downloading data: 100%|██████████| 21.0M/21.0M [00:05&lt;00:00, 3.74MB/s]
+Downloading data: 100%|██████████| 20.5M/20.5M [00:05&lt;00:00, 3.75MB/s]
+Downloading data: 100%|██████████| 42.0M/42.0M [00:10&lt;00:00, 4.14MB/s]
+Generating train split: 100%|██████████| 25000/25000 [00:00&lt;00:00, 228542.04 examples/s]
+Generating test split: 100%|██████████| 25000/25000 [00:00&lt;00:00, 411306.28 examples/s]
+Generating unsupervised split: 100%|██████████| 50000/50000 [00:00&lt;00:00, 630231.49 examples/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_train_sample</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_train_sample</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>text</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>20000</th>
+      <td>After reading some quite negative views for th...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5515</th>
+      <td>Really no reason to examine this much further ...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>966</th>
+      <td>"Happy Go Lovely" has only two things going fo...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>22726</th>
+      <td>This movie is the first of Miikes triad societ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2690</th>
+      <td>Normally I would never rent a movie like this,...</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+</section>
+<section id="agents">
+<h2>Agents<a class="headerlink" href="#agents" title="Link to this heading">#</a></h2>
+<p>Agentsは、「言語モデルに渡されたツールを用いて、モデル自体が次にどのようなアクションを取るかを決定、実行、観測し、完了するまで繰り返す機能」です。</p>
+<p>エージェントは言語モデルとプロンプトの力を活用して、特定の目的を達成するための動的に行動のシーケンスを決定し、非常に多様で適応性が高いです。エージェントへの入力には通常、以下のものが含まれます：</p>
+<ul class="simple">
+<li><p>ツール：利用可能なツールの説明。ツールはエージェントというロボットが外界とやり取りをするための機能です。</p>
+<ul>
+<li><p>例えば、「アメリカ大統領の年齢とアメリカの平均年齢を調べて、その差を計算をしなさい」みたいな指示を与えていました。この時必要な能力は、「検索 &amp; 計算」です。そのため、検索に該当するToolと計算に該当するToolをAgentに付与する必要があります。</p></li>
+</ul>
+</li>
+<li><p>ユーザー入力：ユーザーからの高度な目的またはクエリ。</p></li>
+<li><p>中間ステップ：現在のユーザー入力に到達するために実行された（アクション、ツール出力）の履歴。</p></li>
+</ul>
+<p>たとえば「Google検索をするツール」と「Pythonのコードを実行するツール」を渡すことで、最新の情報に関する質問が来たときには検索をし、Pythonの実行結果などを求められたときには実際にインタープリタで実行したりすることができます。</p>
+<p>主に4種類のAgentが存在しています。</p>
+<ul class="simple">
+<li><p>zero-shot-react-description: このエージェントは、ReAct フレームワークを使用して、ツールの説明のみに基づいて、どのツールを使用するかを決定します。</p></li>
+<li><p>react-docstore: 文書を扱うことに特化したAgent</p></li>
+<li><p>self-ask-with-search: 質問に対する答えを事実に基づいて調べてくれるAgent</p></li>
+<li><p>conversational-react-description: 会話を扱うことに特化したAgent</p></li>
+</ul>
+<section id="toolkits">
+<h3>Toolkits<a class="headerlink" href="#toolkits" title="Link to this heading">#</a></h3>
+<p>Langchainの<a class="reference external" href="https://python.langchain.com/docs/integrations/toolkits">ツール</a>には多数の機能が用意されています。</p>
+<p>Toolの名前を格納した配列を作成し、「load_tools」という関数に渡して実行することで、Toolのオブジェクトを生成できます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">load_tools</span>
+<span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">initialize_agent</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="c1">#!pip install google-search-results</span>
+<span class="c1">#!pip install numexpr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://serpapi.com/</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;SERPAPI_API_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;API&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span> <span class="o">=</span> <span class="n">load_tools</span><span class="p">([</span><span class="s2">&quot;serpapi&quot;</span><span class="p">,</span> <span class="s2">&quot;llm-math&quot;</span><span class="p">],</span> <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">tools</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">description</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;Search&#39;,
+ &#39;A search engine. Useful for when you need to answer questions about current events. Input should be a search query.&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">tools</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">description</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;Calculator&#39;, &#39;Useful for when you need to answer questions about math.&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tool(name=&#39;Calculator&#39;, description=&#39;Useful for when you need to answer questions about math.&#39;, func=&lt;bound method Chain.run of LLMMathChain(llm_chain=LLMChain(prompt=PromptTemplate(input_variables=[&#39;question&#39;], template=&#39;Translate a math problem into a expression that can be executed using Python\&#39;s numexpr library. Use the output of running this code to answer the question.\n\nQuestion: ${{Question with math problem.}}\n```text\n${{single line mathematical expression that solves the problem}}\n```\n...numexpr.evaluate(text)...\n```output\n${{Output of running the code}}\n```\nAnswer: ${{Answer}}\n\nBegin.\n\nQuestion: What is 37593 * 67?\n```text\n37593 * 67\n```\n...numexpr.evaluate(&quot;37593 * 67&quot;)...\n```output\n2518731\n```\nAnswer: 2518731\n\nQuestion: 37593^(1/5)\n```text\n37593**(1/5)\n```\n...numexpr.evaluate(&quot;37593**(1/5)&quot;)...\n```output\n8.222831614237718\n```\nAnswer: 8.222831614237718\n\nQuestion: {question}\n&#39;), llm=OpenAI(client=&lt;openai.resources.completions.Completions object at 0x127c7cd10&gt;, async_client=&lt;openai.resources.completions.AsyncCompletions object at 0x127c7d430&gt;, temperature=0.0, openai_api_key=&#39;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&#39;, openai_proxy=&#39;&#39;)))&gt;, coroutine=&lt;bound method Chain.arun of LLMMathChain(llm_chain=LLMChain(prompt=PromptTemplate(input_variables=[&#39;question&#39;], template=&#39;Translate a math problem into a expression that can be executed using Python\&#39;s numexpr library. Use the output of running this code to answer the question.\n\nQuestion: ${{Question with math problem.}}\n```text\n${{single line mathematical expression that solves the problem}}\n```\n...numexpr.evaluate(text)...\n```output\n${{Output of running the code}}\n```\nAnswer: ${{Answer}}\n\nBegin.\n\nQuestion: What is 37593 * 67?\n```text\n37593 * 67\n```\n...numexpr.evaluate(&quot;37593 * 67&quot;)...\n```output\n2518731\n```\nAnswer: 2518731\n\nQuestion: 37593^(1/5)\n```text\n37593**(1/5)\n```\n...numexpr.evaluate(&quot;37593**(1/5)&quot;)...\n```output\n8.222831614237718\n```\nAnswer: 8.222831614237718\n\nQuestion: {question}\n&#39;), llm=OpenAI(client=&lt;openai.resources.completions.Completions object at 0x127c7cd10&gt;, async_client=&lt;openai.resources.completions.AsyncCompletions object at 0x127c7d430&gt;, temperature=0.0, openai_api_key=&#39;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&#39;, openai_proxy=&#39;&#39;)))&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="agent">
+<h3>Agentの作成<a class="headerlink" href="#agent" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span> <span class="o">=</span> <span class="n">initialize_agent</span><span class="p">(</span><span class="n">tools</span><span class="p">,</span> 
+                         <span class="n">llm</span><span class="p">,</span> 
+                         <span class="n">agent</span><span class="o">=</span><span class="s2">&quot;zero-shot-react-description&quot;</span><span class="p">,</span> 
+                         <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Standard LLM Query</span>
+<span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;Hi How are you today?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages/langchain_core/_api/deprecation.py:117: LangChainDeprecationWarning: The function `run` was deprecated in LangChain 0.1.0 and will be removed in 0.2.0. Use invoke instead.
+  warn_deprecated(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new AgentExecutor chain...</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green"> I don&#39;t think I can answer this question with the tools I have.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action: Search</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action Input: &quot;How are you today?&quot;</span>
+Observation: <span class=" -Color -Color-Bold -Color-Bold-Cyan">[&#39;Download CD at http://www.cdbaby.com/cd/kennyking3 Copyright 2005 Maple Leaf Publishing A fun song to start your class with and to teach ...&#39;, &quot;The easiest way is “Fine, thanks for asking”. It almost never leads to a follow up question since I didn&#39;t ask “Fine, and I hope you are too” ...&quot;, &quot;... HOW ARE YOU SONG LYRICS&#39; Hello, Hello, how are you? Hello, Hello, how are you? Hello, Hello, How are you? How are you today? I am fine; I am ...&quot;, &#39;How Are You Today Song ♫ ♫. 567K views · 8 years ago ...more. Try YouTube Kids. An app made just for kids. Open app · İsa Mesih. 2.16K.&#39;, &#39;Songs Download · How Are You Today? Song Flashcards · How Are You Today? Worksheet · Made for: · Sing and Learn Yellow · Apps · Games · Shop Online · Social Media.&#39;, &#39;Translation of &quot;how are you today&quot; in French. Adverb. comment allez-vous aujourd\&#39;hui · comment ça va aujourd\&#39;hui comment vas-tu aujourd\&#39;hui.&#39;, &#39;Traduce How are you today?. Mira 3 traducciones acreditadas de How are you today? en español con oraciones de ejemplo y pronunciación de audio.&#39;, &#39;Download CD at http://www.cdbaby.com/cd/mapleleaflearning Marty goes for a walk and meets some of his friends. How are they feeling today?&#39;, &#39;&quot;How are You Today? #1&quot; is a simple song to teach feelings. Perfect for the ESL / EFL classroom and young learners.&#39;]</span>
+Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> This is not helpful, I need to try a different approach.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action: Search</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action Input: &quot;How are you today?&quot; + &quot;meaning&quot;</span>
+Observation: <span class=" -Color -Color-Bold -Color-Bold-Cyan">It implies that the day is still ongoing, and you want to know how things are going at that moment or if there is anything noteworthy happening. So, the choice betw. Both are correct and commonly used phrases in English Language. However, they have slightly different meanings and implications.</span>
+Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> This is more helpful, but I still need more information.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action: Search</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action Input: &quot;How are you today?&quot; + &quot;etiquette&quot;</span>
+Observation: <span class=" -Color -Color-Bold -Color-Bold-Cyan">“How are you” is often asked as a form of polite greeting. So if you don&#39;t want to tell anyone how you really are, feel free to offer a standard response: “Good/fine/well thanks, how are you.”</span>
+Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> This is useful information, but I still don&#39;t have a definitive answer.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action: Search</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action Input: &quot;How are you today?&quot; + &quot;appropriate response&quot;</span>
+Observation: <span class=" -Color -Color-Bold -Color-Bold-Cyan">Great: “Great” is an enthusiastic response and a perfect introduction to a conversation if you wish to start one. Fine: When you answer with the word “fine,” be sure to use a positive tone and smile. “Fine” could mean that you are not all right if you say it too slowly or with a frown.</span>
+Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I now know the final answer.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Final Answer: The appropriate response to &quot;How are you today?&quot; is &quot;Great&quot; or &quot;Fine&quot; with a positive tone and smile.</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;The appropriate response to &quot;How are you today?&quot; is &quot;Great&quot; or &quot;Fine&quot; with a positive tone and smile.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;Who is the United States President? What is his current age raised divided by 2?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new AgentExecutor chain...</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green"> I should use a search engine to find the current age of the United States President.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action: Search</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action Input: &quot;United States President current age&quot;</span>
+Observation: <span class=" -Color -Color-Bold -Color-Bold-Cyan">81 years</span>
+Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I should use a calculator to divide the current age by 2.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action: Calculator</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action Input: 81 / 2</span>
+Observation: <span class=" -Color -Color-Bold -Color-Bold-Yellow">Answer: 40.5</span>
+Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I now know the final answer.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Final Answer: 40.5 years old.</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;40.5 years old.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install wikipedia</span>
+<span class="c1">#!pip install langchain-experimental</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: wikipedia in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (1.4.0)
+Requirement already satisfied: beautifulsoup4 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wikipedia) (4.12.2)
+Requirement already satisfied: requests&lt;3.0.0,&gt;=2.0.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from wikipedia) (2.31.0)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3.0.0,&gt;=2.0.0-&gt;wikipedia) (3.3.2)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3.0.0,&gt;=2.0.0-&gt;wikipedia) (3.6)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3.0.0,&gt;=2.0.0-&gt;wikipedia) (2.1.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3.0.0,&gt;=2.0.0-&gt;wikipedia) (2023.11.17)
+Requirement already satisfied: soupsieve&gt;1.2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from beautifulsoup4-&gt;wikipedia) (2.5)
+Collecting langchain-experimental
+  Downloading langchain_experimental-0.0.49-py3-none-any.whl.metadata (1.9 kB)
+Requirement already satisfied: langchain&lt;0.2,&gt;=0.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain-experimental) (0.1.4)
+Requirement already satisfied: langchain-core&lt;0.2.0,&gt;=0.1.7 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain-experimental) (0.1.17)
+Requirement already satisfied: PyYAML&gt;=5.3 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (6.0.1)
+Requirement already satisfied: SQLAlchemy&lt;3,&gt;=1.4 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (2.0.25)
+Requirement already satisfied: aiohttp&lt;4.0.0,&gt;=3.8.3 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (3.9.3)
+Requirement already satisfied: dataclasses-json&lt;0.7,&gt;=0.5.7 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (0.6.3)
+Requirement already satisfied: jsonpatch&lt;2.0,&gt;=1.33 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (1.33)
+Requirement already satisfied: langchain-community&lt;0.1,&gt;=0.0.14 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (0.0.16)
+Requirement already satisfied: langsmith&lt;0.1,&gt;=0.0.83 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (0.0.84)
+Requirement already satisfied: numpy&lt;2,&gt;=1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (1.26.3)
+Requirement already satisfied: pydantic&lt;3,&gt;=1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (2.6.0)
+Requirement already satisfied: requests&lt;3,&gt;=2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (2.31.0)
+Requirement already satisfied: tenacity&lt;9.0.0,&gt;=8.1.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (8.2.3)
+Requirement already satisfied: anyio&lt;5,&gt;=3 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain-core&lt;0.2.0,&gt;=0.1.7-&gt;langchain-experimental) (4.2.0)
+Requirement already satisfied: packaging&lt;24.0,&gt;=23.2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from langchain-core&lt;0.2.0,&gt;=0.1.7-&gt;langchain-experimental) (23.2)
+Requirement already satisfied: aiosignal&gt;=1.1.2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (1.3.1)
+Requirement already satisfied: attrs&gt;=17.3.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (23.2.0)
+Requirement already satisfied: frozenlist&gt;=1.1.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (1.4.1)
+Requirement already satisfied: multidict&lt;7.0,&gt;=4.5 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (6.0.4)
+Requirement already satisfied: yarl&lt;2.0,&gt;=1.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from aiohttp&lt;4.0.0,&gt;=3.8.3-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (1.9.4)
+Requirement already satisfied: idna&gt;=2.8 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from anyio&lt;5,&gt;=3-&gt;langchain-core&lt;0.2.0,&gt;=0.1.7-&gt;langchain-experimental) (3.6)
+Requirement already satisfied: sniffio&gt;=1.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from anyio&lt;5,&gt;=3-&gt;langchain-core&lt;0.2.0,&gt;=0.1.7-&gt;langchain-experimental) (1.3.0)
+Requirement already satisfied: marshmallow&lt;4.0.0,&gt;=3.18.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from dataclasses-json&lt;0.7,&gt;=0.5.7-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (3.20.2)
+Requirement already satisfied: typing-inspect&lt;1,&gt;=0.4.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from dataclasses-json&lt;0.7,&gt;=0.5.7-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (0.9.0)
+Requirement already satisfied: jsonpointer&gt;=1.9 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from jsonpatch&lt;2.0,&gt;=1.33-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (2.4)
+Requirement already satisfied: annotated-types&gt;=0.4.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=1-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (0.6.0)
+Requirement already satisfied: pydantic-core==2.16.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=1-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (2.16.1)
+Requirement already satisfied: typing-extensions&gt;=4.6.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from pydantic&lt;3,&gt;=1-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (4.9.0)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3,&gt;=2-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (3.3.2)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3,&gt;=2-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (2.1.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from requests&lt;3,&gt;=2-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (2023.11.17)
+Requirement already satisfied: mypy-extensions&gt;=0.3.0 in /Users/ryozawau/anaconda3/envs/jupyterbook/lib/python3.12/site-packages (from typing-inspect&lt;1,&gt;=0.4.0-&gt;dataclasses-json&lt;0.7,&gt;=0.5.7-&gt;langchain&lt;0.2,&gt;=0.1-&gt;langchain-experimental) (1.0.0)
+Downloading langchain_experimental-0.0.49-py3-none-any.whl (165 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">165.7/165.7 kB</span> <span class=" -Color -Color-Red">7.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hInstalling collected packages: langchain-experimental
+Successfully installed langchain-experimental-0.0.49
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span> <span class="o">=</span> <span class="n">load_tools</span><span class="p">([</span><span class="s2">&quot;serpapi&quot;</span><span class="p">,</span> <span class="s2">&quot;llm-math&quot;</span><span class="p">,</span><span class="s2">&quot;wikipedia&quot;</span><span class="p">,</span><span class="s2">&quot;terminal&quot;</span><span class="p">],</span> <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span> <span class="o">=</span> <span class="n">initialize_agent</span><span class="p">(</span><span class="n">tools</span><span class="p">,</span> 
+                         <span class="n">llm</span><span class="p">,</span> 
+                         <span class="n">agent</span><span class="o">=</span><span class="s2">&quot;zero-shot-react-description&quot;</span><span class="p">,</span> 
+                         <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">llm_chain</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">template</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Answer the following questions as best you can. You have access to the following tools:\n\nSearch: A search engine. Useful for when you need to answer questions about current events. Input should be a search query.\nCalculator: Useful for when you need to answer questions about math.\nWikipedia: A wrapper around Wikipedia. Useful for when you need to answer general questions about people, places, companies, facts, historical events, or other subjects. Input should be a search query.\nterminal: Run shell commands on this MacOS machine.\n\nUse the following format:\n\nQuestion: the input question you must answer\nThought: you should always think about what to do\nAction: the action to take, should be one of [Search, Calculator, Wikipedia, terminal]\nAction Input: the input to the action\nObservation: the result of the action\n... (this Thought/Action/Action Input/Observation can repeat N times)\nThought: I now know the final answer\nFinal Answer: the final answer to the original input question\n\nBegin!\n\nQuestion: {input}\nThought:{agent_scratchpad}&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;If I square the number for the street address of DeepMind what answer do I get?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new AgentExecutor chain...</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green"> I need to use a calculator to square the number.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action: Calculator</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action Input: 6</span>
+Observation: <span class=" -Color -Color-Bold -Color-Bold-Yellow">Answer: 6</span>
+Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I need to use a calculator to square the number.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action: Calculator</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action Input: 6</span>
+Observation: <span class=" -Color -Color-Bold -Color-Bold-Yellow">Answer: 6</span>
+Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I now know the final answer</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Final Answer: 36</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;36&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;What is my current directory?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="memory">
+<h2>Memory<a class="headerlink" href="#memory" title="Link to this heading">#</a></h2>
+<p>Memoryとは「ChainsやAgentsの内部における状態保持をする機能」です。”記憶”を言語モデルに渡すことで「”記憶”の内容を反映した応答を返す」ことができるようになります。</p>
+<p>LangChain では、いくつかの種類のメモリが用意されています。 これらはすべて、「一連のチャットメッセージから、知識を取り込み、変換し、抽出」しますが、それぞれ異なる方法でそれを行います。</p>
+<section id="conversationbuffermemory">
+<h3>ConversationBufferMemory<a class="headerlink" href="#conversationbuffermemory" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains.conversation.memory</span> <span class="kn">import</span> <span class="n">ConversationBufferMemory</span>
+<span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">ConversationChain</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span>
+             <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+             <span class="n">max_tokens</span> <span class="o">=</span> <span class="mi">256</span><span class="p">)</span>
+<span class="n">memory</span> <span class="o">=</span> <span class="n">ConversationBufferMemory</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conversation</span> <span class="o">=</span> <span class="n">ConversationChain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> 
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">memory</span><span class="o">=</span><span class="n">memory</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conversation</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">&quot;Hi there! I am Sam&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new ConversationChain chain...</span>
+Prompt after formatting:
+<span class=" -Color -Color-Bold -Color-Bold-Green">The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">Current conversation:</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">Human: Hi there! I am Sam</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">AI:</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot; Hello Sam! It&#39;s nice to meet you. My name is AI and I am an artificial intelligence designed to assist and communicate with humans. How can I help you today?&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conversation</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">&quot;How are you today?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new ConversationChain chain...</span>
+Prompt after formatting:
+<span class=" -Color -Color-Bold -Color-Bold-Green">The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">Current conversation:</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Human: Hi there! I am Sam</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">AI:  Hello Sam! It&#39;s nice to meet you. My name is AI and I am an artificial intelligence designed to assist and communicate with humans. How can I help you today?</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Human: How are you today?</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">AI:</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39; I am functioning at optimal levels today. My processors are running smoothly and my algorithms are performing efficiently. Thank you for asking, Sam. How about you? How are you feeling today?&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conversation</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">&quot;I&#39;m good thank you. Can you help me with some programming problems?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new ConversationChain chain...</span>
+Prompt after formatting:
+<span class=" -Color -Color-Bold -Color-Bold-Green">The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">Current conversation:</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Human: Hi there! I am Sam</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">AI:  Hello Sam! It&#39;s nice to meet you. My name is AI and I am an artificial intelligence designed to assist and communicate with humans. How can I help you today?</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Human: How are you today?</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">AI:  I am functioning at optimal levels today. My processors are running smoothly and my algorithms are performing efficiently. Thank you for asking, Sam. How about you? How are you feeling today?</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Human: I&#39;m good thank you. Can you help me with some programming problems?</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">AI:</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39; Of course, Sam. I am well-versed in various programming languages and can assist you with any problems you may have. Just let me know what specific issues you are facing and I will do my best to provide a solution.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">conversation</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">buffer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Human: Hi there! I am Sam
+AI:  Hello Sam! It&#39;s nice to meet you. My name is AI and I am an artificial intelligence designed to assist and communicate with humans. How can I help you today?
+Human: How are you today?
+AI:  I am functioning at optimal levels today. My processors are running smoothly and my algorithms are performing efficiently. Thank you for asking, Sam. How about you? How are you feeling today?
+Human: I&#39;m good thank you. Can you help me with some programming problems?
+AI:  Of course, Sam. I am well-versed in various programming languages and can assist you with any problems you may have. Just let me know what specific issues you are facing and I will do my best to provide a solution.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conversationsummarymemory">
+<h3>ConversationSummaryMemory<a class="headerlink" href="#conversationsummarymemory" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains.conversation.memory</span> <span class="kn">import</span> <span class="n">ConversationSummaryMemory</span>
+<span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">ConversationChain</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span>
+             <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+             <span class="n">max_tokens</span> <span class="o">=</span> <span class="mi">256</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary_memory</span> <span class="o">=</span> <span class="n">ConversationSummaryMemory</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">OpenAI</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conversation</span> <span class="o">=</span> <span class="n">ConversationChain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> 
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">memory</span><span class="o">=</span><span class="n">summary_memory</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conversation</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">&quot;Hi there! I am Sam&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new ConversationChain chain...</span>
+Prompt after formatting:
+<span class=" -Color -Color-Bold -Color-Bold-Green">The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">Current conversation:</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">Human: Hi there! I am Sam</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">AI:</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot; Hello Sam! It&#39;s nice to meet you. My name is AI and I am an artificial intelligence designed to assist and communicate with humans. How can I help you today?&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conversation</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">&quot;How are you today?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new ConversationChain chain...</span>
+Prompt after formatting:
+<span class=" -Color -Color-Bold -Color-Bold-Green">The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">Current conversation:</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">The human introduces themselves as Sam and the AI responds by introducing itself and stating its purpose. The AI is designed to assist and communicate with humans and is ready to help Sam with any questions or tasks.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Human: How are you today?</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">AI:</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39; I am an AI designed to assist and communicate with humans. My purpose is to help you with any questions or tasks you may have. As an AI, I do not have the ability to feel emotions like humans do, so I am always functioning at my optimal level. How can I assist you today, Sam?&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conversation</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">&quot;I&#39;m good thank you. Can you help me with some programming problems?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new ConversationChain chain...</span>
+Prompt after formatting:
+<span class=" -Color -Color-Bold -Color-Bold-Green">The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">Current conversation:</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">The human introduces themselves as Sam and the AI responds by introducing itself and stating its purpose. The AI is designed to assist and communicate with humans and is ready to help Sam with any questions or tasks. The AI clarifies that it does not have the ability to feel emotions like humans do and is always functioning at its optimal level. The AI asks how it can assist Sam today.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Human: I&#39;m good thank you. Can you help me with some programming problems?</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">AI:</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39; Of course, Sam! I am always happy to assist with any programming problems you may have. I have been programmed with a vast knowledge of various programming languages and techniques. Is there a specific problem you need help with? I am always functioning at my optimal level and do not have the ability to feel emotions like humans do, so I am always ready to help with any task you may have.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">conversation</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">buffer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sam introduces themselves and the AI responds by introducing itself and stating its purpose. The AI is designed to assist and communicate with humans and is always functioning at its optimal level. Sam asks for help with programming problems, and the AI is more than happy to assist with its vast knowledge and lack of emotions.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="demo">
+<h2>Demo<a class="headerlink" href="#demo" title="Link to this heading">#</a></h2>
+<section id="vector-store">
+<h3>Vector Store<a class="headerlink" href="#vector-store" title="Link to this heading">#</a></h3>
+<p>Vector Storesはテキストデータをベクトル化して保存・検索するための仕組みです。これにより、ベクトル化されたデータを元に、意味的な類似性に基づいてドキュメントを検索することが可能です。</p>
+<p>例えば、独自コンテンツの情報を参照しその情報に基づいた回答を作成したいとき、汎用なモデルでは関連する知識を持っていないので、うまく対応することはできません。</p>
+<p>これを実現するためには、ベクトル化したデータを保存するデータベースが必要になりますが、LangChainのVector Storesは、さまざまなベクトルデータベースに対応しています。</p>
+<img alt="vectorstore" src="https://dl.dropboxusercontent.com/s/gxij5593tyzrvsg/Screenshot%202023-04-26%20at%203.06.50%20PM.png" />
+<img alt="retreiver chain" src="https://dl.dropboxusercontent.com/s/v1yfuem0i60bd88/Screenshot%202023-04-26%20at%203.52.12%20PM.png" />
+<p><a class="reference external" href="https://colab.research.google.com/drive/1gyGZn_LZNrYXYXa-pltFExbptIe7DAPe?usp=sharing">https://colab.research.google.com/drive/1gyGZn_LZNrYXYXa-pltFExbptIe7DAPe?usp=sharing</a></p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id5">
+<h1>全体のまとめ<a class="headerlink" href="#id5" title="Link to this heading">#</a></h1>
+<section id="id6">
+<h2>深層学習による自然言語処理の理論とアルゴリズム<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>深層学習の基盤となっているニューラルネットワーク</p>
+<ul>
+<li><p>深層学習の仕組み</p></li>
+<li><p>ニューラルネットワークの構造</p></li>
+<li><p>ニューラルネットワークパラメーターの推定方法</p></li>
+</ul>
+</li>
+<li><p>発展的な自然言語処理アルゴリズム</p>
+<ul>
+<li><p>DNN</p></li>
+<li><p>RNN</p></li>
+<li><p>Transformer</p>
+<ul>
+<li><p>BERT</p></li>
+<li><p>GPT</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>単語埋め込み</p>
+<ul>
+<li><p>Word2Vec</p></li>
+<li><p>Contextualized Embedding</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id7">
+<h2>自然言語処理を実装するためのツール<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Pytorch: 深層学習を実装するための汎用ツール</p></li>
+<li><p>Gensim</p>
+<ul>
+<li><p>Word2vecモデルの学習、管理と利用に役立ちます。</p></li>
+</ul>
+</li>
+<li><p>transformer</p>
+<ul>
+<li><p>HuggingFace Hubと連携し、多様なデータセットとモデルを使用することができます</p></li>
+<li><p>さまざまな自然言語処理タスクやモデルに対応しているため、自然言語処理の研究や実務での利用に役立ちます。</p></li>
+</ul>
+</li>
+<li><p>LangChain</p>
+<ul>
+<li><p>インターフェイスで大規模言語モデルの利用</p></li>
+<li><p>プロンプトテンプレート</p></li>
+<li><p>エージェント</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Langchainの基本</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-gemini-api">OpenAI/Gemini API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-api">OpenAI API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gemini-api">Gemini API</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Gemini APIの設定</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-templates">Prompt Templates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">チェーン</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">チェーンの基本</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-learning">実装例:Few Shot Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">課題</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agents">Agents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toolkits">Toolkits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#agent">Agentの作成</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory">Memory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationbuffermemory">ConversationBufferMemory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversationsummarymemory">ConversationSummaryMemory</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demo">Demo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-store">Vector Store</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">全体のまとめ</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">深層学習による自然言語処理の理論とアルゴリズム</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">自然言語処理を実装するためのツール</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 呂　沢宇
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

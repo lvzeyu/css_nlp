@@ -1,0 +1,1142 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>数学基礎 &#8212; 計算社会科学のための自然言語処理</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook/math_basis2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ニューラルネットワーク" href="NN2.html" />
+    <link rel="prev" title="機械学習の基本概念" href="ml_basis2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-light" alt="計算社会科学のための自然言語処理 - Home"/>
+    <script>document.write(`<img src="../_static/tohoku-university-logo-vector.svg" class="logo__image only-dark" alt="計算社会科学のための自然言語処理 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    計算社会科学と自然言語処理
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">イントロダクション</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">ガイダンス</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">基礎知識</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="nlp_basis2.html">自然言語処理の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml_basis2.html">機械学習の基本概念</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">数学基礎</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ニューラルネットワーク</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="NN.html">ニューラルネットワーク</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backpropagation.html">誤差逆伝播法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PyTorch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pytorch.html">Pytorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">単語分散表現</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="word2vec_1.html">単語分散表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_2_embedding.html">word2vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_gensim.html">GensimによるWord2Vecの学習と使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_sentiment.html">Word2Vecを用いるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="word2vec_application.html">Word2Vecが人文・社会科学研究における応用</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RNN</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">RNNの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">LSTM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_lstm.html">LSTMの実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm_classification.html">LSTMによる文書分類</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seq2seq.html">Seq2seq</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transformer</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="attention.html">Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="self-attention.html">Self-Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformer.html">Transformerアーキテクチャ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BERT.html">BERT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_sentiment.html">BERTによるセンチメント分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bert_topic.html">BERTopic</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">大規模言語モデル</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="GPT.html">GPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm.html">大規模言語モデル</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp/blob/master/notebook/math_basis2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/lvzeyu/css_nlp/issues/new?title=Issue%20on%20page%20%2Fnotebook/math_basis2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebook/math_basis2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>数学基礎</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">微分</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">微分の概念</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonによる微分計算</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">微分の公式</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">合成関数の微分</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">偏微分</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">線型代数</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">ベクトル</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">ベクトルとは</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">ベクトルの数学演算</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">行列</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">行列とは</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">行列積</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">転置</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">ベクトルによる微分と勾配</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>数学基礎<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>本講義は、深層学習(主にニューラルネットワーク)について解説します。ここでは、ニューラルネットワークの理解に必要な数学の基本知識をおさらいします。</p>
+<section id="id2">
+<h2>微分<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>微分の概念<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>微分とは、結論から言うと、変数の微小な変化に対応する、関数の変化量を求めることです。</p>
+<p>微分を用いると接線の傾きを計算することができます。このことから、微分が関数の最小化問題に有用なツールであることがわかります。</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span>から<span class="math notranslate nohighlight">\(ℎ\)</span>だけ離れた点<span class="math notranslate nohighlight">\(𝑥+ℎ\)</span>を考え, 2点を通る直線の傾きを求めることができます。</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+a= \frac{f(x + h) - f(x)}{(x+h)-x}
+\]</div>
+<ul class="simple">
+<li><p>次に<span class="math notranslate nohighlight">\(h\)</span>を<span class="math notranslate nohighlight">\(h \rightarrow 0\)</span>のように小さくしていけば、直線の開始点と終了点の2点が1点に収束し、1点での接線として考えることができます。このように、平均変化率の極限値が存在するならば、微分可能であると言います。この式を<span class="math notranslate nohighlight">\(f\)</span>の導関数 (derivative)と呼び、<span class="math notranslate nohighlight">\(f'(x)\)</span>と書きます。関数<span class="math notranslate nohighlight">\(f(x)\)</span>の微分係数<span class="math notranslate nohighlight">\(f'(a)\)</span>はその曲線の点<span class="math notranslate nohighlight">\((a,f(a))\)</span>(接点)における接線の傾きです。</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f'(x)= \lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}
+\]</div>
+<p><img alt="" src="../_images/derivative.png" /></p>
+<ul class="simple">
+<li><p>導関数を求めることを微分(differentiation)するといいます。 記号の使い方として、<span class="math notranslate nohighlight">\(f'(x)\)</span>を<span class="math notranslate nohighlight">\(\frac{df}{dx} (x)\)</span> または <span class="math notranslate nohighlight">\( \frac{d}{dx}f (x)\)</span>と書きます。</p></li>
+</ul>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>関数 <span class="math notranslate nohighlight">\(f(x)\)</span> について、変数 <span class="math notranslate nohighlight">\(x\)</span>をある値 <span class="math notranslate nohighlight">\(a\)</span> に限りなく近づけるとき、どのような近づけ方に対しても関数 <span class="math notranslate nohighlight">\(f(x)\)</span>　の値が一定値<span class="math notranslate nohighlight">\(A\)</span>に限りなく近づくならば、<span class="math notranslate nohighlight">\(x\)</span>が<span class="math notranslate nohighlight">\(a\)</span>に近づくとき<span class="math notranslate nohighlight">\(f(x)\)</span>は値<span class="math notranslate nohighlight">\(A\)</span>に収束といい、<span class="math notranslate nohighlight">\(A\)</span>を極限値と言います。</p>
+</aside>
+</section>
+<section id="python">
+<h3>Pythonによる微分計算<a class="headerlink" href="#python" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Pythonで分の近似計算関数を実装することができます</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 微分の近似計算の精度と計算の安定性のバランスをとるために、中心差分法といった関数の前後の点を使用して計算する方法を用いる</span>
+<span class="k">def</span> <span class="nf">numerical_diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">1e-4</span> <span class="c1"># 微小な変化量: 0.0001</span>
+    <span class="n">nd</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">function_1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">numerical_diff</span><span class="p">(</span><span class="n">function_1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="c1"># 25.0 に近い値が期待される</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.000000010031442
+</pre></div>
+</div>
+</div>
+</div>
+<p>PyTorchでは、微分を計算するために自動微分機能を利用することができます。</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><a class="reference external" href="https://pytorch.org/">PyTorch</a>はPythonのオープンソースの機械学習・深層学習ライブラリです。</p>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="c1"># 入力値をテンソルとして作成し、勾配計算を有効にする</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 関数の出力を計算</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">function_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># 勾配を計算</span>
+<span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+<span class="c1"># 勾配を表示</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>微分の公式<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>覚えておくと便利な微分の公式がありますので，以下に幾つか紹介していきます。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}\begin{align}
+\left( c\right) ^{'}&amp;=0 \\
+\left( x\right)^{'}&amp;=1\\
+\left( cf(x) \right)^{'} &amp;= c f'(x) \\
+\left( x^{n} \right)^{'} &amp;=nx^{n-1} \\
+\left( f(x) + g(x) \right) ^{'} &amp;=f^{'}(x)+g^{'}(x) \\
+\left( f(x) g(x) \right) ^{'} &amp;= f^{'}(x)g(x) + f(x)g^{'}(x) \\
+\left( f(g(x)) \right) ^{'} &amp;= \frac{df(u)}{du}\frac{du}{dx} = f^{'}(g(x)) \cdot g^{'}(x) \\
+\end{align}\end{split}\end{split}\]</div>
+</section>
+<section id="id5">
+<h3>合成関数の微分<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(𝑦=𝑓(𝑥)\)</span>と <span class="math notranslate nohighlight">\(𝑧=𝑔(𝑦)\)</span>の合成関数とは、<span class="math notranslate nohighlight">\(𝑓\)</span>を適用したあとに<span class="math notranslate nohighlight">\(𝑔\)</span>を適用する関数、すなわち <span class="math notranslate nohighlight">\(𝑧=𝑔(𝑓(𝑥))\)</span>のことを指します。</p>
+<p><strong><u>合成関数の導関数がそれぞれの導関数の積で与えられる性質は連鎖律（chain rule）と言います。</strong></u></p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d}{dx} f(g(x)) = \frac{df(u)}{du}\frac{du}{dx}
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>関数
+<span class="math notranslate nohighlight">\(y = \sin(3x^2 + 4x)\)</span>
+の微分を求めます。</p>
+<p>ここで、</p>
+<div class="math notranslate nohighlight">
+\[f(u) = \sin(u)\]</div>
+<div class="math notranslate nohighlight">
+\[g(x) = 3x^2 + 4x\]</div>
+<p>とし、<span class="math notranslate nohighlight">\(y\)</span> は <span class="math notranslate nohighlight">\(f\)</span> と <span class="math notranslate nohighlight">\(g\)</span> の合成関数、すなわち <span class="math notranslate nohighlight">\(y = f(g(x))\)</span> であると考えます。</p>
+<p>連鎖律を用いると:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy}{dx} = \frac{df}{du} \cdot \frac{du}{dx}
+\]</div>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(f'(u) = \cos(u)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(g'(x) = 6x + 4\)</span></p></li>
+</ol>
+<p>これらを連鎖律の式に代入すると:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy}{dx} = \cos(3x^2 + 4x) \cdot (6x + 4)
+\]</div>
+<p>したがって、</p>
+<div class="math notranslate nohighlight">
+\[
+y' =  \cos(3x^2 + 4x) \cdot (6x + 4)
+\]</div>
+<p>が得られます。</p>
+<p>このように、連鎖律を使用することで、合成関数の微分を計算することができます。</p>
+</div>
+</section>
+<section id="id6">
+<h3>偏微分<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>機械学習において、多くの場合、複数の入力変数 <span class="math notranslate nohighlight">\(𝑥_1,𝑥_2,…,𝑥_n\)</span>を用いて<span class="math notranslate nohighlight">\(𝑦\)</span>を予測する多変数関数が扱われます。</p>
+<p><strong><u>偏微分</strong></u>とは、<span class="math notranslate nohighlight">\(n\)</span>変数関数のある一つの変数以外の<span class="math notranslate nohighlight">\(n-1\)</span>個の変数の値を固定し、残りの<span class="math notranslate nohighlight">\(1\)</span>つの変数について関数を微分することです。</p>
+<p>例えば、ある入力 <span class="math notranslate nohighlight">\(𝑥_n\)</span>にのみ注目する偏微分は以下のように表します。</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial x_{n}} f(x_1, x_2, \dots, x_n)
+\]</div>
+<p>微分を意味する記号が、<span class="math notranslate nohighlight">\(𝑑\)</span>から<span class="math notranslate nohighlight">\(\partial\)</span>に変わっています。こうすると、<span class="math notranslate nohighlight">\(\frac{\partial}{\partial x_{n}}\)</span>は <span class="math notranslate nohighlight">\(x_n\)</span>以外を定数と考え、 <span class="math notranslate nohighlight">\(x_n\)</span>にのみ着目して微分を行うという意味となります。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}\begin{aligned}
+\frac{\partial}{\partial x_1}
+\left( 3x_1+4x_2 \right)
+&amp;= \frac{\partial}{\partial x_1}
+\left( 3x_1 \right) + \frac{\partial}{\partial x_1} \left( 4x_2 \right) \\
+&amp;= 3 \times \frac{\partial}{\partial x_1} \left( x_1 \right) + 4 \times \frac{\partial}{\partial x_1} x_2 \\
+&amp;= 3 \times 1 + 4 \times 0 \\
+&amp;= 3
+\end{aligned}\end{split}
+\end{split}\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">diff</span>
+<span class="c1">#plt.style.use(&#39;seaborn-poster&#39;) </span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
+
+<span class="c1"># 関数の定義</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># 偏微分の計算</span>
+<span class="n">partial_x</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">partial_y</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Partial Derivative with respect to x:&quot;</span><span class="p">,</span> <span class="n">partial_x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Partial Derivative with respect to y:&quot;</span><span class="p">,</span> <span class="n">partial_y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Partial Derivative with respect to x: 2*x
+Partial Derivative with respect to y: 2*y
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 可視化のためのデータ生成</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">Zx</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">X</span>
+<span class="n">Zy</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">Y</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># 関数の可視化</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Function: $f(x, y) = x^2 + y^2$&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;$f(x, y)$&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># xに関する偏微分</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Zx</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Partial Derivative: $\frac{\partial}{\partial x}$&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac{\partial f}{\partial x}$&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># yに関する偏微分</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Zy</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Partial Derivative: $\frac{\partial}{\partial y}$&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac{\partial f}{\partial y}$&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/09a808cdfb39a3e42fbfb8022f37afc8f7ddc067a289fc32712b960ea40f9d3a.png" src="../_images/09a808cdfb39a3e42fbfb8022f37afc8f7ddc067a289fc32712b960ea40f9d3a.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="id7">
+<h2>線型代数<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<section id="id8">
+<h3>ベクトル<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h4>ベクトルとは<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
+<p>ベクトル(vector)とは、大きさと向きを持つ量です。ベクトルは、数が一列に並んだ集まりとして表現できます。例えば、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}{\bf x}= \begin{bmatrix}
+x_{1} \\
+x_{2} \\
+x_{3}
+\end{bmatrix}, \
+{\bf y}=\begin{bmatrix}
+y_{1} \\
+y_{2} \\
+\vdots \\
+y_{N}
+\end{bmatrix}\end{split}
+\end{split}\]</div>
+<p>上の例のように、その要素を縦方向に並べたものは列ベクトルと呼びます。一方、</p>
+<div class="math notranslate nohighlight">
+\[
+{\bf z}=\begin{bmatrix}
+z_{1} &amp; z_{2} &amp; z_{3}
+\end{bmatrix}
+\]</div>
+<p>のように、要素を横方向に並べたものは行ベクトルと呼びます。</p>
+<p>一般的には、ベクトルを数式で書く際には, <span class="math notranslate nohighlight">\(\mathbf{W}\)</span>のように太字の記号で表現するか、<span class="math notranslate nohighlight">\(\vec{W}\)</span>のようにベクトルの上に矢印を付けてベクトルを示すことが多いです。</p>
+</section>
+<section id="id10">
+<h4>ベクトルの数学演算<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>加算（足し算）及び減算（引き算）は同じサイズのベクトル同士の間だけで成立します。</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}\begin{bmatrix}
+1 \\
+2 \\
+3
+\end{bmatrix}+\begin{bmatrix}
+4 \\
+5 \\
+6
+\end{bmatrix}=\begin{bmatrix}
+1 + 4 \\
+2 + 5 \\
+3 + 6
+\end{bmatrix}=\begin{bmatrix}
+5 \\
+7 \\
+9
+\end{bmatrix}\end{split}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>スカラ倍とはベクトルにスカラを掛ける演算です。</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+10
+\begin{bmatrix}
+1 \\
+2 \\
+3
+\end{bmatrix}=\begin{bmatrix}
+10 * 1 \\
+10 * 2 \\
+10 * 3
+\end{bmatrix}=\begin{bmatrix}
+10 \\
+20 \\
+30
+\end{bmatrix}\end{split}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>内積 (inner product) とは、同じサイズの2つのベクトルは、それぞれのベクトルの同じ位置に対応する要素同士を掛け、それらを足し合わせる計算です。<span class="math notranslate nohighlight">\(𝐱\)</span>と<span class="math notranslate nohighlight">\(𝐲\)</span>の内積は<span class="math notranslate nohighlight">\(𝐱\cdot𝐲\)</span>で表されます。</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}\begin{aligned}&amp; \begin{bmatrix}
+1 &amp; 2 &amp; 3
+\end{bmatrix} \cdot \begin{bmatrix}
+4 \\
+5 \\
+6
+ \end{bmatrix} = 1 \times 4 + 2 \times 5  + 3 \times 6 = 32 \end{aligned}\end{split}\end{split}\]</div>
+</section>
+</section>
+<section id="id11">
+<h3>行列<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<section id="id12">
+<h4>行列とは<a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
+<p>行列 (matrix) は同じサイズのベクトルを複数個並べたものです。例えば、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+{\bf X} =
+\begin{bmatrix}
+x_{11} &amp; x_{12} \\
+x_{21} &amp; x_{22} \\
+x_{31} &amp; x_{32}
+\end{bmatrix}
+\end{split}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{X}\)</span>は「 3 行 2 列の行列」になります。</p>
+</section>
+<section id="id13">
+<h4>行列積<a class="headerlink" href="#id13" title="Link to this heading">#</a></h4>
+<p>行列の乗算には、行列積、外積、要素積（アダマール積）など複数の方法があります。 ここではそのうち、機械学習の多くの問題で登場します行列積について説明します。</p>
+<p>行列<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>と行列<span class="math notranslate nohighlight">\(\mathbf{B}\)</span>の行列積は<span class="math notranslate nohighlight">\(\mathbf{AB}\)</span>と書き 、<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>の各行と<span class="math notranslate nohighlight">\(\mathbf{B}\)</span>の各列の内積を並べたものとして定義されます。</p>
+<p>例えば、行列<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>の<span class="math notranslate nohighlight">\(1\)</span>行目の行ベクトルと、行列<span class="math notranslate nohighlight">\(\mathbf{B}\)</span>の<span class="math notranslate nohighlight">\(1\)</span>列目の列ベクトルの内積の結果は、<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>と<span class="math notranslate nohighlight">\(\mathbf{B}\)</span>の行列積の結果を表す行列<span class="math notranslate nohighlight">\(\mathbf{C}\)</span>の<span class="math notranslate nohighlight">\(1\)</span>行<span class="math notranslate nohighlight">\(1\)</span>列目に対応します。</p>
+<p><img alt="" src="../_images/matrix.png" /></p>
+<p>内積が定義される条件はベクトルのサイズが等しいということでしたが、ここでもそれが成り立つために、<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>の行のサイズと <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> の列のサイズが一致する必要があります。</p>
+<p><img alt="" src="../_images/matrix2.png" /></p>
+</section>
+<section id="id14">
+<h4>転置<a class="headerlink" href="#id14" title="Link to this heading">#</a></h4>
+<p>転置（transpose）とは、<span class="math notranslate nohighlight">\(m\)</span> 行 <span class="math notranslate nohighlight">\(n\)</span> 列の行列 <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> に対して、 <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> の <span class="math notranslate nohighlight">\((i, j)\)</span> 要素と <span class="math notranslate nohighlight">\((j, i)\)</span> 要素を入れ替えて、<span class="math notranslate nohighlight">\(n\)</span> 行 <span class="math notranslate nohighlight">\(m\)</span> 列の行列に変換する操作です。転置は行列の右肩に<span class="math notranslate nohighlight">\(T\)</span>と書くことで表します。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+{\bf A} =\begin{bmatrix}
+1 &amp; 4 \\
+2 &amp; 5 \\
+3 &amp; 6
+\end{bmatrix}, \
+{\bf A}^{\rm T}=\begin{bmatrix}
+1 &amp; 2 &amp; 3 \\
+4 &amp; 5 &amp; 6
+\end{bmatrix}
+\end{split}
+\end{split}\]</div>
+<p>転置について、以下の定理を覚えておきましょう。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}\begin{aligned}
+&amp;\left( 1\right) \ \left( {\bf A}^{\rm T} \right)^{\rm T} = {\bf A} \\
+&amp;\left( 2\right) \ \left( {\bf A}{\bf B} \right)^{\rm T} = {\bf B}^{\rm T}{\bf A}^{\rm T}\\
+&amp;\left( 3\right) \ \left( {\bf A}{\bf B}{\bf C} \right)^{\rm T} = {\bf C}^{\rm T}{\bf B}^{\rm T}{\bf A}^{\rm T}
+\end{aligned}\end{split}
+\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>もちろん、転置はベクトルに対しても定義できます。転置を用いると、 2 つの列ベクトル<span class="math notranslate nohighlight">\(𝐱\)</span>,<span class="math notranslate nohighlight">\(𝐲\)</span>の内積<span class="math notranslate nohighlight">\(𝐱\cdot𝐲\)</span>は、行列積を用いて<span class="math notranslate nohighlight">\(x^T 𝐲\)</span>と書けます。</p>
+</div>
+</section>
+<section id="id15">
+<h4>ベクトルによる微分と勾配<a class="headerlink" href="#id15" title="Link to this heading">#</a></h4>
+<p>線形結合とは、スカラー倍したベクトル同士を足し合わせることです。</p>
+<p>例えば、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}\begin{aligned}
+{\bf b}
+&amp;=\begin{bmatrix}
+3 \\
+4
+\end{bmatrix}, \
+{\bf x} =
+\begin{bmatrix}
+x_{1} \\
+x_{2}
+\end{bmatrix}\\
+{\bf b}^{\rm T}{\bf x} &amp;=
+\begin{bmatrix}
+3 &amp; 4
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2
+\end{bmatrix}
+= 3x_1 + 4x_2
+\end{aligned}\end{split}
+\end{split}\]</div>
+<p>のように<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>の要素である<span class="math notranslate nohighlight">\(x_1\)</span>および<span class="math notranslate nohighlight">\(x_2\)</span>に関して一次式となっています。</p>
+<p><span class="math notranslate nohighlight">\(\mathbf{𝐛^T𝐱}\)</span>をベクトル<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>で微分したものを、</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial {\bf x}} \left( {\bf b}^{\rm T}{\bf x} \right)
+\]</div>
+<p>と表します。</p>
+<p>「ベクトルで微分」とは、ベクトルのそれぞれの要素で対象を微分し、その結果を要素に対応する位置に並べてベクトルを作ることです。つまり、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\begin{aligned}
+\frac{\partial}{\partial {\bf x}} \left( {\bf b}^{\rm T} {\bf x} \right)
+&amp;= \frac{\partial}{\partial {\bf x}} \left( 3x_1 + 4x_2 \right) \\
+&amp;=
+\begin{bmatrix}
+\frac{\partial}{\partial x_1} \left( 3x_1 + 4x_2 \right) &amp; \frac{\partial}{\partial x_2} \left( 3x_1 + 4x_2 \right)
+\end{bmatrix}
+\end{aligned}
+\end{split}
+=
+\begin{bmatrix}
+3 &amp; 4
+\end{bmatrix}
+\end{split}\]</div>
+<p>入力ベクトルの要素毎に出力に対する偏微分を計算し、それらを並べてベクトルにしたものが <strong><u>勾配 (gradient)</strong></u> と言います。</p>
+<p>つまり、多変数関数における傾きのようなもので、<span class="math notranslate nohighlight">\(1\)</span>変数関数のようにスカラーではなく、勾配で最も急な変化の方向とその大きさを示しています。勾配ベクトルは以下のように定義されます：</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla f = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, ... \right) \
+\]</div>
+<p>ここで、関数<span class="math notranslate nohighlight">\(f(x,y)=x^2+y^2\)</span>の値等高線とその勾配を同時にプロットします。赤い矢印が勾配ベクトルを示しており、各点で関数の最も急な上昇方向を指し示しています。</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>勾配は、関数の局所的な形状や変化の方向を理解する上で非常に役立ちます。特に機械学習や最適化の分野では、勾配降下法というアルゴリズムが関数の最小値を求めるために使用され、この勾配の概念が中心的な役割を果たしています。</p>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 関数とその勾配</span>
+<span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">gradient</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">dfdx</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">dfdy</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span>
+    <span class="k">return</span> <span class="n">dfdx</span><span class="p">,</span> <span class="n">dfdy</span>
+
+<span class="c1"># 座標の生成</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">gradient</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+<span class="c1"># 可視化</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>  <span class="c1"># 値を等高線で表示</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.005</span><span class="p">)</span>  <span class="c1"># 勾配ベクトルを矢印で表示</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Gradient of $f(x, y) = x^2 + y^2$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/86cb64b8b6b8ab128dd174b3f8a5aeb29ad590e7fc8609c1e6624250bc14b9f4.png" src="../_images/86cb64b8b6b8ab128dd174b3f8a5aeb29ad590e7fc8609c1e6624250bc14b9f4.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ml_basis2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">機械学習の基本概念</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="NN2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ニューラルネットワーク</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">微分</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">微分の概念</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Pythonによる微分計算</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">微分の公式</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">合成関数の微分</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">偏微分</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">線型代数</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">ベクトル</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">ベクトルとは</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">ベクトルの数学演算</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">行列</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">行列とは</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">行列積</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">転置</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">ベクトルによる微分と勾配</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 呂　沢宇
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
