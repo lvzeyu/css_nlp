@@ -22,18 +22,17 @@ const myAdmonition = {
           type: "admonitionTitle",
           children: ctx.parseMyst(data.arg.trim()).children[0].children,
         },
-        {
-          type: "paragraph",
-          children: ctx.parseMyst(data.body.trim()).children[0].children,
-        },
+        // ✅ 这里直接放整个 body 的 children
+        ...ctx.parseMyst(data.body.trim()).children,
       ],
     };
     return [admonition];
   },
 };
 
+
 const plugin = {
-  name: "Tohoku Purple Admonition",
+  name: "tohoku_admonition",
   directives: [myAdmonition],
 };
 
@@ -62,6 +61,8 @@ function injectStyle() {
     }
   }
 }
+
+
 
 // 注入样式
 injectStyle();
