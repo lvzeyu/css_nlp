@@ -51,7 +51,7 @@ parse:
     - substitution
 
 launch_buttons:
-  notebook_interface: "jupyterlab"  # or "classic"
+  notebook_interface: "notebook"  # or "classic"
   colab_url: "https://colab.research.google.com"
 
 repository:

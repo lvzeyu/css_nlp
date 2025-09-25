@@ -6,10 +6,13 @@ project:
   # description:
   # keywords: []
   #authors: 呂沢宇　ZEYU LYU
-  github: https://github.com/lvzeyu/css_nlp
+  github: lvzeyu/css_nlp
   # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
   plugins:
     - src/admonition.mjs
+  #jupyter:
+  #  binder:
+  #    repo: lvzeyu/css_nlp # default repo
 site:
   template: book-theme
   options:
@@ -17,3 +20,5 @@ site:
   #   favicon: favicon.ico
 bibliography: references.bib
   #/en/latest/
+launch_buttons:
+  colab_url: "https://colab.research.google.com"
