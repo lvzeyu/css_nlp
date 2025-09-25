@@ -10,6 +10,8 @@ project:
   # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
   plugins:
     - src/admonition.mjs
+  numbering:
+    headings: enabled
   #jupyter:
   #  binder:
   #    repo: lvzeyu/css_nlp # default repo
@@ -18,6 +20,8 @@ site:
   options:
       logo: tohoku-university-logo.svg
   #   favicon: favicon.ico
+  options:
+    analytics_google: G-85RFPTYEE3
 bibliography: references.bib
   #/en/latest/
 launch_buttons:
