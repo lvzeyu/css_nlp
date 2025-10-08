@@ -19,7 +19,7 @@ site:
   template: book-theme
   options:
       logo: tohoku-university-logo.svg
-  #   favicon: favicon.ico
+      favicon: tohoku-university-logo.svg
       analytics_google: G-85RFPTYEE3
 bibliography: references.bib
   #/en/latest/
