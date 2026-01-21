@@ -1,85 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="http://localhost:3000/sitemap_style.xsl" ?>
+<?xml-stylesheet type="text/xsl" href="http://localhost:3001/sitemap_style.xsl" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:3000</loc>
+    <loc>http://localhost:3001</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/introduction</loc>
+    <loc>http://localhost:3001/introduction</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/nlp-basis2</loc>
+    <loc>http://localhost:3001/nlp-basis2</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ml-basis2</loc>
+    <loc>http://localhost:3001/ml-basis2</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/math-basis2</loc>
+    <loc>http://localhost:3001/math-basis2</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/nn2</loc>
+    <loc>http://localhost:3001/nn2</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/backpropagation</loc>
+    <loc>http://localhost:3001/backpropagation</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/sgd</loc>
+    <loc>http://localhost:3001/sgd</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/pytorch2</loc>
+    <loc>http://localhost:3001/pytorch2</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/word2vec-1</loc>
+    <loc>http://localhost:3001/word2vec-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/word2vec-2-embedding</loc>
+    <loc>http://localhost:3001/word2vec-2-embedding</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/word2vec-gensim</loc>
+    <loc>http://localhost:3001/word2vec-gensim</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/word2vec-application</loc>
+    <loc>http://localhost:3001/word2vec-application</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/rnn</loc>
+    <loc>http://localhost:3001/rnn</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/lstm</loc>
+    <loc>http://localhost:3001/lstm</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/pytorch-lstm</loc>
+    <loc>http://localhost:3001/pytorch-lstm</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/lstm-classification</loc>
+    <loc>http://localhost:3001/lstm-classification</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/seq2seq</loc>
+    <loc>http://localhost:3001/seq2seq</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/attention</loc>
+    <loc>http://localhost:3001/attention</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/self-attention</loc>
+    <loc>http://localhost:3001/self-attention</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/transformer</loc>
+    <loc>http://localhost:3001/transformer</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/bert</loc>
+    <loc>http://localhost:3001/bert</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/bert-sentiment</loc>
+    <loc>http://localhost:3001/bert-sentiment</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/bert-topic</loc>
+    <loc>http://localhost:3001/bert-topic</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/gpt</loc>
+    <loc>http://localhost:3001/gpt</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/llm</loc>
+    <loc>http://localhost:3001/llm</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/langchain-basic</loc>
+    <loc>http://localhost:3001/langchain-basic</loc>
   </url>
 </urlset>
