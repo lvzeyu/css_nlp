@@ -4,7 +4,7 @@
 /notebook/sample-text-classification-bert/*
 /notebook/wrime-text-classification-bert/*
 
-
+.env
 # MyST build outputs
 _build
 

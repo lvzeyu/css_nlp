@@ -47,3 +47,4 @@ parts:
   chapters:
   - file: notebook/GPT.ipynb
   - file: notebook/llm.ipynb
+  - file: notebook/langchain_basic.ipynb
