@@ -39,6 +39,8 @@ jobs:
         run: npm install -g jupyter-book
       - name: Build HTML Assets
         run: jupyter-book build --html
+      - name: Add Colab toolbar icon
+        run: python3 src/inject_colab_toolbar.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
