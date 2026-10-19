@@ -23,5 +23,3 @@ site:
       analytics_google: G-85RFPTYEE3
 bibliography: references.bib
   #/en/latest/
-launch_buttons:
-  colab_url: "https://colab.research.google.com"
