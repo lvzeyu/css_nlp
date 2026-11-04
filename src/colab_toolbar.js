@@ -25,6 +25,11 @@
       return;
     }
 
+    if (editUrl.pathname !== `${prefix}master/${file}`) {
+      editUrl.pathname = `${prefix}master/${file}`;
+      editLink.href = editUrl.href;
+    }
+
     const colabUrl = `https://colab.research.google.com/github/${owner}/${repository}/blob/${branch}/${file}`;
     const link = existing ?? document.createElement('a');
     if (!existing) {
