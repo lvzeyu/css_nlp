@@ -17,7 +17,8 @@
       ? editUrl.pathname.slice(prefix.length)
       : '';
     const branchEnd = source.indexOf('/');
-    const branch = source.slice(0, branchEnd);
+    // The CI checkout is detached, so MyST guesses 'main'; the real branch is master.
+    const branch = 'master';
     const file = source.slice(branchEnd + 1);
     if (!branch || !/^notebook\/[^/]+\.ipynb$/.test(file)) {
       existing?.remove();
