@@ -1,4 +1,5 @@
 /notebook/Data/*
+!/notebook/Data/Titanic/
 /notebook/runs/cbow_embeddings/*
 /notebook/Model/*
 /notebook/sample-text-classification-bert/*
